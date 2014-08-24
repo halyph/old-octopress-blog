@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://halyph.github.io/blog/2014/08/25/2d-super-post/</loc>
+    <lastmod>2014-08-25T02:45:11+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://halyph.github.io/blog/2014/08/25/1st-octopress-blog-post/</loc>
     <lastmod>2014-08-25T02:17:12+03:00</lastmod>
     <priority>0.8</priority>
@@ -11,14 +17,14 @@
   
   <url>
     <loc>http://halyph.github.io/blog/archives/</loc>
-    <lastmod>2014-08-25T02:22:55+03:00</lastmod>
+    <lastmod>2014-08-25T02:46:04+03:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://halyph.github.io/</loc>
-    <lastmod>2014-08-25T02:22:55+03:00</lastmod>
+    <lastmod>2014-08-25T02:46:04+03:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
