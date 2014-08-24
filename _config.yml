@@ -2,12 +2,12 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://yoursite.com
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+url: http://halyph.github.io
+title: Knowledge Is Everything
+subtitle:
+author: Orest Ivasiv
 simple_search: https://www.google.com/search
-description:
+description: This blog is about my thoughts related with software development, automation, programming languages, tools and approaches
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
