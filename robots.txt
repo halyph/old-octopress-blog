@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://halyph.github.io/sitemap.xml 
+Sitemap: halyph.github.io/sitemap.xml 
