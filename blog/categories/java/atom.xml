@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Java, | Knowledge Is Everything]]></title>
+  <title><![CDATA[Category: Java | Knowledge Is Everything]]></title>
   <link href="halyph.github.io/blog/categories/java/atom.xml" rel="self"/>
   <link href="halyph.github.io/"/>
-  <updated>2014-08-31T02:16:50+03:00</updated>
+  <updated>2014-08-31T03:13:32+03:00</updated>
   <id>halyph.github.io/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
