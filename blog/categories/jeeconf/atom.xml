@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Jeeconf | Knowledge Is Everything]]></title>
   <link href="halyph.github.io/blog/categories/jeeconf/atom.xml" rel="self"/>
   <link href="halyph.github.io/"/>
-  <updated>2014-09-08T01:55:29+03:00</updated>
+  <updated>2014-09-08T02:37:43+03:00</updated>
   <id>halyph.github.io/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -53,8 +53,7 @@
 <h3>Miscellaneous</h3>
 
 <ul>
-<li><em>Tooling of a Test-Driven Developer, by Paweł Lipiński</em>
-There were highlighted two very interesting libraries for TDD on top of JUnit: <a href="http://joel-costigliola.github.io/assertj/">AssertJ</a> and <a href="https://code.google.com/p/junitparams/">JUnitParams</a>.Very interesting libraries</li>
+<li><em>Tooling of a Test-Driven Developer, by Paweł Lipiński</em> &ndash; There were highlighted two very interesting libraries for TDD on top of JUnit: <a href="http://joel-costigliola.github.io/assertj/">AssertJ</a> and <a href="https://code.google.com/p/junitparams/">JUnitParams</a>.Very interesting libraries</li>
 <li><em>Web Apps in LISP!? EWW!, by Anatoly Polinsky</em> &ndash; Here was shown different aspects of web development in Clojure for beginners. It&rsquo;s was real intro, but very interesting, especially when you&rsquo;d like to spread your mind into alternative JVM-related communities.</li>
 </ul>
 

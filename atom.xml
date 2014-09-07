@@ -4,7 +4,7 @@
   <title><![CDATA[Knowledge Is Everything]]></title>
   <link href="halyph.github.io/atom.xml" rel="self"/>
   <link href="halyph.github.io/"/>
-  <updated>2014-09-08T01:55:29+03:00</updated>
+  <updated>2014-09-08T02:37:43+03:00</updated>
   <id>halyph.github.io/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -206,8 +206,7 @@ java.io.NotSerializableException: com.MyClass
 <h3>Miscellaneous</h3>
 
 <ul>
-<li><em>Tooling of a Test-Driven Developer, by Paweł Lipiński</em>
-There were highlighted two very interesting libraries for TDD on top of JUnit: <a href="http://joel-costigliola.github.io/assertj/">AssertJ</a> and <a href="https://code.google.com/p/junitparams/">JUnitParams</a>.Very interesting libraries</li>
+<li><em>Tooling of a Test-Driven Developer, by Paweł Lipiński</em> &ndash; There were highlighted two very interesting libraries for TDD on top of JUnit: <a href="http://joel-costigliola.github.io/assertj/">AssertJ</a> and <a href="https://code.google.com/p/junitparams/">JUnitParams</a>.Very interesting libraries</li>
 <li><em>Web Apps in LISP!? EWW!, by Anatoly Polinsky</em> &ndash; Here was shown different aspects of web development in Clojure for beginners. It&rsquo;s was real intro, but very interesting, especially when you&rsquo;d like to spread your mind into alternative JVM-related communities.</li>
 </ul>
 
@@ -222,6 +221,35 @@ There were highlighted two very interesting libraries for TDD on top of JUnit: <
 <li><a href="">JEEConf - Kiev, 2013 - Report</a></li>
 <li><a href="">JEEConf - Kiev, 2012 - Report</a></li>
 <li><a href="">JEEConf - Kiev, 2011 - Report</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Thor Notes]]></title>
+    <link href="halyph.github.io/2014/04/thor-notes.html"/>
+    <updated>2014-04-19T12:40:00+03:00</updated>
+    <id>halyph.github.io/2014/04/thor-notes</id>
+    <content type="html"><![CDATA[<p><img class="center" src="halyph.github.io/images/blog/ruby.png"></p>
+
+<p>Some time ago I used <a href="http://whatisthor.com/">Thor</a> for one <a href="http://en.wikipedia.org/wiki/Command-line_interface">CLI</a> application. I
+investigated several tools, but picked Thor because of its simplicity
+and easy to star. In general you would need only the <a href="http://whatisthor.com/">official
+documentation</a>. But, I used <a href="http://bundler.io/">Bundler</a> as real sample of Thor
+usage also.</p>
+
+<p>Here is the list of articles, notes about Thor which might be helpful:</p>
+
+<ul>
+<li><a href="http://whatisthor.com/">Thor Getting Started</a></li>
+<li><a href="http://blog.paracode.com/2012/05/17/building-your-tools-with-thor/">Building Your Tools With Thor</a> - Thor overview</li>
+<li><a href="https://github.com/erikhuda/thor/wiki">Thor wiki</a></li>
+<li><a href="http://stackoverflow.com/questions/9340754/how-do-i-register-a-thorgroup-as-a-subcommand-with-arguments">Thor::Group as a sub-command with arguments</a></li>
+<li><a href="http://stackoverflow.com/questions/9339677/how-do-i-create-thorgroup-generators-as-args-of-my-command">Thor::Group generators as args of my_command</a></li>
+<li><a href="http://stackoverflow.com/questions/5663519/namespacing-thor-commands-in-a-standalone-ruby-executable">Namespacing Thor commands in a standalone ruby executable</a></li>
+<li><a href="http://stackoverflow.com/questions/5729071/how-to-compose-thor-tasks-in-separate-classes-modules-files">Packaging Thor commands in separate classes/modules/files</a></li>
+<li><a href="http://stackoverflow.com/questions/6561912/ruby-thor-based-executable-with-namespaces">Ruby Thor based executable with namespaces</a></li>
 </ul>
 
 ]]></content>

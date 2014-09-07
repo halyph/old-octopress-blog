@@ -360,8 +360,7 @@ java.io.NotSerializableException: com.MyClass
 <h3>Miscellaneous</h3>
 
 <ul>
-<li><em>Tooling of a Test-Driven Developer, by Paweł Lipiński</em>
-There were highlighted two very interesting libraries for TDD on top of JUnit: <a href="http://joel-costigliola.github.io/assertj/">AssertJ</a> and <a href="https://code.google.com/p/junitparams/">JUnitParams</a>.Very interesting libraries</li>
+<li><em>Tooling of a Test-Driven Developer, by Paweł Lipiński</em> &ndash; There were highlighted two very interesting libraries for TDD on top of JUnit: <a href="http://joel-costigliola.github.io/assertj/">AssertJ</a> and <a href="https://code.google.com/p/junitparams/">JUnitParams</a>.Very interesting libraries</li>
 <li><em>Web Apps in LISP!? EWW!, by Anatoly Polinsky</em> &ndash; Here was shown different aspects of web development in Clojure for beginners. It&rsquo;s was real intro, but very interesting, especially when you&rsquo;d like to spread your mind into alternative JVM-related communities.</li>
 </ul>
 
@@ -376,6 +375,55 @@ There were highlighted two very interesting libraries for TDD on top of JUnit: <
 <li><a href="">JEEConf - Kiev, 2013 - Report</a></li>
 <li><a href="">JEEConf - Kiev, 2012 - Report</a></li>
 <li><a href="">JEEConf - Kiev, 2011 - Report</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/04/thor-notes.html">Thor Notes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-04-19T12:40:00+03:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:40 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="center" src="/images/blog/ruby.png"></p>
+
+<p>Some time ago I used <a href="http://whatisthor.com/">Thor</a> for one <a href="http://en.wikipedia.org/wiki/Command-line_interface">CLI</a> application. I
+investigated several tools, but picked Thor because of its simplicity
+and easy to star. In general you would need only the <a href="http://whatisthor.com/">official
+documentation</a>. But, I used <a href="http://bundler.io/">Bundler</a> as real sample of Thor
+usage also.</p>
+
+<p>Here is the list of articles, notes about Thor which might be helpful:</p>
+
+<ul>
+<li><a href="http://whatisthor.com/">Thor Getting Started</a></li>
+<li><a href="http://blog.paracode.com/2012/05/17/building-your-tools-with-thor/">Building Your Tools With Thor</a> - Thor overview</li>
+<li><a href="https://github.com/erikhuda/thor/wiki">Thor wiki</a></li>
+<li><a href="http://stackoverflow.com/questions/9340754/how-do-i-register-a-thorgroup-as-a-subcommand-with-arguments">Thor::Group as a sub-command with arguments</a></li>
+<li><a href="http://stackoverflow.com/questions/9339677/how-do-i-create-thorgroup-generators-as-args-of-my-command">Thor::Group generators as args of my_command</a></li>
+<li><a href="http://stackoverflow.com/questions/5663519/namespacing-thor-commands-in-a-standalone-ruby-executable">Namespacing Thor commands in a standalone ruby executable</a></li>
+<li><a href="http://stackoverflow.com/questions/5729071/how-to-compose-thor-tasks-in-separate-classes-modules-files">Packaging Thor commands in separate classes/modules/files</a></li>
+<li><a href="http://stackoverflow.com/questions/6561912/ruby-thor-based-executable-with-namespaces">Ruby Thor based executable with namespaces</a></li>
 </ul>
 
 </div>
@@ -617,116 +665,6 @@ I don&rsquo;t want to repeat other useful posts about adjusting Blogger for <a h
 </span><span class='line'> }  
 </span><span class='line'>&lt;/pre&gt;</span></code></pre></td></tr></table></div></figure>
 
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/08/rails-23-migration-issues-with-mysql_26.html">Rails 2.3 Migration Issues With MySQL 5.1.3</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2009-08-26T00:13:00+03:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2009</span></span> <span class='time'>12:13 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>depot&gt;rake db:migrate --trace
-</span><span class='line'>(in D:/Projects/RoR/depot)
-</span><span class='line'>** Invoke db:migrate (first_time)
-</span><span class='line'>** Invoke environment (first_time)
-</span><span class='line'>** Execute environment
-</span><span class='line'>** Execute db:migrate
-</span><span class='line'>rake aborted!
-</span><span class='line'>Mysql::Error: query: not connected: CREATE TABLE `schema_migrations` (`version`
-</span><span class='line'>varchar(255) NOT NULL) ENGINE=InnoDB
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connetion_adapters/abstract_adapter.rb:212:in `log'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connetion_adapters/mysql_adapter.rb:320:in `execute'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connetion_adapters/abstract/schema_statements.rb:114:in `create_table'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connetion_adapters/mysql_adapter.rb:473:in `create_table'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connetion_adapters/abstract/schema_statements.rb:320:in `initialize_schema_migration_table'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/migraion.rb:436:in `initialize'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/migraion.rb:400:in `new'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/migraion.rb:400:in `up'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/migraion.rb:383:in `migrate'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/tasks/databases.rake:116
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:636:in `call'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:636:in `execute'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:631:in `each'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:631:in `execute'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:597:in `invoke_with call_chain'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/1.8/monitor.rb:242:in `synchronize'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:590:in `invoke_with call_chain'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:583:in `invoke'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2051:in `invoke_tas'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2029:in `top_level'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2029:in `each'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2029:in `top_level'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2068:in `standard_exception_handling'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2023:in `top_level'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2001:in `run'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2068:in `standard_exception_handling'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:1998:in `run'
-</span><span class='line'>d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/bin/rake:31
-</span><span class='line'>d:/Tools/Ruby/bin/rake:19:in `load'
-</span><span class='line'>d:/Tools/Ruby/bin/rake:19</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As I understood the client MySQL library doesn&rsquo;t work well with Rails 2.3. We can resolve this by using the older MySQL client library (libmySQL.dll). You can get it here <a href="http://forums.aptana.com/viewtopic.php?f=20&amp;amp;t=7563&amp;amp;p=27407&amp;amp;hilit=libmysql.dll#p27407">http://instantrails.rubyforge.org/svn/trunk/InstantRails-win/InstantRails/mysql/bin/libmySQL.dll</a>.
-Just put it in <span style="font-family: Courier New;">&lt;ruby base dir&gt;\bin\</span> and restart MySQL service.</p>
 </div>
   
   
