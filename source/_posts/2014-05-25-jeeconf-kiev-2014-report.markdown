@@ -5,7 +5,6 @@ permalink: "/2014/05/jeeconf-kiev-2014-report.html"
 uuid: "9102901128179163090"
 guid: "tag:blogger.com,1999:blog-7372777165432727866.post-9102901128179163090"
 date: "2014-05-25 23:41:00"
-updated: "2014-05-25 23:44:57"
 description: 
 blogger:
     siteid: "7372777165432727866"
@@ -38,8 +37,7 @@ This year I divided topics by the next directions:
 
 ### Miscellaneous
 
-* *Tooling of a Test-Driven Developer, by Paweł Lipiński*
-There were highlighted two very interesting libraries for TDD on top of JUnit: [AssertJ](http://joel-costigliola.github.io/assertj/) and [JUnitParams](https://code.google.com/p/junitparams/).Very interesting libraries
+* *Tooling of a Test-Driven Developer, by Paweł Lipiński* -- There were highlighted two very interesting libraries for TDD on top of JUnit: [AssertJ](http://joel-costigliola.github.io/assertj/) and [JUnitParams](https://code.google.com/p/junitparams/).Very interesting libraries
 * *Web Apps in LISP!? EWW!, by Anatoly Polinsky* -- Here was shown different aspects of web development in Clojure for beginners. It's was real intro, but very interesting, especially when you'd like to spread your mind into alternative JVM-related communities.
 
 It was very productive conference for me. I've got new portion of inspiration, new knowledge and passion to ordinary things.
