@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Knowledge Is Everything]]></title>
-  <link href="halyph.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Review | Knowledge Is Everything]]></title>
+  <link href="halyph.github.io/blog/categories/review/atom.xml" rel="self"/>
   <link href="halyph.github.io/"/>
   <updated>2014-09-07T23:08:05+03:00</updated>
   <id>halyph.github.io/</id>
@@ -20,7 +20,9 @@
     <id>halyph.github.io/2009/03/effective-way-to-be-expert</id>
     <content type="html"><![CDATA[<div class="css-full-post-content js-full-post-content">
 I&#8217;ve found great post about <a href="http://softwarecreation.org/2009/how-to-become-an-expert-the-effective-way" rel="bookmark">How to Become an Expert. The Effective Way.</a><br />The core idea is: <br /><blockquote>Experts are made, not born.<b> Experts are made by themselves.</b> It is a long, thorny and hard road. But this road makes their life interesting, positive, meaningful and brings <a href="http://softwarecreation.org/2008/the-happiness-programmers-edition/" id="r8q4" title="happiness">happiness</a> from achieving a rare gift - mastery in the field they love.  </blockquote>I invite you to read that post. Enjoy
-</div>]]></content>
+</div>
+
+]]></content>
   </entry>
   
 </feed>
