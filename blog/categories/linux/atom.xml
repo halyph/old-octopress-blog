@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Linux | Knowledge Is Everything]]></title>
+  <link href="halyph.github.io/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="halyph.github.io/"/>
+  <updated>2014-09-08T00:18:18+03:00</updated>
+  <id>halyph.github.io/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[*nix-like Environments for Windows]]></title>
+    <link href="halyph.github.io/2009/11/nix-like-environments-for-windows.html"/>
+    <updated>2009-11-18T01:02:00+02:00</updated>
+    <id>halyph.github.io/2009/11/nix-like-environments-for-windows</id>
+    <content type="html"><![CDATA[<p>*nix like environment is good for developer and sysadmins, and really useful for end-user. That&rsquo;s why we&rsquo;ve got KDE, Gnome and similar. But, I like it a lot even if I&rsquo;m Windows user ;-). There are several cases to set up *nix environment on Windows:</p>
+
+<ul>
+<li>setup Virtual Machine with some Linux distributive and you&rsquo;ve got fully functional Linux. You can use <a href="http://www.vmware.com/">VMware</a> or <a href="http://www.virtualbox.org/">VirtualBox</a>.&nbsp;</li>
+<li>or you can setup Linux-like environment in Windows (i.e. bash, gcc, make, grep, find, sed, etc.).</li>
+</ul>
+
+
+<p>Here is &ldquo;my&rdquo; list of choice for such environments.</p>
+
+<ol>
+<li><a href="http://www.mingw.org/">MinGW</a> - Minimalist GNU for Windows. My top choice if you need GNU development programming tool set. Additional, if you need bash and similar tools install MSYS - general purpose command line environment.</li>
+<li><a href="http://cygwin.com/">Cygwin</a> -&nbsp; is a Linux-like environment for Windows. It&rsquo;s very powerful if you need to develop OS-portable application on windows (it&rsquo;s provide substantial Linux API functionality).&nbsp;</li>
+<li><a href="http://gnuwin32.sourceforge.net/">GnuWin32</a> - provides ports of tools with a <a href="http://www.gnu.org/">GNU</a> or similar open source licenses. Check package list on their home page.</li>
+<li><a href="http://www2.research.att.com/sw/tools/uwin/">UWIN</a><strong> </strong>- it&rsquo;s the similar to MinGW and GnuWin32, but less popular.</li>
+</ol>
+
+
+<p>I prefer to use MinGW/MSYS and Cygwin because they have great community support.</p>
+]]></content>
+  </entry>
+  
+</feed>

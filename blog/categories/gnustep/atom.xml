@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Gnustep | Knowledge Is Everything]]></title>
+  <link href="halyph.github.io/blog/categories/gnustep/atom.xml" rel="self"/>
+  <link href="halyph.github.io/"/>
+  <updated>2014-09-08T00:18:18+03:00</updated>
+  <id>halyph.github.io/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[GNUstep Getting Started]]></title>
+    <link href="halyph.github.io/2009/11/gnustep-getting-started.html"/>
+    <updated>2009-11-08T23:08:00+02:00</updated>
+    <id>halyph.github.io/2009/11/gnustep-getting-started</id>
+    <content type="html"><![CDATA[<p>Objective-C popularity aggressively increased based on <a href="http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html">TIOBE Index</a> (for October 2009)
+<img class="center" src="/images/posts/TIOBE.gif">
+The reason is simple &ndash; iPhone and all related stuff. We should be ready to develop Objective-C based application in future. The worst thing I don&rsquo;t have a Mac, so I don&rsquo;t have development environment.
+I need to get basic Objective-C knowledge, and here several solutions:</p>
+
+<ul>
+<li>buy Mac</li>
+<li>install <a href="http://en.wikipedia.org/wiki/OSx86">Hackintosh </a>on PC</li>
+<li>try GNU compiler and play with Objective-C</li>
+</ul>
+
+
+<p>The better choice is the last one (for me). As I&rsquo;m a Windows XP user and I don&rsquo;t have a time to set up Linux, I&rsquo;m going to use some Windows GNU GCC port: Cygwin or MinGW.</p>
+
+<p>There are two cross-platform projects which implements Objective-C Cocoa/OpenStep APIs:</p>
+
+<ul>
+<li><a href="http://www.cocotron.org/">The Cocotron</a> &ndash; this project uses Mac machine for build (I didn&rsquo;t dig into this), but built application can be run on Windows.</li>
+<li><a href="http://www.gnustep.org/">GNUstep</a> &ndash; this project supports many platforms (Windows included).</li>
+</ul>
+
+
+<p>My choice is <img src="/images/posts/gnustep-header14.png"></p>
+
+<p>Here is the useful links for quick start:</p>
+
+<ul>
+<li><a href="http://www.gnustep.org/">www.gnustep.org</a> &ndash; official site</li>
+<li><a href="http://www.gnustep.it/nicola/Tutorials/index.html">GNUstep programming mini tutorials</a> &ndash; the second place you should start with.</li>
+<li><a href="http://www.gnustep.it/">www.gnustep.it</a> &ndash; This site is dedicated to <a href="http://www.gnustep.org/">GNUstep</a>. There are a lot of useful info.</li>
+<li> <a href="http://gap.nongnu.org/">GNUstep Application Project</a> &ndash; The purpose of this project is to implement a set of administrative applications and user level applications using GNUstep. Another aim of this project is to port as many applications from OPENSTEP/Cocoa to GNUstep as possible. Great place to look into real application.</li>
+<li><a href="http://www.foldr.org/%7Emichaelw/objective-c/">Objective-C: Links, Resources, Stuff</a> &ndash; dig deeper in Objective-C culture</li>
+<li><a href="http://gnustep.made-it.com/">GNUstep Library</a> &ndash; additional info: Build Guides, User Documentation, Developer Documentation</li>
+<li><a href="http://old.nabble.com/GNUstep-f1880.html">GNUstep forum</a> &ndash; it covers the next categories: General, Help, Dev, Webmasters, Bugs, Announce, Apps</li>
+<li><a href="http://www.roard.com/docs/">GNUstep HelpCenter</a> &ndash; links to various tutorials and articles on GNUstep.</li>
+<li><a href="http://wiki.gnustep.org/">GNUstepWiki</a> &ndash; just <em>wiki</em></li>
+</ul>
+
+
+<p><strong>How to build your first GNUstep application in Windows?</strong>
+In general it&rsquo;s simple, but if you have some troubles with it here is the links:</p>
+
+<ol>
+<li><a href="http://www.techotopia.com/index.php/Installing_and_using_GNUstep_and_Objective-C_on_Windows#Downloading_the_GNUstep_Packages">Installing and using GNUstep and Objective-C on Windows</a></li>
+<li><a href="http://www.gnustep.it/nicola/Tutorials/WritingMakefiles/">Writing GNUstep Makefiles</a> (I highly recommend it)</li>
+<li><a href="http://blog.lyxite.com/2008/01/compile-objective-c-programs-using-gcc.html">Compile Objective-C Programs Using gcc</a>The next post will be about tuning the development environment for GNUstep .
+<a href="http://www.jayson.in/programming/objective-c-programming-in-windows-gnustep-projectcenter.html"><span style="font-size: small;"></span></a></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>
