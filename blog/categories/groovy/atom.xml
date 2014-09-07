@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Groovy | Knowledge Is Everything]]></title>
   <link href="halyph.github.io/blog/categories/groovy/atom.xml" rel="self"/>
   <link href="halyph.github.io/"/>
-  <updated>2014-09-08T00:18:18+03:00</updated>
+  <updated>2014-09-08T01:55:29+03:00</updated>
   <id>halyph.github.io/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -12,6 +12,91 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Groovy Notes: Pretty Print JSON From the Command Line]]></title>
+    <link href="halyph.github.io/2014/08/groovy-notes-pretty-print-json-from.html"/>
+    <updated>2014-08-13T21:28:00+03:00</updated>
+    <id>halyph.github.io/2014/08/groovy-notes-pretty-print-json-from</id>
+    <content type="html"><![CDATA[<p><img class="center" src="/images/blog/groovy.png">
+JSON pretty print it&rsquo;s common task while working with JSON from command line. There are many ways of doing this via Python, Ruby, node.js, but here I&rsquo;d like to concentrate on Groovy one-liner:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo &lsquo;{&ldquo;foo&rdquo;: &ldquo;lorem&rdquo;, &ldquo;bar&rdquo;: &ldquo;ipsum&rdquo;}&rsquo; | groovy -e &lsquo;import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)&rsquo;&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>{
+</span><span class='line'>    &ldquo;foo&rdquo;: &ldquo;lorem&rdquo;,
+</span><span class='line'>    &ldquo;bar&rdquo;: &ldquo;ipsum&rdquo;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>We can slightly improve this one-liner via adding shell alias:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ alias pp=&ldquo;groovy -e &lsquo;import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)&rsquo;&rdquo;
+</span><span class='line'>$ echo &lsquo;{&ldquo;foo&rdquo;: &ldquo;lorem&rdquo;, &ldquo;bar&rdquo;: &ldquo;ipsum&rdquo;}&rsquo; | pp</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Also, we might use Groovy script which might be handy for simple JSON validation also:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">$</span> <span class="n">cat</span> <span class="n">prettyJson</span><span class="o">.</span><span class="na">groovy</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">groovy.json.*</span><span class="o">&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;p&gt;try {</span>
+</span><span class='line'><span class="s">  println JsonOutput.prettyPrint(System.in.text)</span>
+</span><span class='line'><span class="s">} catch (JsonException e) {</span>
+</span><span class='line'><span class="s">  println &amp;ldquo;ERROR: Not valid JSON&amp;rdquo;</span>
+</span><span class='line'><span class="s">  System.exit(1)</span>
+</span><span class='line'><span class="s">}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">$</span> <span class="n">echo</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="o">;{&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="nl">foo:</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">lorem</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;,</span> <span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;</span> <span class="o">|</span> <span class="n">groovy</span> <span class="n">prettyJson</span><span class="o">.</span><span class="na">groovy</span>
+</span><span class='line'><span class="nl">ERROR:</span> <span class="n">Not</span> <span class="n">valid</span> <span class="n">JSON</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Review: Programming Groovy 2: Dynamic Productivity for the Java Developer]]></title>
+    <link href="halyph.github.io/2014/07/review-programming-groovy-2-dynamic.html"/>
+    <updated>2014-07-23T01:19:00+03:00</updated>
+    <id>halyph.github.io/2014/07/review-programming-groovy-2-dynamic</id>
+    <content type="html"><![CDATA[<p><img class="center" src="/images/posts/book_programming_groovy2.jpg"></p>
+
+<p>This book is well balanced around Groovy language. I would say there is minimal required knowledge regarding the language. The author (Venkat Subramaniam) fluently covered every important aspect of Groovy. But this book is for experienced developer. The accents were made only in scope of Groovy language and totally avoided any &ldquo;intro&rdquo; programming talks, which is actually cool.</p>
+
+<p>Here is the book&rsquo;s structure:</p>
+
+<ul>
+<li><strong>Beginning Groovy</strong> - this part is dedicated to Groovy language features, especially from Java perspective. Reading this part I was building the parallel to Ruby trying to compare these languages. The main difference which I found it&rsquo;s only syntax &ldquo;sugar&rdquo;. I.e. conceptually these two language are very similar.&nbsp;</li>
+<li><strong>Using Groovy</strong> - this is a pragmatic part where were highlighted the next topics: Groovy GDK, XML Processing, working with DB, &nbsp;working with Java.</li>
+<li><strong>Dynamic features (MOPing Groovy)</strong>&nbsp;- here were highlighted two main metaprogramming approaches: run-time and compile-time metaprogramming. Very interesting part. For me Groovy metaprogramming facilities are much clear comparison to Ruby metaprogramming.</li>
+<li><strong>Using Metaprogramming</strong> - it&rsquo;s pragmatic part where were highlighted the applications for Groovy metaprogramming features. It&rsquo;s very important to note that Groovy contains many pre-bundled classes/modules which are really nice samples of metaprogramming Groovy&rsquo;s features.<div>I highly recommend this book to everybody who is interested in Groovy language. This book highlights Groovy dynamic features.</div></li>
+</ul>
+
+
+<h2>References:</h2>
+
+<ul>
+<li><a href="http://www.amazon.com/Programming-Groovy-Productivity-Developer-Pragmatic/dp/1937785300/">Programming Groovy 2: Dynamic Productivity for the Java Developer</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Why I've Chosen Ruby as Main Scripting Language for My Toolbox]]></title>

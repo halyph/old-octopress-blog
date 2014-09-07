@@ -9,7 +9,8 @@
   <meta name="author" content="Orest Ivasiv">
 
   
-  <meta name="description" content="This post will be dedicated to migtation from Google Blogger to Octopress. ">
+  <meta name="description" content="Old HalypH blog
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,9 +92,292 @@
   </header>
 
 
-  <div class="entry-content"><p>This post will be dedicated to migtation from Google Blogger to Octopress.</p>
+  <div class="entry-content"><p><a href="http://halyph.blogspot.com/">Old <em>HalypH</em> blog</a></p>
+</div>
+  
+  
 
-<p><img src="/images/blog.jpeg"></p>
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/08/groovy-notes-pretty-print-json-from.html">Groovy Notes: Pretty Print JSON From the Command Line</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-08-13T21:28:00+03:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:28 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="center" src="/images/blog/groovy.png">
+JSON pretty print it&rsquo;s common task while working with JSON from command line. There are many ways of doing this via Python, Ruby, node.js, but here I&rsquo;d like to concentrate on Groovy one-liner:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo '{"foo": "lorem", "bar": "ipsum"}' | groovy -e 'import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)'
+</span><span class='line'>
+</span><span class='line'>{
+</span><span class='line'>    "foo": "lorem",
+</span><span class='line'>    "bar": "ipsum"
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can slightly improve this one-liner via adding shell alias:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ alias pp="groovy -e 'import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)'"
+</span><span class='line'>$ echo '{"foo": "lorem", "bar": "ipsum"}' | pp</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Also, we might use Groovy script which might be handy for simple JSON validation also:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">$</span> <span class="n">cat</span> <span class="n">prettyJson</span><span class="o">.</span><span class="na">groovy</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">groovy.json.*</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">println</span> <span class="n">JsonOutput</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">.</span><span class="na">text</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">JsonException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;ERROR: Not valid JSON&quot;</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">$</span> <span class="n">echo</span> <span class="s1">&#39;{&quot;foo: &quot;lorem&quot;, &#39;</span> <span class="o">|</span> <span class="n">groovy</span> <span class="n">prettyJson</span><span class="o">.</span><span class="na">groovy</span>
+</span><span class='line'><span class="nl">ERROR:</span> <span class="n">Not</span> <span class="n">valid</span> <span class="n">JSON</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/08/how-to-disable-tomcat-session.html">How to Disable Tomcat Session Serialization</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-08-12T12:57:00+03:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:57 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="center" src="/images/blog/java.png">
+Suppose you have the next error while restart/stop Tomcat (in my case Tomcat 7.x):</p>
+
+<pre class="brush: java;">WARNING: Cannot serialize session attribute SPRING_SECURITY_CONTEXT for session 54DBA076EDC9B7A24C1AF76824DFD1EF
+java.io.NotSerializableException: com.MyClass
+ at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1180)
+ at java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1528)
+ at java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1493)
+ at java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1416)
+ at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1174)
+ at java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:346)
+ at java.util.ArrayList.writeObject(ArrayList.java:710)
+ at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+ at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+ at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+ at java.lang.reflect.Method.invoke(Method.java:601)
+ at java.io.ObjectStreamClass.invokeWriteObject(ObjectStreamClass.java:975)
+...
+</pre>
+
+
+<p>It means that Tomcat is trying to persist non-serializable objects which were added into the session. Tomcat uses Manager component which is used to create and maintain HTTP sessions for web application.</p>
+
+<p>By default manager implementation configured to perform session persistence across restarts and we want to disable this functionality.</p>
+
+<p>To disable this persistence feature, create a Context configuration file (<em>context.xml</em>) for your web application and add the following element there:</p>
+
+<pre class="brush: xml;">&lt;Manager pathname="" /&gt;
+</pre>
+
+
+<p>You can add this context.xml file to:</p>
+
+<ul>
+<li>App.war:/META-INF/context.xml</li>
+<li>TOMCAT_HOME/conf/Catalina/localhost/App.xml file</li>
+<li>TOMCAT_HOME/cont/context.xml</li>
+</ul>
+
+
+<h2>References</h2>
+
+<ul>
+<li><a href="http://tomcat.apache.org/tomcat-7.0-doc/config/manager.html#Disable_Session_Persistence">Disable Session Persistence </a></li>
+<li><a href="http://tomcat.apache.org/tomcat-7.0-doc/cluster-howto.html">Clustering/Session Replication HOW-TO</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/07/review-programming-groovy-2-dynamic.html">Review: Programming Groovy 2: Dynamic Productivity for the Java Developer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-07-23T01:19:00+03:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2014</span></span> <span class='time'>1:19 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="center" src="/images/posts/book_programming_groovy2.jpg"></p>
+
+<p>This book is well balanced around Groovy language. I would say there is minimal required knowledge regarding the language. The author (Venkat Subramaniam) fluently covered every important aspect of Groovy. But this book is for experienced developer. The accents were made only in scope of Groovy language and totally avoided any &ldquo;intro&rdquo; programming talks, which is actually cool.</p>
+
+<p>Here is the book&rsquo;s structure:</p>
+
+<ul>
+<li><strong>Beginning Groovy</strong> - this part is dedicated to Groovy language features, especially from Java perspective. Reading this part I was building the parallel to Ruby trying to compare these languages. The main difference which I found it&rsquo;s only syntax &ldquo;sugar&rdquo;. I.e. conceptually these two language are very similar.&nbsp;</li>
+<li><strong>Using Groovy</strong> - this is a pragmatic part where were highlighted the next topics: Groovy GDK, XML Processing, working with DB, &nbsp;working with Java.</li>
+<li><strong>Dynamic features (MOPing Groovy)</strong>&nbsp;- here were highlighted two main metaprogramming approaches: run-time and compile-time metaprogramming. Very interesting part. For me Groovy metaprogramming facilities are much clear comparison to Ruby metaprogramming.</li>
+<li><strong>Using Metaprogramming</strong> - it&rsquo;s pragmatic part where were highlighted the applications for Groovy metaprogramming features. It&rsquo;s very important to note that Groovy contains many pre-bundled classes/modules which are really nice samples of metaprogramming Groovy&rsquo;s features.<div>I highly recommend this book to everybody who is interested in Groovy language. This book highlights Groovy dynamic features.</div></li>
+</ul>
+
+
+<h2>References:</h2>
+
+<ul>
+<li><a href="http://www.amazon.com/Programming-Groovy-Productivity-Developer-Pragmatic/dp/1937785300/">Programming Groovy 2: Dynamic Productivity for the Java Developer</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/05/jeeconf-kiev-2014-report.html">JEEConf - Kiev, 2014 - Report</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-05-25T23:41:00+03:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:41 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="center" src="/images/blog/jeeconf.png"></p>
+
+<p>I attended the forth <a href="http://jeeconf.com">JEEConf</a>, May 23-24, 2014. The situation in my country (Ukraine) is difficult that’s why I was amazed to see so many foreign speakers. The organizers did really tremendous work.</p>
+
+<p>This year I divided topics by the next directions:</p>
+
+<h3>Spring</h3>
+
+<ul>
+<li><em>Spring 4, Java EE 7 or Both? by Ivar Grimstad</em> &ndash; The main idea of the talk was to show similar and different parts of Spring 4 and Java EE 7. And have an ability easily identify when to use one or another. There are trade-offs and we should be aware of them.</li>
+<li><em>Spring configuration: how to do it right (experience report), Mikalai Alimenkou</em> &ndash; Mikalai shared his experience related to Spring configs. Nice talk. I&rsquo;m going to borrow some ideas ;-)</li>
+<li><em>Spring the Ripper, by Evgeny Borisov</em> &ndash; It was the most dynamic talk at this conference. The presenter shown Spring life-cycle internals in action. Well done. It should be seen by every Spring dev :-)</li>
+</ul>
+
+
+<h3>Frameworks</h3>
+
+<ul>
+<li><em>Apache Lucene/Solr Internals, by Anatoliy Sokolenko</em> &ndash; I had no experience with these technologies. And it was really nice intro. Now I have some clue how it works.</li>
+<li><em>Streamline your processes with jBPM 6, by Jiri Svitak</em> &ndash; It was an into talk into jBPM 6. I had small experience with competitor framework <a href="http://activiti.org/">Activiti</a>. It&rsquo;s always interesting to see the similar framework&rsquo;s features.</li>
+</ul>
+
+
+<h3>Java/JVM/Compiler</h3>
+
+<ul>
+<li><em>Java8: Stream Style, by Sergey Kuksenko</em> &ndash; It was Java 8 Stream introduction. There were shown different stream features and approaches.</li>
+<li><em><a href="http://shipilev.net/blog/2014/heapdump-is-a-lie/">What Heap Dumps Are Lying To You About, by Aleksey Shipilёv</a></em> &ndash; It&rsquo;s a very special talk related to Java &ldquo;internals&rdquo;. Actually, this talk was about Java object size calculation and what happens under the hood.</li>
+<li><em>Reflection Madness, by Heinz Kabutz</em> &ndash; The presenter told us about Java reflection magic, when to use it and why it&rsquo;s dangerous.</li>
+</ul>
+
+
+<h3>Miscellaneous</h3>
+
+<ul>
+<li><em>Tooling of a Test-Driven Developer, by Paweł Lipiński</em>
+There were highlighted two very interesting libraries for TDD on top of JUnit: <a href="http://joel-costigliola.github.io/assertj/">AssertJ</a> and <a href="https://code.google.com/p/junitparams/">JUnitParams</a>.Very interesting libraries</li>
+<li><em>Web Apps in LISP!? EWW!, by Anatoly Polinsky</em> &ndash; Here was shown different aspects of web development in Clojure for beginners. It&rsquo;s was real intro, but very interesting, especially when you&rsquo;d like to spread your mind into alternative JVM-related communities.</li>
+</ul>
+
+
+<p>It was very productive conference for me. I&rsquo;ve got new portion of inspiration, new knowledge and passion to ordinary things.</p>
+
+<p><img class="center" src="/images/posts/jeeconf2014.jpg"></p>
+
+<h2>References</h2>
+
+<ul>
+<li><a href="">JEEConf - Kiev, 2013 - Report</a></li>
+<li><a href="">JEEConf - Kiev, 2012 - Report</a></li>
+<li><a href="">JEEConf - Kiev, 2011 - Report</a></li>
+</ul>
+
 </div>
   
   
@@ -450,91 +734,9 @@ Just put it in <span style="font-family: Courier New;">&lt;ruby base dir&gt;\bin
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/06/ruby-screencast-resources.html">Top Ruby Screencast Resources</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2009-06-02T22:32:00+03:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2009</span></span> <span class='time'>10:32 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>As you know there are several way to kick-off and learn a new programming language, environment or special tools:</p>
-
-<ul>
-<li>tutorial</li>
-<li>screencast</li>
-</ul>
-
-
-<p>But, now screencast is more popular for effective start and feature demonstration. So, I&rsquo;m trying to collect as more as possible screencast resources for learning Ruby and Rails.</p>
-
-<ul>
-<li><a href="http://railscasts.com/">http://railscasts.com</a>, it&rsquo;s the most popular free Rails screencasts</li>
-<li><a href="http://sdruby.com/">http://sdruby.com</a>, it&rsquo;s San Diego&rsquo;s Ruby community, there are about 59 Ruby and Rails screencasts</li>
-<li><a href="http://www.rubyplus.org/episodes">http://www.rubyplus.org/episodes</a>, Free Ruby and Rails Screencast, about 93 episodes</li>
-<li><a href="http://www.tekniqal.com/">http://www.tekniqal.com</a>, there are 17 tutorials covering basic Ruby topics</li>
-<li><a href="http://www.confreaks.com/events">http://www.confreaks.com/events</a>, here is located videos from several Ruby conferences</li>
-<li><a href="http://showmedo.com/videotutorials/ruby">http://showmedo.com/videotutorials/ruby</a> and <a href="http://showmedo.com/videotutorials/rubyonrails">http://showmedo.com/videotutorials/rubyonrails</a>, it&rsquo;s great resource for learning from ground up. There are a lot of interesting videos for beginners. Also, this resource includes other areas, not only Ruby/Rails related</li>
-<li><a href="http://www.bestechvideos.com/category/development/ruby">http://www.bestechvideos.com/tag/ruby-on-rails</a> and <a href="http://www.bestechvideos.com/category/development/ruby">http://www.bestechvideos.com/category/development/ruby</a>, video collection from different conferences, presentations, etc.</li>
-<li><a href="http://railslab.newrelic.com/scaling-rails">http://railslab.newrelic.com/scaling-rails</a> there are educational videos, teaching you just about everything you need to know to create a Rails application that can scale</li>
-<li><a href="http://rubytu.be/">http://rubytu.be</a> is a community driven collection of Ruby related videos and screencasts</li>
-<li><a href="http://www.learnivore.com/">http://www.learnivore.com</a> is another great screencast aggregator</li>
-<li><a href="http://www.teachmetocode.com/screencasts">http://www.teachmetocode.com/screencasts</a> is similar to railscast.com but have less posts, it&rsquo;s worth to look into</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/03/effective-way-to-be-expert.html">Effective Way to Be an Expert</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2009-03-16T19:35:00+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2009</span></span> <span class='time'>7:35 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve found great post about <a href="http://softwarecreation.org/2009/how-to-become-an-expert-the-effective-way">How to Become an Expert. The Effective Way.</a>
-The core idea is:</p>
-
-<blockquote><p>Experts are made, not born.<strong> Experts are made by themselves.</strong> It is a long, thorny and hard road. But this road makes their life interesting, positive, meaningful and brings <a href="http://softwarecreation.org/2008/the-happiness-programmers-edition/" title="happiness">happiness</a> from achieving a rare gift - mastery in the field they love.I invite you to read that post. Enjoy</p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/posts/2">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -557,19 +759,19 @@ The core idea is:</p>
       </li>
     
       <li class="post">
-        <a href="/2009/12/why-i-chosen-ruby-as-main-scripting.html">Why I've Chosen Ruby as Main Scripting Language for My Toolbox</a>
+        <a href="/2014/08/groovy-notes-pretty-print-json-from.html">Groovy Notes: Pretty Print JSON From the Command Line</a>
       </li>
     
       <li class="post">
-        <a href="/2009/11/nix-like-environments-for-windows.html">*nix-like Environments for Windows</a>
+        <a href="/2014/08/how-to-disable-tomcat-session.html">How to Disable Tomcat Session Serialization</a>
       </li>
     
       <li class="post">
-        <a href="/2009/11/gnustep-getting-started.html">GNUstep Getting Started</a>
+        <a href="/2014/07/review-programming-groovy-2-dynamic.html">Review: Programming Groovy 2: Dynamic Productivity for the Java Developer</a>
       </li>
     
       <li class="post">
-        <a href="/2009/08/test-page-must-be-deleted.html">Syntax Highlighting Code in Blogger</a>
+        <a href="/2014/05/jeeconf-kiev-2014-report.html">JEEConf - Kiev, 2014 - Report</a>
       </li>
     
   </ul>

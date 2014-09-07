@@ -4,7 +4,7 @@
   <title><![CDATA[Knowledge Is Everything]]></title>
   <link href="halyph.github.io/atom.xml" rel="self"/>
   <link href="halyph.github.io/"/>
-  <updated>2014-09-08T00:18:18+03:00</updated>
+  <updated>2014-09-08T01:55:29+03:00</updated>
   <id>halyph.github.io/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -18,9 +18,212 @@
     <link href="halyph.github.io/blog/2014/09/07/migration-to-octopress/"/>
     <updated>2014-09-07T23:15:56+03:00</updated>
     <id>halyph.github.io/blog/2014/09/07/migration-to-octopress</id>
-    <content type="html"><![CDATA[<p>This post will be dedicated to migtation from Google Blogger to Octopress.</p>
+    <content type="html"><![CDATA[<p><a href="http://halyph.blogspot.com/">Old <em>HalypH</em> blog</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Groovy Notes: Pretty Print JSON From the Command Line]]></title>
+    <link href="halyph.github.io/2014/08/groovy-notes-pretty-print-json-from.html"/>
+    <updated>2014-08-13T21:28:00+03:00</updated>
+    <id>halyph.github.io/2014/08/groovy-notes-pretty-print-json-from</id>
+    <content type="html"><![CDATA[<p><img class="center" src="halyph.github.io/images/blog/groovy.png">
+JSON pretty print it&rsquo;s common task while working with JSON from command line. There are many ways of doing this via Python, Ruby, node.js, but here I&rsquo;d like to concentrate on Groovy one-liner:</p>
 
-<p><img src="halyph.github.io/images/blog.jpeg"></p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo '{"foo": "lorem", "bar": "ipsum"}' | groovy -e 'import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)'
+</span><span class='line'>
+</span><span class='line'>{
+</span><span class='line'>    "foo": "lorem",
+</span><span class='line'>    "bar": "ipsum"
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can slightly improve this one-liner via adding shell alias:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ alias pp="groovy -e 'import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)'"
+</span><span class='line'>$ echo '{"foo": "lorem", "bar": "ipsum"}' | pp</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Also, we might use Groovy script which might be handy for simple JSON validation also:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">$</span> <span class="n">cat</span> <span class="n">prettyJson</span><span class="o">.</span><span class="na">groovy</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">groovy.json.*</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">println</span> <span class="n">JsonOutput</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">.</span><span class="na">text</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">JsonException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;ERROR: Not valid JSON&quot;</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">$</span> <span class="n">echo</span> <span class="s1">&#39;{&quot;foo: &quot;lorem&quot;, &#39;</span> <span class="o">|</span> <span class="n">groovy</span> <span class="n">prettyJson</span><span class="o">.</span><span class="na">groovy</span>
+</span><span class='line'><span class="nl">ERROR:</span> <span class="n">Not</span> <span class="n">valid</span> <span class="n">JSON</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Disable Tomcat Session Serialization]]></title>
+    <link href="halyph.github.io/2014/08/how-to-disable-tomcat-session.html"/>
+    <updated>2014-08-12T12:57:00+03:00</updated>
+    <id>halyph.github.io/2014/08/how-to-disable-tomcat-session</id>
+    <content type="html"><![CDATA[<p><img class="center" src="halyph.github.io/images/blog/java.png">
+Suppose you have the next error while restart/stop Tomcat (in my case Tomcat 7.x):</p>
+
+<pre class="brush: java;">WARNING: Cannot serialize session attribute SPRING_SECURITY_CONTEXT for session 54DBA076EDC9B7A24C1AF76824DFD1EF
+java.io.NotSerializableException: com.MyClass
+ at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1180)
+ at java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1528)
+ at java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1493)
+ at java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1416)
+ at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1174)
+ at java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:346)
+ at java.util.ArrayList.writeObject(ArrayList.java:710)
+ at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+ at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+ at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+ at java.lang.reflect.Method.invoke(Method.java:601)
+ at java.io.ObjectStreamClass.invokeWriteObject(ObjectStreamClass.java:975)
+...
+</pre>
+
+
+<p>It means that Tomcat is trying to persist non-serializable objects which were added into the session. Tomcat uses Manager component which is used to create and maintain HTTP sessions for web application.</p>
+
+<p>By default manager implementation configured to perform session persistence across restarts and we want to disable this functionality.</p>
+
+<p>To disable this persistence feature, create a Context configuration file (<em>context.xml</em>) for your web application and add the following element there:</p>
+
+<pre class="brush: xml;">&lt;Manager pathname="" /&gt;
+</pre>
+
+
+<p>You can add this context.xml file to:</p>
+
+<ul>
+<li>App.war:/META-INF/context.xml</li>
+<li>TOMCAT_HOME/conf/Catalina/localhost/App.xml file</li>
+<li>TOMCAT_HOME/cont/context.xml</li>
+</ul>
+
+
+<h2>References</h2>
+
+<ul>
+<li><a href="http://tomcat.apache.org/tomcat-7.0-doc/config/manager.html#Disable_Session_Persistence">Disable Session Persistence </a></li>
+<li><a href="http://tomcat.apache.org/tomcat-7.0-doc/cluster-howto.html">Clustering/Session Replication HOW-TO</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Review: Programming Groovy 2: Dynamic Productivity for the Java Developer]]></title>
+    <link href="halyph.github.io/2014/07/review-programming-groovy-2-dynamic.html"/>
+    <updated>2014-07-23T01:19:00+03:00</updated>
+    <id>halyph.github.io/2014/07/review-programming-groovy-2-dynamic</id>
+    <content type="html"><![CDATA[<p><img class="center" src="halyph.github.io/images/posts/book_programming_groovy2.jpg"></p>
+
+<p>This book is well balanced around Groovy language. I would say there is minimal required knowledge regarding the language. The author (Venkat Subramaniam) fluently covered every important aspect of Groovy. But this book is for experienced developer. The accents were made only in scope of Groovy language and totally avoided any &ldquo;intro&rdquo; programming talks, which is actually cool.</p>
+
+<p>Here is the book&rsquo;s structure:</p>
+
+<ul>
+<li><strong>Beginning Groovy</strong> - this part is dedicated to Groovy language features, especially from Java perspective. Reading this part I was building the parallel to Ruby trying to compare these languages. The main difference which I found it&rsquo;s only syntax &ldquo;sugar&rdquo;. I.e. conceptually these two language are very similar.&nbsp;</li>
+<li><strong>Using Groovy</strong> - this is a pragmatic part where were highlighted the next topics: Groovy GDK, XML Processing, working with DB, &nbsp;working with Java.</li>
+<li><strong>Dynamic features (MOPing Groovy)</strong>&nbsp;- here were highlighted two main metaprogramming approaches: run-time and compile-time metaprogramming. Very interesting part. For me Groovy metaprogramming facilities are much clear comparison to Ruby metaprogramming.</li>
+<li><strong>Using Metaprogramming</strong> - it&rsquo;s pragmatic part where were highlighted the applications for Groovy metaprogramming features. It&rsquo;s very important to note that Groovy contains many pre-bundled classes/modules which are really nice samples of metaprogramming Groovy&rsquo;s features.<div>I highly recommend this book to everybody who is interested in Groovy language. This book highlights Groovy dynamic features.</div></li>
+</ul>
+
+
+<h2>References:</h2>
+
+<ul>
+<li><a href="http://www.amazon.com/Programming-Groovy-Productivity-Developer-Pragmatic/dp/1937785300/">Programming Groovy 2: Dynamic Productivity for the Java Developer</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JEEConf - Kiev, 2014 - Report]]></title>
+    <link href="halyph.github.io/2014/05/jeeconf-kiev-2014-report.html"/>
+    <updated>2014-05-25T23:41:00+03:00</updated>
+    <id>halyph.github.io/2014/05/jeeconf-kiev-2014-report</id>
+    <content type="html"><![CDATA[<p><img class="center" src="halyph.github.io/images/blog/jeeconf.png"></p>
+
+<p>I attended the forth <a href="http://jeeconf.com">JEEConf</a>, May 23-24, 2014. The situation in my country (Ukraine) is difficult that’s why I was amazed to see so many foreign speakers. The organizers did really tremendous work.</p>
+
+<p>This year I divided topics by the next directions:</p>
+
+<h3>Spring</h3>
+
+<ul>
+<li><em>Spring 4, Java EE 7 or Both? by Ivar Grimstad</em> &ndash; The main idea of the talk was to show similar and different parts of Spring 4 and Java EE 7. And have an ability easily identify when to use one or another. There are trade-offs and we should be aware of them.</li>
+<li><em>Spring configuration: how to do it right (experience report), Mikalai Alimenkou</em> &ndash; Mikalai shared his experience related to Spring configs. Nice talk. I&rsquo;m going to borrow some ideas ;-)</li>
+<li><em>Spring the Ripper, by Evgeny Borisov</em> &ndash; It was the most dynamic talk at this conference. The presenter shown Spring life-cycle internals in action. Well done. It should be seen by every Spring dev :-)</li>
+</ul>
+
+
+<h3>Frameworks</h3>
+
+<ul>
+<li><em>Apache Lucene/Solr Internals, by Anatoliy Sokolenko</em> &ndash; I had no experience with these technologies. And it was really nice intro. Now I have some clue how it works.</li>
+<li><em>Streamline your processes with jBPM 6, by Jiri Svitak</em> &ndash; It was an into talk into jBPM 6. I had small experience with competitor framework <a href="http://activiti.org/">Activiti</a>. It&rsquo;s always interesting to see the similar framework&rsquo;s features.</li>
+</ul>
+
+
+<h3>Java/JVM/Compiler</h3>
+
+<ul>
+<li><em>Java8: Stream Style, by Sergey Kuksenko</em> &ndash; It was Java 8 Stream introduction. There were shown different stream features and approaches.</li>
+<li><em><a href="http://shipilev.net/blog/2014/heapdump-is-a-lie/">What Heap Dumps Are Lying To You About, by Aleksey Shipilёv</a></em> &ndash; It&rsquo;s a very special talk related to Java &ldquo;internals&rdquo;. Actually, this talk was about Java object size calculation and what happens under the hood.</li>
+<li><em>Reflection Madness, by Heinz Kabutz</em> &ndash; The presenter told us about Java reflection magic, when to use it and why it&rsquo;s dangerous.</li>
+</ul>
+
+
+<h3>Miscellaneous</h3>
+
+<ul>
+<li><em>Tooling of a Test-Driven Developer, by Paweł Lipiński</em>
+There were highlighted two very interesting libraries for TDD on top of JUnit: <a href="http://joel-costigliola.github.io/assertj/">AssertJ</a> and <a href="https://code.google.com/p/junitparams/">JUnitParams</a>.Very interesting libraries</li>
+<li><em>Web Apps in LISP!? EWW!, by Anatoly Polinsky</em> &ndash; Here was shown different aspects of web development in Clojure for beginners. It&rsquo;s was real intro, but very interesting, especially when you&rsquo;d like to spread your mind into alternative JVM-related communities.</li>
+</ul>
+
+
+<p>It was very productive conference for me. I&rsquo;ve got new portion of inspiration, new knowledge and passion to ordinary things.</p>
+
+<p><img class="center" src="halyph.github.io/images/posts/jeeconf2014.jpg"></p>
+
+<h2>References</h2>
+
+<ul>
+<li><a href="">JEEConf - Kiev, 2013 - Report</a></li>
+<li><a href="">JEEConf - Kiev, 2012 - Report</a></li>
+<li><a href="">JEEConf - Kiev, 2011 - Report</a></li>
+</ul>
+
 ]]></content>
   </entry>
   

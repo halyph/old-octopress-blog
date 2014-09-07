@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Jeeconf | Knowledge Is Everything]]></title>
+  <link href="halyph.github.io/blog/categories/jeeconf/atom.xml" rel="self"/>
+  <link href="halyph.github.io/"/>
+  <updated>2014-09-08T01:55:29+03:00</updated>
+  <id>halyph.github.io/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[JEEConf - Kiev, 2014 - Report]]></title>
+    <link href="halyph.github.io/2014/05/jeeconf-kiev-2014-report.html"/>
+    <updated>2014-05-25T23:41:00+03:00</updated>
+    <id>halyph.github.io/2014/05/jeeconf-kiev-2014-report</id>
+    <content type="html"><![CDATA[<p><img class="center" src="/images/blog/jeeconf.png"></p>
+
+<p>I attended the forth <a href="http://jeeconf.com">JEEConf</a>, May 23-24, 2014. The situation in my country (Ukraine) is difficult that’s why I was amazed to see so many foreign speakers. The organizers did really tremendous work.</p>
+
+<p>This year I divided topics by the next directions:</p>
+
+<h3>Spring</h3>
+
+<ul>
+<li><em>Spring 4, Java EE 7 or Both? by Ivar Grimstad</em> &ndash; The main idea of the talk was to show similar and different parts of Spring 4 and Java EE 7. And have an ability easily identify when to use one or another. There are trade-offs and we should be aware of them.</li>
+<li><em>Spring configuration: how to do it right (experience report), Mikalai Alimenkou</em> &ndash; Mikalai shared his experience related to Spring configs. Nice talk. I&rsquo;m going to borrow some ideas ;-)</li>
+<li><em>Spring the Ripper, by Evgeny Borisov</em> &ndash; It was the most dynamic talk at this conference. The presenter shown Spring life-cycle internals in action. Well done. It should be seen by every Spring dev :-)</li>
+</ul>
+
+
+<h3>Frameworks</h3>
+
+<ul>
+<li><em>Apache Lucene/Solr Internals, by Anatoliy Sokolenko</em> &ndash; I had no experience with these technologies. And it was really nice intro. Now I have some clue how it works.</li>
+<li><em>Streamline your processes with jBPM 6, by Jiri Svitak</em> &ndash; It was an into talk into jBPM 6. I had small experience with competitor framework <a href="http://activiti.org/">Activiti</a>. It&rsquo;s always interesting to see the similar framework&rsquo;s features.</li>
+</ul>
+
+
+<h3>Java/JVM/Compiler</h3>
+
+<ul>
+<li><em>Java8: Stream Style, by Sergey Kuksenko</em> &ndash; It was Java 8 Stream introduction. There were shown different stream features and approaches.</li>
+<li><em><a href="http://shipilev.net/blog/2014/heapdump-is-a-lie/">What Heap Dumps Are Lying To You About, by Aleksey Shipilёv</a></em> &ndash; It&rsquo;s a very special talk related to Java &ldquo;internals&rdquo;. Actually, this talk was about Java object size calculation and what happens under the hood.</li>
+<li><em>Reflection Madness, by Heinz Kabutz</em> &ndash; The presenter told us about Java reflection magic, when to use it and why it&rsquo;s dangerous.</li>
+</ul>
+
+
+<h3>Miscellaneous</h3>
+
+<ul>
+<li><em>Tooling of a Test-Driven Developer, by Paweł Lipiński</em>
+There were highlighted two very interesting libraries for TDD on top of JUnit: <a href="http://joel-costigliola.github.io/assertj/">AssertJ</a> and <a href="https://code.google.com/p/junitparams/">JUnitParams</a>.Very interesting libraries</li>
+<li><em>Web Apps in LISP!? EWW!, by Anatoly Polinsky</em> &ndash; Here was shown different aspects of web development in Clojure for beginners. It&rsquo;s was real intro, but very interesting, especially when you&rsquo;d like to spread your mind into alternative JVM-related communities.</li>
+</ul>
+
+
+<p>It was very productive conference for me. I&rsquo;ve got new portion of inspiration, new knowledge and passion to ordinary things.</p>
+
+<p><img class="center" src="/images/posts/jeeconf2014.jpg"></p>
+
+<h2>References</h2>
+
+<ul>
+<li><a href="">JEEConf - Kiev, 2013 - Report</a></li>
+<li><a href="">JEEConf - Kiev, 2012 - Report</a></li>
+<li><a href="">JEEConf - Kiev, 2011 - Report</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

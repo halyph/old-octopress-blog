@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Review | Knowledge Is Everything]]></title>
   <link href="halyph.github.io/blog/categories/review/atom.xml" rel="self"/>
   <link href="halyph.github.io/"/>
-  <updated>2014-09-08T00:18:18+03:00</updated>
+  <updated>2014-09-08T01:55:29+03:00</updated>
   <id>halyph.github.io/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Review: Programming Groovy 2: Dynamic Productivity for the Java Developer]]></title>
+    <link href="halyph.github.io/2014/07/review-programming-groovy-2-dynamic.html"/>
+    <updated>2014-07-23T01:19:00+03:00</updated>
+    <id>halyph.github.io/2014/07/review-programming-groovy-2-dynamic</id>
+    <content type="html"><![CDATA[<p><img class="center" src="/images/posts/book_programming_groovy2.jpg"></p>
+
+<p>This book is well balanced around Groovy language. I would say there is minimal required knowledge regarding the language. The author (Venkat Subramaniam) fluently covered every important aspect of Groovy. But this book is for experienced developer. The accents were made only in scope of Groovy language and totally avoided any &ldquo;intro&rdquo; programming talks, which is actually cool.</p>
+
+<p>Here is the book&rsquo;s structure:</p>
+
+<ul>
+<li><strong>Beginning Groovy</strong> - this part is dedicated to Groovy language features, especially from Java perspective. Reading this part I was building the parallel to Ruby trying to compare these languages. The main difference which I found it&rsquo;s only syntax &ldquo;sugar&rdquo;. I.e. conceptually these two language are very similar.&nbsp;</li>
+<li><strong>Using Groovy</strong> - this is a pragmatic part where were highlighted the next topics: Groovy GDK, XML Processing, working with DB, &nbsp;working with Java.</li>
+<li><strong>Dynamic features (MOPing Groovy)</strong>&nbsp;- here were highlighted two main metaprogramming approaches: run-time and compile-time metaprogramming. Very interesting part. For me Groovy metaprogramming facilities are much clear comparison to Ruby metaprogramming.</li>
+<li><strong>Using Metaprogramming</strong> - it&rsquo;s pragmatic part where were highlighted the applications for Groovy metaprogramming features. It&rsquo;s very important to note that Groovy contains many pre-bundled classes/modules which are really nice samples of metaprogramming Groovy&rsquo;s features.<div>I highly recommend this book to everybody who is interested in Groovy language. This book highlights Groovy dynamic features.</div></li>
+</ul>
+
+
+<h2>References:</h2>
+
+<ul>
+<li><a href="http://www.amazon.com/Programming-Groovy-Productivity-Developer-Pragmatic/dp/1937785300/">Programming Groovy 2: Dynamic Productivity for the Java Developer</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Effective Way to Be an Expert]]></title>
