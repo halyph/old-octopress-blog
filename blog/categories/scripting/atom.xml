@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Scripting | Knowledge Is Everything]]></title>
-  <link href="halyph.github.io/blog/categories/scripting/atom.xml" rel="self"/>
-  <link href="halyph.github.io/"/>
-  <updated>2014-09-09T16:47:49+03:00</updated>
-  <id>halyph.github.io/</id>
+  <link href="halyph.com/blog/categories/scripting/atom.xml" rel="self"/>
+  <link href="halyph.com/"/>
+  <updated>2014-09-09T16:50:53+03:00</updated>
+  <id>halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Why I've Chosen Ruby as Main Scripting Language for My Toolbox]]></title>
-    <link href="halyph.github.io/2009/12/why-i-chosen-ruby-as-main-scripting.html"/>
+    <link href="halyph.com/2009/12/why-i-chosen-ruby-as-main-scripting.html"/>
     <updated>2009-12-27T12:42:00+02:00</updated>
-    <id>halyph.github.io/2009/12/why-i-chosen-ruby-as-main-scripting</id>
+    <id>halyph.com/2009/12/why-i-chosen-ruby-as-main-scripting</id>
     <content type="html"><![CDATA[<p>There are a lot of scripting languages: Perl, Python, Lua, Tcl, Ruby, JavaScript, Scala, Groovy, Erlang, Lisp, Scheme and Bash/Awk(as shell scripting).</p>
 
 <p>There are criteria I&rsquo;ve tried to match for my scripting language of choice:</p>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Cygwin | Knowledge Is Everything]]></title>
-  <link href="halyph.github.io/blog/categories/cygwin/atom.xml" rel="self"/>
-  <link href="halyph.github.io/"/>
-  <updated>2014-09-09T16:47:49+03:00</updated>
-  <id>halyph.github.io/</id>
+  <link href="halyph.com/blog/categories/cygwin/atom.xml" rel="self"/>
+  <link href="halyph.com/"/>
+  <updated>2014-09-09T16:50:53+03:00</updated>
+  <id>halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[*nix-like Environments for Windows]]></title>
-    <link href="halyph.github.io/2009/11/nix-like-environments-for-windows.html"/>
+    <link href="halyph.com/2009/11/nix-like-environments-for-windows.html"/>
     <updated>2009-11-18T01:02:00+02:00</updated>
-    <id>halyph.github.io/2009/11/nix-like-environments-for-windows</id>
+    <id>halyph.com/2009/11/nix-like-environments-for-windows</id>
     <content type="html"><![CDATA[<p>*nix like environment is good for developer and sysadmins, and really useful for end-user. That&rsquo;s why we&rsquo;ve got KDE, Gnome and similar. But, I like it a lot even if I&rsquo;m Windows user ;-). There are several cases to set up *nix environment on Windows:</p>
 
 <ul>

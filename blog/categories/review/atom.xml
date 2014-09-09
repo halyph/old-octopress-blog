@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Review | Knowledge Is Everything]]></title>
-  <link href="halyph.github.io/blog/categories/review/atom.xml" rel="self"/>
-  <link href="halyph.github.io/"/>
-  <updated>2014-09-09T16:47:49+03:00</updated>
-  <id>halyph.github.io/</id>
+  <link href="halyph.com/blog/categories/review/atom.xml" rel="self"/>
+  <link href="halyph.com/"/>
+  <updated>2014-09-09T16:50:53+03:00</updated>
+  <id>halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Review: Programming Groovy 2: Dynamic Productivity for the Java Developer]]></title>
-    <link href="halyph.github.io/2014/07/review-programming-groovy-2-dynamic.html"/>
+    <link href="halyph.com/2014/07/review-programming-groovy-2-dynamic.html"/>
     <updated>2014-07-23T01:19:00+03:00</updated>
-    <id>halyph.github.io/2014/07/review-programming-groovy-2-dynamic</id>
+    <id>halyph.com/2014/07/review-programming-groovy-2-dynamic</id>
     <content type="html"><![CDATA[<p><img class="center" src="/images/posts/book_programming_groovy2.jpg"></p>
 
 <p>This book is well balanced around Groovy language. I would say there is minimal required knowledge regarding the language. The author (Venkat Subramaniam) fluently covered every important aspect of Groovy. But this book is for experienced developer. The accents were made only in scope of Groovy language and totally avoided any &ldquo;intro&rdquo; programming talks, which is actually cool.</p>
@@ -43,9 +43,9 @@
   
   <entry>
     <title type="html"><![CDATA[Review: Making Java Groovy]]></title>
-    <link href="halyph.github.io/2014/03/review-making-java-groovy.html"/>
+    <link href="halyph.com/2014/03/review-making-java-groovy.html"/>
     <updated>2014-03-17T23:27:00+02:00</updated>
-    <id>halyph.github.io/2014/03/review-making-java-groovy</id>
+    <id>halyph.com/2014/03/review-making-java-groovy</id>
     <content type="html"><![CDATA[<p><img class="center" src="/images/posts/book_making_java_groovy.jpg"></p>
 
 <p>I can say that this book is special. It’s not a Groovy “cookbook”.
@@ -82,9 +82,9 @@ in Groovy. Save your time and automate with Groovy.</p>
   
   <entry>
     <title type="html"><![CDATA[Effective Way to Be an Expert]]></title>
-    <link href="halyph.github.io/2009/03/effective-way-to-be-expert.html"/>
+    <link href="halyph.com/2009/03/effective-way-to-be-expert.html"/>
     <updated>2009-03-16T19:35:00+02:00</updated>
-    <id>halyph.github.io/2009/03/effective-way-to-be-expert</id>
+    <id>halyph.com/2009/03/effective-way-to-be-expert</id>
     <content type="html"><![CDATA[<p>I&rsquo;ve found great post about <a href="http://softwarecreation.org/2009/how-to-become-an-expert-the-effective-way">How to Become an Expert. The Effective Way.</a>
 The core idea is:</p>
 

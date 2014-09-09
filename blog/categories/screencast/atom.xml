@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Screencast | Knowledge Is Everything]]></title>
-  <link href="halyph.github.io/blog/categories/screencast/atom.xml" rel="self"/>
-  <link href="halyph.github.io/"/>
-  <updated>2014-09-09T16:47:49+03:00</updated>
-  <id>halyph.github.io/</id>
+  <link href="halyph.com/blog/categories/screencast/atom.xml" rel="self"/>
+  <link href="halyph.com/"/>
+  <updated>2014-09-09T16:50:53+03:00</updated>
+  <id>halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Top Ruby Screencast Resources]]></title>
-    <link href="halyph.github.io/2009/06/ruby-screencast-resources.html"/>
+    <link href="halyph.com/2009/06/ruby-screencast-resources.html"/>
     <updated>2009-06-02T22:32:00+03:00</updated>
-    <id>halyph.github.io/2009/06/ruby-screencast-resources</id>
+    <id>halyph.com/2009/06/ruby-screencast-resources</id>
     <content type="html"><![CDATA[<p>As you know there are several way to kick-off and learn a new programming language, environment or special tools:</p>
 
 <ul>

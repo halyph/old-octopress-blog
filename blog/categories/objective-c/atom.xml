@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Objective-c | Knowledge Is Everything]]></title>
-  <link href="halyph.github.io/blog/categories/objective-c/atom.xml" rel="self"/>
-  <link href="halyph.github.io/"/>
-  <updated>2014-09-09T16:47:49+03:00</updated>
-  <id>halyph.github.io/</id>
+  <link href="halyph.com/blog/categories/objective-c/atom.xml" rel="self"/>
+  <link href="halyph.com/"/>
+  <updated>2014-09-09T16:50:53+03:00</updated>
+  <id>halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[GNUstep Getting Started]]></title>
-    <link href="halyph.github.io/2009/11/gnustep-getting-started.html"/>
+    <link href="halyph.com/2009/11/gnustep-getting-started.html"/>
     <updated>2009-11-08T23:08:00+02:00</updated>
-    <id>halyph.github.io/2009/11/gnustep-getting-started</id>
+    <id>halyph.com/2009/11/gnustep-getting-started</id>
     <content type="html"><![CDATA[<p>Objective-C popularity aggressively increased based on <a href="http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html">TIOBE Index</a> (for October 2009)
 <img class="center" src="/images/posts/TIOBE.gif">
 The reason is simple &ndash; iPhone and all related stuff. We should be ready to develop Objective-C based application in future. The worst thing I don&rsquo;t have a Mac, so I don&rsquo;t have development environment.

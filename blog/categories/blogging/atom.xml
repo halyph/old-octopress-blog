@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Blogging | Knowledge Is Everything]]></title>
-  <link href="halyph.github.io/blog/categories/blogging/atom.xml" rel="self"/>
-  <link href="halyph.github.io/"/>
-  <updated>2014-09-09T16:47:49+03:00</updated>
-  <id>halyph.github.io/</id>
+  <link href="halyph.com/blog/categories/blogging/atom.xml" rel="self"/>
+  <link href="halyph.com/"/>
+  <updated>2014-09-09T16:50:53+03:00</updated>
+  <id>halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Syntax Highlighting Code in Blogger]]></title>
-    <link href="halyph.github.io/2009/08/test-page-must-be-deleted.html"/>
+    <link href="halyph.com/2009/08/test-page-must-be-deleted.html"/>
     <updated>2009-08-29T00:30:00+03:00</updated>
-    <id>halyph.github.io/2009/08/test-page-must-be-deleted</id>
+    <id>halyph.com/2009/08/test-page-must-be-deleted</id>
     <content type="html"><![CDATA[<p>How to highlight code in Blogger? You can use <a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter">SyntaxHighlighter</a>.
 I don&rsquo;t want to repeat other useful posts about adjusting Blogger for <a href="http://en.wikipedia.org/wiki/Syntax_highlighting" title="http://en.wikipedia.org/wiki/Syntax_highlighting">code syntax highlighter</a>, so take look at these:</p>
 

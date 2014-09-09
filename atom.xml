@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Knowledge Is Everything]]></title>
-  <link href="halyph.github.io/atom.xml" rel="self"/>
-  <link href="halyph.github.io/"/>
-  <updated>2014-09-09T16:47:49+03:00</updated>
-  <id>halyph.github.io/</id>
+  <link href="halyph.com/atom.xml" rel="self"/>
+  <link href="halyph.com/"/>
+  <updated>2014-09-09T16:50:53+03:00</updated>
+  <id>halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
     
@@ -15,19 +15,19 @@
   
   <entry>
     <title type="html"><![CDATA[Migration to Octopress]]></title>
-    <link href="halyph.github.io/blog/2014/09/07/migration-to-octopress/"/>
+    <link href="halyph.com/blog/2014/09/07/migration-to-octopress/"/>
     <updated>2014-09-07T23:15:56+03:00</updated>
-    <id>halyph.github.io/blog/2014/09/07/migration-to-octopress</id>
+    <id>halyph.com/blog/2014/09/07/migration-to-octopress</id>
     <content type="html"><![CDATA[<p><a href="http://halyph.blogspot.com/">Old <em>HalypH</em> blog</a></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Groovy Notes: Pretty Print JSON From the Command Line]]></title>
-    <link href="halyph.github.io/2014/08/groovy-notes-pretty-print-json-from.html"/>
+    <link href="halyph.com/2014/08/groovy-notes-pretty-print-json-from.html"/>
     <updated>2014-08-13T21:28:00+03:00</updated>
-    <id>halyph.github.io/2014/08/groovy-notes-pretty-print-json-from</id>
-    <content type="html"><![CDATA[<p><img class="center" src="halyph.github.io/images/blog/groovy.png">
+    <id>halyph.com/2014/08/groovy-notes-pretty-print-json-from</id>
+    <content type="html"><![CDATA[<p><img class="center" src="halyph.com/images/blog/groovy.png">
 JSON pretty print it&rsquo;s common task while working with JSON from command line. There are many ways of doing this via Python, Ruby, node.js, but here I&rsquo;d like to concentrate on Groovy one-liner:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -85,10 +85,10 @@ JSON pretty print it&rsquo;s common task while working with JSON from command li
   
   <entry>
     <title type="html"><![CDATA[How to Disable Tomcat Session Serialization]]></title>
-    <link href="halyph.github.io/2014/08/how-to-disable-tomcat-session.html"/>
+    <link href="halyph.com/2014/08/how-to-disable-tomcat-session.html"/>
     <updated>2014-08-12T12:57:00+03:00</updated>
-    <id>halyph.github.io/2014/08/how-to-disable-tomcat-session</id>
-    <content type="html"><![CDATA[<p><img class="center" src="halyph.github.io/images/blog/java.png">
+    <id>halyph.com/2014/08/how-to-disable-tomcat-session</id>
+    <content type="html"><![CDATA[<p><img class="center" src="halyph.com/images/blog/java.png">
 Suppose you have the next error while restart/stop Tomcat (in my case Tomcat 7.x):</p>
 
 <pre class="brush: java;">WARNING: Cannot serialize session attribute SPRING_SECURITY_CONTEXT for session 54DBA076EDC9B7A24C1AF76824DFD1EF
@@ -140,10 +140,10 @@ java.io.NotSerializableException: com.MyClass
   
   <entry>
     <title type="html"><![CDATA[Review: Programming Groovy 2: Dynamic Productivity for the Java Developer]]></title>
-    <link href="halyph.github.io/2014/07/review-programming-groovy-2-dynamic.html"/>
+    <link href="halyph.com/2014/07/review-programming-groovy-2-dynamic.html"/>
     <updated>2014-07-23T01:19:00+03:00</updated>
-    <id>halyph.github.io/2014/07/review-programming-groovy-2-dynamic</id>
-    <content type="html"><![CDATA[<p><img class="center" src="halyph.github.io/images/posts/book_programming_groovy2.jpg"></p>
+    <id>halyph.com/2014/07/review-programming-groovy-2-dynamic</id>
+    <content type="html"><![CDATA[<p><img class="center" src="halyph.com/images/posts/book_programming_groovy2.jpg"></p>
 
 <p>This book is well balanced around Groovy language. I would say there is minimal required knowledge regarding the language. The author (Venkat Subramaniam) fluently covered every important aspect of Groovy. But this book is for experienced developer. The accents were made only in scope of Groovy language and totally avoided any &ldquo;intro&rdquo; programming talks, which is actually cool.</p>
 
@@ -168,10 +168,10 @@ java.io.NotSerializableException: com.MyClass
   
   <entry>
     <title type="html"><![CDATA[JEEConf - Kiev, 2014 - Report]]></title>
-    <link href="halyph.github.io/2014/05/jeeconf-kiev-2014-report.html"/>
+    <link href="halyph.com/2014/05/jeeconf-kiev-2014-report.html"/>
     <updated>2014-05-25T23:41:00+03:00</updated>
-    <id>halyph.github.io/2014/05/jeeconf-kiev-2014-report</id>
-    <content type="html"><![CDATA[<p><img class="center" src="halyph.github.io/images/blog/jeeconf.png"></p>
+    <id>halyph.com/2014/05/jeeconf-kiev-2014-report</id>
+    <content type="html"><![CDATA[<p><img class="center" src="halyph.com/images/blog/jeeconf.png"></p>
 
 <p>I attended the forth <a href="http://jeeconf.com">JEEConf</a>, May 23-24, 2014. The situation in my country (Ukraine) is difficult that’s why I was amazed to see so many foreign speakers. The organizers did really tremendous work.</p>
 
@@ -213,7 +213,7 @@ java.io.NotSerializableException: com.MyClass
 
 <p>It was very productive conference for me. I&rsquo;ve got new portion of inspiration, new knowledge and passion to ordinary things.</p>
 
-<p><img class="center" src="halyph.github.io/images/posts/jeeconf2014.jpg"></p>
+<p><img class="center" src="halyph.com/images/posts/jeeconf2014.jpg"></p>
 
 <h2>References</h2>
 
@@ -228,10 +228,10 @@ java.io.NotSerializableException: com.MyClass
   
   <entry>
     <title type="html"><![CDATA[Thor Notes]]></title>
-    <link href="halyph.github.io/2014/04/thor-notes.html"/>
+    <link href="halyph.com/2014/04/thor-notes.html"/>
     <updated>2014-04-19T12:40:00+03:00</updated>
-    <id>halyph.github.io/2014/04/thor-notes</id>
-    <content type="html"><![CDATA[<p><img class="center" src="halyph.github.io/images/blog/ruby.png"></p>
+    <id>halyph.com/2014/04/thor-notes</id>
+    <content type="html"><![CDATA[<p><img class="center" src="halyph.com/images/blog/ruby.png"></p>
 
 <p>Some time ago I used <a href="http://whatisthor.com/">Thor</a> for one <a href="http://en.wikipedia.org/wiki/Command-line_interface">CLI</a> application. I
 investigated several tools, but picked Thor because of its simplicity
@@ -257,10 +257,10 @@ usage also.</p>
   
   <entry>
     <title type="html"><![CDATA[Review: Making Java Groovy]]></title>
-    <link href="halyph.github.io/2014/03/review-making-java-groovy.html"/>
+    <link href="halyph.com/2014/03/review-making-java-groovy.html"/>
     <updated>2014-03-17T23:27:00+02:00</updated>
-    <id>halyph.github.io/2014/03/review-making-java-groovy</id>
-    <content type="html"><![CDATA[<p><img class="center" src="halyph.github.io/images/posts/book_making_java_groovy.jpg"></p>
+    <id>halyph.com/2014/03/review-making-java-groovy</id>
+    <content type="html"><![CDATA[<p><img class="center" src="halyph.com/images/posts/book_making_java_groovy.jpg"></p>
 
 <p>I can say that this book is special. It’s not a Groovy “cookbook”.
 You won’t find tons of tricky recipes around Groovy. You won’t learn
@@ -296,10 +296,10 @@ in Groovy. Save your time and automate with Groovy.</p>
   
   <entry>
     <title type="html"><![CDATA[About Learning New Programming Languages]]></title>
-    <link href="halyph.github.io/2014/01/about-learning-new-programming-languages.html"/>
+    <link href="halyph.com/2014/01/about-learning-new-programming-languages.html"/>
     <updated>2014-01-26T13:25:00+02:00</updated>
-    <id>halyph.github.io/2014/01/about-learning-new-programming-languages</id>
-    <content type="html"><![CDATA[<p><img class="center" src="halyph.github.io/images/posts/progLanguages_small.gif"></p>
+    <id>halyph.com/2014/01/about-learning-new-programming-languages</id>
+    <content type="html"><![CDATA[<p><img class="center" src="halyph.com/images/posts/progLanguages_small.gif"></p>
 
 <p>This post is very subjective and reflect the my current point of view.</p>
 
@@ -377,9 +377,9 @@ Try to avoid hipster <a href="http://en.wikipedia.org/wiki/Bandwagon_effect">ban
   
   <entry>
     <title type="html"><![CDATA[Why I've Chosen Ruby as Main Scripting Language for My Toolbox]]></title>
-    <link href="halyph.github.io/2009/12/why-i-chosen-ruby-as-main-scripting.html"/>
+    <link href="halyph.com/2009/12/why-i-chosen-ruby-as-main-scripting.html"/>
     <updated>2009-12-27T12:42:00+02:00</updated>
-    <id>halyph.github.io/2009/12/why-i-chosen-ruby-as-main-scripting</id>
+    <id>halyph.com/2009/12/why-i-chosen-ruby-as-main-scripting</id>
     <content type="html"><![CDATA[<p>There are a lot of scripting languages: Perl, Python, Lua, Tcl, Ruby, JavaScript, Scala, Groovy, Erlang, Lisp, Scheme and Bash/Awk(as shell scripting).</p>
 
 <p>There are criteria I&rsquo;ve tried to match for my scripting language of choice:</p>
@@ -421,9 +421,9 @@ But I falling in love with Ruby blocks. I love <a href="http://railscasts.com/."
   
   <entry>
     <title type="html"><![CDATA[*nix-like Environments for Windows]]></title>
-    <link href="halyph.github.io/2009/11/nix-like-environments-for-windows.html"/>
+    <link href="halyph.com/2009/11/nix-like-environments-for-windows.html"/>
     <updated>2009-11-18T01:02:00+02:00</updated>
-    <id>halyph.github.io/2009/11/nix-like-environments-for-windows</id>
+    <id>halyph.com/2009/11/nix-like-environments-for-windows</id>
     <content type="html"><![CDATA[<p>*nix like environment is good for developer and sysadmins, and really useful for end-user. That&rsquo;s why we&rsquo;ve got KDE, Gnome and similar. But, I like it a lot even if I&rsquo;m Windows user ;-). There are several cases to set up *nix environment on Windows:</p>
 
 <ul>
@@ -448,11 +448,11 @@ But I falling in love with Ruby blocks. I love <a href="http://railscasts.com/."
   
   <entry>
     <title type="html"><![CDATA[GNUstep Getting Started]]></title>
-    <link href="halyph.github.io/2009/11/gnustep-getting-started.html"/>
+    <link href="halyph.com/2009/11/gnustep-getting-started.html"/>
     <updated>2009-11-08T23:08:00+02:00</updated>
-    <id>halyph.github.io/2009/11/gnustep-getting-started</id>
+    <id>halyph.com/2009/11/gnustep-getting-started</id>
     <content type="html"><![CDATA[<p>Objective-C popularity aggressively increased based on <a href="http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html">TIOBE Index</a> (for October 2009)
-<img class="center" src="halyph.github.io/images/posts/TIOBE.gif">
+<img class="center" src="halyph.com/images/posts/TIOBE.gif">
 The reason is simple &ndash; iPhone and all related stuff. We should be ready to develop Objective-C based application in future. The worst thing I don&rsquo;t have a Mac, so I don&rsquo;t have development environment.
 I need to get basic Objective-C knowledge, and here several solutions:</p>
 
@@ -473,7 +473,7 @@ I need to get basic Objective-C knowledge, and here several solutions:</p>
 </ul>
 
 
-<p>My choice is <img src="halyph.github.io/images/posts/gnustep-header14.png"></p>
+<p>My choice is <img src="halyph.com/images/posts/gnustep-header14.png"></p>
 
 <p>Here is the useful links for quick start:</p>
 
@@ -505,9 +505,9 @@ In general it&rsquo;s simple, but if you have some troubles with it here is the 
   
   <entry>
     <title type="html"><![CDATA[Syntax Highlighting Code in Blogger]]></title>
-    <link href="halyph.github.io/2009/08/test-page-must-be-deleted.html"/>
+    <link href="halyph.com/2009/08/test-page-must-be-deleted.html"/>
     <updated>2009-08-29T00:30:00+03:00</updated>
-    <id>halyph.github.io/2009/08/test-page-must-be-deleted</id>
+    <id>halyph.com/2009/08/test-page-must-be-deleted</id>
     <content type="html"><![CDATA[<p>How to highlight code in Blogger? You can use <a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter">SyntaxHighlighter</a>.
 I don&rsquo;t want to repeat other useful posts about adjusting Blogger for <a href="http://en.wikipedia.org/wiki/Syntax_highlighting" title="http://en.wikipedia.org/wiki/Syntax_highlighting">code syntax highlighter</a>, so take look at these:</p>
 
@@ -536,9 +536,9 @@ I don&rsquo;t want to repeat other useful posts about adjusting Blogger for <a h
   
   <entry>
     <title type="html"><![CDATA[Rails 2.3 Migration Issues With MySQL 5.1.3]]></title>
-    <link href="halyph.github.io/2009/08/rails-23-migration-issues-with-mysql_26.html"/>
+    <link href="halyph.com/2009/08/rails-23-migration-issues-with-mysql_26.html"/>
     <updated>2009-08-26T00:13:00+03:00</updated>
-    <id>halyph.github.io/2009/08/rails-23-migration-issues-with-mysql_26</id>
+    <id>halyph.com/2009/08/rails-23-migration-issues-with-mysql_26</id>
     <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -626,9 +626,9 @@ Just put it in <span style="font-family: Courier New;">&lt;ruby base dir&gt;\bin
   
   <entry>
     <title type="html"><![CDATA[Top Ruby Screencast Resources]]></title>
-    <link href="halyph.github.io/2009/06/ruby-screencast-resources.html"/>
+    <link href="halyph.com/2009/06/ruby-screencast-resources.html"/>
     <updated>2009-06-02T22:32:00+03:00</updated>
-    <id>halyph.github.io/2009/06/ruby-screencast-resources</id>
+    <id>halyph.com/2009/06/ruby-screencast-resources</id>
     <content type="html"><![CDATA[<p>As you know there are several way to kick-off and learn a new programming language, environment or special tools:</p>
 
 <ul>
@@ -658,9 +658,9 @@ Just put it in <span style="font-family: Courier New;">&lt;ruby base dir&gt;\bin
   
   <entry>
     <title type="html"><![CDATA[Effective Way to Be an Expert]]></title>
-    <link href="halyph.github.io/2009/03/effective-way-to-be-expert.html"/>
+    <link href="halyph.com/2009/03/effective-way-to-be-expert.html"/>
     <updated>2009-03-16T19:35:00+02:00</updated>
-    <id>halyph.github.io/2009/03/effective-way-to-be-expert</id>
+    <id>halyph.com/2009/03/effective-way-to-be-expert</id>
     <content type="html"><![CDATA[<p>I&rsquo;ve found great post about <a href="http://softwarecreation.org/2009/how-to-become-an-expert-the-effective-way">How to Become an Expert. The Effective Way.</a>
 The core idea is:</p>
 
