@@ -4,7 +4,7 @@
   <title><![CDATA[Knowledge Is Everything]]></title>
   <link href="halyph.com/atom.xml" rel="self"/>
   <link href="halyph.com/"/>
-  <updated>2014-09-09T22:01:20+03:00</updated>
+  <updated>2014-09-09T22:05:26+03:00</updated>
   <id>halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -218,9 +218,9 @@ java.io.NotSerializableException: com.MyClass
 <h2>References</h2>
 
 <ul>
-<li><a href="">JEEConf - Kiev, 2013 - Report</a></li>
-<li><a href="">JEEConf - Kiev, 2012 - Report</a></li>
-<li><a href="">JEEConf - Kiev, 2011 - Report</a></li>
+<li><a href="http://halyph.blogspot.com/2013/05/jeeconf-kiev-2013-report.html">JEEConf - Kiev, 2013 - Report</a></li>
+<li><a href="http://halyph.blogspot.com/2012/05/this-year-we-had-second-jeeconf.html">JEEConf - Kiev, 2012 - Report</a></li>
+<li><a href="http://halyph.blogspot.com/2011/05/jeeconf-kiev-2011-report.html">JEEConf - Kiev, 2011 - Report</a></li>
 </ul>
 
 ]]></content>
