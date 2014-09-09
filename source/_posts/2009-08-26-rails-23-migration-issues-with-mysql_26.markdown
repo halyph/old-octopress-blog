@@ -12,6 +12,7 @@ blogger:
     postid: "2772777033509564413"
     comments: "12"
 categories: [rails]
+published: false
 ---
 
 ```

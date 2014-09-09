@@ -12,6 +12,7 @@ blogger:
     postid: "6450729650978493273"
     comments: "0"
 categories: [Objective-C, GNUstep]
+published: false
 ---
 
 Objective-C popularity aggressively increased based on [TIOBE Index](http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html) (for October 2009)

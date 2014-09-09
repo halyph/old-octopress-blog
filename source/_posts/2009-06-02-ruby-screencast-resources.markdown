@@ -12,6 +12,7 @@ blogger:
     postid: "8841432517621116453"
     comments: "0"
 categories: [ruby, rails, screencast]
+published: false
 ---
 
 As you know there are several way to kick-off and learn a new programming language, environment or special tools:

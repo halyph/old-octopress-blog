@@ -45,6 +45,6 @@ It was very productive conference for me. I've got new portion of inspiration, n
 {% img center /images/posts/jeeconf2014.jpg %}
 
 ##References
-* [JEEConf - Kiev, 2013 - Report]()
-* [JEEConf - Kiev, 2012 - Report]()
-* [JEEConf - Kiev, 2011 - Report]()
+* [JEEConf - Kiev, 2013 - Report](http://halyph.blogspot.com/2013/05/jeeconf-kiev-2013-report.html)
+* [JEEConf - Kiev, 2012 - Report](http://halyph.blogspot.com/2012/05/this-year-we-had-second-jeeconf.html)
+* [JEEConf - Kiev, 2011 - Report](http://halyph.blogspot.com/2011/05/jeeconf-kiev-2011-report.html)
