@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Groovy | Knowledge Is Everything]]></title>
   <link href="halyph.com/blog/categories/groovy/atom.xml" rel="self"/>
   <link href="halyph.com/"/>
-  <updated>2014-09-09T16:50:53+03:00</updated>
+  <updated>2014-09-09T22:01:20+03:00</updated>
   <id>halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -134,50 +134,6 @@ in Groovy. Save your time and automate with Groovy.</p>
 <li> <a href="http://www.manning.com/kousen/">Making Java Groovy, by Ken Kousen</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Why I've Chosen Ruby as Main Scripting Language for My Toolbox]]></title>
-    <link href="halyph.com/2009/12/why-i-chosen-ruby-as-main-scripting.html"/>
-    <updated>2009-12-27T12:42:00+02:00</updated>
-    <id>halyph.com/2009/12/why-i-chosen-ruby-as-main-scripting</id>
-    <content type="html"><![CDATA[<p>There are a lot of scripting languages: Perl, Python, Lua, Tcl, Ruby, JavaScript, Scala, Groovy, Erlang, Lisp, Scheme and Bash/Awk(as shell scripting).</p>
-
-<p>There are criteria I&rsquo;ve tried to match for my scripting language of choice:</p>
-
-<ul>
-<li>Easy to learn</li>
-<li>Active and big community<em>   Amount of books and tutorials which are available</em>   How many screencasts, conference videos are on-line?</li>
-<li>Can replace shell scripting?</li>
-<li>Number of text editors which support selected language</li>
-<li>Code for fun? Is it suitable for selected language</li>
-<li>Amount of useful frameworks and libraries</li>
-</ul>
-
-
-<p>Let&rsquo;s discuss each of them.</p>
-
-<ul>
-<li><p><strong>JavaScript.</strong> I like this language, but it doesn&rsquo;t have standard serve-side API. There are a lot of implementation, but community  have to work a lot to get valuable result. Check <a href="http://wiki.commonjs.org/wiki/CommonJS">CommonJS</a> to get more info</p></li>
-<li><p><strong>Perl</strong>. I&rsquo;ve never tried to dig deeply into this and code style doesn&rsquo;t suitable for me. I can&rsquo;t code for fun.  Number of tutorials/books are huge. Community is big. But, it&rsquo;s not my language of choice.</p></li>
-<li><p><strong>Lua</strong>. There are no killer features, as for me. In general language are cool and fast. Easy to learn.</p></li>
-<li><p><strong>Tcl</strong>.  I just don&rsquo;t like Tcl language. It&rsquo;s main stopper for me. Community not so big in comparison with other languages. Amount the books is limited.</p></li>
-<li><p><strong>Lisp/Scheme</strong>. Great languages, but not for shell oriented scripting (It will be awkward to write shell scripts)</p></li>
-<li><p><strong>Erlang</strong>. Interesting language, but it&rsquo;s not general purpose. Good for concurrency domain. I have to skip it.</p></li>
-<li><p><strong>Scala/Groovy</strong>. Yet another scripting languages. I can see hype near these languages, especially Scala in Java community.  I can predict, that the next year will have got another hype language(s).</p></li>
-<li><p><strong>Bash/Awk</strong>. I&rsquo;d like to learn these two, but I&rsquo;m windows user and I don&rsquo;t have a possibility to use these during my work. I can use Cygwin/MSYS, but it will be strange, awkward. It will be unnatural. I&rsquo;m sure I need to get additional experience in Bash scripting, but not now. Time is my enemy.</p></li>
-</ul>
-
-
-<p><strong>Python vs Ruby.</strong> These two are very similar. Both have big and active community. Both are general purpose languages. Both are great.
-But I falling in love with Ruby blocks. I love <a href="http://railscasts.com/.">http://railscasts.com/.</a>  I&rsquo;m not web-developer, but Rails concept is super-productive.  I just love Ruby community.</p>
-
-<p>But, there is one drawback. There is a ton of libraries and frameworks which are doing the same thing. Community super productive  and  it&rsquo;s in developing. There is no consistency. So, I have to be aware of any big changes in my favorite libraries/frameworks. I know it sounds strange but it&rsquo;s IMHO.</p>
-
-<p>Shell scripting and task automation is one of the main direction to be productive. From time to time I have to work on different OS&rsquo;s (Windows, Linux, OS X) and environment. But my primary work station is Windows based. I&rsquo;d like to have consistent scripting and automation tools for all these OS/environments. We can automate everything with Bash, etc. But what about Windows? So, choosing scripting language was good decision to create multi-platform toolbox. So, I can use my knowledge on any machine with minimal rework (if required).</p>
-
-<p>Any developer should have some scripting language in his arsenal. <strong>The right tool for the job</strong>. Keep follow this idea and you will be productive.</p>
 ]]></content>
   </entry>
   

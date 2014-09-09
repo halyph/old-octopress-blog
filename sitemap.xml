@@ -50,66 +50,24 @@
     <priority>0.8</priority>
   </url>
   
-  <url>
-    <loc>halyph.com/2009/12/why-i-chosen-ruby-as-main-scripting.html</loc>
-    <lastmod>2009-12-27T12:42:00+02:00</lastmod>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>halyph.com/2009/11/nix-like-environments-for-windows.html</loc>
-    <lastmod>2009-11-18T01:02:00+02:00</lastmod>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>halyph.com/2009/11/gnustep-getting-started.html</loc>
-    <lastmod>2009-11-08T23:08:00+02:00</lastmod>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>halyph.com/2009/08/test-page-must-be-deleted.html</loc>
-    <lastmod>2009-08-29T00:30:00+03:00</lastmod>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>halyph.com/2009/08/rails-23-migration-issues-with-mysql_26.html</loc>
-    <lastmod>2009-08-26T00:13:00+03:00</lastmod>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>halyph.com/2009/06/ruby-screencast-resources.html</loc>
-    <lastmod>2009-06-02T22:32:00+03:00</lastmod>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>halyph.com/2009/03/effective-way-to-be-expert.html</loc>
-    <lastmod>2009-03-16T19:35:00+02:00</lastmod>
-    <priority>0.8</priority>
-  </url>
-  
   
   <url>
     <loc>halyph.com/blog/archives/</loc>
-    <lastmod>2014-09-09T16:50:53+03:00</lastmod>
+    <lastmod>2014-09-09T22:01:20+03:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>halyph.com/</loc>
-    <lastmod>2014-09-09T16:50:53+03:00</lastmod>
+    <lastmod>2014-09-09T22:01:20+03:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>halyph.com/about/</loc>
-    <lastmod>2014-09-09T16:50:53+03:00</lastmod>
+    <lastmod>2014-09-09T22:01:20+03:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
