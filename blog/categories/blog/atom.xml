@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Blog | Knowledge Is Everything]]></title>
-  <link href="halyph.com/blog/categories/blog/atom.xml" rel="self"/>
-  <link href="halyph.com/"/>
-  <updated>2014-10-07T01:45:24+03:00</updated>
-  <id>halyph.com/</id>
+  <link href="http://halyph.com/blog/categories/blog/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2014-10-07T01:54:03+03:00</updated>
+  <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Migration to Octopress]]></title>
-    <link href="halyph.com/blog/2014/09/07/migration-to-octopress/"/>
+    <link href="http://halyph.com/blog/2014/09/07/migration-to-octopress/"/>
     <updated>2014-09-07T23:15:56+03:00</updated>
-    <id>halyph.com/blog/2014/09/07/migration-to-octopress</id>
+    <id>http://halyph.com/blog/2014/09/07/migration-to-octopress</id>
     <content type="html"><![CDATA[<h2>Objectives</h2>
 
 <p>I&rsquo;ve been blogging for several years (2009-2014) using Google Blogger <a href="http://halyph.blogspot.com">My old blogspot blog</a>. It was a great experience. But, I always felt some discomfort.

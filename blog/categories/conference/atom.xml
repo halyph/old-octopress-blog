@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Conference | Knowledge Is Everything]]></title>
-  <link href="halyph.com/blog/categories/conference/atom.xml" rel="self"/>
-  <link href="halyph.com/"/>
-  <updated>2014-10-07T01:45:24+03:00</updated>
-  <id>halyph.com/</id>
+  <link href="http://halyph.com/blog/categories/conference/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2014-10-07T01:54:03+03:00</updated>
+  <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[JEEConf - Kiev, 2014 - Report]]></title>
-    <link href="halyph.com/2014/05/jeeconf-kiev-2014-report.html"/>
+    <link href="http://halyph.com/2014/05/jeeconf-kiev-2014-report.html"/>
     <updated>2014-05-25T23:41:00+03:00</updated>
-    <id>halyph.com/2014/05/jeeconf-kiev-2014-report</id>
+    <id>http://halyph.com/2014/05/jeeconf-kiev-2014-report</id>
     <content type="html"><![CDATA[<p><img class="center" src="/images/blog/jeeconf.png"></p>
 
 <p>I attended the forth <a href="http://jeeconf.com">JEEConf</a>, May 23-24, 2014. The situation in my country (Ukraine) is difficult that’s why I was amazed to see so many foreign speakers. The organizers did really tremendous work.</p>

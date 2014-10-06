@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Knowledge Is Everything]]></title>
-  <link href="halyph.com/atom.xml" rel="self"/>
-  <link href="halyph.com/"/>
-  <updated>2014-10-07T01:45:24+03:00</updated>
-  <id>halyph.com/</id>
+  <link href="http://halyph.com/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2014-10-07T01:54:03+03:00</updated>
+  <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Migration to Octopress]]></title>
-    <link href="halyph.com/blog/2014/09/07/migration-to-octopress/"/>
+    <link href="http://halyph.com/blog/2014/09/07/migration-to-octopress/"/>
     <updated>2014-09-07T23:15:56+03:00</updated>
-    <id>halyph.com/blog/2014/09/07/migration-to-octopress</id>
+    <id>http://halyph.com/blog/2014/09/07/migration-to-octopress</id>
     <content type="html"><![CDATA[<h2>Objectives</h2>
 
 <p>I&rsquo;ve been blogging for several years (2009-2014) using Google Blogger <a href="http://halyph.blogspot.com">My old blogspot blog</a>. It was a great experience. But, I always felt some discomfort.
@@ -70,10 +70,10 @@ I picked Octopress because of the pre-bundled minimal required blogging features
   
   <entry>
     <title type="html"><![CDATA[Groovy Notes: Pretty Print JSON From the Command Line]]></title>
-    <link href="halyph.com/2014/08/groovy-notes-pretty-print-json-from.html"/>
+    <link href="http://halyph.com/2014/08/groovy-notes-pretty-print-json-from.html"/>
     <updated>2014-08-13T21:28:00+03:00</updated>
-    <id>halyph.com/2014/08/groovy-notes-pretty-print-json-from</id>
-    <content type="html"><![CDATA[<p><img class="center" src="halyph.com/images/blog/groovy.png">
+    <id>http://halyph.com/2014/08/groovy-notes-pretty-print-json-from</id>
+    <content type="html"><![CDATA[<p><img class="center" src="http://halyph.com/images/blog/groovy.png">
 JSON pretty print it&rsquo;s common task while working with JSON from command line. There are many ways of doing this via Python, Ruby, node.js, but here I&rsquo;d like to concentrate on Groovy one-liner:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -131,10 +131,10 @@ JSON pretty print it&rsquo;s common task while working with JSON from command li
   
   <entry>
     <title type="html"><![CDATA[How to Disable Tomcat Session Serialization]]></title>
-    <link href="halyph.com/2014/08/how-to-disable-tomcat-session.html"/>
+    <link href="http://halyph.com/2014/08/how-to-disable-tomcat-session.html"/>
     <updated>2014-08-12T12:57:00+03:00</updated>
-    <id>halyph.com/2014/08/how-to-disable-tomcat-session</id>
-    <content type="html"><![CDATA[<p><img class="center" src="halyph.com/images/blog/java.png">
+    <id>http://halyph.com/2014/08/how-to-disable-tomcat-session</id>
+    <content type="html"><![CDATA[<p><img class="center" src="http://halyph.com/images/blog/java.png">
 Suppose you have the next error while restart/stop Tomcat (in my case Tomcat 7.x):</p>
 
 <pre class="brush: java;">WARNING: Cannot serialize session attribute SPRING_SECURITY_CONTEXT for session 54DBA076EDC9B7A24C1AF76824DFD1EF
@@ -186,10 +186,10 @@ java.io.NotSerializableException: com.MyClass
   
   <entry>
     <title type="html"><![CDATA[Review: Programming Groovy 2: Dynamic Productivity for the Java Developer]]></title>
-    <link href="halyph.com/2014/07/review-programming-groovy-2-dynamic.html"/>
+    <link href="http://halyph.com/2014/07/review-programming-groovy-2-dynamic.html"/>
     <updated>2014-07-23T01:19:00+03:00</updated>
-    <id>halyph.com/2014/07/review-programming-groovy-2-dynamic</id>
-    <content type="html"><![CDATA[<p><img class="center" src="halyph.com/images/posts/book_programming_groovy2.jpg"></p>
+    <id>http://halyph.com/2014/07/review-programming-groovy-2-dynamic</id>
+    <content type="html"><![CDATA[<p><img class="center" src="http://halyph.com/images/posts/book_programming_groovy2.jpg"></p>
 
 <p>This book is well balanced around Groovy language. I would say there is minimal required knowledge regarding the language. The author (Venkat Subramaniam) fluently covered every important aspect of Groovy. But this book is for experienced developer. The accents were made only in scope of Groovy language and totally avoided any &ldquo;intro&rdquo; programming talks, which is actually cool.</p>
 
@@ -214,10 +214,10 @@ java.io.NotSerializableException: com.MyClass
   
   <entry>
     <title type="html"><![CDATA[JEEConf - Kiev, 2014 - Report]]></title>
-    <link href="halyph.com/2014/05/jeeconf-kiev-2014-report.html"/>
+    <link href="http://halyph.com/2014/05/jeeconf-kiev-2014-report.html"/>
     <updated>2014-05-25T23:41:00+03:00</updated>
-    <id>halyph.com/2014/05/jeeconf-kiev-2014-report</id>
-    <content type="html"><![CDATA[<p><img class="center" src="halyph.com/images/blog/jeeconf.png"></p>
+    <id>http://halyph.com/2014/05/jeeconf-kiev-2014-report</id>
+    <content type="html"><![CDATA[<p><img class="center" src="http://halyph.com/images/blog/jeeconf.png"></p>
 
 <p>I attended the forth <a href="http://jeeconf.com">JEEConf</a>, May 23-24, 2014. The situation in my country (Ukraine) is difficult that’s why I was amazed to see so many foreign speakers. The organizers did really tremendous work.</p>
 
@@ -259,7 +259,7 @@ java.io.NotSerializableException: com.MyClass
 
 <p>It was very productive conference for me. I&rsquo;ve got new portion of inspiration, new knowledge and passion to ordinary things.</p>
 
-<p><img class="center" src="halyph.com/images/posts/jeeconf2014.jpg"></p>
+<p><img class="center" src="http://halyph.com/images/posts/jeeconf2014.jpg"></p>
 
 <h2>References</h2>
 
@@ -274,10 +274,10 @@ java.io.NotSerializableException: com.MyClass
   
   <entry>
     <title type="html"><![CDATA[Thor Notes]]></title>
-    <link href="halyph.com/2014/04/thor-notes.html"/>
+    <link href="http://halyph.com/2014/04/thor-notes.html"/>
     <updated>2014-04-19T12:40:00+03:00</updated>
-    <id>halyph.com/2014/04/thor-notes</id>
-    <content type="html"><![CDATA[<p><img class="center" src="halyph.com/images/blog/ruby.png"></p>
+    <id>http://halyph.com/2014/04/thor-notes</id>
+    <content type="html"><![CDATA[<p><img class="center" src="http://halyph.com/images/blog/ruby.png"></p>
 
 <p>Some time ago I used <a href="http://whatisthor.com/">Thor</a> for one <a href="http://en.wikipedia.org/wiki/Command-line_interface">CLI</a> application. I
 investigated several tools, but picked Thor because of its simplicity
@@ -303,10 +303,10 @@ usage also.</p>
   
   <entry>
     <title type="html"><![CDATA[Review: Making Java Groovy]]></title>
-    <link href="halyph.com/2014/03/review-making-java-groovy.html"/>
+    <link href="http://halyph.com/2014/03/review-making-java-groovy.html"/>
     <updated>2014-03-17T23:27:00+02:00</updated>
-    <id>halyph.com/2014/03/review-making-java-groovy</id>
-    <content type="html"><![CDATA[<p><img class="center" src="halyph.com/images/posts/book_making_java_groovy.jpg"></p>
+    <id>http://halyph.com/2014/03/review-making-java-groovy</id>
+    <content type="html"><![CDATA[<p><img class="center" src="http://halyph.com/images/posts/book_making_java_groovy.jpg"></p>
 
 <p>I can say that this book is special. It’s not a Groovy “cookbook”.
 You won’t find tons of tricky recipes around Groovy. You won’t learn
@@ -342,10 +342,10 @@ in Groovy. Save your time and automate with Groovy.</p>
   
   <entry>
     <title type="html"><![CDATA[About Learning New Programming Languages]]></title>
-    <link href="halyph.com/2014/01/about-learning-new-programming-languages.html"/>
+    <link href="http://halyph.com/2014/01/about-learning-new-programming-languages.html"/>
     <updated>2014-01-26T13:25:00+02:00</updated>
-    <id>halyph.com/2014/01/about-learning-new-programming-languages</id>
-    <content type="html"><![CDATA[<p><img class="center" src="halyph.com/images/posts/progLanguages_small.gif"></p>
+    <id>http://halyph.com/2014/01/about-learning-new-programming-languages</id>
+    <content type="html"><![CDATA[<p><img class="center" src="http://halyph.com/images/posts/progLanguages_small.gif"></p>
 
 <p>This post is very subjective and reflect the my current point of view.</p>
 

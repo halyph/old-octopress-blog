@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Tomcat | Knowledge Is Everything]]></title>
-  <link href="halyph.com/blog/categories/tomcat/atom.xml" rel="self"/>
-  <link href="halyph.com/"/>
-  <updated>2014-10-07T01:45:24+03:00</updated>
-  <id>halyph.com/</id>
+  <link href="http://halyph.com/blog/categories/tomcat/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2014-10-07T01:54:03+03:00</updated>
+  <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[How to Disable Tomcat Session Serialization]]></title>
-    <link href="halyph.com/2014/08/how-to-disable-tomcat-session.html"/>
+    <link href="http://halyph.com/2014/08/how-to-disable-tomcat-session.html"/>
     <updated>2014-08-12T12:57:00+03:00</updated>
-    <id>halyph.com/2014/08/how-to-disable-tomcat-session</id>
+    <id>http://halyph.com/2014/08/how-to-disable-tomcat-session</id>
     <content type="html"><![CDATA[<p><img class="center" src="/images/blog/java.png">
 Suppose you have the next error while restart/stop Tomcat (in my case Tomcat 7.x):</p>
 

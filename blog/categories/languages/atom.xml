@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Languages | Knowledge Is Everything]]></title>
-  <link href="halyph.com/blog/categories/languages/atom.xml" rel="self"/>
-  <link href="halyph.com/"/>
-  <updated>2014-10-07T01:45:24+03:00</updated>
-  <id>halyph.com/</id>
+  <link href="http://halyph.com/blog/categories/languages/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2014-10-07T01:54:03+03:00</updated>
+  <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[About Learning New Programming Languages]]></title>
-    <link href="halyph.com/2014/01/about-learning-new-programming-languages.html"/>
+    <link href="http://halyph.com/2014/01/about-learning-new-programming-languages.html"/>
     <updated>2014-01-26T13:25:00+02:00</updated>
-    <id>halyph.com/2014/01/about-learning-new-programming-languages</id>
+    <id>http://halyph.com/2014/01/about-learning-new-programming-languages</id>
     <content type="html"><![CDATA[<p><img class="center" src="/images/posts/progLanguages_small.gif"></p>
 
 <p>This post is very subjective and reflect the my current point of view.</p>

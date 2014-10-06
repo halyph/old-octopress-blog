@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Ruby | Knowledge Is Everything]]></title>
-  <link href="halyph.com/blog/categories/ruby/atom.xml" rel="self"/>
-  <link href="halyph.com/"/>
-  <updated>2014-10-07T01:45:24+03:00</updated>
-  <id>halyph.com/</id>
+  <link href="http://halyph.com/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2014-10-07T01:54:03+03:00</updated>
+  <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Thor Notes]]></title>
-    <link href="halyph.com/2014/04/thor-notes.html"/>
+    <link href="http://halyph.com/2014/04/thor-notes.html"/>
     <updated>2014-04-19T12:40:00+03:00</updated>
-    <id>halyph.com/2014/04/thor-notes</id>
+    <id>http://halyph.com/2014/04/thor-notes</id>
     <content type="html"><![CDATA[<p><img class="center" src="/images/blog/ruby.png"></p>
 
 <p>Some time ago I used <a href="http://whatisthor.com/">Thor</a> for one <a href="http://en.wikipedia.org/wiki/Command-line_interface">CLI</a> application. I
