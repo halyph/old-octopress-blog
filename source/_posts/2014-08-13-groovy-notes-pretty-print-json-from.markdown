@@ -12,6 +12,7 @@ blogger:
     postid: "8391203241795630785"
     comments: "0"
 categories: [groovy]
+comments: true
 ---
 {% img center /images/blog/groovy.png %}
 JSON pretty print it's common task while working with JSON from command line. There are many ways of doing this via Python, Ruby, node.js, but here I'd like to concentrate on Groovy one-liner:

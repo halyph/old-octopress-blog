@@ -12,6 +12,7 @@ blogger:
     postid: "811607181898345962"
     comments: "0"
 categories: [learning, languages]
+comments: true
 ---
 {% img center /images/posts/progLanguages_small.gif %}
 

@@ -11,6 +11,7 @@ blogger:
     postid: "9102901128179163090"
     comments: "0"
 categories: [conference, jeeconf]
+comments: true
 ---
 
 {% img center /images/blog/jeeconf.png %}
