@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Groovy | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/groovy/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2014-10-07T02:02:39+03:00</updated>
+  <updated>2014-10-09T23:12:28+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -27,18 +27,20 @@ JSON pretty print it&rsquo;s common task while working with JSON from command li
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo &lsquo;{&ldquo;foo&rdquo;: &ldquo;lorem&rdquo;, &ldquo;bar&rdquo;: &ldquo;ipsum&rdquo;}&rsquo; | groovy -e &lsquo;import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)&rsquo;&lt;/p>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="p">&amp;</span>lsquo<span class="p">;</span><span class="o">{</span><span class="p">&amp;</span>ldquo<span class="p">;</span>foo<span class="p">&amp;</span>rdquo<span class="p">;</span>: <span class="p">&amp;</span>ldquo<span class="p">;</span>lorem<span class="p">&amp;</span>rdquo<span class="p">;</span>, <span class="p">&amp;</span>ldquo<span class="p">;</span>bar<span class="p">&amp;</span>rdquo<span class="p">;</span>: <span class="p">&amp;</span>ldquo<span class="p">;</span>ipsum<span class="p">&amp;</span>rdquo<span class="p">;</span><span class="o">}</span><span class="p">&amp;</span>rsquo<span class="p">;</span> <span class="p">|</span> groovy -e <span class="p">&amp;</span>lsquo<span class="p">;</span>import groovy.json.*<span class="p">;</span> println JsonOutput.prettyPrint<span class="o">(</span>System.in.text<span class="o">)</span><span class="p">&amp;</span>rsquo<span class="p">;</span>&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;p>{
-</span><span class='line'>    &ldquo;foo&rdquo;: &ldquo;lorem&rdquo;,
-</span><span class='line'>    &ldquo;bar&rdquo;: &ldquo;ipsum&rdquo;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</span><span class='line'>&lt;p&gt;<span class="o">{</span>
+</span><span class='line'>    <span class="p">&amp;</span>ldquo<span class="p">;</span>foo<span class="p">&amp;</span>rdquo<span class="p">;</span>: <span class="p">&amp;</span>ldquo<span class="p">;</span>lorem<span class="p">&amp;</span>rdquo<span class="p">;</span>,
+</span><span class='line'>    <span class="p">&amp;</span>ldquo<span class="p">;</span>bar<span class="p">&amp;</span>rdquo<span class="p">;</span>: <span class="p">&amp;</span>ldquo<span class="p">;</span>ipsum<span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>We can slightly improve this one-liner via adding shell alias:
 <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ alias pp=&ldquo;groovy -e &lsquo;import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)&rsquo;&rdquo;
-</span><span class='line'>$ echo &lsquo;{&ldquo;foo&rdquo;: &ldquo;lorem&rdquo;, &ldquo;bar&rdquo;: &ldquo;ipsum&rdquo;}&rsquo; | pp</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">alias </span><span class="nv">pp</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>groovy -e <span class="p">&amp;</span>lsquo<span class="p">;</span>import groovy.json.*<span class="p">;</span> println JsonOutput.prettyPrint<span class="o">(</span>System.in.text<span class="o">)</span><span class="p">&amp;</span>rsquo<span class="p">;&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="p">&amp;</span>lsquo<span class="p">;</span><span class="o">{</span><span class="p">&amp;</span>ldquo<span class="p">;</span>foo<span class="p">&amp;</span>rdquo<span class="p">;</span>: <span class="p">&amp;</span>ldquo<span class="p">;</span>lorem<span class="p">&amp;</span>rdquo<span class="p">;</span>, <span class="p">&amp;</span>ldquo<span class="p">;</span>bar<span class="p">&amp;</span>rdquo<span class="p">;</span>: <span class="p">&amp;</span>ldquo<span class="p">;</span>ipsum<span class="p">&amp;</span>rdquo<span class="p">;</span><span class="o">}</span><span class="p">&amp;</span>rsquo<span class="p">;</span> <span class="p">|</span> pp
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Also, we might use Groovy script which might be handy for simple JSON validation also:</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Knowledge Is Everything]]></title>
   <link href="http://halyph.com/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2014-10-07T02:02:39+03:00</updated>
+  <updated>2014-10-09T23:12:28+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to Use Block Comments in Bash Script]]></title>
+    <link href="http://halyph.com/blog/2014/10/09/bash-block-comments/"/>
+    <updated>2014-10-09T22:39:25+03:00</updated>
+    <id>http://halyph.com/blog/2014/10/09/bash-block-comments</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://halyph.com/images/blog/bash.png">
+What is the simplest way to define block comment in Bash script?</p>
+
+<p>I&rsquo;ve selected two approaches for myself:</p>
+
+<ul>
+<li>Use here document</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;before block comment&quot;</span>
+</span><span class='line'>: <span class="s">&lt;&lt;&#39;END&#39;</span>
+</span><span class='line'><span class="s">Some long </span>
+</span><span class='line'><span class="s">myltiline </span>
+</span><span class='line'><span class="s">text</span>
+</span><span class='line'><span class="s">END</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;after block comment&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Use <strong>&ldquo;if&rdquo;</strong> false block</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;before block comment&quot;</span>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>Some long
+</span><span class='line'>myltiline
+</span><span class='line'>text
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;after block comment&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Migration to Octopress]]></title>
@@ -82,20 +146,22 @@ JSON pretty print it&rsquo;s common task while working with JSON from command li
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo '{"foo": "lorem", "bar": "ipsum"}' | groovy -e 'import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)'
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;{&quot;foo&quot;: &quot;lorem&quot;, &quot;bar&quot;: &quot;ipsum&quot;}&#39;</span> <span class="p">|</span> groovy -e <span class="s1">&#39;import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)&#39;</span>
 </span><span class='line'>
-</span><span class='line'>{
-</span><span class='line'>    "foo": "lorem",
-</span><span class='line'>    "bar": "ipsum"
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;foo&quot;</span>: <span class="s2">&quot;lorem&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;bar&quot;</span>: <span class="s2">&quot;ipsum&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>We can slightly improve this one-liner via adding shell alias:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ alias pp="groovy -e 'import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)'"
-</span><span class='line'>$ echo '{"foo": "lorem", "bar": "ipsum"}' | pp</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">alias </span><span class="nv">pp</span><span class="o">=</span><span class="s2">&quot;groovy -e &#39;import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)&#39;&quot;</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;{&quot;foo&quot;: &quot;lorem&quot;, &quot;bar&quot;: &quot;ipsum&quot;}&#39;</span> <span class="p">|</span> pp
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Also, we might use Groovy script which might be handy for simple JSON validation also:</p>

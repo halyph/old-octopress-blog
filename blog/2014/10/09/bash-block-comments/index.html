@@ -5,11 +5,19 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Migration to Octopress - Knowledge Is Everything</title>
+  <title>How to Use Block Comments in Bash Script - Knowledge Is Everything</title>
   <meta name="author" content="Orest Ivasiv">
 
   
-  <meta name="description" content="Objectives I&rsquo;ve been blogging for several years (2009-2014) using Google Blogger My old blogspot blog. It was a great experience. But, I always &hellip;">
+  <meta name="description" content="What is the simplest way to define block comment in Bash script? I&rsquo;ve selected two approaches for myself: Use here document 1
+2
+3
+4
+5
+6
+7
+8
+9 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +26,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://halyph.com/blog/2014/09/07/migration-to-octopress">
+  <link rel="canonical" href="http://halyph.com/blog/2014/10/09/bash-block-comments">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Knowledge Is Everything" type="application/atom+xml">
@@ -85,7 +93,7 @@
   
   <header>
     
-      <h1 class="entry-title">Migration to Octopress</h1>
+      <h1 class="entry-title">How to Use Block Comments in Bash Script</h1>
     
     
       <p class="meta">
@@ -94,7 +102,7 @@
 
 
 
-<time class='entry-date' datetime='2014-09-07T23:15:56+03:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:15 pm</span></time>
+<time class='entry-date' datetime='2014-10-09T22:39:25+03:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:39 pm</span></time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://halyph.com">Comments</a>
@@ -104,53 +112,62 @@
   </header>
 
 
-<div class="entry-content"><h2>Objectives</h2>
+<div class="entry-content"><p><img class="right" src="/images/blog/bash.png">
+What is the simplest way to define block comment in Bash script?</p>
 
-<p>I&rsquo;ve been blogging for several years (2009-2014) using Google Blogger <a href="http://halyph.blogspot.com">My old blogspot blog</a>. It was a great experience. But, I always felt some discomfort.
-I couldn&rsquo;t simply write without thinking how it will be rendered. I was distracted by blog engine.</p>
-
-<h2>Moving away</h2>
-
-<p>Additional inspiration for moving away came from the essay <a href="http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html">Blogging Like a Hacker</a>.
-Finally, I made a decision to use GitHub Pages for blogging. There were two choices: <a href="http://jekyllrb.com/">Jekyll</a> or <a href="http://octopress.org/">Octopress</a>.
-I picked Octopress because of the pre-bundled minimal required blogging features. <em>I.e.</em> it&rsquo;s not required the additional configuration to start blogging right away.</p>
-
-<p>The official Octopress <a href="http://octopress.org/docs/">documentation</a> has step-by-step guide for blog setup. It&rsquo;s very convenient and transparent.</p>
-
-<h2>Theme</h2>
-
-<p>I didn&rsquo;t want to use the default Octopress theme (it&rsquo;s boring). Theme customization required some time. All others free themes are too complex, IMHO.</p>
-
-<p>At the end I found this <a href="http://blog.justin.kelly.org.au/octopress-theme/">theme</a> and applied it to my <em>new</em> blog.</p>
-
-<h2>Main features</h2>
-
-<p>Here I selected the main features which I like the most:</p>
+<p>I&rsquo;ve selected two approaches for myself:</p>
 
 <ul>
-<li>markdown for blogging</li>
-<li>simple code snippets insertion</li>
-<li>full blog customization</li>
-<li>Ruby at the bottom (I love this language)</li>
-<li>ability to use your favorite text editor (Textmate in my case) for blogging</li>
+<li>Use here document</li>
 </ul>
 
 
-<h3>Minor Issues</h3>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;before block comment&quot;</span>
+</span><span class='line'>: <span class="s">&lt;&lt;&#39;END&#39;</span>
+</span><span class='line'><span class="s">Some long </span>
+</span><span class='line'><span class="s">myltiline </span>
+</span><span class='line'><span class="s">text</span>
+</span><span class='line'><span class="s">END</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;after block comment&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>I&rsquo;ve tried to migrate posts form my old blog to Octopress, tried different approaches. But, I had no success. Actually, I had ugly results, which should be manually fixed.</p>
-
-<h3>P.S.</h3>
-
-<p>There are tons of different Static Site Generators, see the next resources:</p>
 
 <ul>
-<li><a href="https://www.staticgen.com/">Top Open-Source Static Site Generators</a></li>
-<li><a href="http://staticsitegenerators.net/">Static Site Generators, The definitive listing of Static Site Generators — all 298 of them!</a></li>
+<li>Use <strong>&ldquo;if&rdquo;</strong> false block</li>
 </ul>
 
 
-<p>But, Jekyll and Octopress are at the top.</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;before block comment&quot;</span>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>Some long
+</span><span class='line'>myltiline
+</span><span class='line'>text
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;after block comment&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 </div>
 
 
@@ -166,12 +183,12 @@ I picked Octopress because of the pre-bundled minimal required blogging features
 
 
 
-<time class='entry-date' datetime='2014-09-07T23:15:56+03:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:15 pm</span></time>
+<time class='entry-date' datetime='2014-10-09T22:39:25+03:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:39 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/blog/'>blog</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>
+    <a class='category' href='/blog/categories/bash/'>bash</a>, <a class='category' href='/blog/categories/shell/'>shell</a>
   
 </span>
 
@@ -180,7 +197,7 @@ I picked Octopress because of the pre-bundled minimal required blogging features
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://halyph.com/blog/2014/09/07/migration-to-octopress/" data-via="halyph" data-counturl="http://halyph.com/blog/2014/09/07/migration-to-octopress/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://halyph.com/blog/2014/10/09/bash-block-comments/" data-via="halyph" data-counturl="http://halyph.com/blog/2014/10/09/bash-block-comments/" >Tweet</a>
   
   
   
@@ -189,10 +206,8 @@ I picked Octopress because of the pre-bundled minimal required blogging features
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2014/08/groovy-notes-pretty-print-json-from.html" title="Previous Post: Groovy Notes: Pretty print JSON from the command line">&laquo; Groovy Notes: Pretty print JSON from the command line</a>
+        <a class="basic-alignment left" href="/blog/2014/09/07/migration-to-octopress/" title="Previous Post: Migration to Octopress">&laquo; Migration to Octopress</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/10/09/bash-block-comments/" title="Next Post: How to use block comments in Bash Script">How to use block comments in Bash Script &raquo;</a>
       
     </p>
   </footer>
@@ -264,8 +279,8 @@ I picked Octopress because of the pre-bundled minimal required blogging features
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://halyph.com/blog/2014/09/07/migration-to-octopress/';
-        var disqus_url = 'http://halyph.com/blog/2014/09/07/migration-to-octopress/';
+        var disqus_identifier = 'http://halyph.com/blog/2014/10/09/bash-block-comments/';
+        var disqus_url = 'http://halyph.com/blog/2014/10/09/bash-block-comments/';
         var disqus_script = 'embed.js';
       
     (function () {

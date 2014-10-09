@@ -113,20 +113,22 @@ JSON pretty print it&rsquo;s common task while working with JSON from command li
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo '{"foo": "lorem", "bar": "ipsum"}' | groovy -e 'import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)'
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;{&quot;foo&quot;: &quot;lorem&quot;, &quot;bar&quot;: &quot;ipsum&quot;}&#39;</span> <span class="p">|</span> groovy -e <span class="s1">&#39;import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)&#39;</span>
 </span><span class='line'>
-</span><span class='line'>{
-</span><span class='line'>    "foo": "lorem",
-</span><span class='line'>    "bar": "ipsum"
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;foo&quot;</span>: <span class="s2">&quot;lorem&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;bar&quot;</span>: <span class="s2">&quot;ipsum&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>We can slightly improve this one-liner via adding shell alias:</p>
 
 <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ alias pp="groovy -e 'import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)'"
-</span><span class='line'>$ echo '{"foo": "lorem", "bar": "ipsum"}' | pp</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">alias </span><span class="nv">pp</span><span class="o">=</span><span class="s2">&quot;groovy -e &#39;import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)&#39;&quot;</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;{&quot;foo&quot;: &quot;lorem&quot;, &quot;bar&quot;: &quot;ipsum&quot;}&#39;</span> <span class="p">|</span> pp
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>Also, we might use Groovy script which might be handy for simple JSON validation also:</p>
@@ -225,6 +227,10 @@ JSON pretty print it&rsquo;s common task while working with JSON from command li
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/10/09/bash-block-comments/">How to Use Block Comments in Bash Script</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/09/07/migration-to-octopress/">Migration to Octopress</a>
       </li>
     
@@ -238,10 +244,6 @@ JSON pretty print it&rsquo;s common task while working with JSON from command li
     
       <li class="post">
         <a href="/2014/07/review-programming-groovy-2-dynamic.html">Review: Programming Groovy 2: Dynamic Productivity for the Java Developer</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/05/jeeconf-kiev-2014-report.html">JEEConf - Kiev, 2014 - Report</a>
       </li>
     
   </ul>
