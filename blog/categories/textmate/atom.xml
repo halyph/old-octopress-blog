@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Textmate | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/textmate/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2014-10-20T02:37:37+03:00</updated>
+  <updated>2014-10-20T02:42:41+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -21,7 +21,9 @@
     <content type="html"><![CDATA[<p><img class="right" src="/images/blog/textmate.png">
 Recently I&rsquo;ve decided to switch from Sublime Text editor to <a href="http://macromates.com">TextMate 2</a>. At the beginning of <a href="http://rubyonrails.org/">Rails</a> &ldquo;era&rdquo; it was the sexiest text editor in the world. But, at that time, I was a Windows user ;-)</p>
 
-<p>I was inspired by <a href="http://blog.agiledeveloper.com/">Venkat Subramaniam</a> to make this switch.</p>
+<p>I was inspired by <a href="http://blog.agiledeveloper.com/">Venkat Subramaniam</a> to make this switch in 2014. Dr. Venkant is using Textmate during his conference live coding for years.</p>
+
+<p>Additional argument for switching is the fact that Textmate 2 is <a href="https://github.com/textmate/textmate">open sourced</a>.</p>
 
 <p>Here is the list of articles which I highly recommend for Textmate newcomers:</p>
 
