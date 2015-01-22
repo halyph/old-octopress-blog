@@ -4,7 +4,7 @@
   <title><![CDATA[Knowledge Is Everything]]></title>
   <link href="http://halyph.com/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-01-22T02:24:36+02:00</updated>
+  <updated>2015-01-23T00:07:20+02:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -186,11 +186,71 @@
 <p>Verify that our custom table contains just inserted values
 <img class="left" src="http://halyph.com/images/posts/h2console_sqlwindow.png"></p>
 
+<h3>Add Embedded TCP and Web Servers</h3>
+
+<p>Now, it&rsquo;s time to add small improvements.
+The idea is to switch <em>on</em> H2 Console <strong>Web Server</strong> and <strong>TCP Server</strong> to have external access.
+We should add/update item (4) in previous code snippets like this</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">DBNAME</span> <span class="o">=</span> <span class="s">&quot;mytest&quot;</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ClassNotFoundException</span><span class="o">,</span> <span class="n">SQLException</span><span class="o">,</span> <span class="n">IOException</span> <span class="o">{</span>
+</span><span class='line'><span class="o">...</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">Server</span> <span class="n">webServer</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="na">createWebServer</span><span class="o">(</span><span class="s">&quot;-webAllowOthers&quot;</span><span class="o">,</span><span class="s">&quot;-webPort&quot;</span><span class="o">,</span><span class="s">&quot;8082&quot;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span> <span class="c1">// (4a)</span>
+</span><span class='line'>        <span class="n">Server</span> <span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="na">createTcpServer</span><span class="o">(</span><span class="s">&quot;-tcpAllowOthers&quot;</span><span class="o">,</span><span class="s">&quot;-tcpPort&quot;</span><span class="o">,</span><span class="s">&quot;9092&quot;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>    <span class="c1">// (4b)</span>
+</span><span class='line'>        <span class="c1">// .. use in embedded mode ..</span>
+</span><span class='line'><span class="o">...</span>
+</span><span class='line'>        <span class="n">server</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">webServer</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Server is STOPPED&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>After this we can access to Web Console without running external service
+
+<ul>
+<li>Simply use URL in  browser (access to <strong>Web Server</strong>): <a href="http://localhost:8082/">http://localhost:8082/</a></li>
+</ul>
+</li>
+<li>Use any JDBC client (see IntelliJ IDEA as a sample below)
+
+<ul>
+<li>access to <strong>TCP Server</strong>
+<img class="left" src="http://halyph.com/images/posts/h2console_idea.png"></li>
+</ul>
+</li>
+</ul>
+
+
 <h2>References</h2>
 
 <ol>
 <li><a href="http://stackoverflow.com/questions/5077584/h2-database-in-memory-mode-cannot-be-accessed-by-console">H2 database in memory mode cannot be accessed by Console</a></li>
 <li><a href="http://www.h2database.com/html/tutorial.html">Official H2 Tutorial</a></li>
+<li><a href="http://h2database.com/javadoc/org/h2/tools/Server.html">H2 Server methods</a></li>
+<li><a href="https://github.com/halyph/tutorials/tree/master/h2-embedded-console">GitHub Sources</a></li>
 </ol>
 
 ]]></content>
