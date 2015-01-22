@@ -9,7 +9,7 @@
   <meta name="author" content="Orest Ivasiv">
 
   
-  <meta name="description" content="This book is well balanced around Groovy language. I would say there is minimal required knowledge regarding the language. The author (Venkat &hellip;">
+  <meta name="description" content="Suppose you have the next error while restart/stop Tomcat (in my case Tomcat 7.x): WARNING: Cannot serialize session attribute &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -88,6 +88,84 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2014/08/how-to-disable-tomcat-session.html">How to Disable Tomcat Session Serialization</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-08-12T12:57:00+03:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:57 pm</span></time>
+        
+           | <a href="/2014/08/how-to-disable-tomcat-session.html#disqus_thread"
+             data-disqus-identifier="http://halyph.com/2014/08/how-to-disable-tomcat-session.html">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="center" src="/images/blog/java.png">
+Suppose you have the next error while restart/stop Tomcat (in my case Tomcat 7.x):</p>
+
+<pre class="brush: java;">WARNING: Cannot serialize session attribute SPRING_SECURITY_CONTEXT for session 54DBA076EDC9B7A24C1AF76824DFD1EF
+java.io.NotSerializableException: com.MyClass
+ at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1180)
+ at java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1528)
+ at java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1493)
+ at java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1416)
+ at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1174)
+ at java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:346)
+ at java.util.ArrayList.writeObject(ArrayList.java:710)
+ at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+ at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+ at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+ at java.lang.reflect.Method.invoke(Method.java:601)
+ at java.io.ObjectStreamClass.invokeWriteObject(ObjectStreamClass.java:975)
+...
+</pre>
+
+
+<p>It means that Tomcat is trying to persist non-serializable objects which were added into the session. Tomcat uses Manager component which is used to create and maintain HTTP sessions for web application.</p>
+
+<p>By default manager implementation configured to perform session persistence across restarts and we want to disable this functionality.</p>
+
+<p>To disable this persistence feature, create a Context configuration file (<em>context.xml</em>) for your web application and add the following element there:</p>
+
+<pre class="brush: xml;">&lt;Manager pathname="" /&gt;
+</pre>
+
+
+<p>You can add this context.xml file to:</p>
+
+<ul>
+<li>App.war:/META-INF/context.xml</li>
+<li>TOMCAT_HOME/conf/Catalina/localhost/App.xml file</li>
+<li>TOMCAT_HOME/cont/context.xml</li>
+</ul>
+
+
+<h2>References</h2>
+
+<ul>
+<li><a href="http://tomcat.apache.org/tomcat-7.0-doc/config/manager.html#Disable_Session_Persistence">Disable Session Persistence </a></li>
+<li><a href="http://tomcat.apache.org/tomcat-7.0-doc/cluster-howto.html">Clustering/Session Replication HOW-TO</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2014/07/review-programming-groovy-2-dynamic.html">Review: Programming Groovy 2: Dynamic Productivity for the Java Developer</a></h1>
     
     
@@ -134,89 +212,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/05/jeeconf-kiev-2014-report.html">JEEConf - Kiev, 2014 - Report</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-05-25T23:41:00+03:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:41 pm</span></time>
-        
-           | <a href="/2014/05/jeeconf-kiev-2014-report.html#disqus_thread"
-             data-disqus-identifier="http://halyph.com/2014/05/jeeconf-kiev-2014-report.html">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="center" src="/images/blog/jeeconf.png"></p>
-
-<p>I attended the forth <a href="http://jeeconf.com">JEEConf</a>, May 23-24, 2014. The situation in my country (Ukraine) is difficult that’s why I was amazed to see so many foreign speakers. The organizers did really tremendous work.</p>
-
-<p>This year I divided topics by the next directions:</p>
-
-<h3>Spring</h3>
-
-<ul>
-<li><em>Spring 4, Java EE 7 or Both? by Ivar Grimstad</em> &ndash; The main idea of the talk was to show similar and different parts of Spring 4 and Java EE 7. And have an ability easily identify when to use one or another. There are trade-offs and we should be aware of them.</li>
-<li><em>Spring configuration: how to do it right (experience report), Mikalai Alimenkou</em> &ndash; Mikalai shared his experience related to Spring configs. Nice talk. I&rsquo;m going to borrow some ideas ;-)</li>
-<li><em>Spring the Ripper, by Evgeny Borisov</em> &ndash; It was the most dynamic talk at this conference. The presenter shown Spring life-cycle internals in action. Well done. It should be seen by every Spring dev :-)</li>
-</ul>
-
-
-<h3>Frameworks</h3>
-
-<ul>
-<li><em>Apache Lucene/Solr Internals, by Anatoliy Sokolenko</em> &ndash; I had no experience with these technologies. And it was really nice intro. Now I have some clue how it works.</li>
-<li><em>Streamline your processes with jBPM 6, by Jiri Svitak</em> &ndash; It was an into talk into jBPM 6. I had small experience with competitor framework <a href="http://activiti.org/">Activiti</a>. It&rsquo;s always interesting to see the similar framework&rsquo;s features.</li>
-</ul>
-
-
-<h3>Java/JVM/Compiler</h3>
-
-<ul>
-<li><em>Java8: Stream Style, by Sergey Kuksenko</em> &ndash; It was Java 8 Stream introduction. There were shown different stream features and approaches.</li>
-<li><em><a href="http://shipilev.net/blog/2014/heapdump-is-a-lie/">What Heap Dumps Are Lying To You About, by Aleksey Shipilёv</a></em> &ndash; It&rsquo;s a very special talk related to Java &ldquo;internals&rdquo;. Actually, this talk was about Java object size calculation and what happens under the hood.</li>
-<li><em>Reflection Madness, by Heinz Kabutz</em> &ndash; The presenter told us about Java reflection magic, when to use it and why it&rsquo;s dangerous.</li>
-</ul>
-
-
-<h3>Miscellaneous</h3>
-
-<ul>
-<li><em>Tooling of a Test-Driven Developer, by Paweł Lipiński</em> &ndash; There were highlighted two very interesting libraries for TDD on top of JUnit: <a href="http://joel-costigliola.github.io/assertj/">AssertJ</a> and <a href="https://code.google.com/p/junitparams/">JUnitParams</a>.Very interesting libraries</li>
-<li><em>Web Apps in LISP!? EWW!, by Anatoly Polinsky</em> &ndash; Here was shown different aspects of web development in Clojure for beginners. It&rsquo;s was real intro, but very interesting, especially when you&rsquo;d like to spread your mind into alternative JVM-related communities.</li>
-</ul>
-
-
-<p>It was very productive conference for me. I&rsquo;ve got new portion of inspiration, new knowledge and passion to ordinary things.</p>
-
-<p><img class="center" src="/images/posts/jeeconf2014.jpg"></p>
-
-<h2>References</h2>
-
-<ul>
-<li><a href="http://halyph.blogspot.com/2013/05/jeeconf-kiev-2013-report.html">JEEConf - Kiev, 2013 - Report</a></li>
-<li><a href="http://halyph.blogspot.com/2012/05/this-year-we-had-second-jeeconf.html">JEEConf - Kiev, 2012 - Report</a></li>
-<li><a href="http://halyph.blogspot.com/2011/05/jeeconf-kiev-2011-report.html">JEEConf - Kiev, 2011 - Report</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -240,6 +235,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/01/22/how-to-use-embedded-h2-with-h2-console/">How to Use Embedded H2 With Web Console?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/16/how-to-fix-textmate-osx-yosemite-ruby-1-dot-8-issues/">How to Fix Textmate OSX Yosemite Ruby 1.8 Issues?</a>
       </li>
     
@@ -255,15 +254,11 @@
         <a href="/blog/2014/09/07/migration-to-octopress/">Migration to Octopress</a>
       </li>
     
-      <li class="post">
-        <a href="/2014/08/groovy-notes-pretty-print-json-from.html">Groovy Notes: Pretty Print JSON From the Command Line</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bash' style='font-size: 120.0%'>bash(1)</a> <a href='/blog/categories/blog' style='font-size: 120.0%'>blog(1)</a> <a href='/blog/categories/books' style='font-size: 140.0%'>books(2)</a> <a href='/blog/categories/conference' style='font-size: 120.0%'>conference(1)</a> <a href='/blog/categories/groovy' style='font-size: 160.0%'>groovy(3)</a> <a href='/blog/categories/java' style='font-size: 120.0%'>java(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 120.0%'>jeeconf(1)</a> <a href='/blog/categories/languages' style='font-size: 120.0%'>languages(1)</a> <a href='/blog/categories/learning' style='font-size: 120.0%'>learning(1)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>octopress(1)</a> <a href='/blog/categories/review' style='font-size: 140.0%'>review(2)</a> <a href='/blog/categories/ruby' style='font-size: 120.0%'>ruby(1)</a> <a href='/blog/categories/shell' style='font-size: 120.0%'>shell(1)</a> <a href='/blog/categories/textmate' style='font-size: 140.0%'>textmate(2)</a> <a href='/blog/categories/tomcat' style='font-size: 120.0%'>tomcat(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/bash' style='font-size: 120.0%'>bash(1)</a> <a href='/blog/categories/blog' style='font-size: 120.0%'>blog(1)</a> <a href='/blog/categories/books' style='font-size: 140.0%'>books(2)</a> <a href='/blog/categories/conference' style='font-size: 120.0%'>conference(1)</a> <a href='/blog/categories/groovy' style='font-size: 160.0%'>groovy(3)</a> <a href='/blog/categories/h2' style='font-size: 120.0%'>h2(1)</a> <a href='/blog/categories/java' style='font-size: 140.0%'>java(2)</a> <a href='/blog/categories/jdbc' style='font-size: 120.0%'>jdbc(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 120.0%'>jeeconf(1)</a> <a href='/blog/categories/languages' style='font-size: 120.0%'>languages(1)</a> <a href='/blog/categories/learning' style='font-size: 120.0%'>learning(1)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>octopress(1)</a> <a href='/blog/categories/review' style='font-size: 140.0%'>review(2)</a> <a href='/blog/categories/ruby' style='font-size: 120.0%'>ruby(1)</a> <a href='/blog/categories/shell' style='font-size: 120.0%'>shell(1)</a> <a href='/blog/categories/textmate' style='font-size: 140.0%'>textmate(2)</a> <a href='/blog/categories/tomcat' style='font-size: 120.0%'>tomcat(1)</a> </span>
 </section>
 
   

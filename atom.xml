@@ -4,7 +4,7 @@
   <title><![CDATA[Knowledge Is Everything]]></title>
   <link href="http://halyph.com/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-01-03T02:29:55+02:00</updated>
+  <updated>2015-01-22T02:24:36+02:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -12,6 +12,189 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to Use Embedded H2 With Web Console?]]></title>
+    <link href="http://halyph.com/blog/2015/01/22/how-to-use-embedded-h2-with-h2-console/"/>
+    <updated>2015-01-22T00:55:03+02:00</updated>
+    <id>http://halyph.com/blog/2015/01/22/how-to-use-embedded-h2-with-h2-console</id>
+    <content type="html"><![CDATA[<p><img class="center" src="http://halyph.com/images/blog/java.png"></p>
+
+<p>There are several Java SQL databases which supports both server and embedded modes: <a href="http://www.h2database.com/">H2</a>, <a href="http://hsqldb.org/">HSQLDB</a> and <a href="http://db.apache.org/derby/">Derby</a>. The most interesting for me is H2 with own web <a href="http://www.h2database.com/html/quickstart.html#h2_console">Console</a>.</p>
+
+<p>The aim of this post is to show how to connect from H2 Console to embedded in-memory H2.</p>
+
+<blockquote><p>H2 currently supports three servers: a web server (for the H2 Console), a TCP server (for client/server connections) and an PG server (for PostgreSQL clients). <strong>Please note that only the web server supports browser connections.</strong> The servers can be started in different ways, one is using the Server tool. Starting the server doesn&rsquo;t open a database - databases are opened as soon as a client connects.</p></blockquote>
+
+<p>The next steps have to be performed to connect to embedded DB and populate initial data:</p>
+
+<ol>
+<li>Load DB driver</li>
+<li>Get <code>Connection</code></li>
+<li>Create <code>Statement</code> and <code>executeUpate</code> queries</li>
+<li>Create TCP <code>Server</code>. <em>We should start serve to make in-memory DB available for another process</em></li>
+</ol>
+
+
+<h3>Let&rsquo;s try to implement this:</h3>
+
+<ul>
+<li>Run sample application</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">DBNAME</span> <span class="o">=</span> <span class="s">&quot;mytest&quot;</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ClassNotFoundException</span><span class="o">,</span> <span class="n">SQLException</span><span class="o">,</span> <span class="n">IOException</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// open the in-memory database within a VM</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">&quot;org.h2.Driver&quot;</span><span class="o">);</span> <span class="c1">// (1)</span>
+</span><span class='line'>        <span class="n">Connection</span> <span class="n">conn</span>
+</span><span class='line'>          <span class="o">=</span> <span class="n">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="s">&quot;jdbc:h2:mem:&quot;</span> <span class="o">+</span> <span class="n">DBNAME</span><span class="o">,</span> <span class="s">&quot;sa&quot;</span><span class="o">,</span> <span class="s">&quot;sa&quot;</span><span class="o">);</span> <span class="c1">// (2)</span>
+</span><span class='line'>        <span class="c1">// username:password are very important and must be used for connecting via H2 Console</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">Statement</span> <span class="n">stat</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">createStatement</span><span class="o">();</span> <span class="c1">// (3)</span>
+</span><span class='line'>        <span class="n">stat</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">(</span><span class="s">&quot;create table mytbl(id int primary key, name varchar(255))&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">stat</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">(</span><span class="s">&quot;insert into mytbl values(1, &#39;Hello&#39;)&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">stat</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">(</span><span class="s">&quot;insert into mytbl values(2, &#39;World&#39;)&quot;</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Verify that sample data was really inserted</span>
+</span><span class='line'>        <span class="n">ResultSet</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">stat</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">(</span><span class="s">&quot;select * from mytbl&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;ResultSet output:&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="k">while</span> <span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">next</span><span class="o">())</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;&gt; &quot;</span> <span class="o">+</span> <span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">));</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// start a TCP server</span>
+</span><span class='line'>        <span class="n">Server</span> <span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="na">createTcpServer</span><span class="o">().</span><span class="na">start</span><span class="o">();</span> <span class="c1">// (4)</span>
+</span><span class='line'>        <span class="c1">// .. use in embedded mode ..</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// or use it from another process:</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Server started and connection is open.&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;URL: jdbc:h2:&quot;</span> <span class="o">+</span> <span class="n">server</span><span class="o">.</span><span class="na">getURL</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;/mem:&quot;</span> <span class="o">+</span> <span class="n">DBNAME</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;\n&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+</span><span class='line'>                <span class="s">&quot;now start the H2 Console in another process using:\n&quot;</span> <span class="o">+</span>
+</span><span class='line'>                <span class="s">&quot;$ cd h2/bin; java -cp h2-1.4.185.jar org.h2.tools.Console -web -browser&quot;</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Press [Enter] to stop.&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Stopping server and closing the connection&quot;</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">rs</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">server</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Server is STOPPED&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Output for previous run:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ResultSet output:
+</span><span class='line'>&gt; Hello
+</span><span class='line'>&gt; World
+</span><span class='line'>Server started and connection is open.
+</span><span class='line'>URL: jdbc:h2:tcp://192.168.1.100:9092/mem:mytest
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>now start the H2 Console in another process using:
+</span><span class='line'>$ cd h2/bin; java -cp h2-1.4.185.jar org.h2.tools.Console -web -browser
+</span><span class='line'>Press [Enter] to stop.</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>We assume that h2 installation bundle (zip file) was downloaded (from <a href="http://www.h2database.com/html/download.html">http://www.h2database.com/html/download.html</a>) beforehand and unpacked in some folder</li>
+<li>Go into H2 &ldquo;install/unpack&rdquo; folder and run the next command <code>cd h2/bin; java -cp h2-1.4.185.jar org.h2.tools.Console -web -browser</code></li>
+<li>Now we should copy URL (from sample App output) and credentials sa/sa to login into Console
+
+<ul>
+<li><strong>URL:</strong> jdbc:h2:tcp://192.168.1.100:9092/mem:mytest</li>
+<li><strong>Username:</strong> sa</li>
+<li><strong>Password:</strong> sa</li>
+</ul>
+</li>
+<li>Login window (opened from shell by <code>org.h2.tools.Console</code>)
+<img class="left" src="http://halyph.com/images/posts/h2console_login.png"></li>
+</ul>
+
+
+<p>Verify that our custom table contains just inserted values
+<img class="left" src="http://halyph.com/images/posts/h2console_sqlwindow.png"></p>
+
+<h2>References</h2>
+
+<ol>
+<li><a href="http://stackoverflow.com/questions/5077584/h2-database-in-memory-mode-cannot-be-accessed-by-console">H2 database in memory mode cannot be accessed by Console</a></li>
+<li><a href="http://www.h2database.com/html/tutorial.html">Official H2 Tutorial</a></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to Fix Textmate OSX Yosemite Ruby 1.8 Issues?]]></title>
