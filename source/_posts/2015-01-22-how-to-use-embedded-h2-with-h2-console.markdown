@@ -99,7 +99,38 @@ Verify that our custom table contains just inserted values
 {% img left /images/posts/h2console_sqlwindow.png %}
 
 
+### Add Embedded TCP and Web Servers
+Now, it's time to add small improvements. 
+The idea is to switch *on* H2 Console **Web Server** and **TCP Server** to have external access.
+We should add/update item (4) in previous code snippets like this  
+{% codeblock lang:java%}
+public class App {
+    private static final String DBNAME = "mytest";
+
+    public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
+...
+
+        Server webServer = Server.createWebServer("-webAllowOthers","-webPort","8082").start(); // (4a)
+        Server server = Server.createTcpServer("-tcpAllowOthers","-tcpPort","9092").start();    // (4b)
+        // .. use in embedded mode ..
+...
+        server.stop();
+        webServer.stop();
+        conn.close();
+        System.out.println("Server is STOPPED");
+    }
+}
+{% endcodeblock %}
+
+* After this we can access to Web Console without running external service
+  * Simply use URL in  browser (access to **Web Server**): http://localhost:8082/
+* Use any JDBC client (see IntelliJ IDEA as a sample below)
+  * access to **TCP Server**
+{% img left /images/posts/h2console_idea.png %}
+
 ## References
 
 1. [H2 database in memory mode cannot be accessed by Console](http://stackoverflow.com/questions/5077584/h2-database-in-memory-mode-cannot-be-accessed-by-console)
 2. [Official H2 Tutorial](http://www.h2database.com/html/tutorial.html)
+3. [H2 Server methods](http://h2database.com/javadoc/org/h2/tools/Server.html)
+4. [GitHub Sources](https://github.com/halyph/tutorials/tree/master/h2-embedded-console)
