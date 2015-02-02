@@ -4,7 +4,7 @@
   <title><![CDATA[Knowledge Is Everything]]></title>
   <link href="http://halyph.com/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-01-23T00:07:20+02:00</updated>
+  <updated>2015-02-03T00:34:55+02:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -12,6 +12,300 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Scripting in Scala]]></title>
+    <link href="http://halyph.com/blog/2015/02/02/scripting-in-scala/"/>
+    <updated>2015-02-02T00:18:00+02:00</updated>
+    <id>http://halyph.com/blog/2015/02/02/scripting-in-scala</id>
+    <content type="html"><![CDATA[<p><img class="center" src="http://halyph.com/images/blog/scala.png"></p>
+
+<p>Scala language compiles sources code to Java bytecode.  But, it has some nice scripting facilities. Let&rsquo;s review them.</p>
+
+<p>So, the <code>scala</code> command is also a shell-script wrapper around the java command.</p>
+
+<p>According to official <a href="http://www.scala-lang.org/files/archive/nightly/docs-2.10.1/manual/html/scala.html">scala utility</a> documentation (here highlighted only post-related notes):</p>
+
+<blockquote><p><code>scala [ &lt;option&gt; ]... [ &lt;torun&gt; &lt;argument&gt;... ]</code></p>
+
+<p>The <code>scala</code> utility runs Scala code using a Java runtime environment.</p>
+
+<p>If a <strong>script</strong> file is specified to run, then the file is read and all Scala statements and declarations in the file are processed in order. Any arguments specified will be available via the argsvariable.</p>
+
+<p>Script files may have an <strong>optional header</strong> that is ignored if present. There are two ways to format the header: either beginning with #! and ending with !#, or beginning with ::#! and ending with ::!#.</p>
+
+<p>Such a header must have each header boundary start at the beginning of a line. Headers can be used to make stand-alone script files, as shown in the examples below.</p>
+
+<p>Here is a complete Scala script (<strong>check.sh</strong>) for Unix:</p>
+
+<pre><code>#!/bin/sh
+exec scala "$0" "$@"
+!#
+Console.println("Hello, world!")
+argv.toList foreach Console.println
+</code></pre>
+
+<p>Here is a complete Scala script (<strong>check.bat</strong>) for MS Windows:</p>
+
+<pre><code>::#!
+@echo off
+call scala %0 %*
+goto :eof
+::!#
+Console.println("Hello, world!")
+argv.toList foreach Console.println
+</code></pre>
+
+<p>If you want to use the compilation cache to speed up multiple executions of the script (<strong>check.sh</strong>), then add <strong>-savecompiled</strong> to the scala command:</p>
+
+<pre><code>#!/bin/sh
+exec scala -savecompiled "$0" "$@"
+!#
+Console.println("Hello, world!")
+argv.toList foreach Console.println
+</code></pre></blockquote>
+
+<p>These tricks give us an ability to run Scala script as plain shell script. Also, based on the setting above this script can have input parameters and <em>almost</em> cross-platform (see script header differences for Linux <strong>.vs.</strong> Windows).</p>
+
+<p>Now, we should save the mentioned above code snippet in some file (e.g. <strong>check.sh</strong>) and make it executable. This script can be run as any Linux shell script <code>./check.sh</code> (<code>check.bat</code> - Windows).</p>
+
+<h2>Scala utility internals</h2>
+
+<h3>Linux</h3>
+
+<p>Linux script header uses the next items:</p>
+
+<ul>
+<li><code>#!</code> it&rsquo;s <a href="http://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a> interpreter directive</li>
+<li><code>exec</code> is used to run <code>scala</code> without creation new process. Commands which go right after <code>exec</code> will not be executed</li>
+<li><code>!#</code> is simple marker for <code>scala</code> utility (see notes below)</li>
+</ul>
+
+
+<p>E.g.
+This script</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/sh
+</span><span class='line'>echo Header
+</span><span class='line'>exec echo
+</span><span class='line'>!#
+</span><span class='line'>echo Body</span></code></pre></td></tr></table></div></figure>
+
+
+<p>will have the next output</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./test.sh
+</span><span class='line'>Header</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We will get error in case <code>exec</code> is removed:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/sh
+</span><span class='line'>echo Header
+</span><span class='line'>!#
+</span><span class='line'>echo Body</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Output</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./test.sh
+</span><span class='line'>Header
+</span><span class='line'>./test.sh: line 4: !#: command not found
+</span><span class='line'>Body
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Windows</h3>
+
+<p>Windows batch script header uses the next items:</p>
+
+<ul>
+<li><code>::</code> is a remark without displaying or executing that line when the batch file is run (see <a href="http://www.computerhope.com/batch.htm">Information on batch files</a>).</li>
+<li><code>::#!</code>  is simple marker for <code>scala</code> utility (see notes below)</li>
+<li><code>@echo off</code> disable echo</li>
+<li><code>call</code> calls one batch program from another.</li>
+<li><code>goto :eof</code> go to end of file</li>
+<li><code>::!#</code> is simple marker for <code>scala</code> utility (see notes below)</li>
+</ul>
+
+
+<p>The OS-specific script settings were identified, now let&rsquo;s dive deeper to understand how <code>scala</code> utility works.</p>
+
+<h3><code>scala</code> internals</h3>
+
+<p>This utility performs the next flow to run script:</p>
+
+<ol>
+<li>Run <code>scala.tools.nsc.MainGenericRunner#process</code> and identify run target &ldquo;as Script&rdquo; (there are other targets) <code>ScriptRunner.runScriptAndCatch(settings, thingToRun, command.arguments)</code></li>
+<li><code>ScriptRunner</code> creates temp file <code>File.makeTemp("scalacmd", ".scala")</code></li>
+<li>Run compiler and clean script header</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class ScriptRunner extends HasCompileSocket {
+</span><span class='line'>...
+</span><span class='line'>  private def withCompiledScript(
+</span><span class='line'>      settings: GenericRunnerSettings,
+</span><span class='line'>      scriptFile: String)
+</span><span class='line'>      (handler: String =&gt; Boolean): Boolean =
+</span><span class='line'>    {
+</span><span class='line'>      def mainClass = scriptMain(settings)
+</span><span class='line'>  
+</span><span class='line'>         val compiler = newGlobal(settings, reporter)
+</span><span class='line'>         new compiler.Run compile List(scriptFile)</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Global
+</span><span class='line'>    /** If this compilation is scripted, convert the source to a script source. */
+</span><span class='line'>    private def scripted(s: SourceFile) = s match {
+</span><span class='line'>      case b: BatchSourceFile if settings.script.isSetByUser =&gt; ScriptSourceFile(b)
+</span><span class='line'>      case _ =&gt; s
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    /** Compile abstract file until `globalPhase`, but at least
+</span><span class='line'>     *  to phase "namer".
+</span><span class='line'>     */
+</span><span class='line'>    def compileLate(file: AbstractFile) {
+</span><span class='line'>      if (!compiledFiles(file.path))
+</span><span class='line'>        compileLate(new CompilationUnit(scripted(getSourceFile(file))))
+</span><span class='line'>    }
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Cleanup shell script (remove header) via <code>SourceFile</code>. Now, it&rsquo;s clear why script&rsquo;s header have such <em>strange</em> closing markers (see line 21, <code>content drop headerLen</code> - actual header remove)</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>object ScriptSourceFile {
+</span><span class='line'>  /** Length of the script header from the given content, if there is one.
+</span><span class='line'>   *  The header begins with "#!" or "::#!" and ends with a line starting
+</span><span class='line'>   *  with "!#" or "::!#".
+</span><span class='line'>   */
+</span><span class='line'>  def headerLength(cs: Array[Char]): Int = {
+</span><span class='line'>    val headerPattern = Pattern.compile("""((?m)^(::)?!#.*|^.*/env .*)(\r|\n|\r\n)""")
+</span><span class='line'>    val headerStarts  = List("#!", "::#!")
+</span><span class='line'>
+</span><span class='line'>    if (headerStarts exists (cs startsWith _)) {
+</span><span class='line'>      val matcher = headerPattern matcher cs.mkString
+</span><span class='line'>      if (matcher.find) matcher.end
+</span><span class='line'>      else throw new IOException("script file does not close its header with !# or ::!#")
+</span><span class='line'>    }
+</span><span class='line'>    else 0
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  def apply(file: AbstractFile, content: Array[Char]) = {
+</span><span class='line'>    val underlying = new BatchSourceFile(file, content)
+</span><span class='line'>    val headerLen = headerLength(content)
+</span><span class='line'>    val stripped = new ScriptSourceFile(underlying, content drop headerLen, headerLen)
+</span><span class='line'>
+</span><span class='line'>    stripped
+</span><span class='line'>  }</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Add libraries to Scala script</h2>
+
+<p>Scala script libraries (<strong>jar</strong>s) can be added in script&rsquo;s header section:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/sh
+</span><span class='line'>exec scala -classpath "lib/lib.1.jar:lib/lib.2.jar" "$0" "$@"
+</span><span class='line'>!#</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Summary</h2>
+
+<p>There is nothing magical in Scala interpretation. Every single peace of code must be compiled. Such interesting <em>scripting</em> approach can be applied to Java as well.</p>
+
+<p>Unfortunately, Scala is not looks like nice scripting language (because it&rsquo;s <strong>not</strong> designed for this use case). It will be uncomfortable &ldquo;scripting&rdquo; in Scala without IDE.</p>
+
+<h2>References</h2>
+
+<ul>
+<li><a href="http://timperrett.com/2011/08/01/system-scripting-with-scala/">System Scripting with Scala</a></li>
+<li><a href="http://www.scala-lang.org/files/archive/nightly/docs-2.10.1/manual/html/scala.html">scala utility</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a></li>
+<li><a href="http://www.computerhope.com/batch.htm">Information on batch files</a></li>
+<li>Scala Sources:
+
+<ul>
+<li><a href="https://github.com/scala/scala/blob/v2.11.5/src/compiler/scala/tools/nsc/ScriptRunner.scala#">ScriptRunner.scala</a></li>
+<li><a href="https://github.com/scala/scala/blob/v2.11.5/src/reflect/scala/reflect/internal/util/SourceFile.scala">SourceFile.scala</a></li>
+<li><a href="https://github.com/scala/scala/blob/v2.11.5/src/compiler/scala/tools/nsc/Global.scala">Global.scala</a></li>
+</ul>
+</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to Use Embedded H2 With Web Console?]]></title>

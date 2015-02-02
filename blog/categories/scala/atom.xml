@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Bash | Knowledge Is Everything]]></title>
-  <link href="http://halyph.com/blog/categories/bash/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Scala | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/scala/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
   <updated>2015-02-03T00:34:55+02:00</updated>
   <id>http://halyph.com/</id>
@@ -234,73 +234,6 @@ else 0
 </li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to Use Block Comments in Bash Script]]></title>
-    <link href="http://halyph.com/blog/2014/10/09/bash-block-comments/"/>
-    <updated>2014-10-09T22:39:25+03:00</updated>
-    <id>http://halyph.com/blog/2014/10/09/bash-block-comments</id>
-    <content type="html"><![CDATA[<p><img class="right" src="/images/blog/bash.png">
-What is the simplest way to define block comment in Bash script?</p>
-
-<p>I&rsquo;ve selected two approaches for myself:</p>
-
-<ul>
-<li>Use here document
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;h1&gt;!/usr/bin/env bash&lt;/h1&gt;&lt;/li&gt;
-</span><span class='line'>&lt;/ul&gt;
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>&lt;dl&gt;
-</span><span class='line'>&lt;dt&gt;echo <span class="p">&amp;</span>ldquo<span class="p">;</span>before block comment<span class="p">&amp;</span>rdquo<span class="p">;</span>&lt;/dt&gt;
-</span><span class='line'>&lt;dd&gt;<span class="p">&amp;</span>lt<span class="p">;&amp;</span>lt<span class="p">;&amp;</span>lsquo<span class="p">;</span>END<span class="p">&amp;</span>rsquo<span class="p">;</span>
-</span><span class='line'>Some long
-</span><span class='line'>myltiline
-</span><span class='line'>text
-</span><span class='line'>END
-</span><span class='line'><span class="nb">echo</span> <span class="p">&amp;</span>ldquo<span class="p">;</span>after block comment<span class="p">&amp;</span>rdquo<span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></dd>
-</dl>
-
-<ul>
-<li>Use <strong>&ldquo;if&rdquo;</strong> false block
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;h1&gt;!/usr/bin/env bash&lt;/h1&gt;&lt;/li&gt;
-</span><span class='line'>&lt;/ul&gt;
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;echo <span class="p">&amp;</span>ldquo<span class="p">;</span>before block comment<span class="p">&amp;</span>rdquo<span class="p">;</span>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>Some long
-</span><span class='line'>myltiline
-</span><span class='line'>text
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'><span class="nb">echo</span> <span class="p">&amp;</span>ldquo<span class="p">;</span>after block comment<span class="p">&amp;</span>rdquo<span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 ]]></content>
   </entry>
   
