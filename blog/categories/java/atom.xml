@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-02-03T00:34:55+02:00</updated>
+  <updated>2015-02-05T02:05:28+02:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -12,6 +12,268 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to Generate PermGen Leak?]]></title>
+    <link href="http://halyph.com/blog/2015/02/05/how-to-generate-permgen/"/>
+    <updated>2015-02-05T00:05:30+02:00</updated>
+    <id>http://halyph.com/blog/2015/02/05/how-to-generate-permgen</id>
+    <content type="html"><![CDATA[<p><img class="center" src="/images/blog/java.png"></p>
+
+<p>I&rsquo;m sure that a lot of Java developers experienced <code>java.lang.OutOfMemoryError: PermGen space</code> (OOME PermGen). It was very common to get this error after multiple WAR re-deploys on Tomcat v.6.x. Permanent generation (PermGen) region of memory is used to store the internal representation of loaded classes (and much more, see here [<a href="https://plumbr.eu/blog/what-is-a-permgen-leak">1</a>] and [<a href="https://blogs.oracle.com/jonthecollector/entry/presenting_the_permanent_generation">2</a>]).</p>
+
+<p>So, we can get <strong>OOME PermGen</strong> when ClassLoader whats to store class definition, but there is not enough space in PermGen - i.e. loaded too many classes.</p>
+
+<p>Based on this <strong>OOME PermGen</strong> error can be generated via:</p>
+
+<ul>
+<li>decreasing PermGen size</li>
+<li>loading huge amount of classes</li>
+</ul>
+
+
+<p>I highly recommend to read <a href="https://plumbr.eu/blog/what-is-a-permgen-leak">What is a PermGen leak?</a> post to get more info about this issue.</p>
+
+<h3>Disclaimer</h3>
+
+<p>The current post is totally based on <a href="https://plumbr.eu/blog/how-not-to-create-a-permgen-leak">How (not) to create a permgen leak?</a></p>
+
+<h2>Generate PermGen leak</h2>
+
+<p>The main idea is dynamically create a lot of classes via byte code manipulation library. We are going to use <a href="http://www.csg.ci.i.u-tokyo.ac.jp/~chiba/javassist/">Javassist</a> as it&rsquo;s the simplest library with nice API.</p>
+
+<ul>
+<li>We assume that it&rsquo;s <code>maven</code> based project. So, let&rsquo;s add Javassist to <code>pom.xml</code>.</li>
+</ul>
+
+
+<pre><code>&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+  &lt;groupId&gt;com.mycompany.app&lt;/groupId&gt;
+  &lt;artifactId&gt;my-app&lt;/artifactId&gt;
+  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+  &lt;packaging&gt;jar&lt;/packaging&gt;
+
+  &lt;name&gt;my-app&lt;/name&gt;
+  &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+
+  &lt;properties&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    &lt;skipTests&gt;true&lt;/skipTests&gt;
+  &lt;/properties&gt;
+
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.javassist&lt;/groupId&gt;
+      &lt;artifactId&gt;javassist&lt;/artifactId&gt;
+      &lt;version&gt;3.15.0-GA&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+
+  &lt;build&gt;
+    &lt;plugins&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+        &lt;artifactId&gt;appassembler-maven-plugin&lt;/artifactId&gt;
+        &lt;version&gt;1.9&lt;/version&gt;
+        &lt;configuration&gt;
+          &lt;extraJvmArguments&gt;-XX:PermSize=2M -XX:MaxPermSize=4M&lt;/extraJvmArguments&gt;
+          &lt;programs&gt;
+            &lt;program&gt;
+              &lt;mainClass&gt;com.mycompany.app.App&lt;/mainClass&gt;
+              &lt;id&gt;app&lt;/id&gt;
+            &lt;/program&gt;
+          &lt;/programs&gt;
+        &lt;/configuration&gt;
+      &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+
+<ul>
+<li>Also, we should set <strong>PermGen</strong> and <strong>MaxPermGen</strong> size to 2M and 4M respectively (it gives us a chance to get error as quickly as possible). Maven <code>Appassembler</code> plugin [<a href="http://mojo.codehaus.org/appassembler/appassembler-maven-plugin/usage-program-jvmsettings.html">3</a>] uses <code>extraJvmArguments</code> parameter while generating wrapper scripts: shell and batch (see <code>pom.xml</code> above, <code>&lt;extraJvmArguments&gt;-XX:PermSize=2M -XX:MaxPermSize=2M&lt;/extraJvmArguments&gt;</code>).</li>
+</ul>
+
+
+<blockquote><p>&ndash;XX:PermSize<size> - Set initial PermGen Size</p>
+
+<p>&ndash;XX:MaxPermSize<size> - Set the maximum PermGen Size</p></blockquote>
+
+<ul>
+<li>Below is a simple application which dynamically creates 1000 classes to cause PermGem leak. Class creation is very simple and self explanatory. The main idea is that we should use byte code manipulation library to create classes dynamically.</li>
+</ul>
+
+
+<p>See additional comments in the next code snippet</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">mycompany</span><span class="o">.</span><span class="na">app</span><span class="o">;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kn">import</span> <span class="nn">javassist.CannotCompileException</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">javassist.ClassPool</span><span class="o">;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kn">import</span> <span class="nn">java.util.concurrent.TimeUnit</span><span class="o">;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;/&lt;</span><span class="n">strong</span><span class="o">&gt;</span>
+</span><span class='line'> <span class="o">*</span> <span class="n">Steps</span> <span class="n">to</span> <span class="n">build</span> <span class="n">and</span> <span class="n">run</span> <span class="n">demo</span> <span class="nl">application:</span> <span class="o">&lt;</span><span class="n">br</span> <span class="o">/&gt;</span>
+</span><span class='line'> <span class="o">*</span>
+</span><span class='line'> <span class="o">*</span> <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="n">mvn</span> <span class="n">clean</span> <span class="kn">package</span> <span class="nl">appassembler:</span><span class="n">assemble</span>
+</span><span class='line'> <span class="o">*</span> <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="n">target</span><span class="o">/</span><span class="n">appassembler</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">app</span>
+</span><span class='line'> <span class="o">*</span>
+</span><span class='line'> <span class="o">*/</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
+</span><span class='line'>    <span class="o">/&lt;/</span><span class="n">strong</span><span class="o">&gt;</span>
+</span><span class='line'>     <span class="o">*</span> <span class="n">We</span> <span class="n">should</span> <span class="n">use</span> <span class="kd">static</span> <span class="n">block</span> <span class="k">for</span> <span class="n">OutOfMemoryError</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">initialization</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;</span>
+</span><span class='line'>     <span class="o">*</span> <span class="n">It</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;</span><span class="n">s</span> <span class="n">very</span> <span class="n">important</span> <span class="n">to</span> <span class="n">have</span> <span class="n">it</span><span class="o">.</span> <span class="n">In</span> <span class="n">other</span> <span class="k">case</span> <span class="n">JVM</span> <span class="n">won</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;</span><span class="n">t</span> <span class="n">be</span> <span class="n">able</span> <span class="n">to</span>
+</span><span class='line'>     <span class="o">*</span> <span class="k">throw</span> <span class="o">(</span><span class="n">actually</span> <span class="n">create</span> <span class="k">new</span> <span class="n">OutOfMemoryError</span><span class="o">)</span> <span class="k">this</span> <span class="n">exception</span> <span class="n">because</span>
+</span><span class='line'>     <span class="o">*</span> <span class="n">there</span> <span class="n">will</span> <span class="n">be</span> <span class="n">no</span> <span class="n">free</span> <span class="n">memory</span> <span class="k">for</span> <span class="k">this</span><span class="o">.</span> <span class="n">That</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;</span><span class="n">s</span> <span class="n">why</span> <span class="n">we</span> <span class="n">creating</span> <span class="n">it</span> <span class="n">beforehand</span><span class="o">.</span>
+</span><span class='line'>     <span class="o">*</span> <span class="n">As</span> <span class="n">you</span> <span class="n">can</span> <span class="n">see</span> <span class="n">we</span> <span class="n">intentionally</span> <span class="n">added</span> <span class="n">output</span> <span class="n">to</span> <span class="n">highlight</span> <span class="n">that</span> <span class="n">THIS</span> <span class="n">error</span>
+</span><span class='line'>     <span class="o">*</span> <span class="n">was</span> <span class="n">produces</span> <span class="n">by</span> <span class="n">us</span><span class="o">.</span>
+</span><span class='line'>     <span class="o">*/</span>
+</span><span class='line'>    <span class="kd">static</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">new</span> <span class="nf">OutOfMemoryError</span><span class="o">().</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class='line'>        <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(&amp;</span><span class="n">ldquo</span><span class="o">;=====================&amp;</span><span class="n">rdquo</span><span class="o">;);</span>
+</span><span class='line'>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">Initialized</span><span class="o">/</span><span class="n">created</span> <span class="n">OutOfMemoryError</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;);</span>
+</span><span class='line'>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(&amp;</span><span class="n">ldquo</span><span class="o">;=====================&amp;</span><span class="n">rdquo</span><span class="o">;);</span>
+</span><span class='line'>        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Start dynamic class creation.....\n&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span> <span class="mi">1000</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">Class</span> <span class="n">clazz</span> <span class="o">=</span> <span class="n">createClass</span><span class="o">(</span><span class="s">&quot;MyClass&quot;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+</span><span class='line'>        <span class="c1">// we use this output as indicator to see the rough number of created classes</span>
+</span><span class='line'>        <span class="c1">// it&#39;s not necessary to print every single (just created) class</span>
+</span><span class='line'>        <span class="k">if</span><span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">clazz</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">private</span> <span class="kd">static</span> <span class="n">Class</span> <span class="nf">createClass</span><span class="o">(</span><span class="n">String</span> <span class="n">className</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">CannotCompileException</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">ClassPool</span> <span class="n">pool</span> <span class="o">=</span> <span class="n">ClassPool</span><span class="o">.</span><span class="na">getDefault</span><span class="o">();</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">pool</span><span class="o">.</span><span class="na">makeClass</span><span class="o">(</span><span class="n">className</span><span class="o">).</span><span class="na">toClass</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<ul>
+<li>Run the application</li>
+</ul>
+
+
+<pre><code>$ mvn clean package appassembler:assemble
+$ target/appassembler/bin/app
+java.lang.OutOfMemoryError
+    at com.mycompany.app.App.&lt;clinit&gt;(App.java:15)
+=====================
+Initialized/created OutOfMemoryError
+=====================
+Start dynamic class creation.....
+
+class MyClass0
+class MyClass50
+class MyClass100
+class MyClass150
+class MyClass200
+class MyClass250
+class MyClass300
+class MyClass350
+class MyClass400
+class MyClass450
+class MyClass500
+class MyClass550
+Exception in thread "Reference Handler" java.lang.OutOfMemoryError: PermGen space
+    at java.lang.ref.Reference$ReferenceHandler.run(Reference.java:140)
+Exception in thread "main" java.lang.OutOfMemoryError: PermGen space
+    at javassist.ClassPool.toClass(ClassPool.java:1089)
+    at javassist.ClassPool.toClass(ClassPool.java:1032)
+    at javassist.ClassPool.toClass(ClassPool.java:990)
+    at javassist.CtClass.toClass(CtClass.java:1125)
+    at com.mycompany.app.App.createClass(App.java:36)
+    at com.mycompany.app.App.main(App.java:29)
+</code></pre>
+
+<p>The next command runs under the hood:
+<code>java -XX:PermSize=2M -XX:MaxPermSize=4M -classpath "$CLASSPATH" com.mycompany.app.App</code></p>
+
+<p>As you can see it was possible to create about 550 <code>MyClass</code> classes before we&rsquo;ve got an expected error.</p>
+
+<h3>Tomcat Leaks</h3>
+
+<p>Tomcat team created a nice <a href="http://wiki.apache.org/tomcat/MemoryLeakProtection">wiki page</a> where listed and shown the situations where leaks can be detected and fixed.</p>
+
+<h2>References</h2>
+
+<ul>
+<li><a href="https://plumbr.eu/blog/what-is-a-permgen-leak">What is a PermGen leak?</a></li>
+<li><a href="https://plumbr.eu/blog/how-not-to-create-a-permgen-leak">How (not) to create a permgen leak?</a></li>
+<li><a href="http://www.infoq.com/articles/Java-PERMGEN-Removed">Where Has the Java PermGen Gone?</a> PermGen is replace with Metaspace in Java 8</li>
+<li><a href="https://blogs.oracle.com/jonthecollector/entry/presenting_the_permanent_generation">Presenting the Permanent Generation</a> General intro into the subject</li>
+<li><a href="http://www.javaranch.com/journal/200711/creating_java_classes_runtime_expression_evaluation.html">Javassist - Creating Java classes at runtime for evaluating numerical expressions</a> Small article how to create Java classes dynamically</li>
+<li><a href="http://wiki.apache.org/tomcat/MemoryLeakProtection">Tomcat Wiki MemoryLeakProtection</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to Use Embedded H2 With Web Console?]]></title>

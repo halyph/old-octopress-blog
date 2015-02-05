@@ -9,7 +9,7 @@
   <meta name="author" content="Orest Ivasiv">
 
   
-  <meta name="description" content="Textmate 2.0 is using Ruby 1.8 in own bundles. OSX Yosemite dropped Ruby 1.8 as default Ruby implementation, now it&rsquo;s Ruby 2.0. Based on this &hellip;">
+  <meta name="description" content="There are several Java SQL databases which supports both server and embedded modes: H2, HSQLDB and Derby. The most interesting for me is H2 with own &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +82,272 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/22/how-to-use-embedded-h2-with-h2-console/">How to Use Embedded H2 With Web Console?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-22T00:55:03+02:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>12:55 am</span></time>
+        
+           | <a href="/blog/2015/01/22/how-to-use-embedded-h2-with-h2-console/#disqus_thread"
+             data-disqus-identifier="http://halyph.com/blog/2015/01/22/how-to-use-embedded-h2-with-h2-console/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="center" src="/images/blog/java.png"></p>
+
+<p>There are several Java SQL databases which supports both server and embedded modes: <a href="http://www.h2database.com/">H2</a>, <a href="http://hsqldb.org/">HSQLDB</a> and <a href="http://db.apache.org/derby/">Derby</a>. The most interesting for me is H2 with own web <a href="http://www.h2database.com/html/quickstart.html#h2_console">Console</a>.</p>
+
+<p>The aim of this post is to show how to connect from H2 Console to embedded in-memory H2.</p>
+
+<blockquote><p>H2 currently supports three servers: a web server (for the H2 Console), a TCP server (for client/server connections) and an PG server (for PostgreSQL clients). <strong>Please note that only the web server supports browser connections.</strong> The servers can be started in different ways, one is using the Server tool. Starting the server doesn&rsquo;t open a database - databases are opened as soon as a client connects.</p></blockquote>
+
+<p>The next steps have to be performed to connect to embedded DB and populate initial data:</p>
+
+<ol>
+<li>Load DB driver</li>
+<li>Get <code>Connection</code></li>
+<li>Create <code>Statement</code> and <code>executeUpate</code> queries</li>
+<li>Create TCP <code>Server</code>. <em>We should start serve to make in-memory DB available for another process</em></li>
+</ol>
+
+
+<h3>Let&rsquo;s try to implement this:</h3>
+
+<ul>
+<li>Run sample application</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">DBNAME</span> <span class="o">=</span> <span class="s">&quot;mytest&quot;</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ClassNotFoundException</span><span class="o">,</span> <span class="n">SQLException</span><span class="o">,</span> <span class="n">IOException</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// open the in-memory database within a VM</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">&quot;org.h2.Driver&quot;</span><span class="o">);</span> <span class="c1">// (1)</span>
+</span><span class='line'>        <span class="n">Connection</span> <span class="n">conn</span>
+</span><span class='line'>          <span class="o">=</span> <span class="n">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="s">&quot;jdbc:h2:mem:&quot;</span> <span class="o">+</span> <span class="n">DBNAME</span><span class="o">,</span> <span class="s">&quot;sa&quot;</span><span class="o">,</span> <span class="s">&quot;sa&quot;</span><span class="o">);</span> <span class="c1">// (2)</span>
+</span><span class='line'>        <span class="c1">// username:password are very important and must be used for connecting via H2 Console</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">Statement</span> <span class="n">stat</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">createStatement</span><span class="o">();</span> <span class="c1">// (3)</span>
+</span><span class='line'>        <span class="n">stat</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">(</span><span class="s">&quot;create table mytbl(id int primary key, name varchar(255))&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">stat</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">(</span><span class="s">&quot;insert into mytbl values(1, &#39;Hello&#39;)&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">stat</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">(</span><span class="s">&quot;insert into mytbl values(2, &#39;World&#39;)&quot;</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Verify that sample data was really inserted</span>
+</span><span class='line'>        <span class="n">ResultSet</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">stat</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">(</span><span class="s">&quot;select * from mytbl&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;ResultSet output:&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="k">while</span> <span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">next</span><span class="o">())</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;&gt; &quot;</span> <span class="o">+</span> <span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">));</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// start a TCP server</span>
+</span><span class='line'>        <span class="n">Server</span> <span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="na">createTcpServer</span><span class="o">().</span><span class="na">start</span><span class="o">();</span> <span class="c1">// (4)</span>
+</span><span class='line'>        <span class="c1">// .. use in embedded mode ..</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// or use it from another process:</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Server started and connection is open.&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;URL: jdbc:h2:&quot;</span> <span class="o">+</span> <span class="n">server</span><span class="o">.</span><span class="na">getURL</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;/mem:&quot;</span> <span class="o">+</span> <span class="n">DBNAME</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;\n&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+</span><span class='line'>                <span class="s">&quot;now start the H2 Console in another process using:\n&quot;</span> <span class="o">+</span>
+</span><span class='line'>                <span class="s">&quot;$ cd h2/bin; java -cp h2-1.4.185.jar org.h2.tools.Console -web -browser&quot;</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Press [Enter] to stop.&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Stopping server and closing the connection&quot;</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">rs</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">server</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Server is STOPPED&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Output for previous run:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ResultSet output:
+</span><span class='line'>&gt; Hello
+</span><span class='line'>&gt; World
+</span><span class='line'>Server started and connection is open.
+</span><span class='line'>URL: jdbc:h2:tcp://192.168.1.100:9092/mem:mytest
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>now start the H2 Console in another process using:
+</span><span class='line'>$ cd h2/bin; java -cp h2-1.4.185.jar org.h2.tools.Console -web -browser
+</span><span class='line'>Press [Enter] to stop.</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>We assume that h2 installation bundle (zip file) was downloaded (from <a href="http://www.h2database.com/html/download.html">http://www.h2database.com/html/download.html</a>) beforehand and unpacked in some folder</li>
+<li>Go into H2 &ldquo;install/unpack&rdquo; folder and run the next command <code>cd h2/bin; java -cp h2-1.4.185.jar org.h2.tools.Console -web -browser</code></li>
+<li>Now we should copy URL (from sample App output) and credentials sa/sa to login into Console
+
+<ul>
+<li><strong>URL:</strong> jdbc:h2:tcp://192.168.1.100:9092/mem:mytest</li>
+<li><strong>Username:</strong> sa</li>
+<li><strong>Password:</strong> sa</li>
+</ul>
+</li>
+<li>Login window (opened from shell by <code>org.h2.tools.Console</code>)
+<img class="left" src="/images/posts/h2console_login.png"></li>
+</ul>
+
+
+<p>Verify that our custom table contains just inserted values
+<img class="left" src="/images/posts/h2console_sqlwindow.png"></p>
+
+<h3>Add Embedded TCP and Web Servers</h3>
+
+<p>Now, it&rsquo;s time to add small improvements.
+The idea is to switch <em>on</em> H2 Console <strong>Web Server</strong> and <strong>TCP Server</strong> to have external access.
+We should add/update item (4) in previous code snippets like this</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">DBNAME</span> <span class="o">=</span> <span class="s">&quot;mytest&quot;</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ClassNotFoundException</span><span class="o">,</span> <span class="n">SQLException</span><span class="o">,</span> <span class="n">IOException</span> <span class="o">{</span>
+</span><span class='line'><span class="o">...</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">Server</span> <span class="n">webServer</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="na">createWebServer</span><span class="o">(</span><span class="s">&quot;-webAllowOthers&quot;</span><span class="o">,</span><span class="s">&quot;-webPort&quot;</span><span class="o">,</span><span class="s">&quot;8082&quot;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span> <span class="c1">// (4a)</span>
+</span><span class='line'>        <span class="n">Server</span> <span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="na">createTcpServer</span><span class="o">(</span><span class="s">&quot;-tcpAllowOthers&quot;</span><span class="o">,</span><span class="s">&quot;-tcpPort&quot;</span><span class="o">,</span><span class="s">&quot;9092&quot;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>    <span class="c1">// (4b)</span>
+</span><span class='line'>        <span class="c1">// .. use in embedded mode ..</span>
+</span><span class='line'><span class="o">...</span>
+</span><span class='line'>        <span class="n">server</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">webServer</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Server is STOPPED&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>After this we can access to Web Console without running external service
+
+<ul>
+<li>Simply use URL in  browser (access to <strong>Web Server</strong>): <a href="http://localhost:8082/">http://localhost:8082/</a></li>
+</ul>
+</li>
+<li>Use any JDBC client (see IntelliJ IDEA as a sample below)
+
+<ul>
+<li>access to <strong>TCP Server</strong>
+<img class="left" src="/images/posts/h2console_idea.png"></li>
+</ul>
+</li>
+</ul>
+
+
+<h2>References</h2>
+
+<ol>
+<li><a href="http://stackoverflow.com/questions/5077584/h2-database-in-memory-mode-cannot-be-accessed-by-console">H2 database in memory mode cannot be accessed by Console</a></li>
+<li><a href="http://www.h2database.com/html/tutorial.html">Official H2 Tutorial</a></li>
+<li><a href="http://h2database.com/javadoc/org/h2/tools/Server.html">H2 Server methods</a></li>
+<li><a href="https://github.com/halyph/tutorials/tree/master/h2-embedded-console">GitHub Sources</a></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -290,56 +556,6 @@ e.g. <code>Bundles-&gt;Text-&gt;Duplicate Line</code></p></li>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/10/20/switching-to-textmate-2/">Switching to Textmate 2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-10-20T02:06:26+03:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>2:06 am</span></time>
-        
-           | <a href="/blog/2014/10/20/switching-to-textmate-2/#disqus_thread"
-             data-disqus-identifier="http://halyph.com/blog/2014/10/20/switching-to-textmate-2/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="right" src="/images/blog/textmate.png">
-Recently I&rsquo;ve decided to switch from Sublime Text editor to <a href="http://macromates.com">TextMate 2</a>. At the beginning of <a href="http://rubyonrails.org/">Rails</a> &ldquo;era&rdquo; it was the sexiest text editor in the world. But, at that time, I was a Windows user ;-)</p>
-
-<p>I was inspired by <a href="http://blog.agiledeveloper.com/">Venkat Subramaniam</a> to make this switch in 2014. Dr. Venkant is using Textmate during his conference live coding for years.</p>
-
-<p>Additional argument for switching is the fact that Textmate 2 is <a href="https://github.com/textmate/textmate">open sourced</a>.</p>
-
-<p>Here is the list of articles which I highly recommend for Textmate newcomers:</p>
-
-<ul>
-<li><a href="http://hiltmon.com/blog/2013/11/09/textmate-2-basics/">TextMate 2 Basics</a> it&rsquo;s basic tips for using TextMate</li>
-<li><a href="http://hiltmon.com/blog/2014/01/20/more-textmate-2-basics/">More TextMate 2 Basics</a> additional usage tips</li>
-<li><a href="http://hiltmon.com/blog/2013/04/15/my-textmate-2-setup/">My TextMate 2 Setup</a> shows how to tweak TextMate properties per user or per project</li>
-<li><a href="http://nofluffjuststuff.com/blog/venkat_subramaniam/2007/10/tweaking_textmate_groovy_bundle">Tweaking TextMate Groovy Bundle</a> and <a href="http://nofluffjuststuff.com/blog/venkat_subramaniam/2008/02/tweaking_textmate_ruby_bundle_run_command">Tweaking TextMate Ruby Bundle Run Command</a> it&rsquo;s famous Dr. Venkat TextMate setting for showing program run results as tooltips (highly recommended settings). Also, you can see how to configure these setting in this screencast <a href="https://www.agilelearner.com/presentation/5">Running in TextMate</a></li>
-<li><a href="http://manual.macromates.com/en/">TextMate Manual</a></li>
-</ul>
-
-
-<p>Don&rsquo;t forget to share your TextMate links, article, tips, hacks, etc.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -363,6 +579,10 @@ Recently I&rsquo;ve decided to switch from Sublime Text editor to <a href="http:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/02/05/how-to-generate-permgen/">How to Generate PermGen Leak?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/02/02/scripting-in-scala/">Scripting in Scala</a>
       </li>
     
@@ -378,15 +598,11 @@ Recently I&rsquo;ve decided to switch from Sublime Text editor to <a href="http:
         <a href="/blog/2014/10/20/switching-to-textmate-2/">Switching to Textmate 2</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/10/09/bash-block-comments/">How to Use Block Comments in Bash Script</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bash' style='font-size: 140.0%'>bash(2)</a> <a href='/blog/categories/blog' style='font-size: 120.0%'>blog(1)</a> <a href='/blog/categories/books' style='font-size: 140.0%'>books(2)</a> <a href='/blog/categories/conference' style='font-size: 120.0%'>conference(1)</a> <a href='/blog/categories/groovy' style='font-size: 160.0%'>groovy(3)</a> <a href='/blog/categories/h2' style='font-size: 120.0%'>h2(1)</a> <a href='/blog/categories/java' style='font-size: 140.0%'>java(2)</a> <a href='/blog/categories/jdbc' style='font-size: 120.0%'>jdbc(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 120.0%'>jeeconf(1)</a> <a href='/blog/categories/languages' style='font-size: 120.0%'>languages(1)</a> <a href='/blog/categories/learning' style='font-size: 120.0%'>learning(1)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>octopress(1)</a> <a href='/blog/categories/review' style='font-size: 140.0%'>review(2)</a> <a href='/blog/categories/ruby' style='font-size: 120.0%'>ruby(1)</a> <a href='/blog/categories/scala' style='font-size: 120.0%'>scala(1)</a> <a href='/blog/categories/scripting' style='font-size: 120.0%'>scripting(1)</a> <a href='/blog/categories/shell' style='font-size: 140.0%'>shell(2)</a> <a href='/blog/categories/textmate' style='font-size: 140.0%'>textmate(2)</a> <a href='/blog/categories/tomcat' style='font-size: 120.0%'>tomcat(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/bash' style='font-size: 140.0%'>bash(2)</a> <a href='/blog/categories/blog' style='font-size: 120.0%'>blog(1)</a> <a href='/blog/categories/books' style='font-size: 140.0%'>books(2)</a> <a href='/blog/categories/conference' style='font-size: 120.0%'>conference(1)</a> <a href='/blog/categories/groovy' style='font-size: 160.0%'>groovy(3)</a> <a href='/blog/categories/h2' style='font-size: 120.0%'>h2(1)</a> <a href='/blog/categories/java' style='font-size: 160.0%'>java(3)</a> <a href='/blog/categories/java-se' style='font-size: 120.0%'>java se(1)</a> <a href='/blog/categories/jdbc' style='font-size: 120.0%'>jdbc(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 120.0%'>jeeconf(1)</a> <a href='/blog/categories/languages' style='font-size: 120.0%'>languages(1)</a> <a href='/blog/categories/learning' style='font-size: 120.0%'>learning(1)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>octopress(1)</a> <a href='/blog/categories/review' style='font-size: 140.0%'>review(2)</a> <a href='/blog/categories/ruby' style='font-size: 120.0%'>ruby(1)</a> <a href='/blog/categories/scala' style='font-size: 120.0%'>scala(1)</a> <a href='/blog/categories/scripting' style='font-size: 120.0%'>scripting(1)</a> <a href='/blog/categories/shell' style='font-size: 140.0%'>shell(2)</a> <a href='/blog/categories/textmate' style='font-size: 140.0%'>textmate(2)</a> <a href='/blog/categories/tomcat' style='font-size: 120.0%'>tomcat(1)</a> </span>
 </section>
 
   
