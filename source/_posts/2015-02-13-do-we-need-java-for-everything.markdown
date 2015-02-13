@@ -103,7 +103,7 @@ public class helloworld {
 It can be run like this: `$ ./helloworld`
 
 ### So, how does java_launcher work?
-1. This launcher script works on Linux/MacOSX only. We should have additional **java_launcher.bat** script for Windows.    
+1. This launcher script works on Linux/MacOSX only. We should have additional **java_launcher.bat** script for Windows (cygwin and msys are not native Windows solution).    
 2. It supports two types of CLASSPATH lib folders
   - *default* **$SCRIPT_DIR/java_lib** located in the same folder where the actual Java script located 
   - *custom* libs, they should be listed at the head **lib** section of the script (see sample above). The script uses AWK to extract jars from **lib** section 
@@ -135,9 +135,6 @@ class Example {
 > One or more `groovy.lang.Grab` annotations can be added at any place that annotations are accepted to tell the compiler that this code relies on the specific library. This will have the effect of adding the library to the classloader of the groovy compiler. This annotation is detected and evaluated before any other resolution of classes in the script, so imported classes can be properly resolved by a @Grab annotation.
 
 **So, I have no idea why to reinvent the wheel.** Use Groovy for scripting and Java for everything else.
-
-But, I've decided to google a little and review how other people implemented *"Java for Everything"* concept or Java scripting approaches - See my next post.   
-
 
 ## References
 - [Java for Everything]
