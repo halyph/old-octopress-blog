@@ -11,6 +11,7 @@ I provided my reflections about *"Java for Everything"* in the previous [post][p
 Here we will review other implementation of this concept.
 
 I have the next concerns about any Java application (big or small):
+
 - library dependency management must be simple
 - it's very bad practice to distribute sources along with libraries (dependency management tools must be used instead: Ivy, Maven, Gradle, etc.)
 - small application might have a little bit different project layout (not equals to traditional Maven layout)
@@ -22,7 +23,7 @@ I have the next concerns about any Java application (big or small):
 We have to create simple and small REST application based on [Spark Java framework](https://github.com/perwendel/spark) (A Sinatra inspired framework for Java).
 
 Here is the source:
-```
+{% codeblock lang:java %}
 import static spark.Spark.get;
 import static spark.SparkBase.port;
 
@@ -31,12 +32,12 @@ public class App {
         
         for(String arg: args) System.out.printf("> %s", arg);
         
-		get("/hello", (request, response) -> {
+        get("/hello", (request, response) -> {
             return "Hello World!";
         });
     }
 }   
-```
+{% endcodeblock %}
 
 So, here is the list of issues:
 
@@ -46,7 +47,7 @@ So, here is the list of issues:
 
 ## Traditional Maven Way
 - Generate empty project via Maven archetype
-```
+{% codeblock lang:bash %}
 mvn archetype:generate \
 -DgroupId=com.halyph \ 
 -DartifactId=sparkblog \ 
@@ -55,12 +56,12 @@ mvn archetype:generate \
 -DarchetypeGroupId=org.apache.maven.archetypes \ 
 -DarchetypeArtifactId=maven-archetype-quickstart \
 -DinteractiveMode=false
-```
+{% endcodeblock %}
 
 - Open this in IDEA (I don't use other IDEs) via "Open File or Project" and select folder with generated **pom.xml** file. We don't need tests, so we can delete *src->test* folder and remove junit dependency from **pom.xml** file. Now, we can easily run our application via IDE.
 
 - Add Spark framework dependency to **pom.xml** and update our **App** class
-```
+{% codeblock lang:xml %}
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
@@ -99,9 +100,9 @@ mvn archetype:generate \
     </plugins>
   </build>
 </project>
-```
+{% endcodeblock %}
 
-```
+{% codeblock lang:java %}
 package com.halyph.blog;
 
 import static spark.Spark.get;
@@ -121,11 +122,11 @@ public class App {
         });
     }
 }
-```
+{% endcodeblock %}
 This application can be easily run via IDE, but lets run it via Maven
 
 - We should use [Exec Maven Plugin] to run the app with all dependencies
-```
+{% codeblock lang:bash %}
 $ mvn clean compile exec:java -Dexec.mainClass="com.halyph.blog.App"  -Dexec.args="9090 one 1 2"
 [INFO] Scanning for projects...
 [INFO]
@@ -155,10 +156,10 @@ $ mvn clean compile exec:java -Dexec.mainClass="com.halyph.blog.App"  -Dexec.arg
 [Thread-1] INFO spark.webserver.SparkServer - >> Listening on 0.0.0.0:4567
 [Thread-1] INFO org.eclipse.jetty.server.Server - jetty-9.0.2.v20130417
 [Thread-1] INFO org.eclipse.jetty.server.ServerConnector - Started ServerConnector@4afe75c9{HTTP/1.1}{0.0.0.0:4567}
-```
+{% endcodeblock %}
 
 In case the application run configurations is persistent ("main" class and CLI arguments are changing rarely) we can configure it in **pom.xml**:
-```
+{% codeblock lang:xml %}
  <build>
     <plugins>
       ...
@@ -185,12 +186,12 @@ In case the application run configurations is persistent ("main" class and CLI a
       </plugin>
     </plugins>
   </build>
-```
+{% endcodeblock %}
 
 - It's nice idea to use `mvn exec:java`, but it might be a little bit slow. So, we might decide to use some shell script which increase compiled application ramp up time. The problem is that the application have dependencies (which have transitive dependencies). I.e. `java` classpath have to be configured somehow.
 
 Well, I borrowed the ideas from "[A better java shell script wrapper]" script. Here it is:
-```
+{% codeblock lang:bash %}
 #!/usr/bin/env bash
 #
 # Copyright 2012 Zemian Deng
@@ -308,11 +309,11 @@ fi
 if [ -z "$RUN_JAVA_DRY" ]; then
 	"$JAVA_CMD" $RUN_JAVA_OPTS -cp "$RUN_JAVA_CP" $ARGS
 fi
-```
+{% endcodeblock %}
 
 The main idea is to run `mvn dependency:copy-dependencies`, this will generate all the jar files into `target/dependency` folder
 
-```
+{% codeblock lang:bash %}
 $ mvn dependency:copy-dependencies
 [INFO] Scanning for projects...
 [INFO]
@@ -340,7 +341,7 @@ $ mvn dependency:copy-dependencies
 [INFO] Finished at: Thu Feb 12 18:22:54 EET 2015
 [INFO] Final Memory: 9M/243M
 [INFO] ------------------------------------------------------------------------
-```
+{% endcodeblock %}
 Now, we can reuse the provided *above* script **or** use the provided *below* one-liner:
 ```
 java -cp target\classes;target\dependency\* com.halyph.blog.App 9090 one 1 2
@@ -348,7 +349,7 @@ java -cp target\classes;target\dependency\* com.halyph.blog.App 9090 one 1 2
 This one-liner is very simple and can be transformed to shell/batch scripts depending on the level of re-use you'd like to implement.
 
 - Now, it's time to created pre-packed application bundle which can be easily distributed. We will use [Maven Application Assembler Plugin]:
-```
+{% codeblock lang:xml %}
  <build>
     <plugins>
      ...
@@ -380,7 +381,7 @@ This one-liner is very simple and can be transformed to shell/batch scripts depe
       </plugin>
     </plugins>
   </build>
-```
+{% endcodeblock %}
 > The Application Assembler Plugin is a Maven plugin for generating scripts for starting java applications. All dependencies and the artifact of the project itself are placed in a generated Maven repository in a defined assemble directory. All artifacts (dependencies + the artifact from the project) are added to the classpath in the generated bin scripts.
 
 [Maven Application Assembler Plugin] usage:
