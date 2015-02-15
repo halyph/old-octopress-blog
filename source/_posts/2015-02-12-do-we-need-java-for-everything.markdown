@@ -5,15 +5,16 @@ date: 2015-02-13 00:18:30 +0200
 comments: true
 categories: [java, "java se"]
 ---
+{% img center /images/blog/java.png %}
 
 Some time ago one guy wrote a post [Java for Everything]. The main idea is to use Java even for shell scripting.
 > I’m even taking this to an extreme and using Java for shell scripts. I’ve found that anything other than a simple wrapper shell script eventually grows to the point where I’m looking up the arcane syntax for removing some middle element from an array in bash ... Write it in Java to start with. If shelling out to run commands is clumsy, write a utility function to make it easy.
 >I’ve also written a *java_launcher* shell script that allows me to write this at the top of Java programs:
->```
->#!/usr/bin/env java_launcher
-># vim:ft=java
-># lib:/home/lk/lib/teamten.jar
->```
+{% codeblock lang:bash%}
+#!/usr/bin/env java_launcher
+# vim:ft=java
+# lib:/home/lk/lib/teamten.jar
+{% endcodeblock %}
 >I can make the Java programs executable and drop the .java extension. The script strips the header, compiles and caches the class file, and runs the result with the specified jars. It provides one of the big advantages of Python: the lack of build scripts for simple one-off programs.
 
 Here is the actual source of [java_launcher]:
