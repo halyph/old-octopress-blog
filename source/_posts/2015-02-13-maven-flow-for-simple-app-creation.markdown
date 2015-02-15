@@ -5,8 +5,9 @@ date: 2015-02-13 00:18:30 +0200
 comments: true
 categories: [java, maven]
 ---
+{% img center /images/blog/java.png %}
 
-I provided my reflections about *"Java for Everything"* in the previous [post][Do We Need Java for Everything?].
+I provided my reflections about *"Java for Everything"* in the previous [post][prev_post].
 Here we will review other implementation of this concept.
 
 I have the next concerns about any Java application (big or small):
@@ -38,12 +39,13 @@ public class App {
 ```
 
 So, here is the list of issues:
+
 - get Spark dependency with all transitive dependencies
 - pass command-line arguments into the app
 - use this application in development mode and in "production" (packed in jar)
 
 ## Traditional Maven Way
-1. Generate empty project via Maven archetype
+- Generate empty project via Maven archetype
 ```
 mvn archetype:generate \
 -DgroupId=com.halyph \ 
@@ -55,9 +57,9 @@ mvn archetype:generate \
 -DinteractiveMode=false
 ```
 
-2. Open this in IDEA (I don't use other IDEs) via "Open File or Project" and select folder with generated **pom.xml** file. We don't need tests, so we can delete *src->test* folder and remove junit dependency from **pom.xml** file. Now, we can easily run our application via IDE.
+- Open this in IDEA (I don't use other IDEs) via "Open File or Project" and select folder with generated **pom.xml** file. We don't need tests, so we can delete *src->test* folder and remove junit dependency from **pom.xml** file. Now, we can easily run our application via IDE.
 
-3. Add Spark framework dependency to **pom.xml** and update our **App** class
+- Add Spark framework dependency to **pom.xml** and update our **App** class
 ```
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -122,7 +124,7 @@ public class App {
 ```
 This application can be easily run via IDE, but lets run it via Maven
 
-4. We should use [Exec Maven Plugin] to run the app with all dependencies
+- We should use [Exec Maven Plugin] to run the app with all dependencies
 ```
 $ mvn clean compile exec:java -Dexec.mainClass="com.halyph.blog.App"  -Dexec.args="9090 one 1 2"
 [INFO] Scanning for projects...
@@ -185,7 +187,7 @@ In case the application run configurations is persistent ("main" class and CLI a
   </build>
 ```
 
-5. It's nice idea to use `mvn exec:java`, but it might be a little bit slow. So, we might decide to use some shell script which increase compiled application ramp up time. The problem is that the application have dependencies (which have transitive dependencies). I.e. `java` classpath have to be configured somehow.
+- It's nice idea to use `mvn exec:java`, but it might be a little bit slow. So, we might decide to use some shell script which increase compiled application ramp up time. The problem is that the application have dependencies (which have transitive dependencies). I.e. `java` classpath have to be configured somehow.
 
 Well, I borrowed the ideas from "[A better java shell script wrapper]" script. Here it is:
 ```
@@ -345,7 +347,7 @@ java -cp target\classes;target\dependency\* com.halyph.blog.App 9090 one 1 2
 ```
 This one-liner is very simple and can be transformed to shell/batch scripts depending on the level of re-use you'd like to implement.
 
-6. Now, it's time to created pre-packed application bundle which can be easily distributed. We will use [Maven Application Assembler Plugin]:
+- Now, it's time to created pre-packed application bundle which can be easily distributed. We will use [Maven Application Assembler Plugin]:
 ```
  <build>
     <plugins>
@@ -394,16 +396,17 @@ Note: [Maven Application Assembler Plugin] have a lot of customization options, 
 
 ## Summary
 Here was shown that using such tool as Maven you can be productive and "agile" (use [Gradle](http://gradle.org) if you'd like to be in trend):
+
 - generate project skeleton from scratch
 - open it in IDE without ceremony
 - call the app via Maven plugin
 - call it as plain CLI application, but with small ceremony (need to run *dependency:copy-dependencies*) 
 - package the app for further distribution
 
-Yes, it's not a sample write-one Java "script", but it's flexible enough to feel like it is.
+Yes, it's not a simple *write-one* Java "script", but it's flexible enough to feel like it is.
 
 ## References
-- [Do We Need Java for Everything?]
+- [Do We Need Java for Everything?][prev_post]
 - [A better java shell script wrapper]
 - [Exec Maven Plugin]
 - [Maven Application Assembler Plugin]
@@ -412,4 +415,4 @@ Yes, it's not a sample write-one Java "script", but it's flexible enough to feel
 [A better java shell script wrapper]: http://saltnlight5.blogspot.com/2012/08/a-better-java-shell-script-wrapper.html
 [Exec Maven Plugin]: http://mojo.codehaus.org/exec-maven-plugin/usage.html
 [Maven Application Assembler Plugin]: http://mojo.codehaus.org/appassembler/appassembler-maven-plugin/usage-program.html
-[Do We Need Java for Everything?]: ????
+[prev_post]: /blog/2015/02/13/do-we-need-java-for-everything
