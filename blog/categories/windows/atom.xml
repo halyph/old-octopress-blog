@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Ruby | Knowledge Is Everything]]></title>
-  <link href="http://halyph.com/blog/categories/ruby/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Windows | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/windows/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
   <updated>2015-02-21T16:42:19+02:00</updated>
   <id>http://halyph.com/</id>
@@ -157,35 +157,6 @@ $ copy AddTrustExternalCARoot-2048.pem D:\Tools\Ruby\Ruby21-x64\lib\ruby\2.1.0\r
 <li><a href="http://blog.zerosharp.com/setting-up-octopress-on-windows/">Octopress on Windows and GitHub</a></li>
 <li><a href="http://thaiat.github.io/blog/2014/03/13/how-to-install-and-use-octopress-on-windows/">How to Install and Use Octopress on Windows</a></li>
 <li><a href="http://octopress.org/">Octopress</a></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Thor Notes]]></title>
-    <link href="http://halyph.com/2014/04/thor-notes.html"/>
-    <updated>2014-04-19T12:40:00+03:00</updated>
-    <id>http://halyph.com/2014/04/thor-notes</id>
-    <content type="html"><![CDATA[<p><img class="center" src="/images/blog/ruby.png"></p>
-
-<p>Some time ago I used <a href="http://whatisthor.com/">Thor</a> for one <a href="http://en.wikipedia.org/wiki/Command-line_interface">CLI</a> application. I
-investigated several tools, but picked Thor because of its simplicity
-and easy to star. In general you would need only the <a href="http://whatisthor.com/">official
-documentation</a>. But, I used <a href="http://bundler.io/">Bundler</a> as real sample of Thor
-usage also.</p>
-
-<p>Here is the list of articles, notes about Thor which might be helpful:</p>
-
-<ul>
-<li><a href="http://whatisthor.com/">Thor Getting Started</a></li>
-<li><a href="http://blog.paracode.com/2012/05/17/building-your-tools-with-thor/">Building Your Tools With Thor</a> - Thor overview</li>
-<li><a href="https://github.com/erikhuda/thor/wiki">Thor wiki</a></li>
-<li><a href="http://stackoverflow.com/questions/9340754/how-do-i-register-a-thorgroup-as-a-subcommand-with-arguments">Thor::Group as a sub-command with arguments</a></li>
-<li><a href="http://stackoverflow.com/questions/9339677/how-do-i-create-thorgroup-generators-as-args-of-my-command">Thor::Group generators as args of my_command</a></li>
-<li><a href="http://stackoverflow.com/questions/5663519/namespacing-thor-commands-in-a-standalone-ruby-executable">Namespacing Thor commands in a standalone ruby executable</a></li>
-<li><a href="http://stackoverflow.com/questions/5729071/how-to-compose-thor-tasks-in-separate-classes-modules-files">Packaging Thor commands in separate classes/modules/files</a></li>
-<li><a href="http://stackoverflow.com/questions/6561912/ruby-thor-based-executable-with-namespaces">Ruby Thor based executable with namespaces</a></li>
 </ul>
 
 ]]></content>
