@@ -10,16 +10,16 @@ categories: [java, "java se"]
 Some time ago one guy wrote a post [Java for Everything]. The main idea is to use Java even for shell scripting.
 > I’m even taking this to an extreme and using Java for shell scripts. I’ve found that anything other than a simple wrapper shell script eventually grows to the point where I’m looking up the arcane syntax for removing some middle element from an array in bash ... Write it in Java to start with. If shelling out to run commands is clumsy, write a utility function to make it easy.
 >I’ve also written a *java_launcher* shell script that allows me to write this at the top of Java programs:
-{% codeblock lang:bash %}
+``` bash
 #!/usr/bin/env java_launcher
 # vim:ft=java
 # lib:/home/lk/lib/teamten.jar
-{% endcodeblock %}
+```
 >I can make the Java programs executable and drop the .java extension. The script strips the header, compiles and caches the class file, and runs the result with the specified jars. It provides one of the big advantages of Python: the lack of build scripts for simple one-off programs.
 
 Here is the actual source of [java_launcher]:
 
-{% codeblock lang:bash %}
+``` bash
 #!/bin/bash
 
 # Put this script in your path and write the following line at the top of an
@@ -85,11 +85,11 @@ fi
 # Run the program, passing on arguments from command line.
 export CLASSPATH=$CLASS_DIR:$CLASSPATH
 java -Xmx1024m $CLASS_NAME $*
-{% endcodeblock %}
+```
 
 And suppose we'd like to run **helloworld** Java "script" using different jars located in default library location (**java_lib/**) and custom (**/home/username/mylib1.jar** and **/home/username/mylib2.jar**)
 
-{% codeblock lang:java %}
+``` bash
 #!/usr/bin/env java_launcher
 # vim:ft=java
 # lib:/home/username/mylib1.jar:/home/username/mylib2.jar
@@ -99,7 +99,7 @@ public class helloworld {
         System.out.println("Hello world!");
     }
 }
-{% endcodeblock %}
+```
 
 It can be run like this: `$ ./helloworld`
 
@@ -124,14 +124,14 @@ I don't think that Java is "good" language for scripting (see drawbacks above). 
 > Grape (The Groovy Adaptable Packaging Engine or Groovy Advanced Packaging Engine) is the infrastructure enabling the grab() calls in Groovy, a set of classes leveraging Ivy to allow for a repository driven module system for Groovy. This allows a developer to write a script with an essentially arbitrary library requirement, and ship just the script. Grape will, at runtime, download as needed and link the named libraries and all dependencies forming a transitive closure when the script is run from existing repositories such as JCenter, Ibiblio, Codehaus, and java.net.
 
 Sample usage:
-{% codeblock lang:java %}
+``` groovy
 @Grapes([
    @Grab(group='commons-primitives', module='commons-primitives', version='1.0'),
    @Grab(group='org.ccil.cowan.tagsoup', module='tagsoup', version='0.9.7')])
 class Example {
 // ...
 }
-{% endcodeblock %}
+```
 
 > One or more `groovy.lang.Grab` annotations can be added at any place that annotations are accepted to tell the compiler that this code relies on the specific library. This will have the effect of adding the library to the classloader of the groovy compiler. This annotation is detected and evaluated before any other resolution of classes in the script, so imported classes can be properly resolved by a @Grab annotation.
 

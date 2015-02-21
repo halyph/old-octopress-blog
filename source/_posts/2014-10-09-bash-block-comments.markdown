@@ -11,7 +11,7 @@ What is the simplest way to define block comment in Bash script?
 I've selected two approaches for myself:
 
 - Use here document
-{% codeblock lang:bash %}
+``` bash
 #!/usr/bin/env bash
 
 echo "before block comment"
@@ -21,10 +21,10 @@ myltiline
 text
 END
 echo "after block comment"
-{% endcodeblock %}
+```
 
 - Use **"if"** false block
-{% codeblock lang:bash %}
+``` bash
 #!/usr/bin/env bash
 
 echo "before block comment"
@@ -34,4 +34,4 @@ myltiline
 text
 fi
 echo "after block comment"
-{% endcodeblock %}
+```

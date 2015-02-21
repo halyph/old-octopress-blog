@@ -9,7 +9,7 @@ categories: textmate
 Textmate 2.0 is using Ruby 1.8 in own bundles. OSX Yosemite dropped Ruby 1.8 as default Ruby implementation, now it's Ruby 2.0. Based on this all Textmate ruby-based (legacy) bundles do not work. It can be fixed in several steps:
 
 - Install Ruby 1.8.x via some Ruby version manager (e.g. rvm)
-{% codeblock lang:bash %}
+``` bash
 $ rvm install 1.8
 Warning! Requested ruby installation which requires another ruby available - installing ruby-1.8.7-p374 first.
 
@@ -89,7 +89,7 @@ Please be aware that you just installed a ruby that requires        3 patches ju
 This may have known and unaccounted for security vulnerabilities.
 Please consider upgrading to ruby-2.1.4 which will have all of the latest security patches.
 Ruby was built without documentation, to build it run: rvm docs generate-ri
-{% endcodeblock %}
+```
 
 - Update Textmate preferences
 {% img /images/posts/textmate_prefs_ruby.png %}

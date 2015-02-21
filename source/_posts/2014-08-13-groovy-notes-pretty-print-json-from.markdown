@@ -17,24 +17,24 @@ comments: true
 {% img center /images/blog/groovy.png %}
 JSON pretty print it's common task while working with JSON from command line. There are many ways of doing this via Python, Ruby, node.js, but here I'd like to concentrate on Groovy one-liner:
 
-{% codeblock lang:bash%}
+``` bash
 $ echo '{"foo": "lorem", "bar": "ipsum"}' | groovy -e 'import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)'
 
 {
     "foo": "lorem",
     "bar": "ipsum"
 }
-{% endcodeblock %}
+```
 
 We can slightly improve this one-liner via adding shell alias:
-{% codeblock lang:bash %}
+``` bash
 $ alias pp="groovy -e 'import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)'"
 $ echo '{"foo": "lorem", "bar": "ipsum"}' | pp
-{% endcodeblock %}
+```
 
 Also, we might use Groovy script which might be handy for simple JSON validation also:
 
-{% codeblock lang:groovy %}
+``` groovy
 $ cat prettyJson.groovy 
 import groovy.json.*
 
@@ -47,4 +47,4 @@ try {
 
 $ echo '{"foo: "lorem", ' | groovy prettyJson.groovy
 ERROR: Not valid JSON
-{% endcodeblock %}
+```

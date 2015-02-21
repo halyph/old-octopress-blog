@@ -23,7 +23,7 @@ The next steps have to be performed to connect to embedded DB and populate initi
 ### Let's try to implement this: 
 
 * Run sample application
-{% codeblock lang:java%}
+``` java
 
 public class App {
     private static final String DBNAME = "mytest";
@@ -72,7 +72,7 @@ public class App {
         System.out.println("Server is STOPPED");
     }
 }
-{% endcodeblock %}
+```
 * Output for previous run:
 ```
 ResultSet output:
@@ -103,7 +103,7 @@ Verify that our custom table contains just inserted values
 Now, it's time to add small improvements. 
 The idea is to switch *on* H2 Console **Web Server** and **TCP Server** to have external access.
 We should add/update item (4) in previous code snippets like this  
-{% codeblock lang:java%}
+``` java
 public class App {
     private static final String DBNAME = "mytest";
 
@@ -120,7 +120,7 @@ public class App {
         System.out.println("Server is STOPPED");
     }
 }
-{% endcodeblock %}
+```
 
 * After this we can access to Web Console without running external service
   * Simply use URL in  browser (access to **Web Server**): http://localhost:8082/
