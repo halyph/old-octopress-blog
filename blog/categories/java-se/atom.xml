@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java Se | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/java-se/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-02-21T16:42:19+02:00</updated>
+  <updated>2015-02-21T17:05:13+02:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -24,226 +24,98 @@
 
 <blockquote><p>I’m even taking this to an extreme and using Java for shell scripts. I’ve found that anything other than a simple wrapper shell script eventually grows to the point where I’m looking up the arcane syntax for removing some middle element from an array in bash &hellip; Write it in Java to start with. If shelling out to run commands is clumsy, write a utility function to make it easy.
 I’ve also written a <em>java_launcher</em> shell script that allows me to write this at the top of Java programs:
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;!/usr/bin/env java_launcher&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;vim:ft<span class="o">=</span>java&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;lib:/home/lk/lib/teamten.jar&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+&#8220;` bash</p>
+
+<h1>!/usr/bin/env java_launcher</h1>
+
+<h1>vim:ft=java</h1>
+
+<h1>lib:/home/lk/lib/teamten.jar</h1>
+
+<p>&#8220;`
 I can make the Java programs executable and drop the .java extension. The script strips the header, compiles and caches the class file, and runs the result with the specified jars. It provides one of the big advantages of Python: the lack of build scripts for simple one-off programs.</p></blockquote>
 
 <p>Here is the actual source of <a href="https://github.com/lkesteloot/java_launcher">java_launcher</a>:</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;!/bin/bash&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Put this script in your path and write the following line at the top of an&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;executable Java <span class="nb">source </span>program:&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;#&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;#!/usr/bin/env java_launcher&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;#&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Additional documentation here: &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/lkesteloot/java_launcher&quot;</span>&gt;https://github.com/lkesteloot/java_launcher&lt;/a&gt;&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Quit on error.&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;set -e&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Get the name of the script, which the shell passes to us automatically.&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;SOURCE_PATHNAME<span class="o">=</span><span class="nv">$1</span>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$SOURCE_PATHNAME</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="o">=</span> <span class="p">&amp;</span>ldquo<span class="p">;&amp;</span>rdquo<span class="p">;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="nb">echo</span> <span class="p">&amp;</span>ldquo<span class="p">;</span>java_launcher: Must supply name of script as first argument.<span class="p">&amp;</span>rdquo<span class="p">;</span>
-</span><span class='line'>    <span class="nb">exit </span>1
-</span><span class='line'><span class="k">fi</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Skip the script name.&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;shift&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Compute the MD5 of both the <span class="nb">source </span>file and this script.&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;if <span class="o">[</span> -f /sbin/md5 <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="c"># Mac OS/X.</span>
-</span><span class='line'>    <span class="nv">SUM</span><span class="o">=</span><span class="k">$(</span>cat <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$SOURCE_PATHNAME</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="nv">$0</span> <span class="p">|</span> md5<span class="k">)</span>
-</span><span class='line'><span class="k">else</span>
-</span><span class='line'>    <span class="c"># Linux.</span>
-</span><span class='line'>    <span class="nv">SUM</span><span class="o">=</span><span class="k">$(</span>cat <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$SOURCE_PATHNAME</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="nv">$0</span> <span class="p">|</span> md5sum <span class="p">|</span> cut -d<span class="p">&amp;</span><span class="c">#8217; &amp;lsquo; -f1)</span>
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'><span class="nv">SOURCE_FILENAME</span><span class="o">=</span><span class="k">$(</span>basename <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$SOURCE_PATHNAME</span><span class="p">&amp;</span>rdquo<span class="p">;</span><span class="k">)</span>
-</span><span class='line'><span class="nv">SOURCE_DIR</span><span class="o">=</span><span class="k">$(</span>dirname <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$SOURCE_PATHNAME</span><span class="p">&amp;</span>rdquo<span class="p">;</span><span class="k">)</span>
-</span><span class='line'><span class="nv">CLASS_NAME</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$SOURCE_FILENAME</span> <span class="p">|</span> sed -e <span class="p">&amp;</span>rsquo<span class="p">;</span>s/.*//<span class="p">&amp;</span>rsquo<span class="p">;</span><span class="k">)</span>
-</span><span class='line'><span class="nv">CACHE_DIR</span><span class="o">=</span><span class="nv">$HOME</span>/.java_launcher_cache
-</span><span class='line'><span class="nv">CLASS_DIR</span><span class="o">=</span><span class="nv">$CACHE_DIR</span>/<span class="nv">$SUM</span>
-</span><span class='line'><span class="nv">PROCESSED_SOURCE</span><span class="o">=</span><span class="nv">$CLASS_DIR</span>/<span class="k">${</span><span class="nv">SOURCE_FILENAME</span><span class="k">}</span>.java
-</span><span class='line'><span class="nv">PROCESSED_CLASS</span><span class="o">=</span><span class="nv">$CLASS_DIR</span>/<span class="k">${</span><span class="nv">SOURCE_FILENAME</span><span class="k">}</span>.class&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Process <span class="nb">source </span>to find libs <span class="k">for</span> classpath. Relative jars are made relative to the&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;source file.&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;export <span class="nv">CLASSPATH</span><span class="o">=</span><span class="k">$(</span>awk <span class="p">&amp;</span>lsquo<span class="p">;</span>BEGIN <span class="o">{</span> <span class="nv">CLASSPATH</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;&amp;</span>rdquo<span class="p">;</span> <span class="o">}</span> /^# lib:<span class="o">(</span>.*<span class="k">)</span><span class="nv">$/</span> <span class="o">{</span> <span class="nv">jar</span> <span class="o">=</span> substr<span class="o">(</span><span class="nv">$0</span>, 7<span class="k">)</span><span class="p">;</span> <span class="k">if</span> <span class="o">(</span>substr<span class="o">(</span>jar, 1, 1<span class="o">)</span> !<span class="o">=</span> <span class="p">&amp;</span>ldquo<span class="p">;</span>/<span class="p">&amp;</span>rdquo<span class="p">;</span><span class="o">)</span> <span class="nv">jar</span> <span class="o">=</span> SOURCE_DIR <span class="p">&amp;</span>ldquo<span class="p">;</span>/<span class="p">&amp;</span>rdquo<span class="p">;</span> jar<span class="p">;</span> <span class="k">if</span> <span class="o">(</span>CLASSPATH !<span class="o">=</span> <span class="p">&amp;</span>ldquo<span class="p">;&amp;</span>rdquo<span class="p">;</span><span class="o">)</span> <span class="nv">CLASSPATH</span> <span class="o">=</span> CLASSPATH <span class="p">&amp;</span>ldquo<span class="p">;</span>:<span class="p">&amp;</span>rdquo<span class="p">;;</span> <span class="nv">CLASSPATH</span> <span class="o">=</span> CLASSPATH jar <span class="o">}</span> END <span class="o">{</span> print CLASSPATH <span class="o">}</span><span class="p">&amp;</span>rsquo<span class="p">;</span> <span class="nv">SOURCE_DIR</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$SOURCE_DIR</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="p">&amp;</span>lt<span class="p">;</span> <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$SOURCE_PATHNAME</span><span class="p">&amp;</span>rdquo<span class="p">;</span><span class="o">)</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Default libraries. Put default ones last.&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;SCRIPT_DIR<span class="o">=</span><span class="k">$(</span>dirname <span class="nv">$0</span><span class="k">)</span>
-</span><span class='line'><span class="nv">LIB_DIR</span><span class="o">=</span><span class="nv">$SCRIPT_DIR</span>/java_lib
-</span><span class='line'><span class="nb">export </span><span class="nv">CLASSPATH</span><span class="o">=</span><span class="nv">$CLASSPATH</span>:<span class="nv">$LIB_DIR</span>/*&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Compile <span class="k">if</span> necessary.&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;if <span class="o">[</span> -f <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$PROCESSED_CLASS</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="c"># Refresh the dir so that we know we&amp;rsquo;ve used it recently.</span>
-</span><span class='line'>    touch <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$CLASS_DIR</span><span class="p">&amp;</span>rdquo<span class="p">;</span>
-</span><span class='line'><span class="k">else</span>
-</span><span class='line'>    mkdir -p <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$CLASS_DIR</span><span class="p">&amp;</span>rdquo<span class="p">;</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;pre&gt;&lt;code&gt;# Remove header. That<span class="s1">&#39;s anything that starts with #. Replace the lines with</span>
-</span><span class='line'><span class="s1"># an empty line so the line numbers don&#39;</span>t get thrown off.
-</span><span class='line'>sed -e <span class="s1">&#39;s/^#.*//&#39;</span> <span class="p">&amp;</span>lt<span class="p">;</span> <span class="s2">&quot;$SOURCE_PATHNAME&quot;</span> <span class="p">&amp;</span>gt<span class="p">;</span> <span class="s2">&quot;$PROCESSED_SOURCE&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># Compile real source to our cache.</span>
-</span><span class='line'>javac -d <span class="s2">&quot;$CLASS_DIR&quot;</span> <span class="s2">&quot;$PROCESSED_SOURCE&quot;</span>
-</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;fi&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Run the program, passing on arguments from <span class="nb">command </span>line.&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;export <span class="nv">CLASSPATH</span><span class="o">=</span><span class="nv">$CLASS_DIR</span>:<span class="nv">$CLASSPATH</span>
-</span><span class='line'>java -Xmx1024m <span class="nv">$CLASS_NAME</span> <span class="nv">$*</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<pre><code class="bash">#!/bin/bash
+
+# Put this script in your path and write the following line at the top of an
+# executable Java source program:
+#
+#   #!/usr/bin/env java_launcher
+#
+# Additional documentation here: https://github.com/lkesteloot/java_launcher
+
+# Quit on error.
+set -e
+
+# Get the name of the script, which the shell passes to us automatically.
+SOURCE_PATHNAME=$1
+if [ "$SOURCE_PATHNAME" = "" ]; then
+    echo "java_launcher: Must supply name of script as first argument."
+    exit 1
+fi
+
+# Skip the script name.
+shift
+
+# Compute the MD5 of both the source file and this script.
+if [ -f /sbin/md5 ]; then
+    # Mac OS/X.
+    SUM=$(cat "$SOURCE_PATHNAME" $0 | md5)
+else
+    # Linux.
+    SUM=$(cat "$SOURCE_PATHNAME" $0 | md5sum | cut -d' ' -f1)
+fi
+SOURCE_FILENAME=$(basename "$SOURCE_PATHNAME")
+SOURCE_DIR=$(dirname "$SOURCE_PATHNAME")
+CLASS_NAME=$(echo $SOURCE_FILENAME | sed -e 's/\.*//')
+CACHE_DIR=$HOME/.java_launcher_cache
+CLASS_DIR=$CACHE_DIR/$SUM
+PROCESSED_SOURCE=$CLASS_DIR/${SOURCE_FILENAME}.java
+PROCESSED_CLASS=$CLASS_DIR/${SOURCE_FILENAME}.class
+
+# Process source to find libs for classpath. Relative jars are made relative to the
+# source file.
+export CLASSPATH=$(awk 'BEGIN { CLASSPATH="" } /^# lib:(.*)$/ { jar = substr($0, 7); if (substr(jar, 1, 1) != "/") jar = SOURCE_DIR "/" jar; if (CLASSPATH != "") CLASSPATH = CLASSPATH ":"; CLASSPATH = CLASSPATH jar } END { print CLASSPATH }' SOURCE_DIR="$SOURCE_DIR" &lt; "$SOURCE_PATHNAME")
+
+# Default libraries. Put default ones last.
+SCRIPT_DIR=$(dirname $0)
+LIB_DIR=$SCRIPT_DIR/java_lib
+export CLASSPATH=$CLASSPATH:$LIB_DIR/\*
+
+# Compile if necessary.
+if [ -f "$PROCESSED_CLASS" ]; then
+    # Refresh the dir so that we know we've used it recently.
+    touch "$CLASS_DIR"
+else
+    mkdir -p "$CLASS_DIR"
+
+    # Remove header. That's anything that starts with #. Replace the lines with
+    # an empty line so the line numbers don't get thrown off.
+    sed -e 's/^#.*//' &lt; "$SOURCE_PATHNAME" &gt; "$PROCESSED_SOURCE"
+
+    # Compile real source to our cache.
+    javac -d "$CLASS_DIR" "$PROCESSED_SOURCE"
+fi
+
+# Run the program, passing on arguments from command line.
+export CLASSPATH=$CLASS_DIR:$CLASSPATH
+java -Xmx1024m $CLASS_NAME $*
+</code></pre>
 
 <p>And suppose we&rsquo;d like to run <strong>helloworld</strong> Java &ldquo;script&rdquo; using different jars located in default library location (<strong>java_lib/</strong>) and custom (<strong>/home/username/mylib1.jar</strong> and <strong>/home/username/mylib2.jar</strong>)</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;!/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">env</span> <span class="n">java_launcher</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="nl">vim:</span><span class="n">ft</span><span class="o">=</span><span class="n">java</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="nl">lib:</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">username</span><span class="o">/</span><span class="n">mylib1</span><span class="o">.</span><span class="na">jar</span><span class="o">:/</span><span class="n">home</span><span class="o">/</span><span class="n">username</span><span class="o">/</span><span class="n">mylib2</span><span class="o">.</span><span class="na">jar</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">helloworld</span> <span class="o">{</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">Hello</span> <span class="n">world</span><span class="o">!&amp;</span><span class="n">rdquo</span><span class="o">;);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<pre><code class="bash">#!/usr/bin/env java_launcher
+# vim:ft=java
+# lib:/home/username/mylib1.jar:/home/username/mylib2.jar
+
+public class helloworld {
+    public static void main(String[] args) {
+        System.out.println("Hello world!");
+    }
+}
+</code></pre>
 
 <p>It can be run like this: <code>$ ./helloworld</code></p>
 
@@ -275,19 +147,14 @@ I can make the Java programs executable and drop the .java extension. The script
 <blockquote><p>Grape (The Groovy Adaptable Packaging Engine or Groovy Advanced Packaging Engine) is the infrastructure enabling the grab() calls in Groovy, a set of classes leveraging Ivy to allow for a repository driven module system for Groovy. This allows a developer to write a script with an essentially arbitrary library requirement, and ship just the script. Grape will, at runtime, download as needed and link the named libraries and all dependencies forming a transitive closure when the script is run from existing repositories such as JCenter, Ibiblio, Codehaus, and java.net.</p></blockquote>
 
 <p>Sample usage:
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Grapes</span><span class="o">([</span>
-</span><span class='line'>   <span class="nd">@Grab</span><span class="o">(</span><span class="n">group</span><span class="o">=&amp;</span><span class="n">lsquo</span><span class="o">;</span><span class="n">commons</span><span class="o">-</span><span class="n">primitives</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;,</span> <span class="n">module</span><span class="o">=&amp;</span><span class="n">lsquo</span><span class="o">;</span><span class="n">commons</span><span class="o">-</span><span class="n">primitives</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;,</span> <span class="n">version</span><span class="o">=&amp;</span><span class="n">lsquo</span><span class="o">;</span><span class="mf">1.0</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;),</span>
-</span><span class='line'>   <span class="nd">@Grab</span><span class="o">(</span><span class="n">group</span><span class="o">=&amp;</span><span class="n">lsquo</span><span class="o">;</span><span class="n">org</span><span class="o">.</span><span class="na">ccil</span><span class="o">.</span><span class="na">cowan</span><span class="o">.</span><span class="na">tagsoup</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;,</span> <span class="n">module</span><span class="o">=&amp;</span><span class="n">lsquo</span><span class="o">;</span><span class="n">tagsoup</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;,</span> <span class="n">version</span><span class="o">=&amp;</span><span class="n">lsquo</span><span class="o">;</span><span class="mf">0.9</span><span class="o">.</span><span class="mi">7</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;)])</span>
-</span><span class='line'><span class="kd">class</span> <span class="nc">Example</span> <span class="o">{</span>
-</span><span class='line'><span class="c1">// &amp;hellip;</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<code>groovy
+@Grapes([
+   @Grab(group='commons-primitives', module='commons-primitives', version='1.0'),
+   @Grab(group='org.ccil.cowan.tagsoup', module='tagsoup', version='0.9.7')])
+class Example {
+// ...
+}
+</code></p>
 
 <blockquote><p>One or more <code>groovy.lang.Grab</code> annotations can be added at any place that annotations are accepted to tell the compiler that this code relies on the specific library. This will have the effect of adding the library to the classloader of the groovy compiler. This annotation is detected and evaluated before any other resolution of classes in the script, so imported classes can be properly resolved by a @Grab annotation.</p></blockquote>
 
@@ -346,7 +213,7 @@ I can make the Java programs executable and drop the .java extension. The script
 </ul>
 
 
-<pre><code>&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<pre><code class="xml">&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
 
@@ -408,111 +275,57 @@ I can make the Java programs executable and drop the .java extension. The script
 
 <p>See additional comments in the next code snippet</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">mycompany</span><span class="o">.</span><span class="na">app</span><span class="o">;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kn">import</span> <span class="nn">javassist.CannotCompileException</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">javassist.ClassPool</span><span class="o">;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kn">import</span> <span class="nn">java.util.concurrent.TimeUnit</span><span class="o">;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;/&lt;</span><span class="n">strong</span><span class="o">&gt;</span>
-</span><span class='line'> <span class="o">*</span> <span class="n">Steps</span> <span class="n">to</span> <span class="n">build</span> <span class="n">and</span> <span class="n">run</span> <span class="n">demo</span> <span class="nl">application:</span> <span class="o">&lt;</span><span class="n">br</span> <span class="o">/&gt;</span>
-</span><span class='line'> <span class="o">*</span>
-</span><span class='line'> <span class="o">*</span> <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="n">mvn</span> <span class="n">clean</span> <span class="kn">package</span> <span class="nl">appassembler:</span><span class="n">assemble</span>
-</span><span class='line'> <span class="o">*</span> <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="n">target</span><span class="o">/</span><span class="n">appassembler</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">app</span>
-</span><span class='line'> <span class="o">*</span>
-</span><span class='line'> <span class="o">*/</span>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
-</span><span class='line'>    <span class="o">/&lt;/</span><span class="n">strong</span><span class="o">&gt;</span>
-</span><span class='line'>     <span class="o">*</span> <span class="n">We</span> <span class="n">should</span> <span class="n">use</span> <span class="kd">static</span> <span class="n">block</span> <span class="k">for</span> <span class="n">OutOfMemoryError</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">initialization</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;</span>
-</span><span class='line'>     <span class="o">*</span> <span class="n">It</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;</span><span class="n">s</span> <span class="n">very</span> <span class="n">important</span> <span class="n">to</span> <span class="n">have</span> <span class="n">it</span><span class="o">.</span> <span class="n">In</span> <span class="n">other</span> <span class="k">case</span> <span class="n">JVM</span> <span class="n">won</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;</span><span class="n">t</span> <span class="n">be</span> <span class="n">able</span> <span class="n">to</span>
-</span><span class='line'>     <span class="o">*</span> <span class="k">throw</span> <span class="o">(</span><span class="n">actually</span> <span class="n">create</span> <span class="k">new</span> <span class="n">OutOfMemoryError</span><span class="o">)</span> <span class="k">this</span> <span class="n">exception</span> <span class="n">because</span>
-</span><span class='line'>     <span class="o">*</span> <span class="n">there</span> <span class="n">will</span> <span class="n">be</span> <span class="n">no</span> <span class="n">free</span> <span class="n">memory</span> <span class="k">for</span> <span class="k">this</span><span class="o">.</span> <span class="n">That</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;</span><span class="n">s</span> <span class="n">why</span> <span class="n">we</span> <span class="n">creating</span> <span class="n">it</span> <span class="n">beforehand</span><span class="o">.</span>
-</span><span class='line'>     <span class="o">*</span> <span class="n">As</span> <span class="n">you</span> <span class="n">can</span> <span class="n">see</span> <span class="n">we</span> <span class="n">intentionally</span> <span class="n">added</span> <span class="n">output</span> <span class="n">to</span> <span class="n">highlight</span> <span class="n">that</span> <span class="n">THIS</span> <span class="n">error</span>
-</span><span class='line'>     <span class="o">*</span> <span class="n">was</span> <span class="n">produces</span> <span class="n">by</span> <span class="n">us</span><span class="o">.</span>
-</span><span class='line'>     <span class="o">*/</span>
-</span><span class='line'>    <span class="kd">static</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">new</span> <span class="nf">OutOfMemoryError</span><span class="o">().</span><span class="na">printStackTrace</span><span class="o">();</span>
-</span><span class='line'>        <span class="k">try</span> <span class="o">{</span>
-</span><span class='line'>            <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
-</span><span class='line'>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(&amp;</span><span class="n">ldquo</span><span class="o">;=====================&amp;</span><span class="n">rdquo</span><span class="o">;);</span>
-</span><span class='line'>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">Initialized</span><span class="o">/</span><span class="n">created</span> <span class="n">OutOfMemoryError</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;);</span>
-</span><span class='line'>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(&amp;</span><span class="n">ldquo</span><span class="o">;=====================&amp;</span><span class="n">rdquo</span><span class="o">;);</span>
-</span><span class='line'>        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-</span><span class='line'>        <span class="o">}</span>
-</span><span class='line'>    <span class="o">}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Start dynamic class creation.....\n&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span> <span class="mi">1000</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">Class</span> <span class="n">clazz</span> <span class="o">=</span> <span class="n">createClass</span><span class="o">(</span><span class="s">&quot;MyClass&quot;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
-</span><span class='line'>        <span class="c1">// we use this output as indicator to see the rough number of created classes</span>
-</span><span class='line'>        <span class="c1">// it&#39;s not necessary to print every single (just created) class</span>
-</span><span class='line'>        <span class="k">if</span><span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">clazz</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">private</span> <span class="kd">static</span> <span class="n">Class</span> <span class="nf">createClass</span><span class="o">(</span><span class="n">String</span> <span class="n">className</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">CannotCompileException</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">ClassPool</span> <span class="n">pool</span> <span class="o">=</span> <span class="n">ClassPool</span><span class="o">.</span><span class="na">getDefault</span><span class="o">();</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">pool</span><span class="o">.</span><span class="na">makeClass</span><span class="o">(</span><span class="n">className</span><span class="o">).</span><span class="na">toClass</span><span class="o">();</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<pre><code class="java">package com.mycompany.app;
+
+import javassist.CannotCompileException;
+import javassist.ClassPool;
+
+import java.util.concurrent.TimeUnit;
+
+/**
+ * Steps to build and run demo application: &lt;br /&gt;
+ *
+ * &lt;li&gt;mvn clean package appassembler:assemble
+ * &lt;li&gt;target/appassembler/bin/app
+ *
+ */
+public class App {
+    /**
+     * We should use static block for OutOfMemoryError "initialization"
+     * It's very important to have it. In other case JVM won't be able to
+     * throw (actually create new OutOfMemoryError) this exception because
+     * there will be no free memory for this. That's why we creating it beforehand.
+     * As you can see we intentionally added output to highlight that THIS error
+     * was produces by us.
+     */
+    static {
+        new OutOfMemoryError().printStackTrace();
+        try {
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println("=====================");
+            System.out.println("Initialized/created OutOfMemoryError");
+            System.out.println("=====================");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        System.out.println("Start dynamic class creation.....\n");
+        for (int i = 0; i &lt; 1000; i++) {
+            Class clazz = createClass("MyClass" + i);
+            // we use this output as indicator to see the rough number of created classes
+            // it's not necessary to print every single (just created) class
+            if(i % 50 == 0) System.out.println(clazz);
+        }
+    }
+
+    private static Class createClass(String className) throws CannotCompileException {
+        ClassPool pool = ClassPool.getDefault();
+        return pool.makeClass(className).toClass();
+    }
+}
+</code></pre>
 
 <ul>
 <li>Run the application</li>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Groovy | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/groovy/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-02-21T16:42:19+02:00</updated>
+  <updated>2015-02-21T17:05:13+02:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -21,54 +21,35 @@
     <content type="html"><![CDATA[<p><img class="center" src="/images/blog/groovy.png">
 JSON pretty print it&rsquo;s common task while working with JSON from command line. There are many ways of doing this via Python, Ruby, node.js, but here I&rsquo;d like to concentrate on Groovy one-liner:</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="p">&amp;</span>lsquo<span class="p">;</span><span class="o">{</span><span class="p">&amp;</span>ldquo<span class="p">;</span>foo<span class="p">&amp;</span>rdquo<span class="p">;</span>: <span class="p">&amp;</span>ldquo<span class="p">;</span>lorem<span class="p">&amp;</span>rdquo<span class="p">;</span>, <span class="p">&amp;</span>ldquo<span class="p">;</span>bar<span class="p">&amp;</span>rdquo<span class="p">;</span>: <span class="p">&amp;</span>ldquo<span class="p">;</span>ipsum<span class="p">&amp;</span>rdquo<span class="p">;</span><span class="o">}</span><span class="p">&amp;</span>rsquo<span class="p">;</span> <span class="p">|</span> groovy -e <span class="p">&amp;</span>lsquo<span class="p">;</span>import groovy.json.*<span class="p">;</span> println JsonOutput.prettyPrint<span class="o">(</span>System.in.text<span class="o">)</span><span class="p">&amp;</span>rsquo<span class="p">;</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;<span class="o">{</span>
-</span><span class='line'>    <span class="p">&amp;</span>ldquo<span class="p">;</span>foo<span class="p">&amp;</span>rdquo<span class="p">;</span>: <span class="p">&amp;</span>ldquo<span class="p">;</span>lorem<span class="p">&amp;</span>rdquo<span class="p">;</span>,
-</span><span class='line'>    <span class="p">&amp;</span>ldquo<span class="p">;</span>bar<span class="p">&amp;</span>rdquo<span class="p">;</span>: <span class="p">&amp;</span>ldquo<span class="p">;</span>ipsum<span class="p">&amp;</span>rdquo<span class="p">;</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<pre><code class="bash">$ echo '{"foo": "lorem", "bar": "ipsum"}' | groovy -e 'import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)'
+
+{
+    "foo": "lorem",
+    "bar": "ipsum"
+}
+</code></pre>
 
 <p>We can slightly improve this one-liner via adding shell alias:
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">alias </span><span class="nv">pp</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>groovy -e <span class="p">&amp;</span>lsquo<span class="p">;</span>import groovy.json.*<span class="p">;</span> println JsonOutput.prettyPrint<span class="o">(</span>System.in.text<span class="o">)</span><span class="p">&amp;</span>rsquo<span class="p">;&amp;</span>rdquo<span class="p">;</span>
-</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="p">&amp;</span>lsquo<span class="p">;</span><span class="o">{</span><span class="p">&amp;</span>ldquo<span class="p">;</span>foo<span class="p">&amp;</span>rdquo<span class="p">;</span>: <span class="p">&amp;</span>ldquo<span class="p">;</span>lorem<span class="p">&amp;</span>rdquo<span class="p">;</span>, <span class="p">&amp;</span>ldquo<span class="p">;</span>bar<span class="p">&amp;</span>rdquo<span class="p">;</span>: <span class="p">&amp;</span>ldquo<span class="p">;</span>ipsum<span class="p">&amp;</span>rdquo<span class="p">;</span><span class="o">}</span><span class="p">&amp;</span>rsquo<span class="p">;</span> <span class="p">|</span> pp
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<code>bash
+$ alias pp="groovy -e 'import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)'"
+$ echo '{"foo": "lorem", "bar": "ipsum"}' | pp
+</code></p>
 
 <p>Also, we might use Groovy script which might be handy for simple JSON validation also:</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">$</span> <span class="n">cat</span> <span class="n">prettyJson</span><span class="o">.</span><span class="na">groovy</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">groovy.json.*</span><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;try {</span>
-</span><span class='line'><span class="s">  println JsonOutput.prettyPrint(System.in.text)</span>
-</span><span class='line'><span class="s">} catch (JsonException e) {</span>
-</span><span class='line'><span class="s">  println &amp;ldquo;ERROR: Not valid JSON&amp;rdquo;</span>
-</span><span class='line'><span class="s">  System.exit(1)</span>
-</span><span class='line'><span class="s">}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">$</span> <span class="n">echo</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="o">;{&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="nl">foo:</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">lorem</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;,</span> <span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;</span> <span class="o">|</span> <span class="n">groovy</span> <span class="n">prettyJson</span><span class="o">.</span><span class="na">groovy</span>
-</span><span class='line'><span class="nl">ERROR:</span> <span class="n">Not</span> <span class="n">valid</span> <span class="n">JSON</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<pre><code class="groovy">$ cat prettyJson.groovy 
+import groovy.json.*
+
+try {
+  println JsonOutput.prettyPrint(System.in.text)
+} catch (JsonException e) {
+  println "ERROR: Not valid JSON"
+  System.exit(1)
+}
+
+$ echo '{"foo: "lorem", ' | groovy prettyJson.groovy
+ERROR: Not valid JSON
+</code></pre>
 ]]></content>
   </entry>
   

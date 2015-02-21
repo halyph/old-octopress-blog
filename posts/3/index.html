@@ -449,7 +449,7 @@ This script</p>
 </ul>
 
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -551,7 +551,7 @@ This script</p>
 </ul>
 
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -561,16 +561,17 @@ This script</p>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ResultSet output:
-</span><span class='line'>&gt; Hello
-</span><span class='line'>&gt; World
-</span><span class='line'>Server started and connection is open.
-</span><span class='line'>URL: jdbc:h2:tcp://192.168.1.100:9092/mem:mytest
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">ResultSet</span> <span class="nl">output:</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="n">Hello</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="n">World</span>
+</span><span class='line'><span class="n">Server</span> <span class="n">started</span> <span class="n">and</span> <span class="n">connection</span> <span class="n">is</span> <span class="n">open</span><span class="o">.</span>
+</span><span class='line'><span class="nl">URL:</span> <span class="nl">jdbc:h2:tcp:</span><span class="c1">//192.168.1.100:9092/mem:mytest</span>
 </span><span class='line'>
 </span><span class='line'>
-</span><span class='line'>now start the H2 Console in another process using:
-</span><span class='line'>$ cd h2/bin; java -cp h2-1.4.185.jar org.h2.tools.Console -web -browser
-</span><span class='line'>Press [Enter] to stop.</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="n">now</span> <span class="n">start</span> <span class="n">the</span> <span class="n">H2</span> <span class="n">Console</span> <span class="n">in</span> <span class="n">another</span> <span class="n">process</span> <span class="nl">using:</span>
+</span><span class='line'><span class="n">$</span> <span class="n">cd</span> <span class="n">h2</span><span class="o">/</span><span class="n">bin</span><span class="o">;</span> <span class="n">java</span> <span class="o">-</span><span class="n">cp</span> <span class="n">h2</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">185</span><span class="o">.</span><span class="na">jar</span> <span class="n">org</span><span class="o">.</span><span class="na">h2</span><span class="o">.</span><span class="na">tools</span><span class="o">.</span><span class="na">Console</span> <span class="o">-</span><span class="n">web</span> <span class="o">-</span><span class="n">browser</span>
+</span><span class='line'><span class="n">Press</span> <span class="o">[</span><span class="n">Enter</span><span class="o">]</span> <span class="n">to</span> <span class="n">stop</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <ul>
@@ -598,7 +599,7 @@ This script</p>
 The idea is to switch <em>on</em> H2 Console <strong>Web Server</strong> and <strong>TCP Server</strong> to have external access.
 We should add/update item (4) in previous code snippets like this</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>

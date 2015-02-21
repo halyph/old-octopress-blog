@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Shell | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/shell/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-02-21T16:42:19+02:00</updated>
+  <updated>2015-02-21T17:05:13+02:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -249,58 +249,39 @@ What is the simplest way to define block comment in Bash script?</p>
 
 <ul>
 <li>Use here document
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;h1&gt;!/usr/bin/env bash&lt;/h1&gt;&lt;/li&gt;
-</span><span class='line'>&lt;/ul&gt;
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>&lt;dl&gt;
-</span><span class='line'>&lt;dt&gt;echo <span class="p">&amp;</span>ldquo<span class="p">;</span>before block comment<span class="p">&amp;</span>rdquo<span class="p">;</span>&lt;/dt&gt;
-</span><span class='line'>&lt;dd&gt;<span class="p">&amp;</span>lt<span class="p">;&amp;</span>lt<span class="p">;&amp;</span>lsquo<span class="p">;</span>END<span class="p">&amp;</span>rsquo<span class="p">;</span>
-</span><span class='line'>Some long
-</span><span class='line'>myltiline
-</span><span class='line'>text
-</span><span class='line'>END
-</span><span class='line'><span class="nb">echo</span> <span class="p">&amp;</span>ldquo<span class="p">;</span>after block comment<span class="p">&amp;</span>rdquo<span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></dd>
+&#8220;` bash
+
+<h1>!/usr/bin/env bash</h1></li>
+</ul>
+
+
+<dl>
+<dt>echo &ldquo;before block comment&rdquo;</dt>
+<dd>&lt;&lt;&lsquo;END&rsquo;
+Some long
+myltiline
+text
+END
+echo &ldquo;after block comment&rdquo;
+&#8220;`</dd>
 </dl>
 
 <ul>
 <li>Use <strong>&ldquo;if&rdquo;</strong> false block
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;h1&gt;!/usr/bin/env bash&lt;/h1&gt;&lt;/li&gt;
-</span><span class='line'>&lt;/ul&gt;
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;echo <span class="p">&amp;</span>ldquo<span class="p">;</span>before block comment<span class="p">&amp;</span>rdquo<span class="p">;</span>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>Some long
-</span><span class='line'>myltiline
-</span><span class='line'>text
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'><span class="nb">echo</span> <span class="p">&amp;</span>ldquo<span class="p">;</span>after block comment<span class="p">&amp;</span>rdquo<span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+&#8220;` bash
+
+<h1>!/usr/bin/env bash</h1></li>
+</ul>
+
+
+<p>echo &ldquo;before block comment&rdquo;
+if [ ]; then
+Some long
+myltiline
+text
+fi
+echo &ldquo;after block comment&rdquo;
+&#8220;`</p>
 ]]></content>
   </entry>
   

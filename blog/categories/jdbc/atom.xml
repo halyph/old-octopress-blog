@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Jdbc | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/jdbc/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-02-21T16:42:19+02:00</updated>
+  <updated>2015-02-21T17:05:13+02:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -40,115 +40,62 @@
 
 <ul>
 <li>Run sample application
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
-</span><span class='line'>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">DBNAME</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">mytest</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ClassNotFoundException</span><span class="o">,</span> <span class="n">SQLException</span><span class="o">,</span> <span class="n">IOException</span> <span class="o">{</span>
-</span><span class='line'>    <span class="c1">// open the in-memory database within a VM</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">&quot;org.h2.Driver&quot;</span><span class="o">);</span> <span class="c1">// (1)</span>
-</span><span class='line'>    <span class="n">Connection</span> <span class="n">conn</span>
-</span><span class='line'>        <span class="o">=</span> <span class="n">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="s">&quot;jdbc:h2:mem:&quot;</span> <span class="o">+</span> <span class="n">DBNAME</span><span class="o">,</span> <span class="s">&quot;sa&quot;</span><span class="o">,</span> <span class="s">&quot;sa&quot;</span><span class="o">);</span> <span class="c1">// (2)</span>
-</span><span class='line'>    <span class="c1">// username:password are very important and must be used for connecting via H2 Console</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">Statement</span> <span class="n">stat</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">createStatement</span><span class="o">();</span> <span class="c1">// (3)</span>
-</span><span class='line'>    <span class="n">stat</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">(</span><span class="s">&quot;create table mytbl(id int primary key, name varchar(255))&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">stat</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">(</span><span class="s">&quot;insert into mytbl values(1, &#39;Hello&#39;)&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">stat</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">(</span><span class="s">&quot;insert into mytbl values(2, &#39;World&#39;)&quot;</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// Verify that sample data was really inserted</span>
-</span><span class='line'>    <span class="n">ResultSet</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">stat</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">(</span><span class="s">&quot;select * from mytbl&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;ResultSet output:&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="k">while</span> <span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">next</span><span class="o">())</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;&amp;gt; &quot;</span> <span class="o">+</span> <span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">));</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// start a TCP server</span>
-</span><span class='line'>    <span class="n">Server</span> <span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="na">createTcpServer</span><span class="o">().</span><span class="na">start</span><span class="o">();</span> <span class="c1">// (4)</span>
-</span><span class='line'>    <span class="c1">// .. use in embedded mode ..</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// or use it from another process:</span>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Server started and connection is open.&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;URL: jdbc:h2:&quot;</span> <span class="o">+</span> <span class="n">server</span><span class="o">.</span><span class="na">getURL</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;/mem:&quot;</span> <span class="o">+</span> <span class="n">DBNAME</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;\n&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
-</span><span class='line'>            <span class="s">&quot;now start the H2 Console in another process using:\n&quot;</span> <span class="o">+</span>
-</span><span class='line'>            <span class="s">&quot;$ cd h2/bin; java -cp h2-1.4.185.jar org.h2.tools.Console -web -browser&quot;</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Press [Enter] to stop.&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Stopping server and closing the connection&quot;</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">rs</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-</span><span class='line'>    <span class="n">server</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
-</span><span class='line'>    <span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Server is STOPPED&quot;</span><span class="o">);</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+&#8220;` java</li>
+</ul>
+
+
+<p>public class App {
+    private static final String DBNAME = &ldquo;mytest&rdquo;;</p>
+
+<pre><code>public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
+    // open the in-memory database within a VM
+
+    Class.forName("org.h2.Driver"); // (1)
+    Connection conn 
+        = DriverManager.getConnection("jdbc:h2:mem:" + DBNAME, "sa", "sa"); // (2)
+    // username:password are very important and must be used for connecting via H2 Console
+
+    Statement stat = conn.createStatement(); // (3)
+    stat.executeUpdate("create table mytbl(id int primary key, name varchar(255))");
+    stat.executeUpdate("insert into mytbl values(1, 'Hello')");
+    stat.executeUpdate("insert into mytbl values(2, 'World')");
+
+    // Verify that sample data was really inserted
+    ResultSet rs = stat.executeQuery("select * from mytbl");
+    System.out.println("ResultSet output:");
+    while (rs.next()) {
+        System.out.println("&gt; " + rs.getString("name"));
+    }
+
+    // start a TCP server
+    Server server = Server.createTcpServer().start(); // (4)
+    // .. use in embedded mode ..
+
+    // or use it from another process:
+    System.out.println("Server started and connection is open.");
+    System.out.println("URL: jdbc:h2:" + server.getURL() + "/mem:" + DBNAME);
+
+    System.out.println("\n");
+    System.out.println(
+            "now start the H2 Console in another process using:\n" +
+            "$ cd h2/bin; java -cp h2-1.4.185.jar org.h2.tools.Console -web -browser");
+
+    System.out.println("Press [Enter] to stop.");
+    System.in.read();
+
+    System.out.println("Stopping server and closing the connection");
+
+    rs.close();
+    server.stop();
+    conn.close();
+    System.out.println("Server is STOPPED");
+}
+</code></pre>
+
+<p>}
+<code>
 * Output for previous run:
-&#8220;`
+</code>
 ResultSet output:</p>
 
 <blockquote><p>Hello
@@ -177,47 +124,28 @@ Press [Enter] to stop.
 <p>Now, it&rsquo;s time to add small improvements.
 The idea is to switch <em>on</em> H2 Console <strong>Web Server</strong> and <strong>TCP Server</strong> to have external access.
 We should add/update item (4) in previous code snippets like this<br/>
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
-</span><span class='line'>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">DBNAME</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">mytest</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ClassNotFoundException</span><span class="o">,</span> <span class="n">SQLException</span><span class="o">,</span> <span class="n">IOException</span> <span class="o">{</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;&amp;</span><span class="n">hellip</span><span class="o">;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>    <span class="n">Server</span> <span class="n">webServer</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="na">createWebServer</span><span class="o">(</span><span class="s">&quot;-webAllowOthers&quot;</span><span class="o">,</span><span class="s">&quot;-webPort&quot;</span><span class="o">,</span><span class="s">&quot;8082&quot;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span> <span class="c1">// (4a)</span>
-</span><span class='line'>    <span class="n">Server</span> <span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="na">createTcpServer</span><span class="o">(</span><span class="s">&quot;-tcpAllowOthers&quot;</span><span class="o">,</span><span class="s">&quot;-tcpPort&quot;</span><span class="o">,</span><span class="s">&quot;9092&quot;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>    <span class="c1">// (4b)</span>
-</span><span class='line'>    <span class="c1">// .. use in embedded mode ..</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;&amp;</span><span class="n">hellip</span><span class="o">;</span>
-</span><span class='line'>        <span class="n">server</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
-</span><span class='line'>        <span class="n">webServer</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
-</span><span class='line'>        <span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">Server</span> <span class="n">is</span> <span class="n">STOPPED</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+&#8220;` java
+public class App {
+    private static final String DBNAME = &ldquo;mytest&rdquo;;</p>
+
+<pre><code>public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
+</code></pre>
+
+<p>&hellip;</p>
+
+<pre><code>    Server webServer = Server.createWebServer("-webAllowOthers","-webPort","8082").start(); // (4a)
+    Server server = Server.createTcpServer("-tcpAllowOthers","-tcpPort","9092").start();    // (4b)
+    // .. use in embedded mode ..
+</code></pre>
+
+<p>&hellip;
+        server.stop();
+        webServer.stop();
+        conn.close();
+        System.out.println(&ldquo;Server is STOPPED&rdquo;);
+    }
+}
+&#8220;`</p>
 
 <ul>
 <li>After this we can access to Web Console without running external service

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Maven | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/maven/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-02-21T16:42:19+02:00</updated>
+  <updated>2015-02-21T17:05:13+02:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -39,37 +39,23 @@ Here we will review other implementation of this concept.</p>
 <p>We have to create simple and small REST application based on <a href="https://github.com/perwendel/spark">Spark Java framework</a> (A Sinatra inspired framework for Java).</p>
 
 <p>Here is the source:
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">import</span> <span class="nn">static</span> <span class="n">spark</span><span class="o">.</span><span class="na">Spark</span><span class="o">.</span><span class="na">get</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">static</span> <span class="n">spark</span><span class="o">.</span><span class="na">SparkBase</span><span class="o">.</span><span class="na">port</span><span class="o">;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span> <span class="n">String</span><span class="o">[]</span> <span class="n">args</span> <span class="o">)</span> <span class="kd">throws</span> <span class="n">NumberFormatException</span> <span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>    <span class="nf">for</span><span class="o">(</span><span class="n">String</span> <span class="nl">arg:</span> <span class="n">args</span><span class="o">)</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">&quot;&amp;gt; %s&quot;</span><span class="o">,</span> <span class="n">arg</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">get</span><span class="o">(</span><span class="s">&quot;/hello&quot;</span><span class="o">,</span> <span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">response</span><span class="o">)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="o">;</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="s">&quot;Hello World!&quot;</span><span class="o">;</span>
-</span><span class='line'>    <span class="o">});</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span> <span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+&#8220;` java
+import static spark.Spark.get;
+import static spark.SparkBase.port;</p>
+
+<p>public class App {
+    public static void main( String[] args ) throws NumberFormatException {</p>
+
+<pre><code>    for(String arg: args) System.out.printf("&gt; %s", arg);
+
+    get("/hello", (request, response) -&gt; {
+        return "Hello World!";
+    });
+}
+</code></pre>
+
+<p>} <br/>
+&#8220;`</p>
 
 <p>So, here is the list of issues:</p>
 
@@ -84,270 +70,150 @@ Here we will review other implementation of this concept.</p>
 
 <ul>
 <li><p>Generate empty project via Maven archetype
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>mvn archetype:generate <span class="se">\</span>
-</span><span class='line'>-DgroupId<span class="o">=</span>com.halyph <span class="se">\</span>
-</span><span class='line'>-DartifactId<span class="o">=</span>sparkblog <span class="se">\</span>
-</span><span class='line'>-Dpackage<span class="o">=</span>com.halyph.blog <span class="se">\</span>
-</span><span class='line'>-Dversion<span class="o">=</span>1.0-SNAPSHOT <span class="se">\</span>
-</span><span class='line'>-DarchetypeGroupId<span class="o">=</span>org.apache.maven.archetypes <span class="se">\</span>
-</span><span class='line'>-DarchetypeArtifactId<span class="o">=</span>maven-archetype-quickstart <span class="se">\</span>
-</span><span class='line'>-DinteractiveMode<span class="o">=</span><span class="nb">false</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
+<code>bash
+mvn archetype:generate \
+-DgroupId=com.halyph \
+-DartifactId=sparkblog \
+-Dpackage=com.halyph.blog \
+-Dversion=1.0-SNAPSHOT \
+-DarchetypeGroupId=org.apache.maven.archetypes \
+-DarchetypeArtifactId=maven-archetype-quickstart \
+-DinteractiveMode=false
+</code></p></li>
 <li><p>Open this in IDEA (I don&rsquo;t use other IDEs) via &ldquo;Open File or Project&rdquo; and select folder with generated <strong>pom.xml</strong> file. We don&rsquo;t need tests, so we can delete <em>src->test</em> folder and remove junit dependency from <strong>pom.xml</strong> file. Now, we can easily run our application via IDE.</p></li>
 <li><p>Add Spark framework dependency to <strong>pom.xml</strong> and update our <strong>App</strong> class
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
-</span><span class='line'>       <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;p&gt;&lt;groupId&gt;</span>com.halyph<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'><span class="nt">&lt;artifactId&gt;</span>sparkblog<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'><span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'><span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;p&gt;&lt;name&gt;</span>sparkblog<span class="nt">&lt;/name&gt;</span>
-</span><span class='line'><span class="nt">&lt;url&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://maven.apache.org&quot;</span><span class="nt">&gt;</span>http://maven.apache.org<span class="nt">&lt;/a&gt;&lt;/url&gt;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;p&gt;&lt;properties&gt;</span>
-</span><span class='line'>  <span class="ni">&amp;lt;</span>project.build.sourceEncoding&gt;UTF-8<span class="ni">&amp;lt;</span>/project.build.sourceEncoding&gt;
-</span><span class='line'><span class="nt">&lt;/properties&gt;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;p&gt;&lt;dependencies&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;groupId&gt;</span>com.sparkjava<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;artifactId&gt;</span>spark-core<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;version&gt;</span>2.1<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'><span class="nt">&lt;/dependencies&gt;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;p&gt;&lt;build&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;plugins&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;plugin&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;version&gt;</span>3.1<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;target&gt;</span>1.8<span class="nt">&lt;/target&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;source&gt;</span>1.8<span class="nt">&lt;/source&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/configuration&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/plugin&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/plugins&gt;</span>
-</span><span class='line'><span class="nt">&lt;/build&gt;</span>
-</span><span class='line'><span class="nt">&lt;/project&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
+&#8220;` xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion></p>
+
+<p><groupId>com.halyph</groupId>
+<artifactId>sparkblog</artifactId>
+<version>1.0-SNAPSHOT</version>
+<packaging>jar</packaging></p>
+
+<p><name>sparkblog</name>
+<url><a href="http://maven.apache.org">http://maven.apache.org</a></url></p>
+
+<p><properties>
+  &lt;project.build.sourceEncoding>UTF-8&lt;/project.build.sourceEncoding>
+</properties></p>
+
+<p><dependencies>
+  <dependency>
+    <groupId>com.sparkjava</groupId>
+    <artifactId>spark-core</artifactId>
+    <version>2.1</version>
+  </dependency>
+</dependencies></p>
+
+<p><build>
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>3.1</version>
+      <configuration>
+        <target>1.8</target>
+        <source>1.8</source>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+</project>
+&#8220;`</p></li>
 </ul>
 
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">halyph</span><span class="o">.</span><span class="na">blog</span><span class="o">;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kn">import</span> <span class="nn">static</span> <span class="n">spark</span><span class="o">.</span><span class="na">Spark</span><span class="o">.</span><span class="na">get</span><span class="o">;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NumberFormatException</span> <span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>    <span class="n">String</span> <span class="n">myArgs</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
-</span><span class='line'>    <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">arg</span> <span class="o">:</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">&quot;&amp;gt; %s&quot;</span><span class="o">,</span> <span class="n">arg</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">myArgs</span> <span class="o">+=</span> <span class="n">arg</span> <span class="o">+</span> <span class="s">&quot; : &quot;</span><span class="o">;</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
-</span><span class='line'>    <span class="kd">final</span> <span class="n">String</span> <span class="n">finalMyArgs</span> <span class="o">=</span> <span class="n">myArgs</span><span class="o">;</span>
-</span><span class='line'>    <span class="n">get</span><span class="o">(</span><span class="s">&quot;/hello&quot;</span><span class="o">,</span> <span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">response</span><span class="o">)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="o">;</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="s">&quot;Hello World!\n args = &quot;</span> <span class="o">+</span> <span class="n">finalMyArgs</span><span class="o">;</span>
-</span><span class='line'>    <span class="o">});</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-This application can be easily run via IDE, but lets run it via Maven</p>
+<pre><code class="java">package com.halyph.blog;
+
+import static spark.Spark.get;
+
+public class App {
+    public static void main(String[] args) throws NumberFormatException {
+
+        String myArgs = "";
+        for (String arg : args) {
+            System.out.printf("&gt; %s", arg);
+            myArgs += arg + " : ";
+        }
+        System.out.println();
+        final String finalMyArgs = myArgs;
+        get("/hello", (request, response) -&gt; {
+            return "Hello World!\n args = " + finalMyArgs;
+        });
+    }
+}
+</code></pre>
+
+<p>This application can be easily run via IDE, but lets run it via Maven</p>
 
 <ul>
 <li>We should use <a href="http://mojo.codehaus.org/exec-maven-plugin/usage.html">Exec Maven Plugin</a> to run the app with all dependencies
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>mvn clean compile <span class="nb">exec</span>:java -Dexec.mainClass<span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>com.halyph.blog.App<span class="p">&amp;</span>rdquo<span class="p">;</span>  -Dexec.args<span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span><span class="m">9090</span> one <span class="m">1</span> 2<span class="p">&amp;</span>rdquo<span class="p">;</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Scanning <span class="k">for</span> projects<span class="p">&amp;</span>hellip<span class="p">;</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> <span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Building sparkblog 1.0-SNAPSHOT
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> <span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> <span class="p">&amp;</span>mdash<span class="p">;</span> maven-clean-plugin:2.4.1:clean <span class="o">(</span>default-clean<span class="o">)</span> @ sparkblog <span class="p">&amp;</span>mdash<span class="p">;</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Deleting d:<span class="se">\M</span>yProjects<span class="se">\j</span>wrapper<span class="se">\b</span>loggg<span class="se">\s</span>parkblog<span class="se">\t</span>arget
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> <span class="p">&amp;</span>mdash<span class="p">;</span> maven-resources-plugin:2.5:resources <span class="o">(</span>default-resources<span class="o">)</span> @ sparkblog <span class="p">&amp;</span>mdash<span class="p">;</span>
-</span><span class='line'><span class="o">[</span>debug<span class="o">]</span> execute contextualize
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Using <span class="p">&amp;</span>lsquo<span class="p">;</span>UTF-8<span class="p">&amp;</span>rsquo<span class="p">;</span> encoding to copy filtered resources.
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> skip non existing resourceDirectory d:<span class="se">\M</span>yProjects<span class="se">\s</span>parkblog<span class="se">\s</span>rc<span class="se">\m</span>ain<span class="se">\r</span>esources
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> <span class="p">&amp;</span>mdash<span class="p">;</span> maven-compiler-plugin:3.1:compile <span class="o">(</span>default-compile<span class="o">)</span> @ sparkblog <span class="p">&amp;</span>mdash<span class="p">;</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Changes detected - recompiling the module!
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Compiling <span class="m">1</span> <span class="nb">source </span>file to d:<span class="se">\M</span>yProjects<span class="se">\j</span>wrapper<span class="se">\b</span>loggg<span class="se">\s</span>parkblog<span class="se">\t</span>arget<span class="se">\c</span>lasses
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> &gt;&gt;&gt; <span class="nb">exec</span>-maven-plugin:1.2.1:java <span class="o">(</span>default-cli<span class="o">)</span> @ sparkblog &gt;&gt;&gt;
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> <span class="p">&amp;</span>lt<span class="p">;&amp;</span>lt<span class="p">;&amp;</span>lt<span class="p">;</span> <span class="nb">exec</span>-maven-plugin:1.2.1:java <span class="o">(</span>default-cli<span class="o">)</span> @ sparkblog <span class="p">&amp;</span>lt<span class="p">;&amp;</span>lt<span class="p">;&amp;</span>lt<span class="p">;</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> <span class="p">&amp;</span>mdash<span class="p">;</span> <span class="nb">exec</span>-maven-plugin:1.2.1:java <span class="o">(</span>default-cli<span class="o">)</span> @ sparkblog <span class="p">&amp;</span>mdash<span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>&lt;blockquote&gt;&lt;p&gt;9090&gt; one&gt; 1&gt; 2
-</span><span class='line'><span class="o">[</span>Thread-1<span class="o">]</span> INFO spark.webserver.SparkServer - <span class="o">==</span> Spark has ignited <span class="p">&amp;</span>hellip<span class="p">;</span>
-</span><span class='line'><span class="o">[</span>Thread-1<span class="o">]</span> INFO spark.webserver.SparkServer - &gt;&gt; Listening on 0.0.0.0:4567
-</span><span class='line'><span class="o">[</span>Thread-1<span class="o">]</span> INFO org.eclipse.jetty.server.Server - jetty-9.0.2.v20130417
-</span><span class='line'><span class="o">[</span>Thread-1<span class="o">]</span> INFO org.eclipse.jetty.server.ServerConnector - Started ServerConnector@4afe75c9<span class="o">{</span>HTTP/1.1<span class="o">}{</span>0.0.0.0:4567<span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p></blockquote></li>
+&#8220;` bash
+$ mvn clean compile exec:java -Dexec.mainClass=&ldquo;com.halyph.blog.App&rdquo;  -Dexec.args=&ldquo;9090 one 1 2&rdquo;
+[INFO] Scanning for projects&hellip;
+[INFO]
+[INFO] &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+[INFO] Building sparkblog 1.0-SNAPSHOT
+[INFO] &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+[INFO]
+[INFO] &mdash; maven-clean-plugin:2.4.1:clean (default-clean) @ sparkblog &mdash;
+[INFO] Deleting d:\MyProjects\jwrapper\bloggg\sparkblog\target
+[INFO]
+[INFO] &mdash; maven-resources-plugin:2.5:resources (default-resources) @ sparkblog &mdash;
+[debug] execute contextualize
+[INFO] Using &lsquo;UTF-8&rsquo; encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory d:\MyProjects\sparkblog\src\main\resources
+[INFO]
+[INFO] &mdash; maven-compiler-plugin:3.1:compile (default-compile) @ sparkblog &mdash;
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to d:\MyProjects\jwrapper\bloggg\sparkblog\target\classes
+[INFO]
+[INFO] >>> exec-maven-plugin:1.2.1:java (default-cli) @ sparkblog >>>
+[INFO]
+[INFO] &lt;&lt;&lt; exec-maven-plugin:1.2.1:java (default-cli) @ sparkblog &lt;&lt;&lt;
+[INFO]
+[INFO] &mdash; exec-maven-plugin:1.2.1:java (default-cli) @ sparkblog &mdash;
+
+<blockquote><p>9090> one> 1> 2
+[Thread-1] INFO spark.webserver.SparkServer - == Spark has ignited &hellip;
+[Thread-1] INFO spark.webserver.SparkServer - >> Listening on 0.0.0.0:4567
+[Thread-1] INFO org.eclipse.jetty.server.Server - jetty-9.0.2.v20130417
+[Thread-1] INFO org.eclipse.jetty.server.ServerConnector - Started ServerConnector@4afe75c9{HTTP/1.1}{0.0.0.0:4567}
+&#8220;`</p></blockquote></li>
 </ul>
 
 
 <p>In case the application run configurations is persistent (&ldquo;main&rdquo; class and CLI arguments are changing rarely) we can configure it in <strong>pom.xml</strong>:
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'> <span class="nt">&lt;build&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;plugins&gt;</span>
-</span><span class='line'>      <span class="ni">&amp;hellip;</span>
-</span><span class='line'>      <span class="nt">&lt;plugin&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;groupId&gt;</span>org.codehaus.mojo<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;artifactId&gt;</span>exec-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;version&gt;</span>1.3.2<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;executions&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;execution&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;goals&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;goal&gt;</span>java<span class="nt">&lt;/goal&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;/goals&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;/execution&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/executions&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;mainClass&gt;</span>com.halyph.blog.App<span class="nt">&lt;/mainClass&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;arguments&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;argument&gt;</span>9090<span class="nt">&lt;/argument&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;argument&gt;</span>one<span class="nt">&lt;/argument&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;argument&gt;</span>1<span class="nt">&lt;/argument&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;argument&gt;</span>2<span class="nt">&lt;/argument&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;/arguments&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/configuration&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/plugin&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/plugins&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/build&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<code>xml
+ &lt;build&gt;
+    &lt;plugins&gt;
+      ...
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+        &lt;artifactId&gt;exec-maven-plugin&lt;/artifactId&gt;
+        &lt;version&gt;1.3.2&lt;/version&gt;
+        &lt;executions&gt;
+          &lt;execution&gt;
+            &lt;goals&gt;
+              &lt;goal&gt;java&lt;/goal&gt;
+            &lt;/goals&gt;
+          &lt;/execution&gt;
+        &lt;/executions&gt;
+        &lt;configuration&gt;
+          &lt;mainClass&gt;com.halyph.blog.App&lt;/mainClass&gt;
+          &lt;arguments&gt;
+            &lt;argument&gt;9090&lt;/argument&gt;
+            &lt;argument&gt;one&lt;/argument&gt;
+            &lt;argument&gt;1&lt;/argument&gt;
+            &lt;argument&gt;2&lt;/argument&gt;
+          &lt;/arguments&gt;
+        &lt;/configuration&gt;
+      &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+</code></p>
 
 <ul>
 <li>It&rsquo;s nice idea to use <code>mvn exec:java</code>, but it might be a little bit slow. So, we might decide to use some shell script which increase compiled application ramp up time. The problem is that the application have dependencies (which have transitive dependencies). I.e. <code>java</code> classpath have to be configured somehow.</li>
@@ -355,477 +221,254 @@ This application can be easily run via IDE, but lets run it via Maven</p>
 
 
 <p>Well, I borrowed the ideas from &ldquo;<a href="http://saltnlight5.blogspot.com/2012/08/a-better-java-shell-script-wrapper.html">A better java shell script wrapper</a>&rdquo; script. Here it is:
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-<span class='line-number'>96</span>
-<span class='line-number'>97</span>
-<span class='line-number'>98</span>
-<span class='line-number'>99</span>
-<span class='line-number'>100</span>
-<span class='line-number'>101</span>
-<span class='line-number'>102</span>
-<span class='line-number'>103</span>
-<span class='line-number'>104</span>
-<span class='line-number'>105</span>
-<span class='line-number'>106</span>
-<span class='line-number'>107</span>
-<span class='line-number'>108</span>
-<span class='line-number'>109</span>
-<span class='line-number'>110</span>
-<span class='line-number'>111</span>
-<span class='line-number'>112</span>
-<span class='line-number'>113</span>
-<span class='line-number'>114</span>
-<span class='line-number'>115</span>
-<span class='line-number'>116</span>
-<span class='line-number'>117</span>
-<span class='line-number'>118</span>
-<span class='line-number'>119</span>
-<span class='line-number'>120</span>
-<span class='line-number'>121</span>
-<span class='line-number'>122</span>
-<span class='line-number'>123</span>
-<span class='line-number'>124</span>
-<span class='line-number'>125</span>
-<span class='line-number'>126</span>
-<span class='line-number'>127</span>
-<span class='line-number'>128</span>
-<span class='line-number'>129</span>
-<span class='line-number'>130</span>
-<span class='line-number'>131</span>
-<span class='line-number'>132</span>
-<span class='line-number'>133</span>
-<span class='line-number'>134</span>
-<span class='line-number'>135</span>
-<span class='line-number'>136</span>
-<span class='line-number'>137</span>
-<span class='line-number'>138</span>
-<span class='line-number'>139</span>
-<span class='line-number'>140</span>
-<span class='line-number'>141</span>
-<span class='line-number'>142</span>
-<span class='line-number'>143</span>
-<span class='line-number'>144</span>
-<span class='line-number'>145</span>
-<span class='line-number'>146</span>
-<span class='line-number'>147</span>
-<span class='line-number'>148</span>
-<span class='line-number'>149</span>
-<span class='line-number'>150</span>
-<span class='line-number'>151</span>
-<span class='line-number'>152</span>
-<span class='line-number'>153</span>
-<span class='line-number'>154</span>
-<span class='line-number'>155</span>
-<span class='line-number'>156</span>
-<span class='line-number'>157</span>
-<span class='line-number'>158</span>
-<span class='line-number'>159</span>
-<span class='line-number'>160</span>
-<span class='line-number'>161</span>
-<span class='line-number'>162</span>
-<span class='line-number'>163</span>
-<span class='line-number'>164</span>
-<span class='line-number'>165</span>
-<span class='line-number'>166</span>
-<span class='line-number'>167</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;!/usr/bin/env bash&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;#&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Copyright <span class="m">2012</span> Zemian Deng&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;#&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;A wrapper script that run any Java application in unix/cygwin bash env.&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;#&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;This script is assumed to be located in an application<span class="p">&amp;</span>rsquo<span class="p">;</span>s <span class="p">&amp;</span>ldquo<span class="p">;</span>bin<span class="p">&amp;</span>rdquo<span class="p">;</span> directory. It will&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;auto resolve its directory location relative to the application path <span class="o">(</span>which is one&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;parent up from the script.<span class="o">)</span> Therefore, this script can be run any where in the file&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;system and it will still reference the same application directory.&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;#&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;This script will by default auto setup a Java classpath that picks up any <span class="p">&amp;</span>ldquo<span class="p">;</span>config<span class="p">&amp;</span>rdquo<span class="p">;</span>&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;and <span class="p">&amp;</span>ldquo<span class="p">;</span>lib<span class="p">&amp;</span>rdquo<span class="p">;</span> directories under the application directory. It also will also add a&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;any typical Maven project output directories such as <span class="p">&amp;</span>ldquo<span class="p">;</span>target/test-classes<span class="p">&amp;</span>rdquo<span class="p">;</span>,&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>ldquo<span class="p">;</span>target/classes<span class="p">&amp;</span>rdquo<span class="p">;</span>, and <span class="p">&amp;</span>ldquo<span class="p">;</span>target/dependency<span class="p">&amp;</span>rdquo<span class="p">;</span> into classpath. This can be disable by&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;setting <span class="nv">RUN_JAVA_NO_AUTOCP</span><span class="o">=</span>1.&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;#&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;If the <span class="p">&amp;</span>ldquo<span class="p">;</span>Default parameters<span class="p">&amp;</span>rdquo<span class="p">;</span> section bellow doesn<span class="p">&amp;</span>rsquo<span class="p">;</span>t match to user<span class="p">&amp;</span>rsquo<span class="p">;</span>s env, <span class="k">then</span> user&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;may override these variables in their terminal session or preset them in shell<span class="p">&amp;</span>rsquo<span class="p">;</span>s&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;profile startup script. The values of all path should be in cygwin/unix path,&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;and this script will auto convert them into Windows path where is needed.&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;#&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;User may customize the Java classpath by setting RUN_JAVA_CP, which will prefix to existing&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;classpath, or use the <span class="p">&amp;</span>ldquo<span class="p">;</span>-cp<span class="p">&amp;</span>rdquo<span class="p">;</span> option, which will postfix to existing classpath.&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;#&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Usage:&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;run-java <span class="o">[</span>java_opts<span class="o">]</span> &lt;java_main_class&gt; <span class="o">[</span>-cp /more/classpath<span class="o">]</span> <span class="o">[</span>-Dsysprop<span class="o">=</span>value<span class="o">]</span>&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;#&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Example:&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;run-java example.Hello&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;run-java example.Hello -Dname<span class="o">=</span>World&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;run-java org.junit.runner.JUnitCore example.HelloTest -cp <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$HOME</span>/apps/junit/lib/*<span class="p">&amp;</span>rdquo<span class="p">;</span>&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;#&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Created by: Zemian Deng 03/09/2012&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;This run script dir <span class="o">(</span>resolve to absolute path<span class="o">)</span>&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;SCRIPT_DIR<span class="o">=</span><span class="k">$(</span><span class="nb">cd</span> <span class="k">$(</span>dirname <span class="nv">$0</span><span class="k">)</span> <span class="p">&amp;</span>amp<span class="p">;&amp;</span>amp<span class="p">;</span> <span class="nb">pwd</span><span class="k">)</span>    <span class="c"># This dir is where this script live.</span>
-</span><span class='line'><span class="nv">APP_DIR</span><span class="o">=</span><span class="k">$(</span><span class="nb">cd</span> <span class="nv">$SCRIPT_DIR</span>/.. <span class="p">&amp;</span>amp<span class="p">;&amp;</span>amp<span class="p">;</span> <span class="nb">pwd</span><span class="k">)</span>      <span class="c"># Assume the application dir is one level up from script dir.&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Default parameters&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;JAVA_HOME<span class="o">=</span><span class="k">${</span><span class="nv">JAVA_HOME</span><span class="p">:=</span><span class="nv">$HOME</span><span class="p">/apps/jdk</span><span class="k">}</span>     <span class="c"># This is the home directory of Java development kit.</span>
-</span><span class='line'><span class="nv">RUN_JAVA_CP</span><span class="o">=</span><span class="k">${</span><span class="nv">RUN_JAVA_CP</span><span class="p">:=</span><span class="nv">$CLASSPATH</span><span class="k">}</span>     <span class="c"># A classpath prefix before -classpath option, default to $CLASSPATH</span>
-</span><span class='line'><span class="nv">RUN_JAVA_OPTS</span><span class="o">=</span><span class="k">${</span><span class="nv">RUN_JAVA_OPTS</span><span class="p">:=</span><span class="k">}</span>           <span class="c"># Java options (-Xmx512m -XX:MaxPermSize=128m etc)</span>
-</span><span class='line'><span class="nv">RUN_JAVA_DEBUG</span><span class="o">=</span><span class="k">${</span><span class="nv">RUN_JAVA_DEBUG</span><span class="p">:=</span><span class="k">}</span>         <span class="c"># If not empty, print the full java command line before executing it.</span>
-</span><span class='line'><span class="nv">RUN_JAVA_NO_PARSE</span><span class="o">=</span><span class="k">${</span><span class="nv">RUN_JAVA_NO_PARSE</span><span class="p">:=</span><span class="k">}</span>   <span class="c"># If not empty, skip the auto parsing of -D and -cp options from script arguments.</span>
-</span><span class='line'><span class="nv">RUN_JAVA_NO_AUTOCP</span><span class="o">=</span><span class="k">${</span><span class="nv">RUN_JAVA_NO_AUTOCP</span><span class="p">:=</span><span class="k">}</span> <span class="c"># If not empty, do not auto setup Java classpath</span>
-</span><span class='line'><span class="nv">RUN_JAVA_DRY</span><span class="o">=</span><span class="k">${</span><span class="nv">RUN_JAVA_DRY</span><span class="p">:=</span><span class="k">}</span>             <span class="c"># If not empty, do not exec Java command, but just print&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;OS specific support.  <span class="nv">$var</span> &lt;em&gt;must&lt;/em&gt; be <span class="nb">set </span>to either <span class="nb">true </span>or false.&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;CYGWIN<span class="o">=</span><span class="nb">false</span><span class="p">;</span>
-</span><span class='line'><span class="k">case</span> <span class="p">&amp;</span>ldquo<span class="p">;</span>&lt;code&gt;uname&lt;/code&gt;<span class="p">&amp;</span>rdquo<span class="p">;</span> in
-</span><span class='line'>  CYGWIN*<span class="o">)</span> <span class="nv">CYGWIN</span><span class="o">=</span><span class="nb">true</span> <span class="p">;;</span>
-</span><span class='line'><span class="k">esac</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Define where is the java executable is&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;JAVA_CMD<span class="o">=</span>java
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> -d <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$JAVA_HOME</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="nv">JAVA_CMD</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$JAVA_HOME</span>/bin/java<span class="p">&amp;</span>rdquo<span class="p">;</span>
-</span><span class='line'><span class="k">fi</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Auto setup applciation<span class="p">&amp;</span>rsquo<span class="p">;</span>s Java Classpath <span class="o">(</span>only <span class="k">if</span> they exists<span class="o">)</span>&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;if <span class="o">[</span> -z <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$RUN_JAVA_NO_AUTOCP</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> -d <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$APP_DIR</span>/config<span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nv">RUN_JAVA_CP</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$RUN_JAVA_CP</span>:<span class="nv">$APP_DIR</span>/config<span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="p">;</span> <span class="k">fi</span>
-</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> -d <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$APP_DIR</span>/target/test-classes<span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nv">RUN_JAVA_CP</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$RUN_JAVA_CP</span>:<span class="nv">$APP_DIR</span>/target/test-classes<span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="p">;</span> <span class="k">fi</span>
-</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> -d <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$APP_DIR</span>/target/classes<span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nv">RUN_JAVA_CP</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$RUN_JAVA_CP</span>:<span class="nv">$APP_DIR</span>/target/classes<span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="p">;</span> <span class="k">fi</span>
-</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> -d <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$APP_DIR</span>/target/dependency<span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nv">RUN_JAVA_CP</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$RUN_JAVA_CP</span>:<span class="nv">$APP_DIR</span>/target/dependency/&lt;em&gt;<span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="p">;</span> <span class="k">fi</span>
-</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> -d <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$APP_DIR</span>/lib<span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nv">RUN_JAVA_CP</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$RUN_JAVA_CP</span>:<span class="nv">$APP_DIR</span>/lib/&lt;/em&gt;<span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="p">;</span> <span class="k">fi</span>
-</span><span class='line'><span class="k">fi</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;ARGS<span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$@</span><span class="p">&amp;</span>rdquo<span class="p">;</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Parse addition <span class="p">&amp;</span>ldquo<span class="p">;</span>-cp<span class="p">&amp;</span>rdquo<span class="p">;</span> and <span class="p">&amp;</span>ldquo<span class="p">;</span>-D<span class="p">&amp;</span>rdquo<span class="p">;</span> after the Java main class from script arguments&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;This is <span class="k">done</span> <span class="k">for</span> convenient sake so users <span class="k">do</span> not have to <span class="nb">export </span>RUN_JAVA_CP and RUN_JAVA_OPTS&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;saparately, but now they can pass into end of this run-java script instead.&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;This can be disable by setting <span class="nv">RUN_JAVA_NO_PARSE</span><span class="o">=</span>1.&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;if <span class="o">[</span> -z <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$RUN_JAVA_NO_PARSE</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="c"># Prepare variables for parsing</span>
-</span><span class='line'>    <span class="nv">FOUND_CP</span><span class="o">=</span>
-</span><span class='line'>    NEW_ARGS<span class="o">[</span>0<span class="o">]=</span><span class="p">&amp;</span>lsquo<span class="p">;&amp;</span>rsquo<span class="p">;</span>
-</span><span class='line'>    <span class="nv">IDX</span><span class="o">=</span>0&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;pre&gt;&lt;code&gt;# Parse all arguments and look <span class="k">for</span> <span class="s2">&quot;-cp&quot;</span> and <span class="s2">&quot;-D&quot;</span>
-</span><span class='line'><span class="k">for</span> ARG in <span class="s2">&quot;$@&quot;</span><span class="p">;</span> <span class="k">do</span>
-</span><span class='line'>    <span class="k">if</span> <span class="o">[[</span> -n <span class="nv">$FOUND_CP</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>        <span class="nv">RUN_JAVA_CP</span><span class="o">=</span><span class="s2">&quot;$RUN_JAVA_CP:$ARG&quot;</span>
-</span><span class='line'>        <span class="nv">FOUND_CP</span><span class="o">=</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>        <span class="k">case</span> <span class="nv">$ARG</span> in
-</span><span class='line'>        <span class="s1">&#39;-cp&#39;</span><span class="o">)</span>
-</span><span class='line'>            <span class="nv">FOUND_CP</span><span class="o">=</span>1
-</span><span class='line'>            <span class="p">;;</span>
-</span><span class='line'>        <span class="s1">&#39;-D&#39;</span>*<span class="o">)</span>
-</span><span class='line'>            <span class="nv">RUN_JAVA_OPTS</span><span class="o">=</span><span class="s2">&quot;$RUN_JAVA_OPTS $ARG&quot;</span>
-</span><span class='line'>            <span class="p">;;</span>
-</span><span class='line'>        *<span class="o">)</span>
-</span><span class='line'>            NEW_ARGS<span class="o">[</span><span class="nv">$IDX</span><span class="o">]=</span><span class="s2">&quot;$ARG&quot;</span>
-</span><span class='line'>            <span class="nb">let </span><span class="nv">IDX</span><span class="o">=</span><span class="nv">$IDX</span>+1
-</span><span class='line'>            <span class="p">;;</span>
-</span><span class='line'>        <span class="k">esac</span>
-</span><span class='line'>    <span class="k">fi</span>
-</span><span class='line'><span class="k">done</span>
-</span><span class='line'><span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;${NEW_ARGS[@]}&quot;</span>
-</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;fi&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Convert Windows Java Classpath&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;if <span class="nv">$CYGWIN</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="nv">RUN_JAVA_CP</span><span class="o">=</span><span class="k">$(</span>cygpath -mp <span class="nv">$RUN_JAVA_CP</span><span class="k">)</span>
-</span><span class='line'><span class="k">fi</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Display full Java command.&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;if <span class="o">[</span> -n <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$RUN_JAVA_DEBUG</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="o">]</span> <span class="o">||</span> <span class="o">[</span> -n <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$RUN_JAVA_DRY</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="nb">echo</span> <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$JAVA_CMD</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="nv">$RUN_JAVA_OPTS</span> -cp <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$RUN_JAVA_CP</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="nv">$ARGS</span>
-</span><span class='line'><span class="k">fi</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Run Java Main class&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;if <span class="o">[</span> -z <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$RUN_JAVA_DRY</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$JAVA_CMD</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="nv">$RUN_JAVA_OPTS</span> -cp <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$RUN_JAVA_CP</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="nv">$ARGS</span>
-</span><span class='line'><span class="k">fi</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+&#8220;` bash</p>
+
+<h1>!/usr/bin/env bash</h1>
+
+<p>#</p>
+
+<h1>Copyright 2012 Zemian Deng</h1>
+
+<p>#</p>
+
+<h1>A wrapper script that run any Java application in unix/cygwin bash env.</h1>
+
+<p>#</p>
+
+<h1>This script is assumed to be located in an application&rsquo;s &ldquo;bin&rdquo; directory. It will</h1>
+
+<h1>auto resolve its directory location relative to the application path (which is one</h1>
+
+<h1>parent up from the script.) Therefore, this script can be run any where in the file</h1>
+
+<h1>system and it will still reference the same application directory.</h1>
+
+<p>#</p>
+
+<h1>This script will by default auto setup a Java classpath that picks up any &ldquo;config&rdquo;</h1>
+
+<h1>and &ldquo;lib&rdquo; directories under the application directory. It also will also add a</h1>
+
+<h1>any typical Maven project output directories such as &ldquo;target/test-classes&rdquo;,</h1>
+
+<h1>&ldquo;target/classes&rdquo;, and &ldquo;target/dependency&rdquo; into classpath. This can be disable by</h1>
+
+<h1>setting RUN_JAVA_NO_AUTOCP=1.</h1>
+
+<p>#</p>
+
+<h1>If the &ldquo;Default parameters&rdquo; section bellow doesn&rsquo;t match to user&rsquo;s env, then user</h1>
+
+<h1>may override these variables in their terminal session or preset them in shell&rsquo;s</h1>
+
+<h1>profile startup script. The values of all path should be in cygwin/unix path,</h1>
+
+<h1>and this script will auto convert them into Windows path where is needed.</h1>
+
+<p>#</p>
+
+<h1>User may customize the Java classpath by setting RUN_JAVA_CP, which will prefix to existing</h1>
+
+<h1>classpath, or use the &ldquo;-cp&rdquo; option, which will postfix to existing classpath.</h1>
+
+<p>#</p>
+
+<h1>Usage:</h1>
+
+<h1>run-java [java_opts] <java_main_class> [-cp /more/classpath] [-Dsysprop=value]</h1>
+
+<p>#</p>
+
+<h1>Example:</h1>
+
+<h1>run-java example.Hello</h1>
+
+<h1>run-java example.Hello -Dname=World</h1>
+
+<h1>run-java org.junit.runner.JUnitCore example.HelloTest -cp &ldquo;$HOME/apps/junit/lib/*&rdquo;</h1>
+
+<p>#</p>
+
+<h1>Created by: Zemian Deng 03/09/2012</h1>
+
+<h1>This run script dir (resolve to absolute path)</h1>
+
+<p>SCRIPT_DIR=$(cd $(dirname $0) &amp;&amp; pwd)    # This dir is where this script live.
+APP_DIR=$(cd $SCRIPT_DIR/.. &amp;&amp; pwd)      # Assume the application dir is one level up from script dir.</p>
+
+<h1>Default parameters</h1>
+
+<p>JAVA_HOME=${JAVA_HOME:=$HOME/apps/jdk}     # This is the home directory of Java development kit.
+RUN_JAVA_CP=${RUN_JAVA_CP:=$CLASSPATH}     # A classpath prefix before -classpath option, default to $CLASSPATH
+RUN_JAVA_OPTS=${RUN_JAVA_OPTS:=}           # Java options (-Xmx512m -XX:MaxPermSize=128m etc)
+RUN_JAVA_DEBUG=${RUN_JAVA_DEBUG:=}         # If not empty, print the full java command line before executing it.
+RUN_JAVA_NO_PARSE=${RUN_JAVA_NO_PARSE:=}   # If not empty, skip the auto parsing of -D and -cp options from script arguments.
+RUN_JAVA_NO_AUTOCP=${RUN_JAVA_NO_AUTOCP:=} # If not empty, do not auto setup Java classpath
+RUN_JAVA_DRY=${RUN_JAVA_DRY:=}             # If not empty, do not exec Java command, but just print</p>
+
+<h1>OS specific support.  $var <em>must</em> be set to either true or false.</h1>
+
+<p>CYGWIN=false;
+case &ldquo;<code>uname</code>&rdquo; in
+  CYGWIN*) CYGWIN=true ;;
+esac</p>
+
+<h1>Define where is the java executable is</h1>
+
+<p>JAVA_CMD=java
+if [ -d &ldquo;$JAVA_HOME&rdquo; ]; then
+    JAVA_CMD=&ldquo;$JAVA_HOME/bin/java&rdquo;
+fi</p>
+
+<h1>Auto setup applciation&rsquo;s Java Classpath (only if they exists)</h1>
+
+<p>if [ -z &ldquo;$RUN_JAVA_NO_AUTOCP&rdquo; ]; then
+    if [ -d &ldquo;$APP_DIR/config&rdquo; ]; then RUN_JAVA_CP=&ldquo;$RUN_JAVA_CP:$APP_DIR/config&rdquo; ; fi
+    if [ -d &ldquo;$APP_DIR/target/test-classes&rdquo; ]; then RUN_JAVA_CP=&ldquo;$RUN_JAVA_CP:$APP_DIR/target/test-classes&rdquo; ; fi
+    if [ -d &ldquo;$APP_DIR/target/classes&rdquo; ]; then RUN_JAVA_CP=&ldquo;$RUN_JAVA_CP:$APP_DIR/target/classes&rdquo; ; fi
+    if [ -d &ldquo;$APP_DIR/target/dependency&rdquo; ]; then RUN_JAVA_CP=&ldquo;$RUN_JAVA_CP:$APP_DIR/target/dependency/<em>&rdquo; ; fi
+    if [ -d &ldquo;$APP_DIR/lib&rdquo; ]; then RUN_JAVA_CP=&ldquo;$RUN_JAVA_CP:$APP_DIR/lib/</em>&rdquo; ; fi
+fi</p>
+
+<p>ARGS=&ldquo;$@&rdquo;</p>
+
+<h1>Parse addition &ldquo;-cp&rdquo; and &ldquo;-D&rdquo; after the Java main class from script arguments</h1>
+
+<h1>This is done for convenient sake so users do not have to export RUN_JAVA_CP and RUN_JAVA_OPTS</h1>
+
+<h1>saparately, but now they can pass into end of this run-java script instead.</h1>
+
+<h1>This can be disable by setting RUN_JAVA_NO_PARSE=1.</h1>
+
+<p>if [ -z &ldquo;$RUN_JAVA_NO_PARSE&rdquo; ]; then
+    # Prepare variables for parsing
+    FOUND_CP=
+    NEW_ARGS[0]=&lsquo;&rsquo;
+    IDX=0</p>
+
+<pre><code># Parse all arguments and look for "-cp" and "-D"
+for ARG in "$@"; do
+    if [[ -n $FOUND_CP ]]; then
+        RUN_JAVA_CP="$RUN_JAVA_CP:$ARG"
+        FOUND_CP=
+    else
+        case $ARG in
+        '-cp')
+            FOUND_CP=1
+            ;;
+        '-D'*)
+            RUN_JAVA_OPTS="$RUN_JAVA_OPTS $ARG"
+            ;;
+        *)
+            NEW_ARGS[$IDX]="$ARG"
+            let IDX=$IDX+1
+            ;;
+        esac
+    fi
+done
+ARGS="${NEW_ARGS[@]}"
+</code></pre>
+
+<p>fi</p>
+
+<h1>Convert Windows Java Classpath</h1>
+
+<p>if $CYGWIN; then
+    RUN_JAVA_CP=$(cygpath -mp $RUN_JAVA_CP)
+fi</p>
+
+<h1>Display full Java command.</h1>
+
+<p>if [ -n &ldquo;$RUN_JAVA_DEBUG&rdquo; ] || [ -n &ldquo;$RUN_JAVA_DRY&rdquo; ]; then
+    echo &ldquo;$JAVA_CMD&rdquo; $RUN_JAVA_OPTS -cp &ldquo;$RUN_JAVA_CP&rdquo; $ARGS
+fi</p>
+
+<h1>Run Java Main class</h1>
+
+<p>if [ -z &ldquo;$RUN_JAVA_DRY&rdquo; ]; then
+    &ldquo;$JAVA_CMD&rdquo; $RUN_JAVA_OPTS -cp &ldquo;$RUN_JAVA_CP&rdquo; $ARGS
+fi
+&#8220;`</p>
 
 <p>The main idea is to run <code>mvn dependency:copy-dependencies</code>, this will generate all the jar files into <code>target/dependency</code> folder</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>mvn dependency:copy-dependencies
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Scanning <span class="k">for</span> projects<span class="p">&amp;</span>hellip<span class="p">;</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> <span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Building sparkblog 1.0-SNAPSHOT
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> <span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> <span class="p">&amp;</span>mdash<span class="p">;</span> maven-dependency-plugin:2.1:copy-dependencies <span class="o">(</span>default-cli<span class="o">)</span> @ sparkblog <span class="p">&amp;</span>mdash<span class="p">;</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Copying spark-core-2.1.jar to d:<span class="se">\M</span>yProjects<span class="se">\j</span>wrapper<span class="se">\b</span>loggg<span class="se">\s</span>parkblog<span class="se">\t</span>arget<span class="se">\d</span>ependency<span class="se">\s</span>park-core-2.1.jar
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Copying jetty-http-9.0.2.v20130417.jar to d:<span class="se">\M</span>yProjects<span class="se">\j</span>wrapper<span class="se">\b</span>loggg<span class="se">\s</span>parkblog<span class="se">\t</span>arget<span class="se">\d</span>ependency<span class="se">\j</span>etty-http-9.0.2.v20130417.jar
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Copying jetty-io-9.0.2.v20130417.jar to d:<span class="se">\M</span>yProjects<span class="se">\j</span>wrapper<span class="se">\b</span>loggg<span class="se">\s</span>parkblog<span class="se">\t</span>arget<span class="se">\d</span>ependency<span class="se">\j</span>etty-io-9.0.2.v20130417.jar
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Copying jetty-security-9.0.2.v20130417.jar to d:<span class="se">\M</span>yProjects<span class="se">\j</span>wrapper<span class="se">\b</span>loggg<span class="se">\s</span>parkblog<span class="se">\t</span>arget<span class="se">\d</span>ependency<span class="se">\j</span>etty-security-9.0.2.v20130417.jar
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Copying jetty-server-9.0.2.v20130417.jar to d:<span class="se">\M</span>yProjects<span class="se">\j</span>wrapper<span class="se">\b</span>loggg<span class="se">\s</span>parkblog<span class="se">\t</span>arget<span class="se">\d</span>ependency<span class="se">\j</span>etty-server-9.0.2.v20130417.jar
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Copying jetty-servlet-9.0.2.v20130417.jar to d:<span class="se">\M</span>yProjects<span class="se">\j</span>wrapper<span class="se">\b</span>loggg<span class="se">\s</span>parkblog<span class="se">\t</span>arget<span class="se">\d</span>ependency<span class="se">\j</span>etty-servlet-9.0.2.v20130417.jar
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Copying jetty-util-9.0.2.v20130417.jar to d:<span class="se">\M</span>yProjects<span class="se">\j</span>wrapper<span class="se">\b</span>loggg<span class="se">\s</span>parkblog<span class="se">\t</span>arget<span class="se">\d</span>ependency<span class="se">\j</span>etty-util-9.0.2.v20130417.jar
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Copying jetty-webapp-9.0.2.v20130417.jar to d:<span class="se">\M</span>yProjects<span class="se">\j</span>wrapper<span class="se">\b</span>loggg<span class="se">\s</span>parkblog<span class="se">\t</span>arget<span class="se">\d</span>ependency<span class="se">\j</span>etty-webapp-9.0.2.v20130417.jar
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Copying jetty-xml-9.0.2.v20130417.jar to d:<span class="se">\M</span>yProjects<span class="se">\j</span>wrapper<span class="se">\b</span>loggg<span class="se">\s</span>parkblog<span class="se">\t</span>arget<span class="se">\d</span>ependency<span class="se">\j</span>etty-xml-9.0.2.v20130417.jar
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Copying javax.servlet-3.0.0.v201112011016.jar to d:<span class="se">\M</span>yProjects<span class="se">\j</span>wrapper<span class="se">\b</span>loggg<span class="se">\s</span>parkblog<span class="se">\t</span>arget<span class="se">\d</span>ependency<span class="se">\j</span>avax.servlet-3.0.0.v201112011016.jar
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Copying slf4j-api-1.7.7.jar to d:<span class="se">\M</span>yProjects<span class="se">\j</span>wrapper<span class="se">\b</span>loggg<span class="se">\s</span>parkblog<span class="se">\t</span>arget<span class="se">\d</span>ependency<span class="se">\s</span>lf4j-api-1.7.7.jar
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Copying slf4j-simple-1.7.7.jar to d:<span class="se">\M</span>yProjects<span class="se">\j</span>wrapper<span class="se">\b</span>loggg<span class="se">\s</span>parkblog<span class="se">\t</span>arget<span class="se">\d</span>ependency<span class="se">\s</span>lf4j-simple-1.7.7.jar
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> <span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> BUILD SUCCESS
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> <span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Total <span class="nb">time</span>: 2.978s
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Finished at: Thu Feb <span class="m">12</span> 18:22:54 EET 2015
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Final Memory: 9M/243M
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> <span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-Now, we can reuse the provided <em>above</em> script <strong>or</strong> use the provided <em>below</em> one-liner:
-<code>
+<pre><code class="bash">$ mvn dependency:copy-dependencies
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building sparkblog 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-dependency-plugin:2.1:copy-dependencies (default-cli) @ sparkblog ---
+[INFO] Copying spark-core-2.1.jar to d:\MyProjects\jwrapper\bloggg\sparkblog\target\dependency\spark-core-2.1.jar
+[INFO] Copying jetty-http-9.0.2.v20130417.jar to d:\MyProjects\jwrapper\bloggg\sparkblog\target\dependency\jetty-http-9.0.2.v20130417.jar
+[INFO] Copying jetty-io-9.0.2.v20130417.jar to d:\MyProjects\jwrapper\bloggg\sparkblog\target\dependency\jetty-io-9.0.2.v20130417.jar
+[INFO] Copying jetty-security-9.0.2.v20130417.jar to d:\MyProjects\jwrapper\bloggg\sparkblog\target\dependency\jetty-security-9.0.2.v20130417.jar
+[INFO] Copying jetty-server-9.0.2.v20130417.jar to d:\MyProjects\jwrapper\bloggg\sparkblog\target\dependency\jetty-server-9.0.2.v20130417.jar
+[INFO] Copying jetty-servlet-9.0.2.v20130417.jar to d:\MyProjects\jwrapper\bloggg\sparkblog\target\dependency\jetty-servlet-9.0.2.v20130417.jar
+[INFO] Copying jetty-util-9.0.2.v20130417.jar to d:\MyProjects\jwrapper\bloggg\sparkblog\target\dependency\jetty-util-9.0.2.v20130417.jar
+[INFO] Copying jetty-webapp-9.0.2.v20130417.jar to d:\MyProjects\jwrapper\bloggg\sparkblog\target\dependency\jetty-webapp-9.0.2.v20130417.jar
+[INFO] Copying jetty-xml-9.0.2.v20130417.jar to d:\MyProjects\jwrapper\bloggg\sparkblog\target\dependency\jetty-xml-9.0.2.v20130417.jar
+[INFO] Copying javax.servlet-3.0.0.v201112011016.jar to d:\MyProjects\jwrapper\bloggg\sparkblog\target\dependency\javax.servlet-3.0.0.v201112011016.jar
+[INFO] Copying slf4j-api-1.7.7.jar to d:\MyProjects\jwrapper\bloggg\sparkblog\target\dependency\slf4j-api-1.7.7.jar
+[INFO] Copying slf4j-simple-1.7.7.jar to d:\MyProjects\jwrapper\bloggg\sparkblog\target\dependency\slf4j-simple-1.7.7.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2.978s
+[INFO] Finished at: Thu Feb 12 18:22:54 EET 2015
+[INFO] Final Memory: 9M/243M
+[INFO] ------------------------------------------------------------------------
+</code></pre>
+
+<p>Now, we can reuse the provided <em>above</em> script <strong>or</strong> use the provided <em>below</em> one-liner:
+<code>bash
 java -cp target\classes;target\dependency\* com.halyph.blog.App 9090 one 1 2
 </code>
 This one-liner is very simple and can be transformed to shell/batch scripts depending on the level of re-use you&rsquo;d like to implement.</p>
 
 <ul>
 <li>Now, it&rsquo;s time to created pre-packed application bundle which can be easily distributed. We will use <a href="http://mojo.codehaus.org/appassembler/appassembler-maven-plugin/usage-program.html">Maven Application Assembler Plugin</a>:
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;build&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;plugins&gt;</span>
-</span><span class='line'>   <span class="ni">&amp;hellip;</span>
-</span><span class='line'>    <span class="nt">&lt;plugin&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;groupId&gt;</span>org.codehaus.mojo<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;artifactId&gt;</span>appassembler-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;version&gt;</span>1.9<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>      <span class="c">&lt;!--</span>
-</span><span class='line'><span class="c">      This (executions) section can be omitted.</span>
-</span><span class='line'><span class="c">      In case it&#39;s omitted we should call the next command to generate wrapper:</span>
-</span><span class='line'><span class="c">      mvn package appassembler:assemble</span>
-</span><span class='line'><span class="c">      --&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;executions&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;execution&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;goals&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;goal&gt;</span>assemble<span class="nt">&lt;/goal&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;/goals&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/execution&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/executions&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;programs&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;program&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;mainClass&gt;</span>com.halyph.blog.App<span class="nt">&lt;/mainClass&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;id&gt;</span>app<span class="nt">&lt;/id&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;/program&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/programs&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/configuration&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/plugin&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/plugins&gt;</span>
-</span><span class='line'><span class="nt">&lt;/build&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<code>xml
+&lt;build&gt;
+  &lt;plugins&gt;
+   ...
+    &lt;plugin&gt;
+      &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+      &lt;artifactId&gt;appassembler-maven-plugin&lt;/artifactId&gt;
+      &lt;version&gt;1.9&lt;/version&gt;
+      &lt;!--
+      This (executions) section can be omitted.
+      In case it's omitted we should call the next command to generate wrapper:
+      mvn package appassembler:assemble
+      --&gt;
+      &lt;executions&gt;
+        &lt;execution&gt;
+          &lt;phase&gt;package&lt;/phase&gt;
+          &lt;goals&gt;
+            &lt;goal&gt;assemble&lt;/goal&gt;
+          &lt;/goals&gt;
+        &lt;/execution&gt;
+      &lt;/executions&gt;
+      &lt;configuration&gt;
+        &lt;programs&gt;
+          &lt;program&gt;
+            &lt;mainClass&gt;com.halyph.blog.App&lt;/mainClass&gt;
+            &lt;id&gt;app&lt;/id&gt;
+          &lt;/program&gt;
+        &lt;/programs&gt;
+      &lt;/configuration&gt;
+    &lt;/plugin&gt;
+  &lt;/plugins&gt;
+&lt;/build&gt;
+</code>
 
 <blockquote><p>The Application Assembler Plugin is a Maven plugin for generating scripts for starting java applications. All dependencies and the artifact of the project itself are placed in a generated Maven repository in a defined assemble directory. All artifacts (dependencies + the artifact from the project) are added to the classpath in the generated bin scripts.</p></blockquote></li>
 </ul>
 
 
 <p><a href="http://mojo.codehaus.org/appassembler/appassembler-maven-plugin/usage-program.html">Maven Application Assembler Plugin</a> usage:
-<code>
+<code>bash  
 $ mvn package
 $ target/appassembler/bin/app
 </code></p>

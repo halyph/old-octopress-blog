@@ -133,7 +133,7 @@
 </ul>
 
 
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -177,50 +177,51 @@
 <span class='line-number'>42</span>
 <span class='line-number'>43</span>
 <span class='line-number'>44</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-</span><span class='line'>         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-</span><span class='line'>  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+</span><span class='line'>         <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
 </span><span class='line'>
-</span><span class='line'>  &lt;groupId&gt;com.mycompany.app&lt;/groupId&gt;
-</span><span class='line'>  &lt;artifactId&gt;my-app&lt;/artifactId&gt;
-</span><span class='line'>  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-</span><span class='line'>  &lt;packaging&gt;jar&lt;/packaging&gt;
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>com.mycompany.app<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>my-app<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
 </span><span class='line'>
-</span><span class='line'>  &lt;name&gt;my-app&lt;/name&gt;
-</span><span class='line'>  &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+</span><span class='line'>  <span class="nt">&lt;name&gt;</span>my-app<span class="nt">&lt;/name&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;url&gt;</span>http://maven.apache.org<span class="nt">&lt;/url&gt;</span>
 </span><span class='line'>
-</span><span class='line'>  &lt;properties&gt;
-</span><span class='line'>    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-</span><span class='line'>    &lt;skipTests&gt;true&lt;/skipTests&gt;
-</span><span class='line'>  &lt;/properties&gt;
+</span><span class='line'>  <span class="nt">&lt;properties&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;skipTests&gt;</span>true<span class="nt">&lt;/skipTests&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/properties&gt;</span>
 </span><span class='line'>
-</span><span class='line'>  &lt;dependencies&gt;
-</span><span class='line'>    &lt;dependency&gt;
-</span><span class='line'>      &lt;groupId&gt;org.javassist&lt;/groupId&gt;
-</span><span class='line'>      &lt;artifactId&gt;javassist&lt;/artifactId&gt;
-</span><span class='line'>      &lt;version&gt;3.15.0-GA&lt;/version&gt;
-</span><span class='line'>    &lt;/dependency&gt;
-</span><span class='line'>  &lt;/dependencies&gt;
+</span><span class='line'>  <span class="nt">&lt;dependencies&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;groupId&gt;</span>org.javassist<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;artifactId&gt;</span>javassist<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;version&gt;</span>3.15.0-GA<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/dependency&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/dependencies&gt;</span>
 </span><span class='line'>
-</span><span class='line'>  &lt;build&gt;
-</span><span class='line'>    &lt;plugins&gt;
-</span><span class='line'>      &lt;plugin&gt;
-</span><span class='line'>        &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
-</span><span class='line'>        &lt;artifactId&gt;appassembler-maven-plugin&lt;/artifactId&gt;
-</span><span class='line'>        &lt;version&gt;1.9&lt;/version&gt;
-</span><span class='line'>        &lt;configuration&gt;
-</span><span class='line'>          &lt;extraJvmArguments&gt;-XX:PermSize=2M -XX:MaxPermSize=4M&lt;/extraJvmArguments&gt;
-</span><span class='line'>          &lt;programs&gt;
-</span><span class='line'>            &lt;program&gt;
-</span><span class='line'>              &lt;mainClass&gt;com.mycompany.app.App&lt;/mainClass&gt;
-</span><span class='line'>              &lt;id&gt;app&lt;/id&gt;
-</span><span class='line'>            &lt;/program&gt;
-</span><span class='line'>          &lt;/programs&gt;
-</span><span class='line'>        &lt;/configuration&gt;
-</span><span class='line'>      &lt;/plugin&gt;
-</span><span class='line'>    &lt;/plugins&gt;
-</span><span class='line'>  &lt;/build&gt;
-</span><span class='line'>&lt;/project&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class='line'>  <span class="nt">&lt;build&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;plugins&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;plugin&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;groupId&gt;</span>org.codehaus.mojo<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;artifactId&gt;</span>appassembler-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;version&gt;</span>1.9<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;configuration&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;extraJvmArguments&gt;</span>-XX:PermSize=2M -XX:MaxPermSize=4M<span class="nt">&lt;/extraJvmArguments&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;programs&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;program&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;mainClass&gt;</span>com.mycompany.app.App<span class="nt">&lt;/mainClass&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;id&gt;</span>app<span class="nt">&lt;/id&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/program&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/programs&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/configuration&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/plugin&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/plugins&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/build&gt;</span>
+</span><span class='line'><span class="nt">&lt;/project&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <ul>
@@ -239,7 +240,7 @@
 
 <p>See additional comments in the next code snippet</p>
 
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -347,7 +348,7 @@
 </ul>
 
 
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -377,36 +378,37 @@
 <span class='line-number'>28</span>
 <span class='line-number'>29</span>
 <span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ mvn clean package appassembler:assemble
-</span><span class='line'>$ target/appassembler/bin/app
-</span><span class='line'>java.lang.OutOfMemoryError
-</span><span class='line'>  at com.mycompany.app.App.&lt;clinit&gt;(App.java:15)
-</span><span class='line'>=====================
-</span><span class='line'>Initialized/created OutOfMemoryError
-</span><span class='line'>=====================
-</span><span class='line'>Start dynamic class creation.....
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">$</span> <span class="n">mvn</span> <span class="n">clean</span> <span class="kn">package</span> <span class="nl">appassembler:</span><span class="n">assemble</span>
+</span><span class='line'><span class="n">$</span> <span class="n">target</span><span class="o">/</span><span class="n">appassembler</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">app</span>
+</span><span class='line'><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">OutOfMemoryError</span>
+</span><span class='line'>  <span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="na">mycompany</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">App</span><span class="o">.&lt;</span><span class="n">clinit</span><span class="o">&gt;(</span><span class="n">App</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">15</span><span class="o">)</span>
+</span><span class='line'><span class="o">=====================</span>
+</span><span class='line'><span class="n">Initialized</span><span class="o">/</span><span class="n">created</span> <span class="n">OutOfMemoryError</span>
+</span><span class='line'><span class="o">=====================</span>
+</span><span class='line'><span class="n">Start</span> <span class="n">dynamic</span> <span class="kd">class</span> <span class="nc">creation</span><span class="o">.....</span>
 </span><span class='line'>
-</span><span class='line'>class MyClass0
-</span><span class='line'>class MyClass50
-</span><span class='line'>class MyClass100
-</span><span class='line'>class MyClass150
-</span><span class='line'>class MyClass200
-</span><span class='line'>class MyClass250
-</span><span class='line'>class MyClass300
-</span><span class='line'>class MyClass350
-</span><span class='line'>class MyClass400
-</span><span class='line'>class MyClass450
-</span><span class='line'>class MyClass500
-</span><span class='line'>class MyClass550
-</span><span class='line'>Exception in thread "Reference Handler" java.lang.OutOfMemoryError: PermGen space
-</span><span class='line'>  at java.lang.ref.Reference$ReferenceHandler.run(Reference.java:140)
-</span><span class='line'>Exception in thread "main" java.lang.OutOfMemoryError: PermGen space
-</span><span class='line'>  at javassist.ClassPool.toClass(ClassPool.java:1089)
-</span><span class='line'>  at javassist.ClassPool.toClass(ClassPool.java:1032)
-</span><span class='line'>  at javassist.ClassPool.toClass(ClassPool.java:990)
-</span><span class='line'>  at javassist.CtClass.toClass(CtClass.java:1125)
-</span><span class='line'>  at com.mycompany.app.App.createClass(App.java:36)
-</span><span class='line'>  at com.mycompany.app.App.main(App.java:29)</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass0</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass50</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass100</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass150</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass200</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass250</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass300</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass350</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass400</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass450</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass500</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass550</span>
+</span><span class='line'><span class="n">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">&quot;Reference Handler&quot;</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">OutOfMemoryError</span><span class="o">:</span> <span class="n">PermGen</span> <span class="n">space</span>
+</span><span class='line'>  <span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ref</span><span class="o">.</span><span class="na">Reference$ReferenceHandler</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="n">Reference</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">140</span><span class="o">)</span>
+</span><span class='line'><span class="n">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">&quot;main&quot;</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">OutOfMemoryError</span><span class="o">:</span> <span class="n">PermGen</span> <span class="n">space</span>
+</span><span class='line'>  <span class="n">at</span> <span class="n">javassist</span><span class="o">.</span><span class="na">ClassPool</span><span class="o">.</span><span class="na">toClass</span><span class="o">(</span><span class="n">ClassPool</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">1089</span><span class="o">)</span>
+</span><span class='line'>  <span class="n">at</span> <span class="n">javassist</span><span class="o">.</span><span class="na">ClassPool</span><span class="o">.</span><span class="na">toClass</span><span class="o">(</span><span class="n">ClassPool</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">1032</span><span class="o">)</span>
+</span><span class='line'>  <span class="n">at</span> <span class="n">javassist</span><span class="o">.</span><span class="na">ClassPool</span><span class="o">.</span><span class="na">toClass</span><span class="o">(</span><span class="n">ClassPool</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">990</span><span class="o">)</span>
+</span><span class='line'>  <span class="n">at</span> <span class="n">javassist</span><span class="o">.</span><span class="na">CtClass</span><span class="o">.</span><span class="na">toClass</span><span class="o">(</span><span class="n">CtClass</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">1125</span><span class="o">)</span>
+</span><span class='line'>  <span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="na">mycompany</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">App</span><span class="o">.</span><span class="na">createClass</span><span class="o">(</span><span class="n">App</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">36</span><span class="o">)</span>
+</span><span class='line'>  <span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="na">mycompany</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">App</span><span class="o">.</span><span class="na">main</span><span class="o">(</span><span class="n">App</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">29</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>The next command runs under the hood:

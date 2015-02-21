@@ -111,7 +111,7 @@
 <blockquote><p>I’m even taking this to an extreme and using Java for shell scripts. I’ve found that anything other than a simple wrapper shell script eventually grows to the point where I’m looking up the arcane syntax for removing some middle element from an array in bash &hellip; Write it in Java to start with. If shelling out to run commands is clumsy, write a utility function to make it easy.
 I’ve also written a <em>java_launcher</em> shell script that allows me to write this at the top of Java programs:</p></blockquote>
 
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env java_launcher</span>
@@ -124,7 +124,7 @@ I’ve also written a <em>java_launcher</em> shell script that allows me to writ
 
 <p>Here is the actual source of <a href="https://github.com/lkesteloot/java_launcher">java_launcher</a>:</p>
 
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -259,7 +259,7 @@ I’ve also written a <em>java_launcher</em> shell script that allows me to writ
 
 <p>And suppose we&rsquo;d like to run <strong>helloworld</strong> Java &ldquo;script&rdquo; using different jars located in default library location (<strong>java_lib/</strong>) and custom (<strong>/home/username/mylib1.jar</strong> and <strong>/home/username/mylib2.jar</strong>)</p>
 
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -268,13 +268,13 @@ I’ve also written a <em>java_launcher</em> shell script that allows me to writ
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="err">#</span><span class="o">!/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">env</span> <span class="n">java_launcher</span>
-</span><span class='line'><span class="err">#</span> <span class="nl">vim:</span><span class="n">ft</span><span class="o">=</span><span class="n">java</span>
-</span><span class='line'><span class="err">#</span> <span class="nl">lib:</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">username</span><span class="o">/</span><span class="n">mylib1</span><span class="o">.</span><span class="na">jar</span><span class="o">:/</span><span class="n">home</span><span class="o">/</span><span class="n">username</span><span class="o">/</span><span class="n">mylib2</span><span class="o">.</span><span class="na">jar</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env java_launcher</span>
+</span><span class='line'><span class="c"># vim:ft=java</span>
+</span><span class='line'><span class="c"># lib:/home/username/mylib1.jar:/home/username/mylib2.jar</span>
 </span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">helloworld</span> <span class="o">{</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Hello world!&quot;</span><span class="o">);</span>
+</span><span class='line'>public class helloworld <span class="o">{</span>
+</span><span class='line'>    public static void main<span class="o">(</span>String<span class="o">[]</span> args<span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        System.out.println<span class="o">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="o">)</span><span class="p">;</span>
 </span><span class='line'>    <span class="o">}</span>
 </span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
@@ -311,15 +311,15 @@ I’ve also written a <em>java_launcher</em> shell script that allows me to writ
 
 <p>Sample usage:</p>
 
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Grapes</span><span class="o">([</span>
-</span><span class='line'>   <span class="nd">@Grab</span><span class="o">(</span><span class="n">group</span><span class="o">=</span><span class="err">&#39;</span><span class="n">commons</span><span class="o">-</span><span class="n">primitives</span><span class="err">&#39;</span><span class="o">,</span> <span class="n">module</span><span class="o">=</span><span class="err">&#39;</span><span class="n">commons</span><span class="o">-</span><span class="n">primitives</span><span class="err">&#39;</span><span class="o">,</span> <span class="n">version</span><span class="o">=</span><span class="err">&#39;</span><span class="mf">1.0</span><span class="err">&#39;</span><span class="o">),</span>
-</span><span class='line'>   <span class="nd">@Grab</span><span class="o">(</span><span class="n">group</span><span class="o">=</span><span class="err">&#39;</span><span class="n">org</span><span class="o">.</span><span class="na">ccil</span><span class="o">.</span><span class="na">cowan</span><span class="o">.</span><span class="na">tagsoup</span><span class="err">&#39;</span><span class="o">,</span> <span class="n">module</span><span class="o">=</span><span class="err">&#39;</span><span class="n">tagsoup</span><span class="err">&#39;</span><span class="o">,</span> <span class="n">version</span><span class="o">=</span><span class="err">&#39;</span><span class="mf">0.9</span><span class="o">.</span><span class="mi">7</span><span class="err">&#39;</span><span class="o">)])</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="nd">@Grapes</span><span class="o">([</span>
+</span><span class='line'>   <span class="nd">@Grab</span><span class="o">(</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;commons-primitives&#39;</span><span class="o">,</span> <span class="n">module</span><span class="o">=</span><span class="s1">&#39;commons-primitives&#39;</span><span class="o">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.0&#39;</span><span class="o">),</span>
+</span><span class='line'>   <span class="nd">@Grab</span><span class="o">(</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;org.ccil.cowan.tagsoup&#39;</span><span class="o">,</span> <span class="n">module</span><span class="o">=</span><span class="s1">&#39;tagsoup&#39;</span><span class="o">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.9.7&#39;</span><span class="o">)])</span>
 </span><span class='line'><span class="kd">class</span> <span class="nc">Example</span> <span class="o">{</span>
 </span><span class='line'><span class="c1">// ...</span>
 </span><span class='line'><span class="o">}</span>
