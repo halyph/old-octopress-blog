@@ -70,7 +70,7 @@ Now it's time to clone [Octopress] blog and run it. Unfortunatelly, there are so
 
 ### Fix [Octopress] native extentions issues
 
-We know that [Octopress] uses native extentions thats why we have additionally install [Development Kit]
+We know that [Octopress] uses native extentions thats why we have to additionally install [Development Kit]
 
 - Download and unpack it in adjacent to Ruby install folder (`d:\Tools\Ruby\DevKit_2.1_x64\` in my case)
 - Link [Development Kit] installation to previously installed Ruby
