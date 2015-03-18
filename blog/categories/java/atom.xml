@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-02-21T17:05:13+02:00</updated>
+  <updated>2015-03-18T03:04:26+02:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -12,6 +12,138 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to Download Jars From Maven Central]]></title>
+    <link href="http://halyph.com/blog/2015/03/17/how-to-download-jars-from-maven-central/"/>
+    <updated>2015-03-17T18:00:00+02:00</updated>
+    <id>http://halyph.com/blog/2015/03/17/how-to-download-jars-from-maven-central</id>
+    <content type="html"><![CDATA[<center>
+<img src="/images/blog/java.png">
+<img src="/images/blog/ivy.png">
+<img src="/images/blog/maven.png">
+</center>
+
+
+<p>We know how to download Java libraries with it&rsquo;s dependencies (transitive included) via Maven <em>pom.xml</em>, Ant/Ivy <em>build.xml</em> script, Gradle <em>build.gradle</em> script etc.
+But what if we need to download them without these scripts.</p>
+
+<p>There are several ways to do this.
+Assume that we&rsquo;d like to download <code>spark-core</code> library (<code>groupId=com.sparkjava, artifactId=spark-core, version=2.1</code>) with all dependencies from <a href="http://search.maven.org/#artifactdetails%7Ccom.sparkjava%7Cspark-core%7C2.1%7Cjar">Maven Central</a> into <code>lib</code> folder.</p>
+
+<h2>Use Maven3 dependency plugin</h2>
+
+<p>Here is there variants for lib download:
+&#8220;` bash Download library with all dependencies</p>
+
+<h1>Specify repoUrl (it&rsquo;s optional)</h1>
+
+<p>mvn dependency:get -DrepoUrl=<a href="http://download.java.net/maven/2/">http://download.java.net/maven/2/</a> -DgroupId=com.sparkjava -DartifactId=spark-core -Dversion=2.1</p>
+
+<h1>OR use default repoUrl</h1>
+
+<p>mvn dependency:get -DgroupId=com.sparkjava -DartifactId=spark-core -Dversion=2.1</p>
+
+<h1>OR use parameter artifact as groupId:artifactId:version</h1>
+
+<p>mvn dependency:get -Dartifact=com.sparkjava:spark-core:2.1
+&#8220;`</p>
+
+<p>Now we need to copy just downloaded artifacts in our working directory:
+&#8220;` bash Copy jars from local maven repo
+mvn dependency:copy-dependencies -f $HOME/.m2/repository/com/sparkjava/spark-core/2.1/spark-core-2.1.pom -DoutputDirectory=$(pwd)/lib</p>
+
+<h1>the previous command doesn&rsquo;t copy spark-core-x.x.jar, that&rsquo;s why we should copy it manually</h1>
+
+<p>cp $HOME/.m2/repository/com/sparkjava/spark-core/2.1/spark-core-2.1.jar $(pwd)/lib
+&#8220;`</p>
+
+<h2>Use standalone Ivy</h2>
+
+<p>We can use Ivy as standalone jar to download Maven dependencies without creating Ant build file:</p>
+
+<pre><code class="bash"># 1. Download the latest ivy jar (currently it's v.2.4.0)
+curl -L -O http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar
+
+# 2. Run ivy.jar to retrieve all dependencies
+java -jar ivy-2.4.0.jar -dependency com.sparkjava spark-core 2.1 -retrieve "lib/[artifact]-[revision](-[classifier]).[ext]"
+</code></pre>
+
+<p>As you can see Ivy downloads approach is much simpler. The only cons (or pros, it depends) that <strong>ivy.jar</strong> should be additionally downloaded.</p>
+
+<h2>Calling Ivy from Groovy or Java</h2>
+
+<p>Here I&rsquo;ve decided to store <a href="http://makandracards.com/evgeny-goldin/5817-calling-ivy-from-groovy-or-java">Evgeny&rsquo;s Goldin</a> code snippet as a reference for myself. Programmatic artifacts downloads is not a common operation. It&rsquo;s alway nice to know the general concept how it can be done. Especially when Ivy documentation is not very informative.</p>
+
+<pre><code class="java Groovy snippet of calling Ivy">import org.apache.ivy.Ivy
+import org.apache.ivy.core.module.descriptor.DefaultDependencyDescriptor
+import org.apache.ivy.core.module.descriptor.DefaultModuleDescriptor
+import org.apache.ivy.core.module.id.ModuleRevisionId
+import org.apache.ivy.core.resolve.ResolveOptions
+import org.apache.ivy.core.settings.IvySettings
+import org.apache.ivy.plugins.resolver.URLResolver
+import org.apache.ivy.core.report.ResolveReport
+import org.apache.ivy.plugins.parser.xml.XmlModuleDescriptorWriter
+
+
+public File resolveArtifact(String groupId, String artifactId, String version) {
+        //creates clear ivy settings
+        IvySettings ivySettings = new IvySettings();
+        //url resolver for configuration of maven repo
+        URLResolver resolver = new URLResolver();
+        resolver.setM2compatible(true);
+        resolver.setName('central');
+        //you can specify the url resolution pattern strategy
+        resolver.addArtifactPattern(
+            'http://repo1.maven.org/maven2/[organisation]/[module]/[revision]/[artifact](-[revision]).[ext]');
+        //adding maven repo resolver
+        ivySettings.addResolver(resolver);
+        //set to the default resolver
+        ivySettings.setDefaultResolver(resolver.getName());
+        //creates an Ivy instance with settings
+        Ivy ivy = Ivy.newInstance(ivySettings);
+
+        File ivyfile = File.createTempFile('ivy', '.xml');
+        ivyfile.deleteOnExit();
+
+        String[] dep = [groupId, artifactId, version]
+
+        DefaultModuleDescriptor md =
+                DefaultModuleDescriptor.newDefaultInstance(ModuleRevisionId.newInstance(dep[0],
+                dep[1] + '-caller', 'working'));
+
+        DefaultDependencyDescriptor dd = new DefaultDependencyDescriptor(md,
+                ModuleRevisionId.newInstance(dep[0], dep[1], dep[2]), false, false, true);
+        md.addDependency(dd);
+
+        //creates an ivy configuration file
+        XmlModuleDescriptorWriter.write(md, ivyfile);
+
+        String[] confs = ['default'];
+        ResolveOptions resolveOptions = new ResolveOptions().setConfs(confs);
+
+        //init resolve report
+        ResolveReport report = ivy.resolve(ivyfile.toURL(), resolveOptions);
+
+        //so you can get the jar library
+        File jarArtifactFile = report.getAllArtifactsReports()[0].getLocalFile();
+
+        return jarArtifactFile;
+}
+
+resolveArtifact( 'log4j', 'log4j', '1.2.16' )
+</code></pre>
+
+<h2>References</h2>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/15450383/using-maven-to-download-dependencies-to-a-directory-on-the-command-line/15456621">Using Maven to download dependencies to a directory on the command line - Stack Overflow</a></li>
+<li><a href="http://stackoverflow.com/questions/15598612/simplest-ivy-code-to-programmatically-retrieve-dependency-from-maven-central">Simplest Ivy code to programmatically retrieve dependency from Maven Central - Stack Overflow</a></li>
+<li><a href="http://makandracards.com/evgeny-goldin/5817-calling-ivy-from-groovy-or-java">Calling Ivy from Groovy or Java</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Maven Flow for Simple App Creation]]></title>
@@ -1042,61 +1174,6 @@ public class App {
 <li><a href="http://h2database.com/javadoc/org/h2/tools/Server.html">H2 Server methods</a></li>
 <li><a href="https://github.com/halyph/tutorials/tree/master/h2-embedded-console">GitHub Sources</a></li>
 </ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to Disable Tomcat Session Serialization]]></title>
-    <link href="http://halyph.com/2014/08/how-to-disable-tomcat-session.html"/>
-    <updated>2014-08-12T12:57:00+03:00</updated>
-    <id>http://halyph.com/2014/08/how-to-disable-tomcat-session</id>
-    <content type="html"><![CDATA[<p><img class="center" src="/images/blog/java.png">
-Suppose you have the next error while restart/stop Tomcat (in my case Tomcat 7.x):</p>
-
-<pre class="brush: java;">WARNING: Cannot serialize session attribute SPRING_SECURITY_CONTEXT for session 54DBA076EDC9B7A24C1AF76824DFD1EF
-java.io.NotSerializableException: com.MyClass
- at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1180)
- at java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1528)
- at java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1493)
- at java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1416)
- at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1174)
- at java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:346)
- at java.util.ArrayList.writeObject(ArrayList.java:710)
- at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
- at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
- at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
- at java.lang.reflect.Method.invoke(Method.java:601)
- at java.io.ObjectStreamClass.invokeWriteObject(ObjectStreamClass.java:975)
-...
-</pre>
-
-
-<p>It means that Tomcat is trying to persist non-serializable objects which were added into the session. Tomcat uses Manager component which is used to create and maintain HTTP sessions for web application.</p>
-
-<p>By default manager implementation configured to perform session persistence across restarts and we want to disable this functionality.</p>
-
-<p>To disable this persistence feature, create a Context configuration file (<em>context.xml</em>) for your web application and add the following element there:</p>
-
-<pre class="brush: xml;">&lt;Manager pathname="" /&gt;
-</pre>
-
-
-<p>You can add this context.xml file to:</p>
-
-<ul>
-<li>App.war:/META-INF/context.xml</li>
-<li>TOMCAT_HOME/conf/Catalina/localhost/App.xml file</li>
-<li>TOMCAT_HOME/cont/context.xml</li>
-</ul>
-
-
-<h2>References</h2>
-
-<ul>
-<li><a href="http://tomcat.apache.org/tomcat-7.0-doc/config/manager.html#Disable_Session_Persistence">Disable Session Persistence </a></li>
-<li><a href="http://tomcat.apache.org/tomcat-7.0-doc/cluster-howto.html">Clustering/Session Replication HOW-TO</a></li>
-</ul>
 
 ]]></content>
   </entry>

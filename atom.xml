@@ -4,7 +4,7 @@
   <title><![CDATA[Knowledge Is Everything]]></title>
   <link href="http://halyph.com/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-02-21T17:05:13+02:00</updated>
+  <updated>2015-03-18T03:04:26+02:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -12,6 +12,209 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to Download Jars From Maven Central]]></title>
+    <link href="http://halyph.com/blog/2015/03/17/how-to-download-jars-from-maven-central/"/>
+    <updated>2015-03-17T18:00:00+02:00</updated>
+    <id>http://halyph.com/blog/2015/03/17/how-to-download-jars-from-maven-central</id>
+    <content type="html"><![CDATA[<center>
+<img src="http://halyph.com/images/blog/java.png">
+<img src="http://halyph.com/images/blog/ivy.png">
+<img src="http://halyph.com/images/blog/maven.png">
+</center>
+
+
+<p>We know how to download Java libraries with it&rsquo;s dependencies (transitive included) via Maven <em>pom.xml</em>, Ant/Ivy <em>build.xml</em> script, Gradle <em>build.gradle</em> script etc.
+But what if we need to download them without these scripts.</p>
+
+<p>There are several ways to do this.
+Assume that we&rsquo;d like to download <code>spark-core</code> library (<code>groupId=com.sparkjava, artifactId=spark-core, version=2.1</code>) with all dependencies from <a href="http://search.maven.org/#artifactdetails%7Ccom.sparkjava%7Cspark-core%7C2.1%7Cjar">Maven Central</a> into <code>lib</code> folder.</p>
+
+<h2>Use Maven3 dependency plugin</h2>
+
+<p>Here is there variants for lib download:</p>
+
+<figure class='code'><figcaption><span>Download library with all dependencies</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Specify repoUrl (it&#39;s optional)</span>
+</span><span class='line'>mvn dependency:get -DrepoUrl<span class="o">=</span>http://download.java.net/maven/2/ -DgroupId<span class="o">=</span>com.sparkjava -DartifactId<span class="o">=</span>spark-core -Dversion<span class="o">=</span>2.1
+</span><span class='line'>
+</span><span class='line'><span class="c"># OR use default repoUrl</span>
+</span><span class='line'>mvn dependency:get -DgroupId<span class="o">=</span>com.sparkjava -DartifactId<span class="o">=</span>spark-core -Dversion<span class="o">=</span>2.1
+</span><span class='line'>
+</span><span class='line'><span class="c"># OR use parameter artifact as groupId:artifactId:version</span>
+</span><span class='line'>mvn dependency:get -Dartifact<span class="o">=</span>com.sparkjava:spark-core:2.1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we need to copy just downloaded artifacts in our working directory:</p>
+
+<figure class='code'><figcaption><span>Copy jars from local maven repo</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mvn dependency:copy-dependencies -f <span class="nv">$HOME</span>/.m2/repository/com/sparkjava/spark-core/2.1/spark-core-2.1.pom -DoutputDirectory<span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/lib
+</span><span class='line'><span class="c"># the previous command doesn&#39;t copy spark-core-x.x.jar, that&#39;s why we should copy it manually</span>
+</span><span class='line'>cp <span class="nv">$HOME</span>/.m2/repository/com/sparkjava/spark-core/2.1/spark-core-2.1.jar <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/lib
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Use standalone Ivy</h2>
+
+<p>We can use Ivy as standalone jar to download Maven dependencies without creating Ant build file:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 1. Download the latest ivy jar (currently it&#39;s v.2.4.0)</span>
+</span><span class='line'>curl -L -O http://search.maven.org/remotecontent?filepath<span class="o">=</span>org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar
+</span><span class='line'>
+</span><span class='line'><span class="c"># 2. Run ivy.jar to retrieve all dependencies</span>
+</span><span class='line'>java -jar ivy-2.4.0.jar -dependency com.sparkjava spark-core 2.1 -retrieve <span class="s2">&quot;lib/[artifact]-[revision](-[classifier]).[ext]&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see Ivy downloads approach is much simpler. The only cons (or pros, it depends) that <strong>ivy.jar</strong> should be additionally downloaded.</p>
+
+<h2>Calling Ivy from Groovy or Java</h2>
+
+<p>Here I&rsquo;ve decided to store <a href="http://makandracards.com/evgeny-goldin/5817-calling-ivy-from-groovy-or-java">Evgeny&rsquo;s Goldin</a> code snippet as a reference for myself. Programmatic artifacts downloads is not a common operation. It&rsquo;s alway nice to know the general concept how it can be done. Especially when Ivy documentation is not very informative.</p>
+
+<figure class='code'><figcaption><span>Groovy snippet of calling Ivy</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.Ivy</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.core.module.descriptor.DefaultDependencyDescriptor</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.core.module.descriptor.DefaultModuleDescriptor</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.core.module.id.ModuleRevisionId</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.core.resolve.ResolveOptions</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.core.settings.IvySettings</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.plugins.resolver.URLResolver</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.core.report.ResolveReport</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.plugins.parser.xml.XmlModuleDescriptorWriter</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="n">File</span> <span class="nf">resolveArtifact</span><span class="o">(</span><span class="n">String</span> <span class="n">groupId</span><span class="o">,</span> <span class="n">String</span> <span class="n">artifactId</span><span class="o">,</span> <span class="n">String</span> <span class="n">version</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">//creates clear ivy settings</span>
+</span><span class='line'>        <span class="n">IvySettings</span> <span class="n">ivySettings</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">IvySettings</span><span class="o">();</span>
+</span><span class='line'>        <span class="c1">//url resolver for configuration of maven repo</span>
+</span><span class='line'>        <span class="n">URLResolver</span> <span class="n">resolver</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">URLResolver</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">resolver</span><span class="o">.</span><span class="na">setM2compatible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">resolver</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="err">&#39;</span><span class="n">central</span><span class="err">&#39;</span><span class="o">);</span>
+</span><span class='line'>        <span class="c1">//you can specify the url resolution pattern strategy</span>
+</span><span class='line'>        <span class="n">resolver</span><span class="o">.</span><span class="na">addArtifactPattern</span><span class="o">(</span>
+</span><span class='line'>            <span class="err">&#39;</span><span class="nl">http:</span><span class="c1">//repo1.maven.org/maven2/[organisation]/[module]/[revision]/[artifact](-[revision]).[ext]&#39;);</span>
+</span><span class='line'>        <span class="c1">//adding maven repo resolver</span>
+</span><span class='line'>        <span class="n">ivySettings</span><span class="o">.</span><span class="na">addResolver</span><span class="o">(</span><span class="n">resolver</span><span class="o">);</span>
+</span><span class='line'>        <span class="c1">//set to the default resolver</span>
+</span><span class='line'>        <span class="n">ivySettings</span><span class="o">.</span><span class="na">setDefaultResolver</span><span class="o">(</span><span class="n">resolver</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+</span><span class='line'>        <span class="c1">//creates an Ivy instance with settings</span>
+</span><span class='line'>        <span class="n">Ivy</span> <span class="n">ivy</span> <span class="o">=</span> <span class="n">Ivy</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">ivySettings</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">File</span> <span class="n">ivyfile</span> <span class="o">=</span> <span class="n">File</span><span class="o">.</span><span class="na">createTempFile</span><span class="o">(</span><span class="err">&#39;</span><span class="n">ivy</span><span class="err">&#39;</span><span class="o">,</span> <span class="err">&#39;</span><span class="o">.</span><span class="na">xml</span><span class="err">&#39;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">ivyfile</span><span class="o">.</span><span class="na">deleteOnExit</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">String</span><span class="o">[]</span> <span class="n">dep</span> <span class="o">=</span> <span class="o">[</span><span class="n">groupId</span><span class="o">,</span> <span class="n">artifactId</span><span class="o">,</span> <span class="n">version</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">DefaultModuleDescriptor</span> <span class="n">md</span> <span class="o">=</span>
+</span><span class='line'>                <span class="n">DefaultModuleDescriptor</span><span class="o">.</span><span class="na">newDefaultInstance</span><span class="o">(</span><span class="n">ModuleRevisionId</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">dep</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span>
+</span><span class='line'>                <span class="n">dep</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">+</span> <span class="err">&#39;</span><span class="o">-</span><span class="n">caller</span><span class="err">&#39;</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">working</span><span class="err">&#39;</span><span class="o">));</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">DefaultDependencyDescriptor</span> <span class="n">dd</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">DefaultDependencyDescriptor</span><span class="o">(</span><span class="n">md</span><span class="o">,</span>
+</span><span class='line'>                <span class="n">ModuleRevisionId</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">dep</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">dep</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">dep</span><span class="o">[</span><span class="mi">2</span><span class="o">]),</span> <span class="kc">false</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">md</span><span class="o">.</span><span class="na">addDependency</span><span class="o">(</span><span class="n">dd</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">//creates an ivy configuration file</span>
+</span><span class='line'>        <span class="n">XmlModuleDescriptorWriter</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">md</span><span class="o">,</span> <span class="n">ivyfile</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">String</span><span class="o">[]</span> <span class="n">confs</span> <span class="o">=</span> <span class="o">[</span><span class="err">&#39;</span><span class="k">default</span><span class="err">&#39;</span><span class="o">];</span>
+</span><span class='line'>        <span class="n">ResolveOptions</span> <span class="n">resolveOptions</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ResolveOptions</span><span class="o">().</span><span class="na">setConfs</span><span class="o">(</span><span class="n">confs</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">//init resolve report</span>
+</span><span class='line'>        <span class="n">ResolveReport</span> <span class="n">report</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span><span class="n">ivyfile</span><span class="o">.</span><span class="na">toURL</span><span class="o">(),</span> <span class="n">resolveOptions</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">//so you can get the jar library</span>
+</span><span class='line'>        <span class="n">File</span> <span class="n">jarArtifactFile</span> <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="na">getAllArtifactsReports</span><span class="o">()[</span><span class="mi">0</span><span class="o">].</span><span class="na">getLocalFile</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="n">jarArtifactFile</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">resolveArtifact</span><span class="o">(</span> <span class="err">&#39;</span><span class="n">log4j</span><span class="err">&#39;</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">log4j</span><span class="err">&#39;</span><span class="o">,</span> <span class="err">&#39;</span><span class="mf">1.2</span><span class="o">.</span><span class="mi">16</span><span class="err">&#39;</span> <span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>References</h2>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/15450383/using-maven-to-download-dependencies-to-a-directory-on-the-command-line/15456621">Using Maven to download dependencies to a directory on the command line - Stack Overflow</a></li>
+<li><a href="http://stackoverflow.com/questions/15598612/simplest-ivy-code-to-programmatically-retrieve-dependency-from-maven-central">Simplest Ivy code to programmatically retrieve dependency from Maven Central - Stack Overflow</a></li>
+<li><a href="http://makandracards.com/evgeny-goldin/5817-calling-ivy-from-groovy-or-java">Calling Ivy from Groovy or Java</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to Install Octopress on Windows?]]></title>
