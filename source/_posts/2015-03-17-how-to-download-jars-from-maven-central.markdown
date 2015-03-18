@@ -51,7 +51,7 @@ java -jar ivy-2.4.0.jar -dependency com.sparkjava spark-core 2.1 -retrieve "lib/
 
 ```
 
-As you can see Ivy downloads approach is much simpler. The only cons (or pros, it depends) that ivy should be additionally downloaded.
+As you can see Ivy downloads approach is much simpler. The only cons (or pros, it depends) that **ivy.jar** should be additionally downloaded.
 
 ## Calling Ivy from Groovy or Java
 Here I've decided to store [Evgeny's Goldin](http://makandracards.com/evgeny-goldin/5817-calling-ivy-from-groovy-or-java) code snippet as a reference for myself. Programmatic artifacts downloads is not a common operation. It's alway nice to know the general concept how it can be done. Especially when Ivy documentation is not very informative.
@@ -116,8 +116,6 @@ public File resolveArtifact(String groupId, String artifactId, String version) {
 
 resolveArtifact( 'log4j', 'log4j', '1.2.16' )
 ```
-
-
 
 ## References
 - [Using Maven to download dependencies to a directory on the command line - Stack Overflow](http://stackoverflow.com/questions/15450383/using-maven-to-download-dependencies-to-a-directory-on-the-command-line/15456621)
