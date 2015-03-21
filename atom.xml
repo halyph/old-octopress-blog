@@ -4,7 +4,7 @@
   <title><![CDATA[Knowledge Is Everything]]></title>
   <link href="http://halyph.com/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-03-18T03:04:26+02:00</updated>
+  <updated>2015-03-21T21:31:02+02:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -2980,6 +2980,41 @@ can’t change the company because of geographical constrains. Keeping all
 these in mind you should spend your time effectively and learn
 really valuable stuff. <br/>
 Try to avoid hipster <a href="http://en.wikipedia.org/wiki/Bandwagon_effect">bandwagon effect</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[List of Real Spring-Based Projects]]></title>
+    <link href="http://halyph.com/blog/2013/12/03/list-of-real-spring-based-projects/"/>
+    <updated>2013-12-03T14:54:44+02:00</updated>
+    <id>http://halyph.com/blog/2013/12/03/list-of-real-spring-based-projects</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://halyph.com/images/blog/spring.png"></p>
+
+<p>There are tons of Spring pet-projects on GitHub and it&rsquo;s cool. But, such big and powerful framework as Spring can&rsquo;t be lean by simple project. It requires big and complex samples which can highlight best practices and common approaches while using this framework. Here is the lift of such open sources projects:</p>
+
+<ul>
+<li><a href="http://www.broadleafcommerce.org">Broadleaf Commerce</a> - BroadleafCommerce is an open-source, eCommerce framework written entirely in Java</li>
+<li><a href="http://www.openlegacy.io">OpenLegacy</a> - is a powerful, lightweight, extensible, and flexible Java-based API framework with tools for building applications and services over existing legacy applications…otherwise known as legacy modernization</li>
+<li><a href="http://www.onehippo.org">Hippo CMS</a> - is a Java based, Open Source Web Content Management platform. Hippo is created to help you deliver Personalized Experiences across a wide variety of Channels and Devices, around the globe, to increase conversion and to improve brand loyalty.</li>
+<li><a href="http://www.weceem.org">Weceem CMS</a> is a free, open source content management system. It is built with Grails, a rapid application development framework build on the Java VM using Groovy, Java and Spring.</li>
+<li><a href="http://sourceforge.net/projects/magnolia">Magnolia CMS (Community Edition)</a> is a free, easy-to-use powerful Enterprise Content Management system. It is available under an Open Source license, the GPL version 3. Magnolia Community Edition includes an AJAX-powered intuitive web-browser interface, a clear Java programming API and a useful custom tag library for easy templating in JSP and Servlets. It can use any JSR-283 compliant content repository.</li>
+<li><a href="http://sourceforge.net/projects/alfresco">Alfresco</a> - is an open source enterprise content management repository (CMS) built by a team that includes the co-founder of Documentum. Its modular architecture uses the latest open src Java technologies. Includes Document Management, Records Management</li>
+<li><a href="http://jtalks.org">JTalks.org</a> is an open source project developed by JavaTalks community. The overall idea is to build a network of components like Forums, Articles, Webinars which are interconnected and they share the same database of users.</li>
+<li><a href="http://www.springbyexample.org">Spring by Example</a> - self-explained</li>
+<li><a href="https://github.com/spring-projects/greenhouse">Greenhouse</a> - Reference web application for Spring technologies and social destination for Spring developers</li>
+<li><a href="http://www.devnull.org/zuul">Zuul</a> - is a free, open source web application which can be used to centralize and manage configuration for your internal applications. It enables your operations team to control changes and your developers a centralized place to organize settings.</li>
+<li><a href="http://lightadmin.org">LightAdmin</a> - Pluggable data administration UI library for Java web applications</li>
+<li><a href="https://github.com/spring-io/sagan">Sagan</a> - Sagan: the spring.io site and reference application. There are bunch of difference article related, this one combines the most important: <a href="http://spring.io/blog/2014/05/12/springone2gx-2013-replay-spring-io-inside-and-out">SpringOne2GX 2013 Replay: spring.io inside and out</a>.</li>
+<li><a href="https://github.com/jdubois/Tudu-Lists">Tudu-Lists</a> It is an online todo lists manager. Currently, Tudu Lists is NOT in <a href="http://www.julien-dubois.com/tudu-lists">active development anymore</a>. But, I think it&rsquo;s very good sample of Spring-based application.</li>
+</ul>
+
+
+<h2>References</h2>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/2604655/any-open-source-spring-sample-project-thats-bigger-than-petclinic">Stackoverflow - Any open source Spring sample project that&rsquo;s bigger than PetClinic?</a></li>
+</ul>
+
 ]]></content>
   </entry>
   
