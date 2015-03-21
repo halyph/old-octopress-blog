@@ -5,7 +5,7 @@ date: 2013-12-03 14:54:44 +0200
 comments: true
 categories: [java, spring]
 ---
-{% img center /images/blog/spring.png %}
+{% img left /images/blog/spring.png %}
 
 There are tons of Spring pet-projects on GitHub and it's cool. But, such big and powerful framework as Spring can't be lean by simple project. It requires big and complex samples which can highlight best practices and common approaches while using this framework. Here is the lift of such open sources projects:
 
