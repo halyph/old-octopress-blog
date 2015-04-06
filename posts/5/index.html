@@ -9,7 +9,7 @@
   <meta name="author" content="Orest Ivasiv">
 
   
-  <meta name="description" content="Recently I&rsquo;ve decided to switch from Sublime Text editor to TextMate 2. At the beginning of Rails &ldquo;era&rdquo; it was the sexiest text &hellip;">
+  <meta name="description" content="Textmate 2.0 is using Ruby 1.8 in own bundles. OSX Yosemite dropped Ruby 1.8 as default Ruby implementation, now it&rsquo;s Ruby 2.0. Based on this &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -88,6 +88,213 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/11/16/how-to-fix-textmate-osx-yosemite-ruby-1-dot-8-issues/">How to Fix Textmate OSX Yosemite Ruby 1.8 Issues?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-11-16T17:40:32+02:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>5:40 pm</span></time>
+        
+           | <a href="/blog/2014/11/16/how-to-fix-textmate-osx-yosemite-ruby-1-dot-8-issues/#disqus_thread"
+             data-disqus-identifier="http://halyph.com/blog/2014/11/16/how-to-fix-textmate-osx-yosemite-ruby-1-dot-8-issues/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="right" src="/images/blog/textmate.png">
+Textmate 2.0 is using Ruby 1.8 in own bundles. OSX Yosemite dropped Ruby 1.8 as default Ruby implementation, now it&rsquo;s Ruby 2.0. Based on this all Textmate ruby-based (legacy) bundles do not work. It can be fixed in several steps:</p>
+
+<ul>
+<li>Install Ruby 1.8.x via some Ruby version manager (e.g. rvm)</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rvm install 1.8
+</span><span class='line'>Warning! Requested ruby installation which requires another ruby available - installing ruby-1.8.7-p374 first.
+</span><span class='line'>
+</span><span class='line'>Checking requirements <span class="k">for</span> osx.
+</span><span class='line'>Installing requirements <span class="k">for</span> osx.
+</span><span class='line'>Updating system...........
+</span><span class='line'>Installing required custom packages: homebrew/versions homebrew/versions.
+</span><span class='line'>Installing required packages: libtool, gcc48, libyaml, libksba, openssl098.....-Certificates in <span class="s1">&#39;/usr/local/etc/openssl/cert.pem&#39;</span> are already up to date.
+</span><span class='line'>Requirements installation successful.
+</span><span class='line'>Installing Ruby from <span class="nb">source </span>to: /Users/halyph/.rvm/rubies/ruby-1.8.7-p374, this may take a <span class="k">while</span> depending on your cpu<span class="o">(</span>s<span class="o">)</span>...
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#downloading ruby-1.8.7-p374, this may take a while depending on your connection...</span>
+</span><span class='line'>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+</span><span class='line'>                                 Dload  Upload   Total   Spent    Left  Speed
+</span><span class='line'><span class="m">100</span> 4150k  <span class="m">100</span> 4150k    <span class="m">0</span>     <span class="m">0</span>   279k      <span class="m">0</span>  0:00:14  0:00:14 --:--:--  326k
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#extracting ruby-1.8.7-p374 to /Users/halyph/.rvm/src/ruby-1.8.7-p374....</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#applying patch /Users/halyph/.rvm/patches/ruby/1.8.7/stdout-rouge-fix.patch.</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#applying patch /Users/halyph/.rvm/patches/ruby/1.8.7/no_sslv2.diff.</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#applying patch /Users/halyph/.rvm/patches/ruby/GH-488.patch.</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#applying patch /Users/halyph/.rvm/patches/ruby/ssl_no_ec2m.patch.</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#configuring...............................</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#post-configuration.</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#compiling....................................................</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#installing.</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#making binaries executable..</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#downloading rubygems-2.0.14</span>
+</span><span class='line'>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+</span><span class='line'>                                 Dload  Upload   Total   Spent    Left  Speed
+</span><span class='line'><span class="m">100</span>  329k  <span class="m">100</span>  329k    <span class="m">0</span>     <span class="m">0</span>   108k      <span class="m">0</span>  0:00:03  0:00:03 --:--:--  108k
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#extracting rubygems-2.0.14....</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#removing old rubygems.........</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#installing rubygems-2.0.14..................................|</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#gemset created /Users/halyph/.rvm/gems/ruby-1.8.7-p374@global</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#importing gemset /Users/halyph/.rvm/gemsets/ruby/1.8.7/global.gems..............................................................</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#generating global wrappers........</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#gemset created /Users/halyph/.rvm/gems/ruby-1.8.7-p374</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#importing gemsetfile /Users/halyph/.rvm/gemsets/default.gems evaluated to empty gem list</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#generating default wrappers........</span>
+</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#adjusting #shebangs for (gem irb erb ri rdoc testrb rake).</span>
+</span><span class='line'>Install of ruby-1.8.7-p374 - <span class="c">#complete</span>
+</span><span class='line'>WARNING: Please be aware that you just installed a ruby that is no longer maintained <span class="o">(</span>2014-02-23<span class="o">)</span>, <span class="k">for</span> a list of maintained rubies visit:
+</span><span class='line'>
+</span><span class='line'>    http://bugs.ruby-lang.org/projects/ruby/wiki/ReleaseEngineering
+</span><span class='line'>
+</span><span class='line'>Please consider upgrading to ruby-2.1.4 which will have all of the latest security patches.
+</span><span class='line'>Ruby was built without documentation, to build it run: rvm docs generate-ri
+</span><span class='line'>Checking requirements <span class="k">for</span> osx.
+</span><span class='line'>Certificates in <span class="s1">&#39;/usr/local/etc/openssl/cert.pem&#39;</span> are already up to date.
+</span><span class='line'>Requirements installation successful.
+</span><span class='line'>Installing Ruby from <span class="nb">source </span>to: /Users/halyph/.rvm/rubies/ruby-1.8.7-head, this may take a <span class="k">while</span> depending on your cpu<span class="o">(</span>s<span class="o">)</span>...
+</span><span class='line'>Cloning from git://github.com/ruby/ruby.git, this may take a <span class="k">while</span> depending on your connection.
+</span><span class='line'>HEAD is now at 2a9ea11 * lib/webrick/server.rb <span class="o">(</span>initialize<span class="o">)</span>: Initialize shutdown pipe here
+</span><span class='line'>Branch ruby_1_8_7 <span class="nb">set </span>up to track remote branch ruby_1_8_7 from origin.
+</span><span class='line'>Switched to a new branch <span class="s1">&#39;ruby_1_8_7&#39;</span>
+</span><span class='line'>Copying from repo to src path...
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#applying patch /Users/halyph/.rvm/patches/ruby/1.8.7/stdout-rouge-fix.patch.</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#applying patch /Users/halyph/.rvm/patches/ruby/1.8.7/no_sslv2.diff.</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#applying patch /Users/halyph/.rvm/patches/ruby/ssl_no_ec2m.patch.</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#autoreconf.</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#configuring...............................</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#post-configuration.</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#compiling...................................................|</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#installing.</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#making binaries executable..</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#downloading rubygems-2.0.14</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#extracting rubygems-2.0.14.....</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#removing old rubygems.........</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#installing rubygems-2.0.14..................................|</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#gemset created /Users/halyph/.rvm/gems/ruby-1.8.7-head@global</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#importing gemset /Users/halyph/.rvm/gemsets/ruby/1.8.7/global.gems..............................................................</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#generating global wrappers........</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#gemset created /Users/halyph/.rvm/gems/ruby-1.8.7-head</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#importing gemsetfile /Users/halyph/.rvm/gemsets/default.gems evaluated to empty gem list</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#generating default wrappers........</span>
+</span><span class='line'>ruby-1.8.7-head - <span class="c">#adjusting #shebangs for (gem irb erb ri rdoc testrb rake).</span>
+</span><span class='line'>Install of ruby-1.8.7-head - <span class="c">#complete</span>
+</span><span class='line'>Please be aware that you just installed a ruby that requires        <span class="m">3</span> patches just to be compiled on an up to date linux system.
+</span><span class='line'>This may have known and unaccounted <span class="k">for</span> security vulnerabilities.
+</span><span class='line'>Please consider upgrading to ruby-2.1.4 which will have all of the latest security patches.
+</span><span class='line'>Ruby was built without documentation, to build it run: rvm docs generate-ri
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>Update Textmate preferences
+<img src="/images/posts/textmate_prefs_ruby.png"></p></li>
+<li><p>Verify &ldquo;updated&rdquo; Textmate settings via some ruby-based bundles,
+e.g. <code>Bundles-&gt;Text-&gt;Duplicate Line</code></p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/10/20/switching-to-textmate-2/">Switching to Textmate 2</a></h1>
     
     
@@ -133,93 +340,6 @@ Recently I&rsquo;ve decided to switch from Sublime Text editor to <a href="http:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/10/09/bash-block-comments/">How to Use Block Comments in Bash Script</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-10-09T22:39:25+03:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:39 pm</span></time>
-        
-           | <a href="/blog/2014/10/09/bash-block-comments/#disqus_thread"
-             data-disqus-identifier="http://halyph.com/blog/2014/10/09/bash-block-comments/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="right" src="/images/blog/bash.png">
-What is the simplest way to define block comment in Bash script?</p>
-
-<p>I&rsquo;ve selected two approaches for myself:</p>
-
-<ul>
-<li>Use here document</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;before block comment&quot;</span>
-</span><span class='line'>: <span class="s">&lt;&lt;&#39;END&#39;</span>
-</span><span class='line'><span class="s">Some long </span>
-</span><span class='line'><span class="s">myltiline </span>
-</span><span class='line'><span class="s">text</span>
-</span><span class='line'><span class="s">END</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;after block comment&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Use <strong>&ldquo;if&rdquo;</strong> false block</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;before block comment&quot;</span>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>Some long
-</span><span class='line'>myltiline
-</span><span class='line'>text
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;after block comment&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/6">&larr; Older</a>
@@ -243,6 +363,10 @@ What is the simplest way to define block comment in Bash script?</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/04/rails-architecture-and-scalability-issues/">Rails Architecture and Scalability</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/03/17/how-to-download-jars-from-maven-central/">How to Download Jars From Maven Central</a>
       </li>
     
@@ -258,15 +382,11 @@ What is the simplest way to define block comment in Bash script?</p>
         <a href="/blog/2015/02/13/do-we-need-java-for-everything/">Do We Need Java for Everything?</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/02/05/how-to-generate-permgen/">How to Generate PermGen Leak?</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bash' style='font-size: 117.14285714285714%'>bash(2)</a> <a href='/blog/categories/blog' style='font-size: 108.57142857142857%'>blog(1)</a> <a href='/blog/categories/books' style='font-size: 117.14285714285714%'>books(2)</a> <a href='/blog/categories/conference' style='font-size: 108.57142857142857%'>conference(1)</a> <a href='/blog/categories/groovy' style='font-size: 125.71428571428572%'>groovy(3)</a> <a href='/blog/categories/h2' style='font-size: 108.57142857142857%'>h2(1)</a> <a href='/blog/categories/ivy' style='font-size: 108.57142857142857%'>ivy(1)</a> <a href='/blog/categories/java' style='font-size: 160.0%'>java(7)</a> <a href='/blog/categories/java-se' style='font-size: 117.14285714285714%'>java se(2)</a> <a href='/blog/categories/jdbc' style='font-size: 108.57142857142857%'>jdbc(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 108.57142857142857%'>jeeconf(1)</a> <a href='/blog/categories/languages' style='font-size: 108.57142857142857%'>languages(1)</a> <a href='/blog/categories/learning' style='font-size: 108.57142857142857%'>learning(1)</a> <a href='/blog/categories/maven' style='font-size: 117.14285714285714%'>maven(2)</a> <a href='/blog/categories/octopress' style='font-size: 117.14285714285714%'>octopress(2)</a> <a href='/blog/categories/review' style='font-size: 117.14285714285714%'>review(2)</a> <a href='/blog/categories/ruby' style='font-size: 117.14285714285714%'>ruby(2)</a> <a href='/blog/categories/scala' style='font-size: 108.57142857142857%'>scala(1)</a> <a href='/blog/categories/scripting' style='font-size: 108.57142857142857%'>scripting(1)</a> <a href='/blog/categories/shell' style='font-size: 117.14285714285714%'>shell(2)</a> <a href='/blog/categories/spring' style='font-size: 108.57142857142857%'>spring(1)</a> <a href='/blog/categories/textmate' style='font-size: 117.14285714285714%'>textmate(2)</a> <a href='/blog/categories/tomcat' style='font-size: 108.57142857142857%'>tomcat(1)</a> <a href='/blog/categories/windows' style='font-size: 108.57142857142857%'>windows(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/architecture' style='font-size: 108.57142857142857%'>architecture(1)</a> <a href='/blog/categories/bash' style='font-size: 117.14285714285714%'>bash(2)</a> <a href='/blog/categories/blog' style='font-size: 108.57142857142857%'>blog(1)</a> <a href='/blog/categories/books' style='font-size: 117.14285714285714%'>books(2)</a> <a href='/blog/categories/conference' style='font-size: 108.57142857142857%'>conference(1)</a> <a href='/blog/categories/groovy' style='font-size: 125.71428571428572%'>groovy(3)</a> <a href='/blog/categories/h2' style='font-size: 108.57142857142857%'>h2(1)</a> <a href='/blog/categories/ivy' style='font-size: 108.57142857142857%'>ivy(1)</a> <a href='/blog/categories/java' style='font-size: 160.0%'>java(7)</a> <a href='/blog/categories/java-se' style='font-size: 117.14285714285714%'>java se(2)</a> <a href='/blog/categories/jdbc' style='font-size: 108.57142857142857%'>jdbc(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 108.57142857142857%'>jeeconf(1)</a> <a href='/blog/categories/languages' style='font-size: 108.57142857142857%'>languages(1)</a> <a href='/blog/categories/learning' style='font-size: 108.57142857142857%'>learning(1)</a> <a href='/blog/categories/maven' style='font-size: 117.14285714285714%'>maven(2)</a> <a href='/blog/categories/octopress' style='font-size: 117.14285714285714%'>octopress(2)</a> <a href='/blog/categories/rails' style='font-size: 108.57142857142857%'>rails(1)</a> <a href='/blog/categories/review' style='font-size: 117.14285714285714%'>review(2)</a> <a href='/blog/categories/ruby' style='font-size: 125.71428571428572%'>ruby(3)</a> <a href='/blog/categories/scala' style='font-size: 108.57142857142857%'>scala(1)</a> <a href='/blog/categories/scripting' style='font-size: 108.57142857142857%'>scripting(1)</a> <a href='/blog/categories/shell' style='font-size: 117.14285714285714%'>shell(2)</a> <a href='/blog/categories/spring' style='font-size: 108.57142857142857%'>spring(1)</a> <a href='/blog/categories/textmate' style='font-size: 117.14285714285714%'>textmate(2)</a> <a href='/blog/categories/tomcat' style='font-size: 108.57142857142857%'>tomcat(1)</a> <a href='/blog/categories/windows' style='font-size: 108.57142857142857%'>windows(1)</a> </span>
 </section>
 
   

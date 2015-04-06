@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Conference | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/conference/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-03-21T21:31:02+02:00</updated>
+  <updated>2015-04-06T23:30:49+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -24,6 +24,7 @@
 
 <p>This year I divided topics by the next directions:</p>
 
+<a name="Spring"></a>
 <h3>Spring</h3>
 
 <ul>
@@ -33,6 +34,7 @@
 </ul>
 
 
+<a name="Frameworks"></a>
 <h3>Frameworks</h3>
 
 <ul>
@@ -41,6 +43,7 @@
 </ul>
 
 
+<a name="Java.JVM.Compiler"></a>
 <h3>Java/JVM/Compiler</h3>
 
 <ul>
@@ -50,6 +53,7 @@
 </ul>
 
 
+<a name="Miscellaneous"></a>
 <h3>Miscellaneous</h3>
 
 <ul>
@@ -62,6 +66,7 @@
 
 <p><img class="center" src="/images/posts/jeeconf2014.jpg"></p>
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ul>

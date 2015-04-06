@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Books | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/books/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-03-21T21:31:02+02:00</updated>
+  <updated>2015-04-06T23:30:49+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -32,6 +32,7 @@
 </ul>
 
 
+<a name="References:"></a>
 <h2>References:</h2>
 
 <ul>
@@ -71,6 +72,7 @@ used only with Grails. Java programmers must re-discover Groovy as super
 pragmatic language. Everything which is written in Java can be written
 in Groovy. Save your time and automate with Groovy.</p>
 
+<a name="References:"></a>
 <h2>References:</h2>
 
 <ul>

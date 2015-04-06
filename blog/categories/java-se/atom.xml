@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java Se | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/java-se/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-03-21T21:31:02+02:00</updated>
+  <updated>2015-04-06T23:30:49+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -26,10 +26,13 @@
 I’ve also written a <em>java_launcher</em> shell script that allows me to write this at the top of Java programs:
 &#8220;` bash</p>
 
+<a name="L..usr.bin.env.java_launcher"></a>
 <h1>!/usr/bin/env java_launcher</h1>
 
+<a name="vim:ft.java"></a>
 <h1>vim:ft=java</h1>
 
+<a name="lib:.home.lk.lib.teamten.jar"></a>
 <h1>lib:/home/lk/lib/teamten.jar</h1>
 
 <p>&#8220;`
@@ -119,6 +122,7 @@ public class helloworld {
 
 <p>It can be run like this: <code>$ ./helloworld</code></p>
 
+<a name="So..how.does.java_launcher.work."></a>
 <h3>So, how does java_launcher work?</h3>
 
 <ol>
@@ -132,6 +136,7 @@ public class helloworld {
 </ol>
 
 
+<a name="Drawbacks"></a>
 <h3>Drawbacks</h3>
 
 <p>I see the next drawbacks:
@@ -140,6 +145,7 @@ public class helloworld {
 - Java script requires additional configuration to be opened/edited in IDE (project file, adjust all dependencies, etc.)
 - it&rsquo;s very hard to edit Java code in plain editor (Java language is verbose). Scripting in Java without IDE might be real pain</p>
 
+<a name="Why.not.Groovy."></a>
 <h2>Why not Groovy?</h2>
 
 <p>I don&rsquo;t think that Java is &ldquo;good&rdquo; language for scripting (see drawbacks above). Groovy is much better language with nice scripting capabilities. Every Groovy script might be treated like a Java code snippet (with some exceptions <a href="http://groovy.codehaus.org/Differences+from+Java">[1]</a> and <a href="http://groovy-lang.org/differences.html">[2]</a>). But, the most important is that Groovy has build-in <a href="http://groovy-lang.org/grape.html">Grape dependency manager</a>:</p>
@@ -160,6 +166,7 @@ class Example {
 
 <p><strong>So, I have no idea why to reinvent the wheel.</strong> Use Groovy for scripting and Java for everything else.</p>
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ul>
@@ -200,10 +207,12 @@ class Example {
 
 <p>I highly recommend to read <a href="https://plumbr.eu/blog/what-is-a-permgen-leak">What is a PermGen leak?</a> post to get more info about this issue.</p>
 
+<a name="Disclaimer"></a>
 <h3>Disclaimer</h3>
 
 <p>The current post is totally based on <a href="https://plumbr.eu/blog/how-not-to-create-a-permgen-leak">How (not) to create a permgen leak?</a></p>
 
+<a name="Generate.PermGen.leak"></a>
 <h2>Generate PermGen leak</h2>
 
 <p>The main idea is dynamically create a lot of classes via byte code manipulation library. We are going to use <a href="http://www.csg.ci.i.u-tokyo.ac.jp/~chiba/javassist/">Javassist</a> as it&rsquo;s the simplest library with nice API.</p>
@@ -369,10 +378,12 @@ Exception in thread "main" java.lang.OutOfMemoryError: PermGen space
 
 <p>As you can see it was possible to create about 550 <code>MyClass</code> classes before we&rsquo;ve got an expected error.</p>
 
+<a name="Tomcat.Leaks"></a>
 <h3>Tomcat Leaks</h3>
 
 <p>Tomcat team created a nice <a href="http://wiki.apache.org/tomcat/MemoryLeakProtection">wiki page</a> where listed and shown the situations where leaks can be detected and fixed.</p>
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="Orest Ivasiv">
 
   
-  <meta name="description" content="Suppose you have the next error while restart/stop Tomcat (in my case Tomcat 7.x): WARNING: Cannot serialize session attribute &hellip;">
+  <meta name="description" content="JSON pretty print it&rsquo;s common task while working with JSON from command line. There are many ways of doing this via Python, Ruby, node.js, but &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -88,6 +88,92 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2014/08/groovy-notes-pretty-print-json-from.html">Groovy Notes: Pretty Print JSON From the Command Line</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-08-13T21:28:00+03:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:28 pm</span></time>
+        
+           | <a href="/2014/08/groovy-notes-pretty-print-json-from.html#disqus_thread"
+             data-disqus-identifier="http://halyph.com/2014/08/groovy-notes-pretty-print-json-from.html">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="center" src="/images/blog/groovy.png">
+JSON pretty print it&rsquo;s common task while working with JSON from command line. There are many ways of doing this via Python, Ruby, node.js, but here I&rsquo;d like to concentrate on Groovy one-liner:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;{&quot;foo&quot;: &quot;lorem&quot;, &quot;bar&quot;: &quot;ipsum&quot;}&#39;</span> <span class="p">|</span> groovy -e <span class="s1">&#39;import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;foo&quot;</span>: <span class="s2">&quot;lorem&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;bar&quot;</span>: <span class="s2">&quot;ipsum&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can slightly improve this one-liner via adding shell alias:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">alias </span><span class="nv">pp</span><span class="o">=</span><span class="s2">&quot;groovy -e &#39;import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)&#39;&quot;</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;{&quot;foo&quot;: &quot;lorem&quot;, &quot;bar&quot;: &quot;ipsum&quot;}&#39;</span> <span class="p">|</span> pp
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Also, we might use Groovy script which might be handy for simple JSON validation also:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">$</span> <span class="n">cat</span> <span class="n">prettyJson</span><span class="o">.</span><span class="na">groovy</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">groovy.json.*</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">println</span> <span class="n">JsonOutput</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">.</span><span class="na">text</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">JsonException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;ERROR: Not valid JSON&quot;</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">$</span> <span class="n">echo</span> <span class="s1">&#39;{&quot;foo: &quot;lorem&quot;, &#39;</span> <span class="o">|</span> <span class="n">groovy</span> <span class="n">prettyJson</span><span class="o">.</span><span class="na">groovy</span>
+</span><span class='line'><span class="nl">ERROR:</span> <span class="n">Not</span> <span class="n">valid</span> <span class="n">JSON</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2014/08/how-to-disable-tomcat-session.html">How to Disable Tomcat Session Serialization</a></h1>
     
     
@@ -147,62 +233,12 @@ java.io.NotSerializableException: com.MyClass
 </ul>
 
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ul>
 <li><a href="http://tomcat.apache.org/tomcat-7.0-doc/config/manager.html#Disable_Session_Persistence">Disable Session Persistence </a></li>
 <li><a href="http://tomcat.apache.org/tomcat-7.0-doc/cluster-howto.html">Clustering/Session Replication HOW-TO</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/07/review-programming-groovy-2-dynamic.html">Review: Programming Groovy 2: Dynamic Productivity for the Java Developer</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-07-23T01:19:00+03:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2014</span></span> <span class='time'>1:19 am</span></time>
-        
-           | <a href="/2014/07/review-programming-groovy-2-dynamic.html#disqus_thread"
-             data-disqus-identifier="http://halyph.com/2014/07/review-programming-groovy-2-dynamic.html">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="center" src="/images/posts/book_programming_groovy2.jpg"></p>
-
-<p>This book is well balanced around Groovy language. I would say there is minimal required knowledge regarding the language. The author (Venkat Subramaniam) fluently covered every important aspect of Groovy. But this book is for experienced developer. The accents were made only in scope of Groovy language and totally avoided any &ldquo;intro&rdquo; programming talks, which is actually cool.</p>
-
-<p>Here is the book&rsquo;s structure:</p>
-
-<ul>
-<li><strong>Beginning Groovy</strong> - this part is dedicated to Groovy language features, especially from Java perspective. Reading this part I was building the parallel to Ruby trying to compare these languages. The main difference which I found it&rsquo;s only syntax &ldquo;sugar&rdquo;. I.e. conceptually these two language are very similar.&nbsp;</li>
-<li><strong>Using Groovy</strong> - this is a pragmatic part where were highlighted the next topics: Groovy GDK, XML Processing, working with DB, &nbsp;working with Java.</li>
-<li><strong>Dynamic features (MOPing Groovy)</strong>&nbsp;- here were highlighted two main metaprogramming approaches: run-time and compile-time metaprogramming. Very interesting part. For me Groovy metaprogramming facilities are much clear comparison to Ruby metaprogramming.</li>
-<li><strong>Using Metaprogramming</strong> - it&rsquo;s pragmatic part where were highlighted the applications for Groovy metaprogramming features. It&rsquo;s very important to note that Groovy contains many pre-bundled classes/modules which are really nice samples of metaprogramming Groovy&rsquo;s features.<div>I highly recommend this book to everybody who is interested in Groovy language. This book highlights Groovy dynamic features.</div></li>
-</ul>
-
-
-<h2>References:</h2>
-
-<ul>
-<li><a href="http://www.amazon.com/Programming-Groovy-Productivity-Developer-Pragmatic/dp/1937785300/">Programming Groovy 2: Dynamic Productivity for the Java Developer</a></li>
 </ul>
 
 </div>
@@ -235,6 +271,10 @@ java.io.NotSerializableException: com.MyClass
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/04/rails-architecture-and-scalability-issues/">Rails Architecture and Scalability</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/03/17/how-to-download-jars-from-maven-central/">How to Download Jars From Maven Central</a>
       </li>
     
@@ -250,15 +290,11 @@ java.io.NotSerializableException: com.MyClass
         <a href="/blog/2015/02/13/do-we-need-java-for-everything/">Do We Need Java for Everything?</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/02/05/how-to-generate-permgen/">How to Generate PermGen Leak?</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bash' style='font-size: 117.14285714285714%'>bash(2)</a> <a href='/blog/categories/blog' style='font-size: 108.57142857142857%'>blog(1)</a> <a href='/blog/categories/books' style='font-size: 117.14285714285714%'>books(2)</a> <a href='/blog/categories/conference' style='font-size: 108.57142857142857%'>conference(1)</a> <a href='/blog/categories/groovy' style='font-size: 125.71428571428572%'>groovy(3)</a> <a href='/blog/categories/h2' style='font-size: 108.57142857142857%'>h2(1)</a> <a href='/blog/categories/ivy' style='font-size: 108.57142857142857%'>ivy(1)</a> <a href='/blog/categories/java' style='font-size: 160.0%'>java(7)</a> <a href='/blog/categories/java-se' style='font-size: 117.14285714285714%'>java se(2)</a> <a href='/blog/categories/jdbc' style='font-size: 108.57142857142857%'>jdbc(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 108.57142857142857%'>jeeconf(1)</a> <a href='/blog/categories/languages' style='font-size: 108.57142857142857%'>languages(1)</a> <a href='/blog/categories/learning' style='font-size: 108.57142857142857%'>learning(1)</a> <a href='/blog/categories/maven' style='font-size: 117.14285714285714%'>maven(2)</a> <a href='/blog/categories/octopress' style='font-size: 117.14285714285714%'>octopress(2)</a> <a href='/blog/categories/review' style='font-size: 117.14285714285714%'>review(2)</a> <a href='/blog/categories/ruby' style='font-size: 117.14285714285714%'>ruby(2)</a> <a href='/blog/categories/scala' style='font-size: 108.57142857142857%'>scala(1)</a> <a href='/blog/categories/scripting' style='font-size: 108.57142857142857%'>scripting(1)</a> <a href='/blog/categories/shell' style='font-size: 117.14285714285714%'>shell(2)</a> <a href='/blog/categories/spring' style='font-size: 108.57142857142857%'>spring(1)</a> <a href='/blog/categories/textmate' style='font-size: 117.14285714285714%'>textmate(2)</a> <a href='/blog/categories/tomcat' style='font-size: 108.57142857142857%'>tomcat(1)</a> <a href='/blog/categories/windows' style='font-size: 108.57142857142857%'>windows(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/architecture' style='font-size: 108.57142857142857%'>architecture(1)</a> <a href='/blog/categories/bash' style='font-size: 117.14285714285714%'>bash(2)</a> <a href='/blog/categories/blog' style='font-size: 108.57142857142857%'>blog(1)</a> <a href='/blog/categories/books' style='font-size: 117.14285714285714%'>books(2)</a> <a href='/blog/categories/conference' style='font-size: 108.57142857142857%'>conference(1)</a> <a href='/blog/categories/groovy' style='font-size: 125.71428571428572%'>groovy(3)</a> <a href='/blog/categories/h2' style='font-size: 108.57142857142857%'>h2(1)</a> <a href='/blog/categories/ivy' style='font-size: 108.57142857142857%'>ivy(1)</a> <a href='/blog/categories/java' style='font-size: 160.0%'>java(7)</a> <a href='/blog/categories/java-se' style='font-size: 117.14285714285714%'>java se(2)</a> <a href='/blog/categories/jdbc' style='font-size: 108.57142857142857%'>jdbc(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 108.57142857142857%'>jeeconf(1)</a> <a href='/blog/categories/languages' style='font-size: 108.57142857142857%'>languages(1)</a> <a href='/blog/categories/learning' style='font-size: 108.57142857142857%'>learning(1)</a> <a href='/blog/categories/maven' style='font-size: 117.14285714285714%'>maven(2)</a> <a href='/blog/categories/octopress' style='font-size: 117.14285714285714%'>octopress(2)</a> <a href='/blog/categories/rails' style='font-size: 108.57142857142857%'>rails(1)</a> <a href='/blog/categories/review' style='font-size: 117.14285714285714%'>review(2)</a> <a href='/blog/categories/ruby' style='font-size: 125.71428571428572%'>ruby(3)</a> <a href='/blog/categories/scala' style='font-size: 108.57142857142857%'>scala(1)</a> <a href='/blog/categories/scripting' style='font-size: 108.57142857142857%'>scripting(1)</a> <a href='/blog/categories/shell' style='font-size: 117.14285714285714%'>shell(2)</a> <a href='/blog/categories/spring' style='font-size: 108.57142857142857%'>spring(1)</a> <a href='/blog/categories/textmate' style='font-size: 117.14285714285714%'>textmate(2)</a> <a href='/blog/categories/tomcat' style='font-size: 108.57142857142857%'>tomcat(1)</a> <a href='/blog/categories/windows' style='font-size: 108.57142857142857%'>windows(1)</a> </span>
 </section>
 
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Jdbc | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/jdbc/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-03-21T21:31:02+02:00</updated>
+  <updated>2015-04-06T23:30:49+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -36,6 +36,7 @@
 </ol>
 
 
+<a name="Let.s.try.to.implement.this:"></a>
 <h3>Let&rsquo;s try to implement this:</h3>
 
 <ul>
@@ -119,6 +120,7 @@ Press [Enter] to stop.
 <p>Verify that our custom table contains just inserted values
 <img class="left" src="/images/posts/h2console_sqlwindow.png"></p>
 
+<a name="Add.Embedded.TCP.and.Web.Servers"></a>
 <h3>Add Embedded TCP and Web Servers</h3>
 
 <p>Now, it&rsquo;s time to add small improvements.
@@ -164,6 +166,7 @@ public class App {
 </ul>
 
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ol>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Scripting | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/scripting/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-03-21T21:31:02+02:00</updated>
+  <updated>2015-04-06T23:30:49+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -69,8 +69,10 @@ argv.toList foreach Console.println
 
 <p>Now, we should save the mentioned above code snippet in some file (e.g. <strong>check.sh</strong>) and make it executable. This script can be run as any Linux shell script <code>./check.sh</code> (<code>check.bat</code> - Windows).</p>
 
+<a name="Scala.utility.internals"></a>
 <h2>Scala utility internals</h2>
 
+<a name="Linux"></a>
 <h3>Linux</h3>
 
 <p>Linux script header uses the next items:</p>
@@ -86,6 +88,7 @@ argv.toList foreach Console.println
 This script
 &#8220;`</p>
 
+<a name="L...bin.sh"></a>
 <h1>! /bin/sh</h1>
 
 <p>echo Header
@@ -102,6 +105,7 @@ Header
 <p>We will get error in case <code>exec</code> is removed:
 &#8220;`</p>
 
+<a name="L...bin.sh"></a>
 <h1>! /bin/sh</h1>
 
 <p>echo Header
@@ -200,23 +204,27 @@ else 0
 <p>  }
 &#8220;`</p>
 
+<a name="Add.libraries.to.Scala.script"></a>
 <h2>Add libraries to Scala script</h2>
 
 <p>Scala script libraries (<strong>jar</strong>s) can be added in script&rsquo;s header section:
 &#8220;`</p>
 
+<a name="L..bin.sh"></a>
 <h1>!/bin/sh</h1>
 
 <p>exec scala -classpath &ldquo;lib/lib.1.jar:lib/lib.2.jar&rdquo; &ldquo;$0&rdquo; &ldquo;$@&rdquo;
 !#
 &#8220;`</p>
 
+<a name="Summary"></a>
 <h2>Summary</h2>
 
 <p>There is nothing magical in Scala interpretation. Every single peace of code must be compiled. Such interesting <em>scripting</em> approach can be applied to Java as well.</p>
 
 <p>Unfortunately, Scala is not looks like nice scripting language (because it&rsquo;s <strong>not</strong> designed for this use case). It will be uncomfortable &ldquo;scripting&rdquo; in Scala without IDE.</p>
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ivy | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/ivy/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-03-21T21:31:02+02:00</updated>
+  <updated>2015-04-06T23:30:49+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -31,19 +31,23 @@ But what if we need to download them without these scripts.</p>
 <p>There are several ways to do this.
 Assume that we&rsquo;d like to download <code>spark-core</code> library (<code>groupId=com.sparkjava, artifactId=spark-core, version=2.1</code>) with all dependencies from <a href="http://search.maven.org/#artifactdetails%7Ccom.sparkjava%7Cspark-core%7C2.1%7Cjar">Maven Central</a> into <code>lib</code> folder.</p>
 
+<a name="Use.Maven3.dependency.plugin"></a>
 <h2>Use Maven3 dependency plugin</h2>
 
 <p>Here is there variants for lib download:
 &#8220;` bash Download library with all dependencies</p>
 
+<a name="Specify.repoUrl..it.s.optional."></a>
 <h1>Specify repoUrl (it&rsquo;s optional)</h1>
 
 <p>mvn dependency:get -DrepoUrl=<a href="http://download.java.net/maven/2/">http://download.java.net/maven/2/</a> -DgroupId=com.sparkjava -DartifactId=spark-core -Dversion=2.1</p>
 
+<a name="OR.use.default.repoUrl"></a>
 <h1>OR use default repoUrl</h1>
 
 <p>mvn dependency:get -DgroupId=com.sparkjava -DartifactId=spark-core -Dversion=2.1</p>
 
+<a name="OR.use.parameter.artifact.as.groupId:artifactId:version"></a>
 <h1>OR use parameter artifact as groupId:artifactId:version</h1>
 
 <p>mvn dependency:get -Dartifact=com.sparkjava:spark-core:2.1
@@ -53,11 +57,13 @@ Assume that we&rsquo;d like to download <code>spark-core</code> library (<code>g
 &#8220;` bash Copy jars from local maven repo
 mvn dependency:copy-dependencies -f $HOME/.m2/repository/com/sparkjava/spark-core/2.1/spark-core-2.1.pom -DoutputDirectory=$(pwd)/lib</p>
 
+<a name="the.previous.command.doesn.t.copy.spark-core-x.x.jar..that.s.why.we.should.copy.it.manually"></a>
 <h1>the previous command doesn&rsquo;t copy spark-core-x.x.jar, that&rsquo;s why we should copy it manually</h1>
 
 <p>cp $HOME/.m2/repository/com/sparkjava/spark-core/2.1/spark-core-2.1.jar $(pwd)/lib
 &#8220;`</p>
 
+<a name="Use.standalone.Ivy"></a>
 <h2>Use standalone Ivy</h2>
 
 <p>We can use Ivy as standalone jar to download Maven dependencies without creating Ant build file:</p>
@@ -71,6 +77,7 @@ java -jar ivy-2.4.0.jar -dependency com.sparkjava spark-core 2.1 -retrieve "lib/
 
 <p>As you can see Ivy downloads approach is much simpler. The only cons (or pros, it depends) that <strong>ivy.jar</strong> should be additionally downloaded.</p>
 
+<a name="Calling.Ivy.from.Groovy.or.Java"></a>
 <h2>Calling Ivy from Groovy or Java</h2>
 
 <p>Here I&rsquo;ve decided to store <a href="http://makandracards.com/evgeny-goldin/5817-calling-ivy-from-groovy-or-java">Evgeny&rsquo;s Goldin</a> code snippet as a reference for myself. Programmatic artifacts downloads is not a common operation. It&rsquo;s alway nice to know the general concept how it can be done. Especially when Ivy documentation is not very informative.</p>
@@ -134,6 +141,7 @@ public File resolveArtifact(String groupId, String artifactId, String version) {
 resolveArtifact( 'log4j', 'log4j', '1.2.16' )
 </code></pre>
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ul>

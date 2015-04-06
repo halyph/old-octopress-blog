@@ -155,8 +155,10 @@ argv.toList foreach Console.println
 
 <p>Now, we should save the mentioned above code snippet in some file (e.g. <strong>check.sh</strong>) and make it executable. This script can be run as any Linux shell script <code>./check.sh</code> (<code>check.bat</code> - Windows).</p>
 
+<a name="Scala.utility.internals"></a>
 <h2>Scala utility internals</h2>
 
+<a name="Linux"></a>
 <h3>Linux</h3>
 
 <p>Linux script header uses the next items:</p>
@@ -216,6 +218,7 @@ This script</p>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
+<a name="Windows"></a>
 <h3>Windows</h3>
 
 <p>Windows batch script header uses the next items:</p>
@@ -232,6 +235,7 @@ This script</p>
 
 <p>The OS-specific script settings were identified, now let&rsquo;s dive deeper to understand how <code>scala</code> utility works.</p>
 
+<a name="L.code.scala..code..internals"></a>
 <h3><code>scala</code> internals</h3>
 
 <p>This utility performs the next flow to run script:</p>
@@ -355,6 +359,7 @@ This script</p>
 </span><span class='line'>  }</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
+<a name="Add.libraries.to.Scala.script"></a>
 <h2>Add libraries to Scala script</h2>
 
 <p>Scala script libraries (<strong>jar</strong>s) can be added in script&rsquo;s header section:</p>
@@ -367,12 +372,14 @@ This script</p>
 </span><span class='line'>!#</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
+<a name="Summary"></a>
 <h2>Summary</h2>
 
 <p>There is nothing magical in Scala interpretation. Every single peace of code must be compiled. Such interesting <em>scripting</em> approach can be applied to Java as well.</p>
 
 <p>Unfortunately, Scala is not looks like nice scripting language (because it&rsquo;s <strong>not</strong> designed for this use case). It will be uncomfortable &ldquo;scripting&rdquo; in Scala without IDE.</p>
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ul>
@@ -458,6 +465,10 @@ This script</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/04/rails-architecture-and-scalability-issues/">Rails Architecture and Scalability</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/03/17/how-to-download-jars-from-maven-central/">How to Download Jars From Maven Central</a>
       </li>
     
@@ -473,15 +484,11 @@ This script</p>
         <a href="/blog/2015/02/13/do-we-need-java-for-everything/">Do We Need Java for Everything?</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/02/05/how-to-generate-permgen/">How to Generate PermGen Leak?</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bash' style='font-size: 117.14285714285714%'>bash(2)</a> <a href='/blog/categories/blog' style='font-size: 108.57142857142857%'>blog(1)</a> <a href='/blog/categories/books' style='font-size: 117.14285714285714%'>books(2)</a> <a href='/blog/categories/conference' style='font-size: 108.57142857142857%'>conference(1)</a> <a href='/blog/categories/groovy' style='font-size: 125.71428571428572%'>groovy(3)</a> <a href='/blog/categories/h2' style='font-size: 108.57142857142857%'>h2(1)</a> <a href='/blog/categories/ivy' style='font-size: 108.57142857142857%'>ivy(1)</a> <a href='/blog/categories/java' style='font-size: 160.0%'>java(7)</a> <a href='/blog/categories/java-se' style='font-size: 117.14285714285714%'>java se(2)</a> <a href='/blog/categories/jdbc' style='font-size: 108.57142857142857%'>jdbc(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 108.57142857142857%'>jeeconf(1)</a> <a href='/blog/categories/languages' style='font-size: 108.57142857142857%'>languages(1)</a> <a href='/blog/categories/learning' style='font-size: 108.57142857142857%'>learning(1)</a> <a href='/blog/categories/maven' style='font-size: 117.14285714285714%'>maven(2)</a> <a href='/blog/categories/octopress' style='font-size: 117.14285714285714%'>octopress(2)</a> <a href='/blog/categories/review' style='font-size: 117.14285714285714%'>review(2)</a> <a href='/blog/categories/ruby' style='font-size: 117.14285714285714%'>ruby(2)</a> <a href='/blog/categories/scala' style='font-size: 108.57142857142857%'>scala(1)</a> <a href='/blog/categories/scripting' style='font-size: 108.57142857142857%'>scripting(1)</a> <a href='/blog/categories/shell' style='font-size: 117.14285714285714%'>shell(2)</a> <a href='/blog/categories/spring' style='font-size: 108.57142857142857%'>spring(1)</a> <a href='/blog/categories/textmate' style='font-size: 117.14285714285714%'>textmate(2)</a> <a href='/blog/categories/tomcat' style='font-size: 108.57142857142857%'>tomcat(1)</a> <a href='/blog/categories/windows' style='font-size: 108.57142857142857%'>windows(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/architecture' style='font-size: 108.57142857142857%'>architecture(1)</a> <a href='/blog/categories/bash' style='font-size: 117.14285714285714%'>bash(2)</a> <a href='/blog/categories/blog' style='font-size: 108.57142857142857%'>blog(1)</a> <a href='/blog/categories/books' style='font-size: 117.14285714285714%'>books(2)</a> <a href='/blog/categories/conference' style='font-size: 108.57142857142857%'>conference(1)</a> <a href='/blog/categories/groovy' style='font-size: 125.71428571428572%'>groovy(3)</a> <a href='/blog/categories/h2' style='font-size: 108.57142857142857%'>h2(1)</a> <a href='/blog/categories/ivy' style='font-size: 108.57142857142857%'>ivy(1)</a> <a href='/blog/categories/java' style='font-size: 160.0%'>java(7)</a> <a href='/blog/categories/java-se' style='font-size: 117.14285714285714%'>java se(2)</a> <a href='/blog/categories/jdbc' style='font-size: 108.57142857142857%'>jdbc(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 108.57142857142857%'>jeeconf(1)</a> <a href='/blog/categories/languages' style='font-size: 108.57142857142857%'>languages(1)</a> <a href='/blog/categories/learning' style='font-size: 108.57142857142857%'>learning(1)</a> <a href='/blog/categories/maven' style='font-size: 117.14285714285714%'>maven(2)</a> <a href='/blog/categories/octopress' style='font-size: 117.14285714285714%'>octopress(2)</a> <a href='/blog/categories/rails' style='font-size: 108.57142857142857%'>rails(1)</a> <a href='/blog/categories/review' style='font-size: 117.14285714285714%'>review(2)</a> <a href='/blog/categories/ruby' style='font-size: 125.71428571428572%'>ruby(3)</a> <a href='/blog/categories/scala' style='font-size: 108.57142857142857%'>scala(1)</a> <a href='/blog/categories/scripting' style='font-size: 108.57142857142857%'>scripting(1)</a> <a href='/blog/categories/shell' style='font-size: 117.14285714285714%'>shell(2)</a> <a href='/blog/categories/spring' style='font-size: 108.57142857142857%'>spring(1)</a> <a href='/blog/categories/textmate' style='font-size: 117.14285714285714%'>textmate(2)</a> <a href='/blog/categories/tomcat' style='font-size: 108.57142857142857%'>tomcat(1)</a> <a href='/blog/categories/windows' style='font-size: 108.57142857142857%'>windows(1)</a> </span>
 </section>
 
   

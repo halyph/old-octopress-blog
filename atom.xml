@@ -4,7 +4,7 @@
   <title><![CDATA[Knowledge Is Everything]]></title>
   <link href="http://halyph.com/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-03-21T21:31:02+02:00</updated>
+  <updated>2015-04-06T23:30:49+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -12,6 +12,332 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Architecture and Scalability]]></title>
+    <link href="http://halyph.com/blog/2015/04/04/rails-architecture-and-scalability-issues/"/>
+    <updated>2015-04-04T19:17:12+03:00</updated>
+    <id>http://halyph.com/blog/2015/04/04/rails-architecture-and-scalability-issues</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://halyph.com/images/blog/ruby.png"></p>
+
+<p><ul>
+ <li>
+ <ul>
+  <li><a href="#Rails.deployment.architecture">Rails deployment architecture</a>
+  <ul>
+   <li><a href="#Simple.Rails.Setup">Simple Rails Setup</a></li>
+   <li><a href="#Typical.Rails.Setup">Typical Rails Setup</a></li>
+   <li><a href="#Application.server..Phusion.Passenger.">Application server (Phusion Passenger)</a></li>
+  </ul>
+  </li>
+  <li><a href="#Recommended.Rails.Application.Setups">Recommended Rails Application Setups</a>
+  <ul>
+   <li><a href="#Small.Site">Small Site</a></li>
+   <li><a href="#Medium.Site">Medium Site</a></li>
+   <li><a href="#Large.Site">Large Site</a></li>
+  </ul>
+  </li>
+  <li><a href="#Scale.up.Traditional.Rails.Application">Scale up Traditional Rails Application</a>
+  <ul>
+   <li><a href="#Caching">Caching</a></li>
+   <li><a href="#Long-runnint.task.scaling">Long-runnint task scaling</a></li>
+  </ul>
+  </li>
+  <li><a href="#Rails.moving.towards.SOA.and.micro.services">Rails moving towards SOA and micro services</a>
+  <ul>
+   <li><a href="#Splitting.application.into.small.pieces">Splitting application into small pieces</a></li>
+   <li><a href="#Reference..sample..service.orienter...micro.service.architecture">Reference (sample) service orienter / micro service architecture</a>
+   <ul>
+    <li><a href="#Groupon">Groupon</a></li>
+    <li><a href="#Flipcart">Flipcart</a></li>
+    <li><a href="#Gilt">Gilt</a>
+</li>
+   </ul>
+   </li>
+  </ul>
+  </li>
+  <li><a href="#Conclusion">Conclusion</a></li>
+  <li><a href="#Rails.related.tech.components">Rails related tech components</a>
+  <ul>
+   <li><a href="#Web.Servers...Proxy">Web Servers / Proxy</a></li>
+   <li><a href="#Application.Servers">Application Servers</a></li>
+   <li><a href="#Libraries...Tools">Libraries / Tools</a></li>
+  </ul>
+  </li>
+  <li><a href="#References">References</a></li>
+ </ul>
+ </li>
+</ul>
+
+</p>
+
+<p>Everybody know when this <em>&ldquo;Rails doesn&rsquo;t scale&rdquo;</em> has been begun:</p>
+
+<ul>
+<li><strong>2009</strong> <a href="http://www.artima.com/scalazine/articles/twitter_on_scala.html">Twitter message queue back-end moved from Ruby to Scala</a></li>
+<li><strong>2011</strong> <a href="https://blog.twitter.com/2011/twitter-search-now-3x-faster">Twitter Search is Now 3x Faster</a></li>
+</ul>
+
+
+<blockquote><p>Panic, we must not use <strong>Ruby on Rails</strong> because Twitter had scalability problems.</p></blockquote>
+
+<p>I&rsquo;m a Java developer who love Ruby language, but don&rsquo;t write anything in Rails. Despite this I&rsquo;ve decided to look into this famous <em>&ldquo;Rails doesn&rsquo;t scale&rdquo;</em> statement deeper to understand the root cause of this problem.</p>
+
+<p>So, I <a href="https://github.com/halyph/architecture-case-study#ruby-on-rails-architecture-case-studies">collected</a> public available Ruby on Rails architecture and scalability case studies (videos of conference talks, reports and blog posts) and tried to extract the general patterns of architecture and scalability issues.</p>
+
+<p>There are two type of scalability issues:</p>
+
+<ol>
+<li><strong>Application performance</strong> - when web application can&rsquo;t handle huge traffic</li>
+<li><strong>Delivery velocity</strong> - when it&rsquo;s become hard to make changes in big Rails application, run quick tests, deploy it and manage big team</li>
+</ol>
+
+
+<p><em>Note</em>: You are not another &ldquo;twitter&rdquo; to worry about scalability issues right from beginning of the project (there are fewer web apps on the Internet to get enough traffic to even care about scalability). Your goal is to push your product as quick as possible.
+But, in the same time you&rsquo;d like to use Rails (due to it&rsquo;s productivity) and make you potentially application scalable (in all possible terms)</p>
+
+<p>The most interesting that scalability is about architecture, databases, caching, event queues, disk IO and less about Rails framework.</p>
+
+<a name="Rails.deployment.architecture"></a>
+<h2>Rails deployment architecture</h2>
+
+<p>Let&rsquo;s review the common Rails deployment approaches (see <a href="http://www.slideshare.net/jweiss/deployment-with-ruby-on-rails">Deployment with Ruby on Rails</a>)</p>
+
+<a name="Simple.Rails.Setup"></a>
+<h3>Simple Rails Setup</h3>
+
+<p>One Rails instance handles all requests. Rails is single-threaded: There is only one concurrent request.</p>
+
+<p><img src="http://halyph.com/images/posts/2015-04-04/pic1.jpg"></p>
+
+<a name="Typical.Rails.Setup"></a>
+<h3>Typical Rails Setup</h3>
+
+<ul>
+<li>A load-balancer distributes the incoming requests</li>
+<li>Some load-balancers will deliver static requests themselves</li>
+<li>Several Rails instances handle all requests</li>
+<li>Number of concurrent requests equals number of Rails instances</li>
+</ul>
+
+
+<p><img src="http://halyph.com/images/posts/2015-04-04/pic2.jpg"></p>
+
+<a name="Application.server..Phusion.Passenger."></a>
+<h3>Application server (Phusion Passenger)</h3>
+
+<ul>
+<li>Involving Phusion Passenger application server</li>
+<li>Makes setup easier on the single machine level</li>
+<li>Multiple servers still require load balancer</li>
+<li>Suitable for mass-hosting</li>
+<li>upcoming standard way of deploying Rails</li>
+</ul>
+
+
+<p><img src="http://halyph.com/images/posts/2015-04-04/pic3.jpg"></p>
+
+<a name="Recommended.Rails.Application.Setups"></a>
+<h2>Recommended Rails Application Setups</h2>
+
+<a name="Small.Site"></a>
+<h3>Small Site</h3>
+
+<p>Apache with mod_rails/Phusion Passenger</p>
+
+<p><img src="http://halyph.com/images/posts/2015-04-04/pic4.jpg"></p>
+
+<a name="Medium.Site"></a>
+<h3>Medium Site</h3>
+
+<ul>
+<li>Apache/Nginx as frontend proxy</li>
+<li>Passanger as backend</li>
+<li>Deliver static files with Apache/Nginx</li>
+</ul>
+
+
+<p><img src="http://halyph.com/images/posts/2015-04-04/pic5.jpg"></p>
+
+<a name="Large.Site"></a>
+<h3>Large Site</h3>
+
+<ul>
+<li>Redundant load-ballancer</li>
+<li>Redundant proxy</li>
+<li>Phusion Passenger/mod_rails</li>
+</ul>
+
+
+<p><img src="http://halyph.com/images/posts/2015-04-04/pic6.jpg"></p>
+
+<a name="Scale.up.Traditional.Rails.Application"></a>
+<h2>Scale up Traditional Rails Application</h2>
+
+<a name="Caching"></a>
+<h3>Caching</h3>
+
+<p>There might be the cases when it&rsquo;s not enought and in this case we should start looking in &ldquo;cashing&rdquo; direction via involving Memcahed and/or Redis <em>(based on Konstantin’s Gredeskoul slides)</em></p>
+
+<p><img src="http://halyph.com/images/posts/2015-04-04/pic7.jpg"></p>
+
+<a name="Long-runnint.task.scaling"></a>
+<h3>Long-runnint task scaling</h3>
+
+<p><em>(based on Konstantin’s Gredeskoul slides)</em></p>
+
+<ul>
+<li>Background jobs with Reques (it sits on top of Redis)</li>
+<li>Use Solr/Elasticsearch instead of doing complex joins</li>
+</ul>
+
+
+<p><img src="http://halyph.com/images/posts/2015-04-04/pic8.jpg"></p>
+
+<a name="Rails.moving.towards.SOA.and.micro.services"></a>
+<h2>Rails moving towards SOA and micro services</h2>
+
+<p>The shown above architectures are related to <strong>Monolith Architecture</strong>. This type of architecture has some problems:</p>
+
+<ul>
+<li>Development pain points:</li>
+<li>effective controllers and models have a lot of logic
+
+<ul>
+<li>~1000 Models/Controllers, 200K LOC, 100s of jobs</li>
+</ul>
+</li>
+<li>Merge issues arise in big team (20-30+)</li>
+<li>Lots of contributors and no ownership</li>
+<li>Difficult deployments with long integration cycles</li>
+<li>Tests are not green, it&rsquo;s really hard to support stable test quality</li>
+</ul>
+
+
+<p>The monolithic Rails app should evolve into ecosystems of connected services. It&rsquo;s becoming quite common for Rails apps to be working mainly as <a href="https://github.com/halyph/architecture-case-study/blob/master/rails-as-an-soa-client-by-pete-hodgson.md">clients</a> to other services.</p>
+
+<a name="Splitting.application.into.small.pieces"></a>
+<h3>Splitting application into small pieces</h3>
+
+<ul>
+<li>Split into smaller applications (based on Konstantin&rsquo;s Gredeskoul <a href="http://www.slideshare.net/kigster/enterprise-architectures-with-ruby-and-rails">slides</a>)
+
+<ul>
+<li>Contains web UI, logic and data
+
+<ul>
+<li>Extract look and feel into gem to share across apps</li>
+</ul>
+</li>
+<li>May combine with other apps</li>
+<li>May rely on common libraries</li>
+<li>Typically run in their own Ruby VM</li>
+</ul>
+</li>
+<li>Extract services and create APIs
+
+<ul>
+<li>Create client API wrapper gems for consumers</li>
+</ul>
+</li>
+<li>Extract libraries (gems)
+
+<ul>
+<li>Create shared based client gem library</li>
+</ul>
+</li>
+</ul>
+
+
+<p><img src="http://halyph.com/images/posts/2015-04-04/pic9.jpg"></p>
+
+<a name="Reference..sample..service.orienter...micro.service.architecture"></a>
+<h3>Reference (sample) service orienter / micro service architecture</h3>
+
+<p>Now, we have more than one Rails application and many service which are communicating using messaging, distributed cashed, etc.</p>
+
+<a name="Groupon"></a>
+<h4><a href="https://github.com/halyph/architecture-case-study/blob/master/groupon.md">Groupon</a></h4>
+
+<p><img src="http://halyph.com/images/posts/2015-04-04/pic10.png"></p>
+
+<a name="Flipcart"></a>
+<h4><a href="https://github.com/halyph/architecture-case-study/blob/master/flipcart.md">Flipcart</a></h4>
+
+<p><img src="http://halyph.com/images/posts/2015-04-04/pic11.jpg"></p>
+
+<a name="Gilt"></a>
+<h4><a href="https://github.com/halyph/architecture-case-study/blob/master/gilt.md">Gilt</a></h4>
+
+<p><img src="http://halyph.com/images/posts/2015-04-04/pic12.jpg"></p>
+
+<p>I&rsquo;ve collect much more case studies, see <a href="https://github.com/halyph/architecture-case-study#ruby-on-rails-architecture-case-studies">here</a>.</p>
+
+<a name="Conclusion"></a>
+<h2>Conclusion</h2>
+
+<p>Moving Monolith Rails application to micro service architecture it&rsquo;s not one shot action. It&rsquo;s long run with lots of trade offs. And more over, micro service architecture is not silver bullet, it&rsquo;s just one alternative way to scale your application (see [Recommended Rails Application Setups][#Recommended.Rails.Application.Setups]).</p>
+
+<p>The key idea is to develop your application with <a href="http://en.wikipedia.org/wiki/Single_responsibility_principle">SRP (Single responsibility principle)</a> in mind. The more modular your application the more scalable it&rsquo;s.</p>
+
+<p>I&rsquo;m planning to add more architecture case studies to my <a href="https://github.com/halyph/architecture-case-study#ruby-on-rails-architecture-case-studies">collection</a> (not only Rails related). Stay tuned.</p>
+
+<a name="Rails.related.tech.components"></a>
+<h2>Rails related tech components</h2>
+
+<p>Collection of major technology components mentioned in case studies.</p>
+
+<a name="Web.Servers...Proxy"></a>
+<h3>Web Servers / Proxy</h3>
+
+<ul>
+<li><a href="http://httpd.apache.org/">Apache</a></li>
+<li><a href="http://nginx.org/">Nginx</a></li>
+<li><a href="http://www.haproxy.org/">HAProxy</a></li>
+</ul>
+
+
+<a name="Application.Servers"></a>
+<h3>Application Servers</h3>
+
+<ul>
+<li><a href="http://unicorn.bogomips.org/">Unicorn</a></li>
+<li><a href="https://www.phusionpassenger.com">Phusion Passenger</a></li>
+<li><a href="http://puma.io/">Puma</a></li>
+<li><a href="http://code.macournoyer.com/thin/">Thin</a></li>
+</ul>
+
+
+<a name="Libraries...Tools"></a>
+<h3>Libraries / Tools</h3>
+
+<ul>
+<li><a href="http://redis.io/">Redis</a></li>
+<li><a href="http://memcached.org/">Memcached</a></li>
+<li><a href="https://github.com/resque/resque">Reque</a></li>
+<li><a href="http://sidekiq.org/">Sidekiq</a></li>
+<li><a href="http://lucene.apache.org/solr/">Solr</a></li>
+<li><a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a></li>
+</ul>
+
+
+<a name="References"></a>
+<h2>References</h2>
+
+<ul>
+<li><a href="https://github.com/halyph/architecture-case-study#ruby-on-rails-architecture-case-studies">Collection of Ruby on Rails Architecture Case Studies</a>
+
+<ul>
+<li><a href="http://www.slideshare.net/jweiss/deployment-with-ruby-on-rails">Deployment with Ruby on Rails</a></li>
+<li><a href="http://www.slideshare.net/kigster/enterprise-architectures-with-ruby-and-rails">Enterprise Architectures with Ruby (and Rails)</a></li>
+</ul>
+</li>
+<li><a href="http://www.quora.com/Does-Ruby-on-Rails-scale">Does Ruby on Rails scale</a> - Quora</li>
+<li>&ldquo;Keeping Your Massive Rails App From Turning Into a S#!t Show with Benjamin Smith&rdquo; (see <a href="https://vimeo.com/76094344">video</a> and <a href="https://speakerdeck.com/benjaminleesmith/keeping-your-massive-rails-app-from-turning-into-a-s-number-t-show-windycityrails-2013">slides</a>)</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to Download Jars From Maven Central]]></title>
@@ -31,6 +357,7 @@ But what if we need to download them without these scripts.</p>
 <p>There are several ways to do this.
 Assume that we&rsquo;d like to download <code>spark-core</code> library (<code>groupId=com.sparkjava, artifactId=spark-core, version=2.1</code>) with all dependencies from <a href="http://search.maven.org/#artifactdetails%7Ccom.sparkjava%7Cspark-core%7C2.1%7Cjar">Maven Central</a> into <code>lib</code> folder.</p>
 
+<a name="Use.Maven3.dependency.plugin"></a>
 <h2>Use Maven3 dependency plugin</h2>
 
 <p>Here is there variants for lib download:</p>
@@ -65,6 +392,7 @@ Assume that we&rsquo;d like to download <code>spark-core</code> library (<code>g
 </span></code></pre></td></tr></table></div></figure>
 
 
+<a name="Use.standalone.Ivy"></a>
 <h2>Use standalone Ivy</h2>
 
 <p>We can use Ivy as standalone jar to download Maven dependencies without creating Ant build file:</p>
@@ -84,6 +412,7 @@ Assume that we&rsquo;d like to download <code>spark-core</code> library (<code>g
 
 <p>As you can see Ivy downloads approach is much simpler. The only cons (or pros, it depends) that <strong>ivy.jar</strong> should be additionally downloaded.</p>
 
+<a name="Calling.Ivy.from.Groovy.or.Java"></a>
 <h2>Calling Ivy from Groovy or Java</h2>
 
 <p>Here I&rsquo;ve decided to store <a href="http://makandracards.com/evgeny-goldin/5817-calling-ivy-from-groovy-or-java">Evgeny&rsquo;s Goldin</a> code snippet as a reference for myself. Programmatic artifacts downloads is not a common operation. It&rsquo;s alway nice to know the general concept how it can be done. Especially when Ivy documentation is not very informative.</p>
@@ -205,6 +534,7 @@ Assume that we&rsquo;d like to download <code>spark-core</code> library (<code>g
 </span></code></pre></td></tr></table></div></figure>
 
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ul>
@@ -275,6 +605,7 @@ Assume that we&rsquo;d like to download <code>spark-core</code> library (<code>g
 
 <p>There is JRuby version of <code>fast-stemmer</code> gem called <a href="https://github.com/caius/jruby-stemmer"><code>jruby-stemmer</code></a>. But, I&rsquo;m not ready to maitain this. That&rsquo;s why I&rsquo;ve decided to use <a href="http://rubyinstaller.org/">RubyInstaller</a>.</p>
 
+<a name="Install.Ruby.on.Windows.and.SSL.issues"></a>
 <h2>Install Ruby on Windows and SSL issues</h2>
 
 <ol>
@@ -321,10 +652,12 @@ Assume that we&rsquo;d like to download <code>spark-core</code> library (<code>g
 </ul>
 
 
+<a name="Prepapre.environment.for.Octopress"></a>
 <h2>Prepapre environment for Octopress</h2>
 
 <p>Now it&rsquo;s time to clone <a href="http://octopress.org/">Octopress</a> blog and run it. Unfortunatelly, there are some minor issues which still must be fixed.</p>
 
+<a name="Fix..Octopress..native.extentions.issues"></a>
 <h3>Fix <a href="http://octopress.org/">Octopress</a> native extentions issues</h3>
 
 <p>We know that <a href="http://octopress.org/">Octopress</a> uses native extentions thats why we have to additionally install <a href="http://cdn.rubyinstaller.org/archives/devkits/DevKit-mingw64-64-4.7.2-20130224-1432-sfx.exe">Development Kit</a></p>
@@ -376,10 +709,12 @@ Assume that we&rsquo;d like to download <code>spark-core</code> library (<code>g
 </span><span class='line'>- D:/Tools/Ruby/Ruby21-x64</span></code></pre></td></tr></table></div></figure>
 
 
+<a name="Install.Python"></a>
 <h3>Install Python</h3>
 
 <p>The default syntax highlighting engine in Octopress/Jekyll is <a href="http://pygments.org/">Pygments</a>. It&rsquo;s requires Python v.2.7.x. Simply download <a href="https://www.python.org/downloads/release/python-278/">Python v.2.7.8</a> and add it on system <code>PATH</code>.</p>
 
+<a name="Final.steps"></a>
 <h3>Final steps</h3>
 
 <p>I assume that blog was previously cloned. Now, we should perform &ldquo;traditional&rdquo; Ruby project ceremony:</p>
@@ -391,6 +726,7 @@ Assume that we&rsquo;d like to download <code>spark-core</code> library (<code>g
 </ul>
 
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ul>
@@ -423,6 +759,7 @@ Here we will review other implementation of this concept.</p>
 </ul>
 
 
+<a name="Use.Case"></a>
 <h2>Use Case</h2>
 
 <p>We have to create simple and small REST application based on <a href="https://github.com/perwendel/spark">Spark Java framework</a> (A Sinatra inspired framework for Java).</p>
@@ -467,6 +804,7 @@ Here we will review other implementation of this concept.</p>
 </ul>
 
 
+<a name="Traditional.Maven.Way"></a>
 <h2>Traditional Maven Way</h2>
 
 <ul>
@@ -1147,6 +1485,7 @@ Here we will review other implementation of this concept.</p>
 
 <p>Note: <a href="http://mojo.codehaus.org/appassembler/appassembler-maven-plugin/usage-program.html">Maven Application Assembler Plugin</a> have a lot of customization options, just check the documentation.</p>
 
+<a name="Summary"></a>
 <h2>Summary</h2>
 
 <p>Here was shown that using such tool as Maven you can be productive and &ldquo;agile&rdquo; (use <a href="http://gradle.org">Gradle</a> if you&rsquo;d like to be in trend):</p>
@@ -1162,6 +1501,7 @@ Here we will review other implementation of this concept.</p>
 
 <p>Yes, it&rsquo;s not a simple <em>write-one</em> Java &ldquo;script&rdquo;, but it&rsquo;s flexible enough to feel like it is.</p>
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ul>
@@ -1358,6 +1698,7 @@ I’ve also written a <em>java_launcher</em> shell script that allows me to writ
 
 <p>It can be run like this: <code>$ ./helloworld</code></p>
 
+<a name="So..how.does.java_launcher.work."></a>
 <h3>So, how does java_launcher work?</h3>
 
 <ol>
@@ -1371,6 +1712,7 @@ I’ve also written a <em>java_launcher</em> shell script that allows me to writ
 </ol>
 
 
+<a name="Drawbacks"></a>
 <h3>Drawbacks</h3>
 
 <p>I see the next drawbacks:
@@ -1379,6 +1721,7 @@ I’ve also written a <em>java_launcher</em> shell script that allows me to writ
 - Java script requires additional configuration to be opened/edited in IDE (project file, adjust all dependencies, etc.)
 - it&rsquo;s very hard to edit Java code in plain editor (Java language is verbose). Scripting in Java without IDE might be real pain</p>
 
+<a name="Why.not.Groovy."></a>
 <h2>Why not Groovy?</h2>
 
 <p>I don&rsquo;t think that Java is &ldquo;good&rdquo; language for scripting (see drawbacks above). Groovy is much better language with nice scripting capabilities. Every Groovy script might be treated like a Java code snippet (with some exceptions <a href="http://groovy.codehaus.org/Differences+from+Java">[1]</a> and <a href="http://groovy-lang.org/differences.html">[2]</a>). But, the most important is that Groovy has build-in <a href="http://groovy-lang.org/grape.html">Grape dependency manager</a>:</p>
@@ -1406,6 +1749,7 @@ I’ve also written a <em>java_launcher</em> shell script that allows me to writ
 
 <p><strong>So, I have no idea why to reinvent the wheel.</strong> Use Groovy for scripting and Java for everything else.</p>
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ul>
@@ -1446,10 +1790,12 @@ I’ve also written a <em>java_launcher</em> shell script that allows me to writ
 
 <p>I highly recommend to read <a href="https://plumbr.eu/blog/what-is-a-permgen-leak">What is a PermGen leak?</a> post to get more info about this issue.</p>
 
+<a name="Disclaimer"></a>
 <h3>Disclaimer</h3>
 
 <p>The current post is totally based on <a href="https://plumbr.eu/blog/how-not-to-create-a-permgen-leak">How (not) to create a permgen leak?</a></p>
 
+<a name="Generate.PermGen.leak"></a>
 <h2>Generate PermGen leak</h2>
 
 <p>The main idea is dynamically create a lot of classes via byte code manipulation library. We are going to use <a href="http://www.csg.ci.i.u-tokyo.ac.jp/~chiba/javassist/">Javassist</a> as it&rsquo;s the simplest library with nice API.</p>
@@ -1742,10 +2088,12 @@ I’ve also written a <em>java_launcher</em> shell script that allows me to writ
 
 <p>As you can see it was possible to create about 550 <code>MyClass</code> classes before we&rsquo;ve got an expected error.</p>
 
+<a name="Tomcat.Leaks"></a>
 <h3>Tomcat Leaks</h3>
 
 <p>Tomcat team created a nice <a href="http://wiki.apache.org/tomcat/MemoryLeakProtection">wiki page</a> where listed and shown the situations where leaks can be detected and fixed.</p>
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ul>
@@ -1816,8 +2164,10 @@ argv.toList foreach Console.println
 
 <p>Now, we should save the mentioned above code snippet in some file (e.g. <strong>check.sh</strong>) and make it executable. This script can be run as any Linux shell script <code>./check.sh</code> (<code>check.bat</code> - Windows).</p>
 
+<a name="Scala.utility.internals"></a>
 <h2>Scala utility internals</h2>
 
+<a name="Linux"></a>
 <h3>Linux</h3>
 
 <p>Linux script header uses the next items:</p>
@@ -1877,6 +2227,7 @@ This script</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<a name="Windows"></a>
 <h3>Windows</h3>
 
 <p>Windows batch script header uses the next items:</p>
@@ -1893,6 +2244,7 @@ This script</p>
 
 <p>The OS-specific script settings were identified, now let&rsquo;s dive deeper to understand how <code>scala</code> utility works.</p>
 
+<a name="L.code.scala..code..internals"></a>
 <h3><code>scala</code> internals</h3>
 
 <p>This utility performs the next flow to run script:</p>
@@ -2016,6 +2368,7 @@ This script</p>
 </span><span class='line'>  }</span></code></pre></td></tr></table></div></figure>
 
 
+<a name="Add.libraries.to.Scala.script"></a>
 <h2>Add libraries to Scala script</h2>
 
 <p>Scala script libraries (<strong>jar</strong>s) can be added in script&rsquo;s header section:</p>
@@ -2028,12 +2381,14 @@ This script</p>
 </span><span class='line'>!#</span></code></pre></td></tr></table></div></figure>
 
 
+<a name="Summary"></a>
 <h2>Summary</h2>
 
 <p>There is nothing magical in Scala interpretation. Every single peace of code must be compiled. Such interesting <em>scripting</em> approach can be applied to Java as well.</p>
 
 <p>Unfortunately, Scala is not looks like nice scripting language (because it&rsquo;s <strong>not</strong> designed for this use case). It will be uncomfortable &ldquo;scripting&rdquo; in Scala without IDE.</p>
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ul>
@@ -2077,6 +2432,7 @@ This script</p>
 </ol>
 
 
+<a name="Let.s.try.to.implement.this:"></a>
 <h3>Let&rsquo;s try to implement this:</h3>
 
 <ul>
@@ -2228,6 +2584,7 @@ This script</p>
 <p>Verify that our custom table contains just inserted values
 <img class="left" src="http://halyph.com/images/posts/h2console_sqlwindow.png"></p>
 
+<a name="Add.Embedded.TCP.and.Web.Servers"></a>
 <h3>Add Embedded TCP and Web Servers</h3>
 
 <p>Now, it&rsquo;s time to add small improvements.
@@ -2286,6 +2643,7 @@ We should add/update item (4) in previous code snippets like this</p>
 </ul>
 
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ol>
@@ -2578,11 +2936,13 @@ What is the simplest way to define block comment in Bash script?</p>
     <link href="http://halyph.com/blog/2014/09/07/migration-to-octopress/"/>
     <updated>2014-09-07T23:15:56+03:00</updated>
     <id>http://halyph.com/blog/2014/09/07/migration-to-octopress</id>
-    <content type="html"><![CDATA[<h2>Objectives</h2>
+    <content type="html"><![CDATA[<a name="Objectives"></a>
+<h2>Objectives</h2>
 
 <p>I&rsquo;ve been blogging for several years (2009-2014) using Google Blogger <a href="http://halyph.blogspot.com">My old blogspot blog</a>. It was a great experience. But, I always felt some discomfort.
 I couldn&rsquo;t simply write without thinking how it will be rendered. I was distracted by blog engine.</p>
 
+<a name="Moving.away"></a>
 <h2>Moving away</h2>
 
 <p>Additional inspiration for moving away came from the essay <a href="http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html">Blogging Like a Hacker</a>.
@@ -2591,12 +2951,14 @@ I picked Octopress because of the pre-bundled minimal required blogging features
 
 <p>The official Octopress <a href="http://octopress.org/docs/">documentation</a> has step-by-step guide for blog setup. It&rsquo;s very convenient and transparent.</p>
 
+<a name="Theme"></a>
 <h2>Theme</h2>
 
 <p>I didn&rsquo;t want to use the default Octopress theme (it&rsquo;s boring). Theme customization required some time. All others free themes are too complex, IMHO.</p>
 
 <p>At the end I found this <a href="http://blog.justin.kelly.org.au/octopress-theme/">theme</a> and applied it to my <em>new</em> blog.</p>
 
+<a name="Main.features"></a>
 <h2>Main features</h2>
 
 <p>Here I selected the main features which I like the most:</p>
@@ -2610,10 +2972,12 @@ I picked Octopress because of the pre-bundled minimal required blogging features
 </ul>
 
 
+<a name="Minor.Issues"></a>
 <h3>Minor Issues</h3>
 
 <p>I&rsquo;ve tried to migrate posts form my old blog to Octopress, tried different approaches. But, I had no success. Actually, I had ugly results, which should be manually fixed.</p>
 
+<a name="P.S."></a>
 <h3>P.S.</h3>
 
 <p>There are tons of different Static Site Generators, see the next resources:</p>
@@ -2736,6 +3100,7 @@ java.io.NotSerializableException: com.MyClass
 </ul>
 
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ul>
@@ -2765,6 +3130,7 @@ java.io.NotSerializableException: com.MyClass
 </ul>
 
 
+<a name="References:"></a>
 <h2>References:</h2>
 
 <ul>
@@ -2785,6 +3151,7 @@ java.io.NotSerializableException: com.MyClass
 
 <p>This year I divided topics by the next directions:</p>
 
+<a name="Spring"></a>
 <h3>Spring</h3>
 
 <ul>
@@ -2794,6 +3161,7 @@ java.io.NotSerializableException: com.MyClass
 </ul>
 
 
+<a name="Frameworks"></a>
 <h3>Frameworks</h3>
 
 <ul>
@@ -2802,6 +3170,7 @@ java.io.NotSerializableException: com.MyClass
 </ul>
 
 
+<a name="Java.JVM.Compiler"></a>
 <h3>Java/JVM/Compiler</h3>
 
 <ul>
@@ -2811,6 +3180,7 @@ java.io.NotSerializableException: com.MyClass
 </ul>
 
 
+<a name="Miscellaneous"></a>
 <h3>Miscellaneous</h3>
 
 <ul>
@@ -2823,6 +3193,7 @@ java.io.NotSerializableException: com.MyClass
 
 <p><img class="center" src="http://halyph.com/images/posts/jeeconf2014.jpg"></p>
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ul>
@@ -2893,6 +3264,7 @@ used only with Grails. Java programmers must re-discover Groovy as super
 pragmatic language. Everything which is written in Java can be written
 in Groovy. Save your time and automate with Groovy.</p>
 
+<a name="References:"></a>
 <h2>References:</h2>
 
 <ul>
@@ -3009,6 +3381,7 @@ Try to avoid hipster <a href="http://en.wikipedia.org/wiki/Bandwagon_effect">ban
 </ul>
 
 
+<a name="References"></a>
 <h2>References</h2>
 
 <ul>
