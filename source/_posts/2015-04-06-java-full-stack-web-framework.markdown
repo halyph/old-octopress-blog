@@ -10,7 +10,7 @@ categories: java
 
 !TOC
 
-I believe that everybody body knows the most popular full-stack web framework [Ruby on Rails](http://rubyonrails.org). Of course there are other frameworks for Ruby language, but Rails is the number one. Now the question how many full-stack web frameworks exist for Java?
+I believe that everybody knows the most popular full-stack web framework - [Ruby on Rails](http://rubyonrails.org). Of course there are other frameworks for Ruby language, but Rails is the number one. Now, the question: how many full-stack web frameworks exist for Java?
 
 ## Overview
 
