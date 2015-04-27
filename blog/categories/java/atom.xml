@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-04-06T23:30:49+03:00</updated>
+  <updated>2015-04-28T00:56:38+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -12,6 +12,170 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Java Full Stack Web Framework]]></title>
+    <link href="http://halyph.com/blog/2015/04/06/java-full-stack-web-framework/"/>
+    <updated>2015-04-06T23:43:10+03:00</updated>
+    <id>http://halyph.com/blog/2015/04/06/java-full-stack-web-framework</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/blog/java.png"></p>
+
+<p><ul>
+ <li>
+ <ul>
+  <li><a href="#Overview">Overview</a></li>
+  <li><a href="#Grails">Grails</a></li>
+  <li><a href="#Play.Framework.2">Play Framework 2</a></li>
+  <li><a href="#Code.Generation.Frameworks">Code Generation Frameworks</a>
+  <ul>
+   <li><a href="#Spring.Roo">Spring Roo</a></li>
+   <li><a href="#JBoss.Forge">JBoss Forge</a></li>
+   <li><a href="#AppFuse">AppFuse</a></li>
+   <li><a href="#JHipster">JHipster</a></li>
+  </ul>
+  </li>
+  <li><a href="#Domain-driven.Frameworks">Domain-driven Frameworks</a></li>
+  <li><a href="#Others">Others</a></li>
+  <li><a href="#Summary">Summary</a></li>
+  <li><a href="#References">References</a></li>
+ </ul>
+ </li>
+</ul>
+
+</p>
+
+<p>I believe that everybody body knows the most popular full-stack web framework <a href="http://rubyonrails.org">Ruby on Rails</a>. Of course there are other frameworks for Ruby language, but Rails is the number one. Now the question how many full-stack web frameworks exist for Java?</p>
+
+<a name="Overview"></a>
+<h2>Overview</h2>
+
+<p>Let&rsquo;s define the desired items for full-stack web framework:</p>
+
+<ul>
+<li>CoC - <a href="http://en.wikipedia.org/wiki/Convention_over_configuration">Convention over configuration</a></li>
+<li>MVC - <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">Model-view-controller</a></li>
+<li>DRY - <a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself">Don&rsquo;t repeat yourself</a></li>
+<li>Scaffolding (<em>it was one of the major selling point on the early stage of Rails</em>)
+
+<ul>
+<li>Easy prototyping</li>
+</ul>
+</li>
+<li>Data/Persistent Layer / ORM</li>
+<li>DB schema migration</li>
+<li>URI Routing</li>
+<li>HTML Rendering / Template engines</li>
+<li>Testing</li>
+<li>REST API</li>
+<li>Security</li>
+<li>Caching</li>
+<li>Request Filtering</li>
+<li>Session Management</li>
+<li>Form Validation</li>
+<li>i18n/l10n</li>
+</ul>
+
+
+<a name="Grails"></a>
+<h2>Grails</h2>
+
+<p>I think  <a href="https://grails.org">Grails</a> was and is the single &ldquo;true&rdquo; Rails reincarnation on JVM. Grails is based on <a href="http://www.groovy-lang.org/">Groovy</a> language. It support all concepts Rails supports. It&rsquo;s based on Spring/Hibernate and Gradle since v.3.0 (Grails v.3.0.0 was released on <strong>Mar 31, 2015</strong>).</p>
+
+<p>Grails v.3 is build on <a href="http://projects.spring.io/spring-boot/">Spring Boot</a>.</p>
+
+<p>Some people arguing that Grails v.3 acts as simple wrapper on top of Spring Boot and now it does not worth any investments. But, we must not agree as CoC and DRY principles are very vague.</p>
+
+<a name="Play.Framework.2"></a>
+<h2>Play Framework 2</h2>
+
+<p><a href="https://www.playframework.com/">Play Framework 2</a> is a special player. It has two implementations: Java and Scala. Actually Java version is not as powerful as Scala due to Java, as a language, &ldquo;limitation&rdquo;. This framework lives under <a href="http://typesafe.com/">Typesafe</a> umbrella, aka <strong>&ldquo;Typesafe Reactive Platform&rdquo;</strong>.</p>
+
+<p>Play is just different. It&rsquo;s not Servlet-based and is built on <a href="http://netty.io/">Netty</a> async framework. A lot of people claiming that Play is very cool and productive. I haven&rsquo;t tried it yet. But it looks promising and interesting.</p>
+
+<a name="Code.Generation.Frameworks"></a>
+<h2>Code Generation Frameworks</h2>
+
+<p>I decided to define the special category &ldquo;Code Generation&rdquo;. Frameworks which are related  to this category are not full stack, but can be called as RAD (Rapid Application Development) frameworks.</p>
+
+<a name="Spring.Roo"></a>
+<h3>Spring Roo</h3>
+
+<p><a href="http://projects.spring.io/spring-roo/">Spring Roo</a> was very popular some time ago and had a lot of investments from VMWare (former Spring stack owner). Later, the ownership was transferred to <a href="http://www.disid.com">DISIG</a>.</p>
+
+<p>Spring Roo is code generation framework, built on top of Spring stack. It&rsquo;s useful for quick prototyping.</p>
+
+<a name="JBoss.Forge"></a>
+<h3>JBoss Forge</h3>
+
+<p><a href="http://forge.jboss.org/">JBoss Forge</a> is conceptually equal to Spring Roo, but linked to Java EE stack (like <a href="http://wildfly.org/">Wildfly</a>, <a href="http://tomee.apache.org/apache-tomee.html">TomEE</a>) and Maven. It&rsquo;s relly cool if you work with Java EE a lot. Forge is shine in prototyping and code generation. Community looks vibrant and active.</p>
+
+<a name="AppFuse"></a>
+<h3>AppFuse</h3>
+
+<p><a href="http://appfuse.org/">AppFuse</a> can be called as ramp-up framework. The main goal is to quickly generate project with pre-onfigured functionality (see <code>mvn archetype:generate</code>).</p>
+
+<a name="JHipster"></a>
+<h3>JHipster</h3>
+
+<p><a href="https://jhipster.github.io/">JHipster</a> is brand new and based on Spring Boot and Angular.js v.1.x. Classical code generation like in Forge or Spring Roo. But, code generation is build on top of node.js tool <a href="http://yeoman.io/">Yeoman</a>. Concept is very interesting, especially when it uses so hipster&rsquo;s technologies ;-).
+It can generate both back-end (REST endpoint) and front-end (Angular.js Single-page application), even <a href="http://www.liquibase.org/">Liquibase</a> migrations (which is cool too).</p>
+
+<a name="Domain-driven.Frameworks"></a>
+<h2>Domain-driven Frameworks</h2>
+
+<p>There is a very special category Domain-driven frameworks. For this category I&rsquo;ve selected two most popular frameworks: <a href="http://www.openxava.org/">OpenXava</a> and <a href="http://isis.apache.org/">Apache Isis</a>. The main idea is that they can generate views and RESTs based on domain entities. Both frameworks have active community. They have &ldquo;own&rdquo; concepts and no hipsters technologies. The usage domain is very narrow, I guess they can be easily used to quickly general application&rsquo;s back-offices (aka admin pages) and prototyping.</p>
+
+<a name="Others"></a>
+<h2>Others</h2>
+
+<p>There are several others frameworks (<a href="http://www.ninjaframework.org/">Ninja</a>, Javalight](<a href="http://javalite.io/">http://javalite.io/</a>), <a href="http://joddframework.org/">Jodd µicro frameworks</a>). They are build by small communities (or my single developer) and have some applications. But, it&rsquo;s risky to invest in them. You can look into because of curiosity, but not more. As for me it&rsquo;s much safe to use Play/Grails than some unpopular frameworks.</p>
+
+<a name="Summary"></a>
+<h2>Summary</h2>
+
+<p>So, Java ecosystem has two full stack frameworks which use Java language minimally: <strong>Grails</strong> (Groovy/Java) and <strong>Play</strong> (Scala/Java). Also, we have a bunch on code generation frameworks and domain-driven frameworks (which occupy really special niche).</p>
+
+<a name="References"></a>
+<h2>References</h2>
+
+<ul>
+<li>Full stack
+
+<ul>
+<li><a href="https://grails.org/">Grails</a></li>
+<li><a href="https://www.playframework.com/">Play Framework 2</a></li>
+</ul>
+</li>
+<li>Code Generation
+
+<ul>
+<li><a href="http://projects.spring.io/spring-roo/">Spring Roo</a></li>
+<li><a href="http://forge.jboss.org/">JBoss Forge</a></li>
+<li><a href="http://appfuse.org/">AppFuse</a></li>
+<li><a href="https://jhipster.github.io/">JHipster</a></li>
+</ul>
+</li>
+<li>DD Frameworks
+
+<ul>
+<li><a href="http://www.openxava.org/">OpenXava</a></li>
+<li><a href="http://isis.apache.org/">Apache Isis</a></li>
+</ul>
+</li>
+<li>Others
+
+<ul>
+<li><a href="http://www.ninjaframework.org/">Ninja</a></li>
+<li><a href="http://javalite.io/">Javalight</a></li>
+<li><a href="http://jodd.org/">Jodd</a> and <a href="http://joddframework.org/">Jodd µicro frameworks</a></li>
+<li><a href="http://www.web4j.com/">Web4j</a></li>
+<li><a href="http://rifers.org/">Rife</a> - dead</li>
+</ul>
+</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to Download Jars From Maven Central]]></title>
@@ -1071,172 +1235,6 @@ Exception in thread "main" java.lang.OutOfMemoryError: PermGen space
 <li><a href="http://www.javaranch.com/journal/200711/creating_java_classes_runtime_expression_evaluation.html">Javassist - Creating Java classes at runtime for evaluating numerical expressions</a> Small article how to create Java classes dynamically</li>
 <li><a href="http://wiki.apache.org/tomcat/MemoryLeakProtection">Tomcat Wiki MemoryLeakProtection</a></li>
 </ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to Use Embedded H2 With Web Console?]]></title>
-    <link href="http://halyph.com/blog/2015/01/22/how-to-use-embedded-h2-with-h2-console/"/>
-    <updated>2015-01-22T00:55:03+02:00</updated>
-    <id>http://halyph.com/blog/2015/01/22/how-to-use-embedded-h2-with-h2-console</id>
-    <content type="html"><![CDATA[<p><img class="center" src="/images/blog/java.png"></p>
-
-<p>There are several Java SQL databases which supports both server and embedded modes: <a href="http://www.h2database.com/">H2</a>, <a href="http://hsqldb.org/">HSQLDB</a> and <a href="http://db.apache.org/derby/">Derby</a>. The most interesting for me is H2 with own web <a href="http://www.h2database.com/html/quickstart.html#h2_console">Console</a>.</p>
-
-<p>The aim of this post is to show how to connect from H2 Console to embedded in-memory H2.</p>
-
-<blockquote><p>H2 currently supports three servers: a web server (for the H2 Console), a TCP server (for client/server connections) and an PG server (for PostgreSQL clients). <strong>Please note that only the web server supports browser connections.</strong> The servers can be started in different ways, one is using the Server tool. Starting the server doesn&rsquo;t open a database - databases are opened as soon as a client connects.</p></blockquote>
-
-<p>The next steps have to be performed to connect to embedded DB and populate initial data:</p>
-
-<ol>
-<li>Load DB driver</li>
-<li>Get <code>Connection</code></li>
-<li>Create <code>Statement</code> and <code>executeUpate</code> queries</li>
-<li>Create TCP <code>Server</code>. <em>We should start serve to make in-memory DB available for another process</em></li>
-</ol>
-
-
-<a name="Let.s.try.to.implement.this:"></a>
-<h3>Let&rsquo;s try to implement this:</h3>
-
-<ul>
-<li>Run sample application
-&#8220;` java</li>
-</ul>
-
-
-<p>public class App {
-    private static final String DBNAME = &ldquo;mytest&rdquo;;</p>
-
-<pre><code>public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
-    // open the in-memory database within a VM
-
-    Class.forName("org.h2.Driver"); // (1)
-    Connection conn 
-        = DriverManager.getConnection("jdbc:h2:mem:" + DBNAME, "sa", "sa"); // (2)
-    // username:password are very important and must be used for connecting via H2 Console
-
-    Statement stat = conn.createStatement(); // (3)
-    stat.executeUpdate("create table mytbl(id int primary key, name varchar(255))");
-    stat.executeUpdate("insert into mytbl values(1, 'Hello')");
-    stat.executeUpdate("insert into mytbl values(2, 'World')");
-
-    // Verify that sample data was really inserted
-    ResultSet rs = stat.executeQuery("select * from mytbl");
-    System.out.println("ResultSet output:");
-    while (rs.next()) {
-        System.out.println("&gt; " + rs.getString("name"));
-    }
-
-    // start a TCP server
-    Server server = Server.createTcpServer().start(); // (4)
-    // .. use in embedded mode ..
-
-    // or use it from another process:
-    System.out.println("Server started and connection is open.");
-    System.out.println("URL: jdbc:h2:" + server.getURL() + "/mem:" + DBNAME);
-
-    System.out.println("\n");
-    System.out.println(
-            "now start the H2 Console in another process using:\n" +
-            "$ cd h2/bin; java -cp h2-1.4.185.jar org.h2.tools.Console -web -browser");
-
-    System.out.println("Press [Enter] to stop.");
-    System.in.read();
-
-    System.out.println("Stopping server and closing the connection");
-
-    rs.close();
-    server.stop();
-    conn.close();
-    System.out.println("Server is STOPPED");
-}
-</code></pre>
-
-<p>}
-<code>
-* Output for previous run:
-</code>
-ResultSet output:</p>
-
-<blockquote><p>Hello
-World
-Server started and connection is open.
-URL: jdbc:h2:tcp://192.168.1.100:9092/mem:mytest</p></blockquote>
-
-<p>now start the H2 Console in another process using:
-$ cd h2/bin; java -cp h2-1.4.185.jar org.h2.tools.Console -web -browser
-Press [Enter] to stop.
-<code>``
-* We assume that h2 installation bundle (zip file) was downloaded (from http://www.h2database.com/html/download.html) beforehand and unpacked in some folder
-* Go into H2 "install/unpack" folder and run the next command</code>cd h2/bin; java -cp h2-1.4.185.jar org.h2.tools.Console -web -browser<code>
-* Now we should copy URL (from sample App output) and credentials sa/sa to login into Console
-  * **URL:** jdbc:h2:tcp://192.168.1.100:9092/mem:mytest
-  * **Username:** sa
-  * **Password:** sa
-* Login window (opened from shell by</code>org.h2.tools.Console`)
-<img class="left" src="/images/posts/h2console_login.png"></p>
-
-<p>Verify that our custom table contains just inserted values
-<img class="left" src="/images/posts/h2console_sqlwindow.png"></p>
-
-<a name="Add.Embedded.TCP.and.Web.Servers"></a>
-<h3>Add Embedded TCP and Web Servers</h3>
-
-<p>Now, it&rsquo;s time to add small improvements.
-The idea is to switch <em>on</em> H2 Console <strong>Web Server</strong> and <strong>TCP Server</strong> to have external access.
-We should add/update item (4) in previous code snippets like this<br/>
-&#8220;` java
-public class App {
-    private static final String DBNAME = &ldquo;mytest&rdquo;;</p>
-
-<pre><code>public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
-</code></pre>
-
-<p>&hellip;</p>
-
-<pre><code>    Server webServer = Server.createWebServer("-webAllowOthers","-webPort","8082").start(); // (4a)
-    Server server = Server.createTcpServer("-tcpAllowOthers","-tcpPort","9092").start();    // (4b)
-    // .. use in embedded mode ..
-</code></pre>
-
-<p>&hellip;
-        server.stop();
-        webServer.stop();
-        conn.close();
-        System.out.println(&ldquo;Server is STOPPED&rdquo;);
-    }
-}
-&#8220;`</p>
-
-<ul>
-<li>After this we can access to Web Console without running external service
-
-<ul>
-<li>Simply use URL in  browser (access to <strong>Web Server</strong>): <a href="http://localhost:8082/">http://localhost:8082/</a></li>
-</ul>
-</li>
-<li>Use any JDBC client (see IntelliJ IDEA as a sample below)
-
-<ul>
-<li>access to <strong>TCP Server</strong>
-<img class="left" src="/images/posts/h2console_idea.png"></li>
-</ul>
-</li>
-</ul>
-
-
-<a name="References"></a>
-<h2>References</h2>
-
-<ol>
-<li><a href="http://stackoverflow.com/questions/5077584/h2-database-in-memory-mode-cannot-be-accessed-by-console">H2 database in memory mode cannot be accessed by Console</a></li>
-<li><a href="http://www.h2database.com/html/tutorial.html">Official H2 Tutorial</a></li>
-<li><a href="http://h2database.com/javadoc/org/h2/tools/Server.html">H2 Server methods</a></li>
-<li><a href="https://github.com/halyph/tutorials/tree/master/h2-embedded-console">GitHub Sources</a></li>
-</ol>
 
 ]]></content>
   </entry>
