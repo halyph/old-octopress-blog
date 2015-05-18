@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://halyph.com/blog/2015/05/18/golang-presentation-tool/</loc>
+    <lastmod>2015-05-18T23:52:50+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://halyph.com/blog/2015/04/06/java-full-stack-web-framework/</loc>
     <lastmod>2015-04-06T23:43:10+03:00</lastmod>
     <priority>0.8</priority>
@@ -131,21 +137,21 @@
   
   <url>
     <loc>http://halyph.com/blog/archives/</loc>
-    <lastmod>2015-04-28T00:58:53+03:00</lastmod>
+    <lastmod>2015-05-19T01:20:38+03:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://halyph.com/</loc>
-    <lastmod>2015-04-28T00:58:53+03:00</lastmod>
+    <lastmod>2015-05-19T01:20:38+03:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>http://halyph.com/about/</loc>
-    <lastmod>2015-04-28T00:58:53+03:00</lastmod>
+    <lastmod>2015-05-19T01:20:38+03:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Knowledge Is Everything</title>
+  <title>Go Presentation Tool - Knowledge Is Everything</title>
   <meta name="author" content="Orest Ivasiv">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://halyph.com">
+  <link rel="canonical" href="http://halyph.com/blog/2015/05/18/golang-presentation-tool">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Knowledge Is Everything" type="application/atom+xml">
@@ -80,15 +80,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/05/18/golang-presentation-tool/">Go Presentation Tool</a></h1>
+      <h1 class="entry-title">Go Presentation Tool</h1>
     
     
       <p class="meta">
@@ -99,15 +96,15 @@
 
 <time class='entry-date' datetime='2015-05-18T23:52:50+03:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:52 pm</span></time>
         
-           | <a href="/blog/2015/05/18/golang-presentation-tool/#disqus_thread"
-             data-disqus-identifier="http://halyph.com/blog/2015/05/18/golang-presentation-tool/">Comments</a>
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://halyph.com">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><img class="right" src="/images/blog/gopher.png"></p>
+<div class="entry-content"><p><img class="right" src="/images/blog/gopher.png"></p>
 
 <p>Have you ever noticed how Go community presents Go-related talks? Their slides are very simple and without any fancy animation features: see <a href="http://talks.golang.org">Go talks</a>. You might say that they are no so feature-rich as <a href="https://github.com/hakimel/reveal.js/">Reveal.js</a>. And it&rsquo;s true. But, simplicity is beauty, as for me. Also, it&rsquo;s very well aligned with Go language philosophy.</p>
 
@@ -120,7 +117,7 @@
 
 <p>Install Go:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -144,7 +141,7 @@
 </span><span class='line'>  <span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/local/opt/go/libexec/bin
 </span><span class='line'><span class="o">==</span>&gt; Summary
 </span><span class='line'>🍺  /usr/local/Cellar/go/1.4.2: <span class="m">4566</span> files, 155M
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <a name="Define.Go.workspace"></a>
@@ -152,19 +149,19 @@
 
 <p>Let&rsquo;s assume that our Go language workspace will be located at <code>/Users/halyph/Projects/go</code>:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>mkdir go
 </span><span class='line'><span class="nv">$ </span><span class="nb">pwd</span>
 </span><span class='line'>/Users/halyph/Projects/go
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <a name="Configure..code.PATH..code..variable"></a>
 <h3>Configure <code>PATH</code> variable</h3>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -176,7 +173,7 @@
 </span><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/local/opt/go/libexec/bin
 </span><span class='line'><span class="nb">export </span><span class="nv">GOPATH</span><span class="o">=</span><span class="nv">$HOME</span>/Projects/go  <span class="c">#/Users/halyph/Projects/go</span>
 </span><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$GOPATH</span>/bin
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <a name="Install.Go.present.tool"></a>
@@ -184,22 +181,22 @@
 
 <p><strong>present</strong> tool is located in separate package <code>golang.org/x/tools</code> which depends on <code>golang.org/x/net</code> package:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>go get golang.org/x/net
 </span><span class='line'><span class="nv">$ </span>go get golang.org/x/tools
 </span><span class='line'><span class="nv">$ </span>go install golang.org/x/tools/cmd/present
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>Now, we can find <strong>present</strong> tool here:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>which present
 </span><span class='line'>/Users/halyph/Projects/go/bin/present
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <a name="Run.present.tool"></a>
@@ -212,7 +209,7 @@
 </ul>
 
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -246,7 +243,7 @@
 </span><span class='line'>* Title of slide or section <span class="o">(</span>must have asterisk<span class="o">)</span>
 </span><span class='line'>
 </span><span class='line'>Some Text
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <ul>
@@ -254,11 +251,11 @@
 </ul>
 
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>present
 </span><span class='line'>2015/05/19 00:55:33 Open your web browser and visit http://127.0.0.1:3999
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>You should see something like this:</p>
@@ -283,207 +280,58 @@
 </ul>
 
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Orest Ivasiv</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-05-18T23:52:50+03:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:52 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/golang/'>golang</a>
+  
+</span>
+
+
+    </p>
     
-      <h1 class="entry-title"><a href="/blog/2015/04/06/java-full-stack-web-framework/">Java Full Stack Web Framework</a></h1>
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://halyph.com/blog/2015/05/18/golang-presentation-tool/" data-via="halyph" data-counturl="http://halyph.com/blog/2015/05/18/golang-presentation-tool/" >Tweet</a>
+  
+  
+  
+</div>
+
     
-    
-      <p class="meta">
-        
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/04/06/java-full-stack-web-framework/" title="Previous Post: Java full stack web framework">&laquo; Java full stack web framework</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-
-
-
-<time class='entry-date' datetime='2015-04-06T23:43:10+03:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:43 pm</span></time>
-        
-           | <a href="/blog/2015/04/06/java-full-stack-web-framework/#disqus_thread"
-             data-disqus-identifier="http://halyph.com/blog/2015/04/06/java-full-stack-web-framework/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="right" src="/images/blog/java.png"></p>
-
-<p><ul>
- <li>
- <ul>
-  <li><a href="#Overview">Overview</a></li>
-  <li><a href="#Grails">Grails</a></li>
-  <li><a href="#Play.Framework.2">Play Framework 2</a></li>
-  <li><a href="#Code.Generation.Frameworks">Code Generation Frameworks</a>
-  <ul>
-   <li><a href="#Spring.Roo">Spring Roo</a></li>
-   <li><a href="#JBoss.Forge">JBoss Forge</a></li>
-   <li><a href="#AppFuse">AppFuse</a></li>
-   <li><a href="#JHipster">JHipster</a></li>
-  </ul>
-  </li>
-  <li><a href="#Domain-driven.Frameworks">Domain-driven Frameworks</a></li>
-  <li><a href="#Others">Others</a></li>
-  <li><a href="#Summary">Summary</a></li>
-  <li><a href="#References">References</a></li>
- </ul>
- </li>
-</ul>
-
-</p>
-
-<p>I believe that everybody knows the most popular full-stack web framework - <a href="http://rubyonrails.org">Ruby on Rails</a>. Of course there are other frameworks for Ruby language, but Rails is the number one. Now, the question: how many full-stack web frameworks exist for Java?</p>
-
-<a name="Overview"></a>
-<h2>Overview</h2>
-
-<p>Let&rsquo;s define the desired items for full-stack web framework:</p>
-
-<ul>
-<li>CoC - <a href="http://en.wikipedia.org/wiki/Convention_over_configuration">Convention over configuration</a></li>
-<li>MVC - <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">Model-view-controller</a></li>
-<li>DRY - <a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself">Don&rsquo;t repeat yourself</a></li>
-<li>Scaffolding (<em>it was one of the major selling point on the early stage of Rails</em>)
-
-<ul>
-<li>Easy prototyping</li>
-</ul>
-</li>
-<li>Data/Persistent Layer / ORM</li>
-<li>DB schema migration</li>
-<li>URI Routing</li>
-<li>HTML Rendering / Template engines</li>
-<li>Testing</li>
-<li>REST API</li>
-<li>Security</li>
-<li>Caching</li>
-<li>Request Filtering</li>
-<li>Session Management</li>
-<li>Form Validation</li>
-<li>i18n/l10n</li>
-</ul>
-
-
-<a name="Grails"></a>
-<h2>Grails</h2>
-
-<p>I think  <a href="https://grails.org">Grails</a> was and is the single &ldquo;true&rdquo; Rails reincarnation on JVM. Grails is based on <a href="http://www.groovy-lang.org/">Groovy</a> language. It support all concepts Rails supports. It&rsquo;s based on Spring/Hibernate and Gradle since v.3.0 (Grails v.3.0.0 was released on <strong>Mar 31, 2015</strong>).</p>
-
-<p>Grails v.3 is build on <a href="http://projects.spring.io/spring-boot/">Spring Boot</a>.</p>
-
-<p>Some people arguing that Grails v.3 acts as simple wrapper on top of Spring Boot and now it does not worth any investments. But, we must not agree as CoC and DRY principles are very vague.</p>
-
-<a name="Play.Framework.2"></a>
-<h2>Play Framework 2</h2>
-
-<p><a href="https://www.playframework.com/">Play Framework 2</a> is a special player. It has two implementations: Java and Scala. Actually Java version is not as powerful as Scala due to Java, as a language, &ldquo;limitation&rdquo;. This framework lives under <a href="http://typesafe.com/">Typesafe</a> umbrella, aka <strong>&ldquo;Typesafe Reactive Platform&rdquo;</strong>.</p>
-
-<p>Play is just different. It&rsquo;s not Servlet-based and is built on <a href="http://netty.io/">Netty</a> async framework. A lot of people claiming that Play is very cool and productive. I haven&rsquo;t tried it yet. But it looks promising and interesting.</p>
-
-<a name="Code.Generation.Frameworks"></a>
-<h2>Code Generation Frameworks</h2>
-
-<p>I decided to define the special category &ldquo;Code Generation&rdquo;. Frameworks which are related  to this category are not full stack, but can be called as RAD (Rapid Application Development) frameworks.</p>
-
-<a name="Spring.Roo"></a>
-<h3>Spring Roo</h3>
-
-<p><a href="http://projects.spring.io/spring-roo/">Spring Roo</a> was very popular some time ago and had a lot of investments from VMWare (former Spring stack owner). Later, the ownership was transferred to <a href="http://www.disid.com">DISIG</a>.</p>
-
-<p>Spring Roo is code generation framework, built on top of Spring stack. It&rsquo;s useful for quick prototyping.</p>
-
-<a name="JBoss.Forge"></a>
-<h3>JBoss Forge</h3>
-
-<p><a href="http://forge.jboss.org/">JBoss Forge</a> is conceptually equal to Spring Roo, but linked to Java EE stack (like <a href="http://wildfly.org/">Wildfly</a>, <a href="http://tomee.apache.org/apache-tomee.html">TomEE</a>) and Maven. It&rsquo;s relly cool if you work with Java EE a lot. Forge is shine in prototyping and code generation. Community looks vibrant and active.</p>
-
-<a name="AppFuse"></a>
-<h3>AppFuse</h3>
-
-<p><a href="http://appfuse.org/">AppFuse</a> can be called as ramp-up framework. The main goal is to quickly generate project with pre-onfigured functionality (see <code>mvn archetype:generate</code>).</p>
-
-<a name="JHipster"></a>
-<h3>JHipster</h3>
-
-<p><a href="https://jhipster.github.io/">JHipster</a> is brand new and based on Spring Boot and Angular.js v.1.x. Classical code generation like in Forge or Spring Roo. But, code generation is build on top of node.js tool <a href="http://yeoman.io/">Yeoman</a>. Concept is very interesting, especially when it uses so hipster&rsquo;s technologies ;-).
-It can generate both back-end (REST endpoint) and front-end (Angular.js Single-page application), even <a href="http://www.liquibase.org/">Liquibase</a> migrations (which is cool too).</p>
-
-<a name="Domain-driven.Frameworks"></a>
-<h2>Domain-driven Frameworks</h2>
-
-<p>There is a very special category Domain-driven frameworks. For this category I&rsquo;ve selected two most popular frameworks: <a href="http://www.openxava.org/">OpenXava</a> and <a href="http://isis.apache.org/">Apache Isis</a>. The main idea is that they can generate views and RESTs based on domain entities. Both frameworks have active community. They have &ldquo;own&rdquo; concepts and no hipsters technologies. The usage domain is very narrow, I guess they can be easily used to quickly general application&rsquo;s back-offices (aka admin pages) and prototyping.</p>
-
-<a name="Others"></a>
-<h2>Others</h2>
-
-<p>There are several others frameworks (<a href="http://www.ninjaframework.org/">Ninja</a>, Javalight](<a href="http://javalite.io/">http://javalite.io/</a>), <a href="http://joddframework.org/">Jodd µicro frameworks</a>). They are build by small communities (or my single developer) and have some applications. But, it&rsquo;s risky to invest in them. You can look into because of curiosity, but not more. As for me it&rsquo;s much safe to use Play/Grails than some unpopular frameworks.</p>
-
-<a name="Summary"></a>
-<h2>Summary</h2>
-
-<p>So, Java ecosystem has two full stack frameworks which use Java language minimally: <strong>Grails</strong> (Groovy/Java) and <strong>Play</strong> (Scala/Java). Also, we have a bunch on code generation frameworks and domain-driven frameworks (which occupy really special niche).</p>
-
-<a name="References"></a>
-<h2>References</h2>
-
-<ul>
-<li>Full stack
-
-<ul>
-<li><a href="https://grails.org/">Grails</a></li>
-<li><a href="https://www.playframework.com/">Play Framework 2</a></li>
-</ul>
-</li>
-<li>Code Generation
-
-<ul>
-<li><a href="http://projects.spring.io/spring-roo/">Spring Roo</a></li>
-<li><a href="http://forge.jboss.org/">JBoss Forge</a></li>
-<li><a href="http://appfuse.org/">AppFuse</a></li>
-<li><a href="https://jhipster.github.io/">JHipster</a></li>
-</ul>
-</li>
-<li>DD Frameworks
-
-<ul>
-<li><a href="http://www.openxava.org/">OpenXava</a></li>
-<li><a href="http://isis.apache.org/">Apache Isis</a></li>
-</ul>
-</li>
-<li>Others
-
-<ul>
-<li><a href="http://www.ninjaframework.org/">Ninja</a></li>
-<li><a href="http://javalite.io/">Javalight</a></li>
-<li><a href="http://jodd.org/">Jodd</a> and <a href="http://joddframework.org/">Jodd µicro frameworks</a></li>
-<li><a href="http://www.web4j.com/">Web4j</a></li>
-<li><a href="http://rifers.org/">Rife</a> - dead</li>
-</ul>
-</li>
-</ul>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
-  
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/posts/2">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -526,6 +374,7 @@ It can generate both back-end (REST endpoint) and front-end (Angular.js Single-p
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -540,7 +389,10 @@ It can generate both back-end (REST endpoint) and front-end (Angular.js Single-p
       var disqus_shortname = 'kie-by-halyph';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://halyph.com/blog/2015/05/18/golang-presentation-tool/';
+        var disqus_url = 'http://halyph.com/blog/2015/05/18/golang-presentation-tool/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

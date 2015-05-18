@@ -4,7 +4,7 @@
   <title><![CDATA[Knowledge Is Everything]]></title>
   <link href="http://halyph.com/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-04-28T00:58:53+03:00</updated>
+  <updated>2015-05-19T01:20:38+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -12,6 +12,189 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Go Presentation Tool]]></title>
+    <link href="http://halyph.com/blog/2015/05/18/golang-presentation-tool/"/>
+    <updated>2015-05-18T23:52:50+03:00</updated>
+    <id>http://halyph.com/blog/2015/05/18/golang-presentation-tool</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://halyph.com/images/blog/gopher.png"></p>
+
+<p>Have you ever noticed how Go community presents Go-related talks? Their slides are very simple and without any fancy animation features: see <a href="http://talks.golang.org">Go talks</a>. You might say that they are no so feature-rich as <a href="https://github.com/hakimel/reveal.js/">Reveal.js</a>. And it&rsquo;s true. But, simplicity is beauty, as for me. Also, it&rsquo;s very well aligned with Go language philosophy.</p>
+
+<p>So, here is listed steps required to <em>setup</em> and <em>run</em> Go <strong>present</strong> tool.</p>
+
+<a name="Install.Go"></a>
+<h2>Install Go</h2>
+
+<p>I use Mac OS X in this tutorial (see the next <a href="https://golang.org/doc/install">article</a> to install Go on other <em>OS</em>es).</p>
+
+<p>Install Go:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew install <span class="nv">go</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">==</span>&gt; Downloading https://homebrew.bintray.com/bottles/go-1.4.2.yosemite.bottle.1.
+</span><span class='line'><span class="c">######################################################################## 100.0%</span>
+</span><span class='line'><span class="o">==</span>&gt; Pouring go-1.4.2.yosemite.bottle.1.tar.gz
+</span><span class='line'><span class="o">==</span>&gt; Caveats
+</span><span class='line'>As of go 1.2, a valid GOPATH is required to use the <span class="sb">`</span>go get<span class="sb">`</span> <span class="nb">command</span>:   https://golang.org/doc/code.html#GOPATH
+</span><span class='line'>
+</span><span class='line'>You may wish to add the GOROOT-based install location to your PATH:
+</span><span class='line'>  <span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/local/opt/go/libexec/bin
+</span><span class='line'><span class="o">==</span>&gt; Summary
+</span><span class='line'>🍺  /usr/local/Cellar/go/1.4.2: <span class="m">4566</span> files, 155M
+</span></code></pre></td></tr></table></div></figure>
+
+
+<a name="Define.Go.workspace"></a>
+<h2>Define Go workspace</h2>
+
+<p>Let&rsquo;s assume that our Go language workspace will be located at <code>/Users/halyph/Projects/go</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>mkdir go
+</span><span class='line'><span class="nv">$ </span><span class="nb">pwd</span>
+</span><span class='line'>/Users/halyph/Projects/go
+</span></code></pre></td></tr></table></div></figure>
+
+
+<a name="Configure..code.PATH..code..variable"></a>
+<h3>Configure <code>PATH</code> variable</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat .bash_profile
+</span><span class='line'>
+</span><span class='line'><span class="c">#Golang settings</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/local/opt/go/libexec/bin
+</span><span class='line'><span class="nb">export </span><span class="nv">GOPATH</span><span class="o">=</span><span class="nv">$HOME</span>/Projects/go  <span class="c">#/Users/halyph/Projects/go</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$GOPATH</span>/bin
+</span></code></pre></td></tr></table></div></figure>
+
+
+<a name="Install.Go.present.tool"></a>
+<h2>Install Go present tool</h2>
+
+<p><strong>present</strong> tool is located in separate package <code>golang.org/x/tools</code> which depends on <code>golang.org/x/net</code> package:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>go get golang.org/x/net
+</span><span class='line'><span class="nv">$ </span>go get golang.org/x/tools
+</span><span class='line'><span class="nv">$ </span>go install golang.org/x/tools/cmd/present
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, we can find <strong>present</strong> tool here:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>which present
+</span><span class='line'>/Users/halyph/Projects/go/bin/present
+</span></code></pre></td></tr></table></div></figure>
+
+
+<a name="Run.present.tool"></a>
+<h2>Run present tool</h2>
+
+<p>The easiest way to test <strong>present</strong> tool is to render some slides:</p>
+
+<ul>
+<li>Create sample <code>slide</code> file (see <code>.slide</code> <a href="http://godoc.org/golang.org/x/tools/present">file format</a>) in any folder:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat sample.slide
+</span><span class='line'>
+</span><span class='line'>Title of document
+</span><span class='line'>Subtitle of document
+</span><span class='line'>15:04 <span class="m">2</span> Jan 2006
+</span><span class='line'>Tags: foo, bar, baz
+</span><span class='line'>
+</span><span class='line'>Author Name
+</span><span class='line'>Job title, Company
+</span><span class='line'>joe@example.com
+</span><span class='line'>http://url/
+</span><span class='line'>@twitter_name
+</span><span class='line'>Some Text
+</span><span class='line'>
+</span><span class='line'>* Title of slide or section <span class="o">(</span>must have asterisk<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>Some Text
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Run <strong>present</strong> in this folder:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>present
+</span><span class='line'>2015/05/19 00:55:33 Open your web browser and visit http://127.0.0.1:3999
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You should see something like this:</p>
+
+<p><img src="http://halyph.com/images/posts/2015-05-19/pic1.png"></p>
+
+<p><img src="http://halyph.com/images/posts/2015-05-19/pic2.png"></p>
+
+<p>Go <strong>present</strong> works and you are ready to produce <em>Go-fashion</em> slides.</p>
+
+<a name="References"></a>
+<h2>References</h2>
+
+<ul>
+<li><a href="http://godoc.org/golang.org/x/tools/present">Go present package documentation</a></li>
+<li><a href="https://github.com/hakimel/reveal.js/">Reveal.js - The HTML Presentation Framework</a></li>
+<li><a href="http://talks.golang.org">Go talks - slides</a></li>
+<li><a href="https://github.com/cmars/represent">Go tool Represent - Static slide presentation and article pages, generated from text</a></li>
+<li><a href="https://www.youtube.com/watch?v=83JBmS8WpHM">Video - go present - create html slides with extractable, executable go code</a></li>
+<li><a href="https://pythonadventures.wordpress.com/2014/02/14/using-gos-present-with-python-code-snippets/">Using Go’s present with Python code snippets</a> and <a href="https://groups.google.com/forum/#!topic/golang-nuts/BdgXMRqjGqk">Go-nuts discussion - how to embed runnable code snippets in a presentation</a></li>
+<li><a href="http://blog.joshsoftware.com/2014/03/10/how-do-i-create-a-presentation-using-go/">How Do I Create A Presentation Using Go?</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Java Full Stack Web Framework]]></title>
@@ -3435,87 +3618,6 @@ in Groovy. Save your time and automate with Groovy.</p>
 <li> <a href="http://www.manning.com/kousen/">Making Java Groovy, by Ken Kousen</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[About Learning New Programming Languages]]></title>
-    <link href="http://halyph.com/2014/01/about-learning-new-programming-languages.html"/>
-    <updated>2014-01-26T13:25:00+02:00</updated>
-    <id>http://halyph.com/2014/01/about-learning-new-programming-languages</id>
-    <content type="html"><![CDATA[<p><img class="center" src="http://halyph.com/images/posts/progLanguages_small.gif"></p>
-
-<p>This post is very subjective and reflect the my current point of view.</p>
-
-<p>There are tons of different programming
-languages. Few of them you are using daily, few of them from time to
-time. And huge amount are touched “accidentally” (via playing and
-writing “big” hello world).</p>
-
-<p>Now the question is: Should we spend our
-time playing with every hipster/hype language? Maybe it’s better to
-invest own time in something really important. In something which can
-improve our productivity and range of task which can be solved by our
-“major” language(s).</p>
-
-<p>In general to “learn” a new language is
-not a big deal. But, nowadays we can’t use language itself in
-isolation. “Learn a new language” means not only language, but also
-its <strong>related areas</strong>:</p>
-
-<ul>
-<li>ecosystem (libraries, frameworks,
-IDE, tools)</li>
-<li>problems which can be solved with
-this language (some languages are well suited for the particular set
-of problems: Erlang, Prolog, SQL, etc.)</li>
-<li>community</li>
-<li>best practices and
-idiomatic code</li>
-<li>etc.</li>
-</ul>
-
-
-<p>Now, if you calculate and recall your
-experience You will notice that language <strong>related areas</strong> take huge
-amount of time to master.</p>
-
-<p>Here is some general sample: Imagine
-that language X is your major tool for making money. Now, you’ve
-switched, temporary, to language Y, for reasonable amount of time
-(several months). Then you switched back to language X and stick there
-for long-long period of time. You will notice how you are loosing those
-minimal knowledge (required to accomplish the tasks) gained for language
-Y. You can recollect the syntax, but related areas of language Y
-have been evolved and updated. Even more, some related areas are
-obsolete, etc. And now it will be much hard to get the same knowledge in
-language Y quickly. You must be adequate to understand this.</p>
-
-<p><strong>So, what does it mean from me:</strong></p>
-
-<ul>
-<li>Select minimal required set of
-programming languages which makes you as productive as possible.
-Master these languages</li>
-<li>It’s a good idea to spend
-time playing with other languages. But it’s bad idea to switch from
-one to another language regularly. You are losing focus.</li>
-<li>Master ecosystem</li>
-<li>Be active in language
-community</li>
-</ul>
-
-
-<p>I don’t want to say that learning new
-languages is a bad idea. No. I don’t think so. But the reality has some
-influence on us. It might happen that “new” language and related areas
-are cool, you are happy using all these stuff working on pet-projects.
-But you have some objective constrains and can’t use it at your work:
-e.g. a) there are no projects where you can use this language or b) you
-can’t change the company because of geographical constrains. Keeping all
-these in mind you should spend your time effectively and learn
-really valuable stuff. <br/>
-Try to avoid hipster <a href="http://en.wikipedia.org/wiki/Bandwagon_effect">bandwagon effect</a>.</p>
 ]]></content>
   </entry>
   

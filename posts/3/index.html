@@ -9,8 +9,7 @@
   <meta name="author" content="Orest Ivasiv">
 
   
-  <meta name="description" content="I provided my reflections about &ldquo;Java for Everything&rdquo; in the previous post.
-Here we will review other implementation of this concept. I &hellip;">
+  <meta name="description" content="I&rsquo;ve been using Octopress on Mac OS X (i.e. have no problem). But, recently I&rsquo;ve decided to run my blog on Windows machine and felt pain &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +82,221 @@ Here we will review other implementation of this concept. I &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/17/how-to-install-octopress-on-windows/">How to Install Octopress on Windows?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-17T18:53:27+02:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:53 pm</span></time>
+        
+           | <a href="/blog/2015/02/17/how-to-install-octopress-on-windows/#disqus_thread"
+             data-disqus-identifier="http://halyph.com/blog/2015/02/17/how-to-install-octopress-on-windows/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="center" src="/images/blog/ruby.png"></p>
+
+<p>I&rsquo;ve been using <a href="http://octopress.org/">Octopress</a> on Mac OS X (i.e. have no problem). But, recently I&rsquo;ve decided to run my blog on Windows machine and felt pain. Ahh, <a href="http://octopress.org/">Octopress</a> uses bunch of native extentions which actually cause a lot of cross-platform issues. My first attempt was to try <a href="http://jruby.org/">JRuby</a> due to his better Windows support, but got this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ bundle install
+</span><span class='line'>Fetching gem metadata from https://rubygems.org/.........
+</span><span class='line'>Installing rake (10.4.2)
+</span><span class='line'>Installing RedCloth (4.2.9)
+</span><span class='line'>Using blankslate (2.1.2.4)
+</span><span class='line'>Installing hitimes (1.2.2)
+</span><span class='line'>Installing timers (4.0.1)
+</span><span class='line'>Installing celluloid (0.16.0)
+</span><span class='line'>Installing chunky_png (1.3.3)
+</span><span class='line'>Installing fast-stemmer (1.0.2) with native extensions
+</span><span class='line'>Gem::Installer::ExtensionBuildError: ERROR: Failed to build gem native extension
+</span><span class='line'>.
+</span><span class='line'>        D:/Tools/JRuby/jruby-1.7.0/bin/jruby.exe extconf.rb NotImplementedError: C extension support is not enabled. Pass -Xcext.enabled=true to JRuby or set JRUBY_OPTS or modify .jrubyrc to enable.
+</span><span class='line'>
+</span><span class='line'>   (root) at D:/Tools/JRuby/jruby-1.7.0/lib/ruby/shared/mkmf.rb:8  require at org/jruby/RubyKernel.java:1019
+</span><span class='line'>   (root) at D:/Tools/JRuby/jruby-1.7.0/lib/ruby/shared/rubygems/custom_require.rb:1
+</span><span class='line'>   (root) at extconf.rb:1
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>Gem files will remain installed in D:/Tools/JRuby/jruby-1.7.0/lib/ruby/gems/shared/gems/fast-stemmer-1.0.2 for inspection.
+</span><span class='line'>Results logged to D:/Tools/JRuby/jruby-1.7.0/lib/ruby/gems/shared/gems/fast-stemmer-1.0.2/ext/gem_make.out
+</span><span class='line'>An error occurred while installing fast-stemmer (1.0.2), and Bundler cannot continue.
+</span><span class='line'>Make sure that `gem install fast-stemmer -v '1.0.2'` succeeds before bundling.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There is JRuby version of <code>fast-stemmer</code> gem called <a href="https://github.com/caius/jruby-stemmer"><code>jruby-stemmer</code></a>. But, I&rsquo;m not ready to maitain this. That&rsquo;s why I&rsquo;ve decided to use <a href="http://rubyinstaller.org/">RubyInstaller</a>.</p>
+
+<a name="Install.Ruby.on.Windows.and.SSL.issues"></a>
+<h2>Install Ruby on Windows and SSL issues</h2>
+
+<ol>
+<li><p>Download (<code>rubyinstaller-2.1.5-x64.exe</code> in my case) and install <a href="http://rubyinstaller.org/">RubyInstaller</a>. I installed in <code>d:\Tools\Ruby\Ruby21-x64\</code> folder.</p></li>
+<li><p>Check <code>rubygems</code> via running <code>gem update</code> and you should get the next error:</p></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gem update
+</span><span class='line'>Updating installed gems
+</span><span class='line'>ERROR:  While executing gem ... (Gem::RemoteFetcher::FetchError)
+</span><span class='line'>    SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed (https://api.rubygems.org/specs.4.8.gz)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It&rsquo;s well known <code>rubygems</code> issues with ready to use <a href="https://gist.github.com/luislavena/f064211759ee0f806c88">solution</a>:</p>
+
+<ul>
+<li>Step 1: Obtain the new trust certificate, download it <a href="https://raw.githubusercontent.com/rubygems/rubygems/master/lib/rubygems/ssl_certs/AddTrustExternalCARoot-2048.pem">AddTrustExternalCARoot-2048.pem</a> in some temp folder</li>
+<li>Step 2: Locate RubyGems certificate directory in your installation (in my case it&rsquo;s <code>D:/Tools/Ruby/Ruby21-x64/lib/ruby/2.1.0/</code> )</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gem which rubygems
+</span><span class='line'>D:/Tools/Ruby/Ruby21-x64/lib/ruby/2.1.0/rubygems.rb</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Step 3: Copy new trust certificate into <code>D:\Tools\Ruby\Ruby21-x64\lib\ruby\2.1.0\rubygems\ssl_certs</code></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ copy AddTrustExternalCARoot-2048.pem D:\Tools\Ruby\Ruby21-x64\lib\ruby\2.1.0\rubygems\ssl_certs</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Step 4: Now You should be able to run gem update without any issues</li>
+</ul>
+
+
+<a name="Prepapre.environment.for.Octopress"></a>
+<h2>Prepapre environment for Octopress</h2>
+
+<p>Now it&rsquo;s time to clone <a href="http://octopress.org/">Octopress</a> blog and run it. Unfortunatelly, there are some minor issues which still must be fixed.</p>
+
+<a name="Fix..Octopress..native.extentions.issues"></a>
+<h3>Fix <a href="http://octopress.org/">Octopress</a> native extentions issues</h3>
+
+<p>We know that <a href="http://octopress.org/">Octopress</a> uses native extentions thats why we have to additionally install <a href="http://cdn.rubyinstaller.org/archives/devkits/DevKit-mingw64-64-4.7.2-20130224-1432-sfx.exe">Development Kit</a></p>
+
+<ul>
+<li>Download and unpack it in adjacent to Ruby install folder (<code>d:\Tools\Ruby\DevKit_2.1_x64\</code> in my case)</li>
+<li>Link <a href="http://cdn.rubyinstaller.org/archives/devkits/DevKit-mingw64-64-4.7.2-20130224-1432-sfx.exe">Development Kit</a> installation to previously installed Ruby
+
+<ul>
+<li>Go to <a href="http://cdn.rubyinstaller.org/archives/devkits/DevKit-mingw64-64-4.7.2-20130224-1432-sfx.exe">Development Kit</a> install folder <code>d:\Tools\Ruby\DevKit_2.1_x64\</code></li>
+<li>Run <code>ruby dk.rb init</code> which generate <code>config.yml</code>. Open <code>config.yml</code> and add <code>- D:/Tools/Ruby/Ruby21-x64</code> to the end of this file.</li>
+<li>Run <code>ruby dk.rb install</code></li>
+</ul>
+</li>
+</ul>
+
+
+<p>See my <em>Development Kit</em> <code>config.yml</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># This configuration file contains the absolute path locations of all
+</span><span class='line'># installed Rubies to be enhanced to work with the DevKit. This config
+</span><span class='line'># file is generated by the 'ruby dk.rb init' step and may be modified
+</span><span class='line'># before running the 'ruby dk.rb install' step. To include any installed
+</span><span class='line'># Rubies that were not automagically discovered, simply add a line below
+</span><span class='line'># the triple hyphens with the absolute path to the Ruby root directory.
+</span><span class='line'>#
+</span><span class='line'># Example:
+</span><span class='line'>#
+</span><span class='line'># ---
+</span><span class='line'># - C:/ruby19trunk
+</span><span class='line'># - C:/ruby192dev
+</span><span class='line'>#
+</span><span class='line'>---
+</span><span class='line'>- D:/Tools/Ruby/Ruby21-x64</span></code></pre></td></tr></table></div></figure>
+
+
+<a name="Install.Python"></a>
+<h3>Install Python</h3>
+
+<p>The default syntax highlighting engine in Octopress/Jekyll is <a href="http://pygments.org/">Pygments</a>. It&rsquo;s requires Python v.2.7.x. Simply download <a href="https://www.python.org/downloads/release/python-278/">Python v.2.7.8</a> and add it on system <code>PATH</code>.</p>
+
+<a name="Final.steps"></a>
+<h3>Final steps</h3>
+
+<p>I assume that blog was previously cloned. Now, we should perform &ldquo;traditional&rdquo; Ruby project ceremony:</p>
+
+<ul>
+<li>Install <code>budler</code> via <code>gem install bundler</code></li>
+<li>Setup all required gems <code>bundle install</code></li>
+<li>Run <a href="http://octopress.org/">Octopress</a> preview <code>rake preview</code></li>
+</ul>
+
+
+<a name="References"></a>
+<h2>References</h2>
+
+<ul>
+<li><a href="http://blog.zerosharp.com/setting-up-octopress-on-windows/">Octopress on Windows and GitHub</a></li>
+<li><a href="http://thaiat.github.io/blog/2014/03/13/how-to-install-and-use-octopress-on-windows/">How to Install and Use Octopress on Windows</a></li>
+<li><a href="http://octopress.org/">Octopress</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -884,283 +1098,6 @@ Here we will review other implementation of this concept.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/13/do-we-need-java-for-everything/">Do We Need Java for Everything?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-02-13T00:18:30+02:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:18 am</span></time>
-        
-           | <a href="/blog/2015/02/13/do-we-need-java-for-everything/#disqus_thread"
-             data-disqus-identifier="http://halyph.com/blog/2015/02/13/do-we-need-java-for-everything/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="center" src="/images/blog/java.png"></p>
-
-<p>Some time ago one guy wrote a post <a href="http://www.teamten.com/lawrence/writings/java-for-everything.html">Java for Everything</a>. The main idea is to use Java even for shell scripting.</p>
-
-<blockquote><p>I’m even taking this to an extreme and using Java for shell scripts. I’ve found that anything other than a simple wrapper shell script eventually grows to the point where I’m looking up the arcane syntax for removing some middle element from an array in bash &hellip; Write it in Java to start with. If shelling out to run commands is clumsy, write a utility function to make it easy.
-I’ve also written a <em>java_launcher</em> shell script that allows me to write this at the top of Java programs:</p></blockquote>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env java_launcher</span>
-</span><span class='line'><span class="c"># vim:ft=java</span>
-</span><span class='line'><span class="c"># lib:/home/lk/lib/teamten.jar</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>I can make the Java programs executable and drop the .java extension. The script strips the header, compiles and caches the class file, and runs the result with the specified jars. It provides one of the big advantages of Python: the lack of build scripts for simple one-off programs.</p></blockquote>
-
-<p>Here is the actual source of <a href="https://github.com/lkesteloot/java_launcher">java_launcher</a>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># Put this script in your path and write the following line at the top of an</span>
-</span><span class='line'><span class="c"># executable Java source program:</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c">#   #!/usr/bin/env java_launcher</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># Additional documentation here: https://github.com/lkesteloot/java_launcher</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># Quit on error.</span>
-</span><span class='line'><span class="nb">set</span> -e
-</span><span class='line'>
-</span><span class='line'><span class="c"># Get the name of the script, which the shell passes to us automatically.</span>
-</span><span class='line'><span class="nv">SOURCE_PATHNAME</span><span class="o">=</span><span class="nv">$1</span>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$SOURCE_PATHNAME&quot;</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="nb">echo</span> <span class="s2">&quot;java_launcher: Must supply name of script as first argument.&quot;</span>
-</span><span class='line'>    <span class="nb">exit </span>1
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># Skip the script name.</span>
-</span><span class='line'><span class="nb">shift</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># Compute the MD5 of both the source file and this script.</span>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> -f /sbin/md5 <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="c"># Mac OS/X.</span>
-</span><span class='line'>    <span class="nv">SUM</span><span class="o">=</span><span class="k">$(</span>cat <span class="s2">&quot;$SOURCE_PATHNAME&quot;</span> <span class="nv">$0</span> <span class="p">|</span> md5<span class="k">)</span>
-</span><span class='line'><span class="k">else</span>
-</span><span class='line'>    <span class="c"># Linux.</span>
-</span><span class='line'>    <span class="nv">SUM</span><span class="o">=</span><span class="k">$(</span>cat <span class="s2">&quot;$SOURCE_PATHNAME&quot;</span> <span class="nv">$0</span> <span class="p">|</span> md5sum <span class="p">|</span> cut -d<span class="s1">&#39; &#39;</span> -f1<span class="k">)</span>
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'><span class="nv">SOURCE_FILENAME</span><span class="o">=</span><span class="k">$(</span>basename <span class="s2">&quot;$SOURCE_PATHNAME&quot;</span><span class="k">)</span>
-</span><span class='line'><span class="nv">SOURCE_DIR</span><span class="o">=</span><span class="k">$(</span>dirname <span class="s2">&quot;$SOURCE_PATHNAME&quot;</span><span class="k">)</span>
-</span><span class='line'><span class="nv">CLASS_NAME</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$SOURCE_FILENAME</span> <span class="p">|</span> sed -e <span class="s1">&#39;s/\.*//&#39;</span><span class="k">)</span>
-</span><span class='line'><span class="nv">CACHE_DIR</span><span class="o">=</span><span class="nv">$HOME</span>/.java_launcher_cache
-</span><span class='line'><span class="nv">CLASS_DIR</span><span class="o">=</span><span class="nv">$CACHE_DIR</span>/<span class="nv">$SUM</span>
-</span><span class='line'><span class="nv">PROCESSED_SOURCE</span><span class="o">=</span><span class="nv">$CLASS_DIR</span>/<span class="k">${</span><span class="nv">SOURCE_FILENAME</span><span class="k">}</span>.java
-</span><span class='line'><span class="nv">PROCESSED_CLASS</span><span class="o">=</span><span class="nv">$CLASS_DIR</span>/<span class="k">${</span><span class="nv">SOURCE_FILENAME</span><span class="k">}</span>.class
-</span><span class='line'>
-</span><span class='line'><span class="c"># Process source to find libs for classpath. Relative jars are made relative to the</span>
-</span><span class='line'><span class="c"># source file.</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">CLASSPATH</span><span class="o">=</span><span class="k">$(</span>awk <span class="s1">&#39;BEGIN { CLASSPATH=&quot;&quot; } /^# lib:(.*)$/ { jar = substr($0, 7); if (substr(jar, 1, 1) != &quot;/&quot;) jar = SOURCE_DIR &quot;/&quot; jar; if (CLASSPATH != &quot;&quot;) CLASSPATH = CLASSPATH &quot;:&quot;; CLASSPATH = CLASSPATH jar } END { print CLASSPATH }&#39;</span> <span class="nv">SOURCE_DIR</span><span class="o">=</span><span class="s2">&quot;$SOURCE_DIR&quot;</span> &lt; <span class="s2">&quot;$SOURCE_PATHNAME&quot;</span><span class="k">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># Default libraries. Put default ones last.</span>
-</span><span class='line'><span class="nv">SCRIPT_DIR</span><span class="o">=</span><span class="k">$(</span>dirname <span class="nv">$0</span><span class="k">)</span>
-</span><span class='line'><span class="nv">LIB_DIR</span><span class="o">=</span><span class="nv">$SCRIPT_DIR</span>/java_lib
-</span><span class='line'><span class="nb">export </span><span class="nv">CLASSPATH</span><span class="o">=</span><span class="nv">$CLASSPATH</span>:<span class="nv">$LIB_DIR</span>/<span class="se">\*</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># Compile if necessary.</span>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> -f <span class="s2">&quot;$PROCESSED_CLASS&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="c"># Refresh the dir so that we know we&#39;ve used it recently.</span>
-</span><span class='line'>    touch <span class="s2">&quot;$CLASS_DIR&quot;</span>
-</span><span class='line'><span class="k">else</span>
-</span><span class='line'>    mkdir -p <span class="s2">&quot;$CLASS_DIR&quot;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c"># Remove header. That&#39;s anything that starts with #. Replace the lines with</span>
-</span><span class='line'>    <span class="c"># an empty line so the line numbers don&#39;t get thrown off.</span>
-</span><span class='line'>    sed -e <span class="s1">&#39;s/^#.*//&#39;</span> &lt; <span class="s2">&quot;$SOURCE_PATHNAME&quot;</span> &gt; <span class="s2">&quot;$PROCESSED_SOURCE&quot;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c"># Compile real source to our cache.</span>
-</span><span class='line'>    javac -d <span class="s2">&quot;$CLASS_DIR&quot;</span> <span class="s2">&quot;$PROCESSED_SOURCE&quot;</span>
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># Run the program, passing on arguments from command line.</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">CLASSPATH</span><span class="o">=</span><span class="nv">$CLASS_DIR</span>:<span class="nv">$CLASSPATH</span>
-</span><span class='line'>java -Xmx1024m <span class="nv">$CLASS_NAME</span> <span class="nv">$*</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And suppose we&rsquo;d like to run <strong>helloworld</strong> Java &ldquo;script&rdquo; using different jars located in default library location (<strong>java_lib/</strong>) and custom (<strong>/home/username/mylib1.jar</strong> and <strong>/home/username/mylib2.jar</strong>)</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env java_launcher</span>
-</span><span class='line'><span class="c"># vim:ft=java</span>
-</span><span class='line'><span class="c"># lib:/home/username/mylib1.jar:/home/username/mylib2.jar</span>
-</span><span class='line'>
-</span><span class='line'>public class helloworld <span class="o">{</span>
-</span><span class='line'>    public static void main<span class="o">(</span>String<span class="o">[]</span> args<span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        System.out.println<span class="o">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="o">)</span><span class="p">;</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It can be run like this: <code>$ ./helloworld</code></p>
-
-<a name="So..how.does.java_launcher.work."></a>
-<h3>So, how does java_launcher work?</h3>
-
-<ol>
-<li>This launcher script works on Linux/MacOSX only. We should have additional <strong>java_launcher.bat</strong> script for Windows (cygwin and msys are not native Windows solution).</li>
-<li>It supports two types of CLASSPATH lib folders</li>
-<li><em>default</em> <strong>$SCRIPT_DIR/java_lib</strong> located in the same folder where the actual Java script located</li>
-<li><em>custom</em> libs, they should be listed at the head <strong>lib</strong> section of the script (see sample above). The script uses AWK to extract jars from <strong>lib</strong> section</li>
-<li><strong>java_launcher</strong> uses MD5 hashing to track source changes and (re)compile the source script only when it has been changed. See MD5 calculated <code>SUM</code> variable above</li>
-<li><em>launcher</em> has dedicated folder where it stores the processed and compiled script (based on MD5 hash changes). See the next variables: <code>CACHE_DIR</code>, <code>PROCESSED_SOURCE</code> and <code>PROCESSED_CLASS</code>.</li>
-<li>Then it combines the <em>default</em> and <em>custom</em> libs in resulted CLASSPATH</li>
-</ol>
-
-
-<a name="Drawbacks"></a>
-<h3>Drawbacks</h3>
-
-<p>I see the next drawbacks:
-- libs should be distributed along with actual &ldquo;script&rdquo;. The common use case is to have minimal required script, which downloads all required dependencies by yourself
-- launcher is not cross-platform
-- Java script requires additional configuration to be opened/edited in IDE (project file, adjust all dependencies, etc.)
-- it&rsquo;s very hard to edit Java code in plain editor (Java language is verbose). Scripting in Java without IDE might be real pain</p>
-
-<a name="Why.not.Groovy."></a>
-<h2>Why not Groovy?</h2>
-
-<p>I don&rsquo;t think that Java is &ldquo;good&rdquo; language for scripting (see drawbacks above). Groovy is much better language with nice scripting capabilities. Every Groovy script might be treated like a Java code snippet (with some exceptions <a href="http://groovy.codehaus.org/Differences+from+Java">[1]</a> and <a href="http://groovy-lang.org/differences.html">[2]</a>). But, the most important is that Groovy has build-in <a href="http://groovy-lang.org/grape.html">Grape dependency manager</a>:</p>
-
-<blockquote><p>Grape (The Groovy Adaptable Packaging Engine or Groovy Advanced Packaging Engine) is the infrastructure enabling the grab() calls in Groovy, a set of classes leveraging Ivy to allow for a repository driven module system for Groovy. This allows a developer to write a script with an essentially arbitrary library requirement, and ship just the script. Grape will, at runtime, download as needed and link the named libraries and all dependencies forming a transitive closure when the script is run from existing repositories such as JCenter, Ibiblio, Codehaus, and java.net.</p></blockquote>
-
-<p>Sample usage:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="nd">@Grapes</span><span class="o">([</span>
-</span><span class='line'>   <span class="nd">@Grab</span><span class="o">(</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;commons-primitives&#39;</span><span class="o">,</span> <span class="n">module</span><span class="o">=</span><span class="s1">&#39;commons-primitives&#39;</span><span class="o">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.0&#39;</span><span class="o">),</span>
-</span><span class='line'>   <span class="nd">@Grab</span><span class="o">(</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;org.ccil.cowan.tagsoup&#39;</span><span class="o">,</span> <span class="n">module</span><span class="o">=</span><span class="s1">&#39;tagsoup&#39;</span><span class="o">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.9.7&#39;</span><span class="o">)])</span>
-</span><span class='line'><span class="kd">class</span> <span class="nc">Example</span> <span class="o">{</span>
-</span><span class='line'><span class="c1">// ...</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>One or more <code>groovy.lang.Grab</code> annotations can be added at any place that annotations are accepted to tell the compiler that this code relies on the specific library. This will have the effect of adding the library to the classloader of the groovy compiler. This annotation is detected and evaluated before any other resolution of classes in the script, so imported classes can be properly resolved by a @Grab annotation.</p></blockquote>
-
-<p><strong>So, I have no idea why to reinvent the wheel.</strong> Use Groovy for scripting and Java for everything else.</p>
-
-<a name="References"></a>
-<h2>References</h2>
-
-<ul>
-<li><a href="http://www.teamten.com/lawrence/writings/java-for-everything.html">Java for Everything</a></li>
-<li>Some reflections to the original post <a href="http://www.teamten.com/lawrence/writings/java-for-everything.html">Java for Everything</a>:
-
-<ul>
-<li><a href="https://news.ycombinator.com/item?id=8677556">Hacker News</a></li>
-<li><a href="http://www.reddit.com/r/programming/duplicates/2nvybk/java_for_everything">Reddit</a></li>
-</ul>
-</li>
-<li><a href="https://github.com/lkesteloot/java_launcher">java_launcher</a> source code</li>
-<li><a href="http://groovy.codehaus.org/Differences+from+Java">Groovy Differences from Java</a></li>
-<li><a href="http://groovy-lang.org/grape.html">Grape dependency manager</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -1184,6 +1121,10 @@ I’ve also written a <em>java_launcher</em> shell script that allows me to writ
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/18/golang-presentation-tool/">Go Presentation Tool</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/04/06/java-full-stack-web-framework/">Java Full Stack Web Framework</a>
       </li>
     
@@ -1199,15 +1140,11 @@ I’ve also written a <em>java_launcher</em> shell script that allows me to writ
         <a href="/blog/2015/02/17/how-to-install-octopress-on-windows/">How to Install Octopress on Windows?</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/02/13/maven-flow-for-simple-app-creation/">Maven Flow for Simple App Creation</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <span id="tag-cloud"><a href='/blog/categories/architecture' style='font-size: 107.5%'>architecture(1)</a> <a href='/blog/categories/bash' style='font-size: 115.0%'>bash(2)</a> <a href='/blog/categories/blog' style='font-size: 107.5%'>blog(1)</a> <a href='/blog/categories/books' style='font-size: 115.0%'>books(2)</a> <a href='/blog/categories/conference' style='font-size: 107.5%'>conference(1)</a> <a href='/blog/categories/groovy' style='font-size: 122.5%'>groovy(3)</a> <a href='/blog/categories/h2' style='font-size: 107.5%'>h2(1)</a> <a href='/blog/categories/ivy' style='font-size: 107.5%'>ivy(1)</a> <a href='/blog/categories/java' style='font-size: 160.0%'>java(8)</a> <a href='/blog/categories/java-se' style='font-size: 115.0%'>java se(2)</a> <a href='/blog/categories/jdbc' style='font-size: 107.5%'>jdbc(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 107.5%'>jeeconf(1)</a> <a href='/blog/categories/languages' style='font-size: 107.5%'>languages(1)</a> <a href='/blog/categories/learning' style='font-size: 107.5%'>learning(1)</a> <a href='/blog/categories/maven' style='font-size: 115.0%'>maven(2)</a> <a href='/blog/categories/octopress' style='font-size: 115.0%'>octopress(2)</a> <a href='/blog/categories/rails' style='font-size: 107.5%'>rails(1)</a> <a href='/blog/categories/review' style='font-size: 115.0%'>review(2)</a> <a href='/blog/categories/ruby' style='font-size: 122.5%'>ruby(3)</a> <a href='/blog/categories/scala' style='font-size: 107.5%'>scala(1)</a> <a href='/blog/categories/scripting' style='font-size: 107.5%'>scripting(1)</a> <a href='/blog/categories/shell' style='font-size: 115.0%'>shell(2)</a> <a href='/blog/categories/spring' style='font-size: 107.5%'>spring(1)</a> <a href='/blog/categories/textmate' style='font-size: 115.0%'>textmate(2)</a> <a href='/blog/categories/tomcat' style='font-size: 107.5%'>tomcat(1)</a> <a href='/blog/categories/windows' style='font-size: 107.5%'>windows(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/architecture' style='font-size: 107.5%'>architecture(1)</a> <a href='/blog/categories/bash' style='font-size: 115.0%'>bash(2)</a> <a href='/blog/categories/blog' style='font-size: 107.5%'>blog(1)</a> <a href='/blog/categories/books' style='font-size: 115.0%'>books(2)</a> <a href='/blog/categories/conference' style='font-size: 107.5%'>conference(1)</a> <a href='/blog/categories/golang' style='font-size: 107.5%'>golang(1)</a> <a href='/blog/categories/groovy' style='font-size: 122.5%'>groovy(3)</a> <a href='/blog/categories/h2' style='font-size: 107.5%'>h2(1)</a> <a href='/blog/categories/ivy' style='font-size: 107.5%'>ivy(1)</a> <a href='/blog/categories/java' style='font-size: 160.0%'>java(8)</a> <a href='/blog/categories/java-se' style='font-size: 115.0%'>java se(2)</a> <a href='/blog/categories/jdbc' style='font-size: 107.5%'>jdbc(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 107.5%'>jeeconf(1)</a> <a href='/blog/categories/languages' style='font-size: 107.5%'>languages(1)</a> <a href='/blog/categories/learning' style='font-size: 107.5%'>learning(1)</a> <a href='/blog/categories/maven' style='font-size: 115.0%'>maven(2)</a> <a href='/blog/categories/octopress' style='font-size: 115.0%'>octopress(2)</a> <a href='/blog/categories/rails' style='font-size: 107.5%'>rails(1)</a> <a href='/blog/categories/review' style='font-size: 115.0%'>review(2)</a> <a href='/blog/categories/ruby' style='font-size: 122.5%'>ruby(3)</a> <a href='/blog/categories/scala' style='font-size: 107.5%'>scala(1)</a> <a href='/blog/categories/scripting' style='font-size: 107.5%'>scripting(1)</a> <a href='/blog/categories/shell' style='font-size: 115.0%'>shell(2)</a> <a href='/blog/categories/spring' style='font-size: 107.5%'>spring(1)</a> <a href='/blog/categories/textmate' style='font-size: 115.0%'>textmate(2)</a> <a href='/blog/categories/tomcat' style='font-size: 107.5%'>tomcat(1)</a> <a href='/blog/categories/windows' style='font-size: 107.5%'>windows(1)</a> </span>
 </section>
 
   

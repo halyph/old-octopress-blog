@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Golang | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/golang/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-05-19T01:20:38+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Go Presentation Tool]]></title>
+    <link href="http://halyph.com/blog/2015/05/18/golang-presentation-tool/"/>
+    <updated>2015-05-18T23:52:50+03:00</updated>
+    <id>http://halyph.com/blog/2015/05/18/golang-presentation-tool</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/blog/gopher.png"></p>
+
+<p>Have you ever noticed how Go community presents Go-related talks? Their slides are very simple and without any fancy animation features: see <a href="http://talks.golang.org">Go talks</a>. You might say that they are no so feature-rich as <a href="https://github.com/hakimel/reveal.js/">Reveal.js</a>. And it&rsquo;s true. But, simplicity is beauty, as for me. Also, it&rsquo;s very well aligned with Go language philosophy.</p>
+
+<p>So, here is listed steps required to <em>setup</em> and <em>run</em> Go <strong>present</strong> tool.</p>
+
+<a name="Install.Go"></a>
+<h2>Install Go</h2>
+
+<p>I use Mac OS X in this tutorial (see the next <a href="https://golang.org/doc/install">article</a> to install Go on other <em>OS</em>es).</p>
+
+<p>Install Go:</p>
+
+<pre><code class="bash">$ brew install go
+
+==&gt; Downloading https://homebrew.bintray.com/bottles/go-1.4.2.yosemite.bottle.1.
+######################################################################## 100.0%
+==&gt; Pouring go-1.4.2.yosemite.bottle.1.tar.gz
+==&gt; Caveats
+As of go 1.2, a valid GOPATH is required to use the `go get` command:   https://golang.org/doc/code.html#GOPATH  
+
+You may wish to add the GOROOT-based install location to your PATH:
+  export PATH=$PATH:/usr/local/opt/go/libexec/bin
+==&gt; Summary
+🍺  /usr/local/Cellar/go/1.4.2: 4566 files, 155M
+</code></pre>
+
+<a name="Define.Go.workspace"></a>
+<h2>Define Go workspace</h2>
+
+<p>Let&rsquo;s assume that our Go language workspace will be located at <code>/Users/halyph/Projects/go</code>:</p>
+
+<pre><code class="bash ">$ mkdir go
+$ pwd
+/Users/halyph/Projects/go
+</code></pre>
+
+<a name="Configure..code.PATH..code..variable"></a>
+<h3>Configure <code>PATH</code> variable</h3>
+
+<pre><code class="bash">$ cat .bash_profile
+
+#Golang settings
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
+export GOPATH=$HOME/Projects/go  #/Users/halyph/Projects/go
+export PATH=$PATH:$GOPATH/bin
+</code></pre>
+
+<a name="Install.Go.present.tool"></a>
+<h2>Install Go present tool</h2>
+
+<p><strong>present</strong> tool is located in separate package <code>golang.org/x/tools</code> which depends on <code>golang.org/x/net</code> package:
+<code>bash
+$ go get golang.org/x/net
+$ go get golang.org/x/tools
+$ go install golang.org/x/tools/cmd/present
+</code></p>
+
+<p>Now, we can find <strong>present</strong> tool here:
+<code>
+$ which present
+/Users/halyph/Projects/go/bin/present
+</code></p>
+
+<a name="Run.present.tool"></a>
+<h2>Run present tool</h2>
+
+<p>The easiest way to test <strong>present</strong> tool is to render some slides:</p>
+
+<ul>
+<li>Create sample <code>slide</code> file (see <code>.slide</code> <a href="http://godoc.org/golang.org/x/tools/present">file format</a>) in any folder:
+&#8220;`
+$ cat sample.slide</li>
+</ul>
+
+
+<p>Title of document
+Subtitle of document
+15:04 2 Jan 2006
+Tags: foo, bar, baz</p>
+
+<p>Author Name
+Job title, Company
+<a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#106;&#x6f;&#x65;&#x40;&#101;&#120;&#x61;&#109;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;">&#106;&#111;&#x65;&#x40;&#x65;&#120;&#x61;&#x6d;&#112;&#x6c;&#101;&#x2e;&#99;&#111;&#109;</a>
+<a href="http://url/">http://url/</a>
+@twitter_name
+Some Text</p>
+
+<ul>
+<li>Title of slide or section (must have asterisk)</li>
+</ul>
+
+
+<p>Some Text</p>
+
+<pre><code>
+- Run **present** in this folder:
+</code></pre>
+
+<p>$ present
+2015/05/19 00:55:33 Open your web browser and visit <a href="http://127.0.0.1:3999">http://127.0.0.1:3999</a>
+&#8220;`</p>
+
+<p>You should see something like this:</p>
+
+<p><img src="/images/posts/2015-05-19/pic1.png"></p>
+
+<p><img src="/images/posts/2015-05-19/pic2.png"></p>
+
+<p>Go <strong>present</strong> works and you are ready to produce <em>Go-fashion</em> slides.</p>
+
+<a name="References"></a>
+<h2>References</h2>
+
+<ul>
+<li><a href="http://godoc.org/golang.org/x/tools/present">Go present package documentation</a></li>
+<li><a href="https://github.com/hakimel/reveal.js/">Reveal.js - The HTML Presentation Framework</a></li>
+<li><a href="http://talks.golang.org">Go talks - slides</a></li>
+<li><a href="https://github.com/cmars/represent">Go tool Represent - Static slide presentation and article pages, generated from text</a></li>
+<li><a href="https://www.youtube.com/watch?v=83JBmS8WpHM">Video - go present - create html slides with extractable, executable go code</a></li>
+<li><a href="https://pythonadventures.wordpress.com/2014/02/14/using-gos-present-with-python-code-snippets/">Using Go’s present with Python code snippets</a> and <a href="https://groups.google.com/forum/#!topic/golang-nuts/BdgXMRqjGqk">Go-nuts discussion - how to embed runnable code snippets in a presentation</a></li>
+<li><a href="http://blog.joshsoftware.com/2014/03/10/how-do-i-create-a-presentation-using-go/">How Do I Create A Presentation Using Go?</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>
