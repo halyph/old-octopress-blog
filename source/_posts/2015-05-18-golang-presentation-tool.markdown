@@ -12,7 +12,7 @@ Have you ever noticed how Go community presents Go-related talks? Their slides a
 So, here is listed steps required to *setup* and *run* Go **present** tool.
 
 ## Install Go
-I use Mac OS X in this tutorial (See the next [article](https://golang.org/doc/install) to Go install on other *OS*es).
+I use Mac OS X in this tutorial (see the next [article](https://golang.org/doc/install) to install Go on other *OS*es).
 
 Install Go:
 
@@ -51,7 +51,7 @@ export GOPATH=$HOME/Projects/go  #/Users/halyph/Projects/go
 export PATH=$PATH:$GOPATH/bin
 ```
 
-### Install Go present tool
+## Install Go present tool
 **present** tool is located in separate package `golang.org/x/tools` which depends on `golang.org/x/net` package:
 ``` bash
 $ go get golang.org/x/net
