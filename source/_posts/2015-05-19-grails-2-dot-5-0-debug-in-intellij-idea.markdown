@@ -8,10 +8,9 @@ categories: [groovy, grails]
 
 {% img right /images/blog/grails.jpg %}
 
-I've been using Grails v.2.5.0 and tried to debug Grails app via traditional Intellij IDEA Debug with no success.
+I've been using Grails v.2.5.0 and tried to debug Grails app via traditional Intellij IDEA 14 Debug with no success.
 
-*To be short*: using IDEA *Debug* allows us debug Grails build system only. Why?
-
+*To be short*: using IDEA *Debug* allows us debug Grails build system **only**. Why?
 > Forked execution is configured via the `grails-app/conf/BuildConfig.groovy` file. The following is the default configuration:
 ``` groovy
 grails.project.fork = [
@@ -21,22 +20,25 @@ grails.project.fork = [
 ]
 ```
 
-Based on this we should create two IDEA Run/Debug Configurations:
+*Based on this we should create two IDEA Run/Debug Configurations:*
 
 - Create simple Grails *Run* configuration with `--debug-fork` parameter: `run-app --debug-fork`.
 E.g.
 
 {% img /images/posts/2015-05-19/idea1.png %}
-Application will be run with the next output 
+And run this Configuration. We should get the next output 
 ```
 Listening for transport dt_socket at address: 5005
 |Server running. Browse to http://localhost:8080/TekDays
 ``` 
 This socket address will be used for *Remote* connection.
 
-- Create IDEA `Remote` Configuration
+- Create IDEA `Remote` Configuration (*Run/Debug Configuration* -> *Remote*)
 
 {% img /images/posts/2015-05-19/idea2.png %}
+And run this Configuation. Now, we are able to *debug* our application.
+
+The main idea is that we should have two running *Configurations*!
 
 ## References
 - [Grails Goodness: Debugging App in Forked Mode](http://mrhaki.blogspot.com/2013/12/grails-goodness-debugging-app-in-forked.html)
