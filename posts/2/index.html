@@ -9,7 +9,7 @@
   <meta name="author" content="Orest Ivasiv">
 
   
-  <meta name="description" content="Rails deployment architecture Simple Rails Setup Typical Rails Setup Application server (Phusion Passenger) Recommended Rails Application Setups &hellip;">
+  <meta name="description" content="Overview Grails Play Framework 2 Code Generation Frameworks Spring Roo JBoss Forge AppFuse JHipster Domain-driven Frameworks Others Summary &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +82,193 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/06/java-full-stack-web-framework/">Java Full Stack Web Framework</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-06T23:43:10+03:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:43 pm</span></time>
+        
+           | <a href="/blog/2015/04/06/java-full-stack-web-framework/#disqus_thread"
+             data-disqus-identifier="http://halyph.com/blog/2015/04/06/java-full-stack-web-framework/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="right" src="/images/blog/java.png"></p>
+
+<p><ul>
+ <li>
+ <ul>
+  <li><a href="#Overview">Overview</a></li>
+  <li><a href="#Grails">Grails</a></li>
+  <li><a href="#Play.Framework.2">Play Framework 2</a></li>
+  <li><a href="#Code.Generation.Frameworks">Code Generation Frameworks</a>
+  <ul>
+   <li><a href="#Spring.Roo">Spring Roo</a></li>
+   <li><a href="#JBoss.Forge">JBoss Forge</a></li>
+   <li><a href="#AppFuse">AppFuse</a></li>
+   <li><a href="#JHipster">JHipster</a></li>
+  </ul>
+  </li>
+  <li><a href="#Domain-driven.Frameworks">Domain-driven Frameworks</a></li>
+  <li><a href="#Others">Others</a></li>
+  <li><a href="#Summary">Summary</a></li>
+  <li><a href="#References">References</a></li>
+ </ul>
+ </li>
+</ul>
+
+</p>
+
+<p>I believe that everybody knows the most popular full-stack web framework - <a href="http://rubyonrails.org">Ruby on Rails</a>. Of course there are other frameworks for Ruby language, but Rails is the number one. Now, the question: how many full-stack web frameworks exist for Java?</p>
+
+<a name="Overview"></a>
+<h2>Overview</h2>
+
+<p>Let&rsquo;s define the desired items for full-stack web framework:</p>
+
+<ul>
+<li>CoC - <a href="http://en.wikipedia.org/wiki/Convention_over_configuration">Convention over configuration</a></li>
+<li>MVC - <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">Model-view-controller</a></li>
+<li>DRY - <a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself">Don&rsquo;t repeat yourself</a></li>
+<li>Scaffolding (<em>it was one of the major selling point on the early stage of Rails</em>)
+
+<ul>
+<li>Easy prototyping</li>
+</ul>
+</li>
+<li>Data/Persistent Layer / ORM</li>
+<li>DB schema migration</li>
+<li>URI Routing</li>
+<li>HTML Rendering / Template engines</li>
+<li>Testing</li>
+<li>REST API</li>
+<li>Security</li>
+<li>Caching</li>
+<li>Request Filtering</li>
+<li>Session Management</li>
+<li>Form Validation</li>
+<li>i18n/l10n</li>
+</ul>
+
+
+<a name="Grails"></a>
+<h2>Grails</h2>
+
+<p>I think  <a href="https://grails.org">Grails</a> was and is the single &ldquo;true&rdquo; Rails reincarnation on JVM. Grails is based on <a href="http://www.groovy-lang.org/">Groovy</a> language. It support all concepts Rails supports. It&rsquo;s based on Spring/Hibernate and Gradle since v.3.0 (Grails v.3.0.0 was released on <strong>Mar 31, 2015</strong>).</p>
+
+<p>Grails v.3 is build on <a href="http://projects.spring.io/spring-boot/">Spring Boot</a>.</p>
+
+<p>Some people arguing that Grails v.3 acts as simple wrapper on top of Spring Boot and now it does not worth any investments. But, we must not agree as CoC and DRY principles are very vague.</p>
+
+<a name="Play.Framework.2"></a>
+<h2>Play Framework 2</h2>
+
+<p><a href="https://www.playframework.com/">Play Framework 2</a> is a special player. It has two implementations: Java and Scala. Actually Java version is not as powerful as Scala due to Java, as a language, &ldquo;limitation&rdquo;. This framework lives under <a href="http://typesafe.com/">Typesafe</a> umbrella, aka <strong>&ldquo;Typesafe Reactive Platform&rdquo;</strong>.</p>
+
+<p>Play is just different. It&rsquo;s not Servlet-based and is built on <a href="http://netty.io/">Netty</a> async framework. A lot of people claiming that Play is very cool and productive. I haven&rsquo;t tried it yet. But it looks promising and interesting.</p>
+
+<a name="Code.Generation.Frameworks"></a>
+<h2>Code Generation Frameworks</h2>
+
+<p>I decided to define the special category &ldquo;Code Generation&rdquo;. Frameworks which are related  to this category are not full stack, but can be called as RAD (Rapid Application Development) frameworks.</p>
+
+<a name="Spring.Roo"></a>
+<h3>Spring Roo</h3>
+
+<p><a href="http://projects.spring.io/spring-roo/">Spring Roo</a> was very popular some time ago and had a lot of investments from VMWare (former Spring stack owner). Later, the ownership was transferred to <a href="http://www.disid.com">DISIG</a>.</p>
+
+<p>Spring Roo is code generation framework, built on top of Spring stack. It&rsquo;s useful for quick prototyping.</p>
+
+<a name="JBoss.Forge"></a>
+<h3>JBoss Forge</h3>
+
+<p><a href="http://forge.jboss.org/">JBoss Forge</a> is conceptually equal to Spring Roo, but linked to Java EE stack (like <a href="http://wildfly.org/">Wildfly</a>, <a href="http://tomee.apache.org/apache-tomee.html">TomEE</a>) and Maven. It&rsquo;s relly cool if you work with Java EE a lot. Forge is shine in prototyping and code generation. Community looks vibrant and active.</p>
+
+<a name="AppFuse"></a>
+<h3>AppFuse</h3>
+
+<p><a href="http://appfuse.org/">AppFuse</a> can be called as ramp-up framework. The main goal is to quickly generate project with pre-onfigured functionality (see <code>mvn archetype:generate</code>).</p>
+
+<a name="JHipster"></a>
+<h3>JHipster</h3>
+
+<p><a href="https://jhipster.github.io/">JHipster</a> is brand new and based on Spring Boot and Angular.js v.1.x. Classical code generation like in Forge or Spring Roo. But, code generation is build on top of node.js tool <a href="http://yeoman.io/">Yeoman</a>. Concept is very interesting, especially when it uses so hipster&rsquo;s technologies ;-).
+It can generate both back-end (REST endpoint) and front-end (Angular.js Single-page application), even <a href="http://www.liquibase.org/">Liquibase</a> migrations (which is cool too).</p>
+
+<a name="Domain-driven.Frameworks"></a>
+<h2>Domain-driven Frameworks</h2>
+
+<p>There is a very special category Domain-driven frameworks. For this category I&rsquo;ve selected two most popular frameworks: <a href="http://www.openxava.org/">OpenXava</a> and <a href="http://isis.apache.org/">Apache Isis</a>. The main idea is that they can generate views and RESTs based on domain entities. Both frameworks have active community. They have &ldquo;own&rdquo; concepts and no hipsters technologies. The usage domain is very narrow, I guess they can be easily used to quickly general application&rsquo;s back-offices (aka admin pages) and prototyping.</p>
+
+<a name="Others"></a>
+<h2>Others</h2>
+
+<p>There are several others frameworks (<a href="http://www.ninjaframework.org/">Ninja</a>, Javalight](<a href="http://javalite.io/">http://javalite.io/</a>), <a href="http://joddframework.org/">Jodd µicro frameworks</a>). They are build by small communities (or my single developer) and have some applications. But, it&rsquo;s risky to invest in them. You can look into because of curiosity, but not more. As for me it&rsquo;s much safe to use Play/Grails than some unpopular frameworks.</p>
+
+<a name="Summary"></a>
+<h2>Summary</h2>
+
+<p>So, Java ecosystem has two full stack frameworks which use Java language minimally: <strong>Grails</strong> (Groovy/Java) and <strong>Play</strong> (Scala/Java). Also, we have a bunch on code generation frameworks and domain-driven frameworks (which occupy really special niche).</p>
+
+<a name="References"></a>
+<h2>References</h2>
+
+<ul>
+<li>Full stack
+
+<ul>
+<li><a href="https://grails.org/">Grails</a></li>
+<li><a href="https://www.playframework.com/">Play Framework 2</a></li>
+</ul>
+</li>
+<li>Code Generation
+
+<ul>
+<li><a href="http://projects.spring.io/spring-roo/">Spring Roo</a></li>
+<li><a href="http://forge.jboss.org/">JBoss Forge</a></li>
+<li><a href="http://appfuse.org/">AppFuse</a></li>
+<li><a href="https://jhipster.github.io/">JHipster</a></li>
+</ul>
+</li>
+<li>DD Frameworks
+
+<ul>
+<li><a href="http://www.openxava.org/">OpenXava</a></li>
+<li><a href="http://isis.apache.org/">Apache Isis</a></li>
+</ul>
+</li>
+<li>Others
+
+<ul>
+<li><a href="http://www.ninjaframework.org/">Ninja</a></li>
+<li><a href="http://javalite.io/">Javalight</a></li>
+<li><a href="http://jodd.org/">Jodd</a> and <a href="http://joddframework.org/">Jodd µicro frameworks</a></li>
+<li><a href="http://www.web4j.com/">Web4j</a></li>
+<li><a href="http://rifers.org/">Rife</a> - dead</li>
+</ul>
+</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -432,236 +619,6 @@ But, in the same time you&rsquo;d like to use Rails (due to it&rsquo;s productiv
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/17/how-to-download-jars-from-maven-central/">How to Download Jars From Maven Central</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-17T18:00:00+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:00 pm</span></time>
-        
-           | <a href="/blog/2015/03/17/how-to-download-jars-from-maven-central/#disqus_thread"
-             data-disqus-identifier="http://halyph.com/blog/2015/03/17/how-to-download-jars-from-maven-central/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><center>
-<img src="/images/blog/java.png">
-<img src="/images/blog/ivy.png">
-<img src="/images/blog/maven.png">
-</center>
-
-
-<p>We know how to download Java libraries with it&rsquo;s dependencies (transitive included) via Maven <em>pom.xml</em>, Ant/Ivy <em>build.xml</em> script, Gradle <em>build.gradle</em> script etc.
-But what if we need to download them without these scripts.</p>
-
-<p>There are several ways to do this.
-Assume that we&rsquo;d like to download <code>spark-core</code> library (<code>groupId=com.sparkjava, artifactId=spark-core, version=2.1</code>) with all dependencies from <a href="http://search.maven.org/#artifactdetails%7Ccom.sparkjava%7Cspark-core%7C2.1%7Cjar">Maven Central</a> into <code>lib</code> folder.</p>
-
-<a name="Use.Maven3.dependency.plugin"></a>
-<h2>Use Maven3 dependency plugin</h2>
-
-<p>Here is there variants for lib download:</p>
-
-<figure class='code'><figcaption><span>Download library with all dependencies</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Specify repoUrl (it&#39;s optional)</span>
-</span><span class='line'>mvn dependency:get -DrepoUrl<span class="o">=</span>http://download.java.net/maven/2/ -DgroupId<span class="o">=</span>com.sparkjava -DartifactId<span class="o">=</span>spark-core -Dversion<span class="o">=</span>2.1
-</span><span class='line'>
-</span><span class='line'><span class="c"># OR use default repoUrl</span>
-</span><span class='line'>mvn dependency:get -DgroupId<span class="o">=</span>com.sparkjava -DartifactId<span class="o">=</span>spark-core -Dversion<span class="o">=</span>2.1
-</span><span class='line'>
-</span><span class='line'><span class="c"># OR use parameter artifact as groupId:artifactId:version</span>
-</span><span class='line'>mvn dependency:get -Dartifact<span class="o">=</span>com.sparkjava:spark-core:2.1
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now we need to copy just downloaded artifacts in our working directory:</p>
-
-<figure class='code'><figcaption><span>Copy jars from local maven repo</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>mvn dependency:copy-dependencies -f <span class="nv">$HOME</span>/.m2/repository/com/sparkjava/spark-core/2.1/spark-core-2.1.pom -DoutputDirectory<span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/lib
-</span><span class='line'><span class="c"># the previous command doesn&#39;t copy spark-core-x.x.jar, that&#39;s why we should copy it manually</span>
-</span><span class='line'>cp <span class="nv">$HOME</span>/.m2/repository/com/sparkjava/spark-core/2.1/spark-core-2.1.jar <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/lib
-</span></code></pre></td></tr></table></div></figure>
-
-
-<a name="Use.standalone.Ivy"></a>
-<h2>Use standalone Ivy</h2>
-
-<p>We can use Ivy as standalone jar to download Maven dependencies without creating Ant build file:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 1. Download the latest ivy jar (currently it&#39;s v.2.4.0)</span>
-</span><span class='line'>curl -L -O http://search.maven.org/remotecontent?filepath<span class="o">=</span>org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar
-</span><span class='line'>
-</span><span class='line'><span class="c"># 2. Run ivy.jar to retrieve all dependencies</span>
-</span><span class='line'>java -jar ivy-2.4.0.jar -dependency com.sparkjava spark-core 2.1 -retrieve <span class="s2">&quot;lib/[artifact]-[revision](-[classifier]).[ext]&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As you can see Ivy downloads approach is much simpler. The only cons (or pros, it depends) that <strong>ivy.jar</strong> should be additionally downloaded.</p>
-
-<a name="Calling.Ivy.from.Groovy.or.Java"></a>
-<h2>Calling Ivy from Groovy or Java</h2>
-
-<p>Here I&rsquo;ve decided to store <a href="http://makandracards.com/evgeny-goldin/5817-calling-ivy-from-groovy-or-java">Evgeny&rsquo;s Goldin</a> code snippet as a reference for myself. Programmatic artifacts downloads is not a common operation. It&rsquo;s alway nice to know the general concept how it can be done. Especially when Ivy documentation is not very informative.</p>
-
-<figure class='code'><figcaption><span>Groovy snippet of calling Ivy</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.Ivy</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.core.module.descriptor.DefaultDependencyDescriptor</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.core.module.descriptor.DefaultModuleDescriptor</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.core.module.id.ModuleRevisionId</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.core.resolve.ResolveOptions</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.core.settings.IvySettings</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.plugins.resolver.URLResolver</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.core.report.ResolveReport</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.ivy.plugins.parser.xml.XmlModuleDescriptorWriter</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="n">File</span> <span class="nf">resolveArtifact</span><span class="o">(</span><span class="n">String</span> <span class="n">groupId</span><span class="o">,</span> <span class="n">String</span> <span class="n">artifactId</span><span class="o">,</span> <span class="n">String</span> <span class="n">version</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="c1">//creates clear ivy settings</span>
-</span><span class='line'>        <span class="n">IvySettings</span> <span class="n">ivySettings</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">IvySettings</span><span class="o">();</span>
-</span><span class='line'>        <span class="c1">//url resolver for configuration of maven repo</span>
-</span><span class='line'>        <span class="n">URLResolver</span> <span class="n">resolver</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">URLResolver</span><span class="o">();</span>
-</span><span class='line'>        <span class="n">resolver</span><span class="o">.</span><span class="na">setM2compatible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">resolver</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="err">&#39;</span><span class="n">central</span><span class="err">&#39;</span><span class="o">);</span>
-</span><span class='line'>        <span class="c1">//you can specify the url resolution pattern strategy</span>
-</span><span class='line'>        <span class="n">resolver</span><span class="o">.</span><span class="na">addArtifactPattern</span><span class="o">(</span>
-</span><span class='line'>            <span class="err">&#39;</span><span class="nl">http:</span><span class="c1">//repo1.maven.org/maven2/[organisation]/[module]/[revision]/[artifact](-[revision]).[ext]&#39;);</span>
-</span><span class='line'>        <span class="c1">//adding maven repo resolver</span>
-</span><span class='line'>        <span class="n">ivySettings</span><span class="o">.</span><span class="na">addResolver</span><span class="o">(</span><span class="n">resolver</span><span class="o">);</span>
-</span><span class='line'>        <span class="c1">//set to the default resolver</span>
-</span><span class='line'>        <span class="n">ivySettings</span><span class="o">.</span><span class="na">setDefaultResolver</span><span class="o">(</span><span class="n">resolver</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
-</span><span class='line'>        <span class="c1">//creates an Ivy instance with settings</span>
-</span><span class='line'>        <span class="n">Ivy</span> <span class="n">ivy</span> <span class="o">=</span> <span class="n">Ivy</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">ivySettings</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">File</span> <span class="n">ivyfile</span> <span class="o">=</span> <span class="n">File</span><span class="o">.</span><span class="na">createTempFile</span><span class="o">(</span><span class="err">&#39;</span><span class="n">ivy</span><span class="err">&#39;</span><span class="o">,</span> <span class="err">&#39;</span><span class="o">.</span><span class="na">xml</span><span class="err">&#39;</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">ivyfile</span><span class="o">.</span><span class="na">deleteOnExit</span><span class="o">();</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">String</span><span class="o">[]</span> <span class="n">dep</span> <span class="o">=</span> <span class="o">[</span><span class="n">groupId</span><span class="o">,</span> <span class="n">artifactId</span><span class="o">,</span> <span class="n">version</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">DefaultModuleDescriptor</span> <span class="n">md</span> <span class="o">=</span>
-</span><span class='line'>                <span class="n">DefaultModuleDescriptor</span><span class="o">.</span><span class="na">newDefaultInstance</span><span class="o">(</span><span class="n">ModuleRevisionId</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">dep</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span>
-</span><span class='line'>                <span class="n">dep</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">+</span> <span class="err">&#39;</span><span class="o">-</span><span class="n">caller</span><span class="err">&#39;</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">working</span><span class="err">&#39;</span><span class="o">));</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">DefaultDependencyDescriptor</span> <span class="n">dd</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">DefaultDependencyDescriptor</span><span class="o">(</span><span class="n">md</span><span class="o">,</span>
-</span><span class='line'>                <span class="n">ModuleRevisionId</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">dep</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">dep</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">dep</span><span class="o">[</span><span class="mi">2</span><span class="o">]),</span> <span class="kc">false</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">md</span><span class="o">.</span><span class="na">addDependency</span><span class="o">(</span><span class="n">dd</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">//creates an ivy configuration file</span>
-</span><span class='line'>        <span class="n">XmlModuleDescriptorWriter</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">md</span><span class="o">,</span> <span class="n">ivyfile</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">String</span><span class="o">[]</span> <span class="n">confs</span> <span class="o">=</span> <span class="o">[</span><span class="err">&#39;</span><span class="k">default</span><span class="err">&#39;</span><span class="o">];</span>
-</span><span class='line'>        <span class="n">ResolveOptions</span> <span class="n">resolveOptions</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ResolveOptions</span><span class="o">().</span><span class="na">setConfs</span><span class="o">(</span><span class="n">confs</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">//init resolve report</span>
-</span><span class='line'>        <span class="n">ResolveReport</span> <span class="n">report</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span><span class="n">ivyfile</span><span class="o">.</span><span class="na">toURL</span><span class="o">(),</span> <span class="n">resolveOptions</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">//so you can get the jar library</span>
-</span><span class='line'>        <span class="n">File</span> <span class="n">jarArtifactFile</span> <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="na">getAllArtifactsReports</span><span class="o">()[</span><span class="mi">0</span><span class="o">].</span><span class="na">getLocalFile</span><span class="o">();</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">return</span> <span class="n">jarArtifactFile</span><span class="o">;</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">resolveArtifact</span><span class="o">(</span> <span class="err">&#39;</span><span class="n">log4j</span><span class="err">&#39;</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">log4j</span><span class="err">&#39;</span><span class="o">,</span> <span class="err">&#39;</span><span class="mf">1.2</span><span class="o">.</span><span class="mi">16</span><span class="err">&#39;</span> <span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<a name="References"></a>
-<h2>References</h2>
-
-<ul>
-<li><a href="http://stackoverflow.com/questions/15450383/using-maven-to-download-dependencies-to-a-directory-on-the-command-line/15456621">Using Maven to download dependencies to a directory on the command line - Stack Overflow</a></li>
-<li><a href="http://stackoverflow.com/questions/15598612/simplest-ivy-code-to-programmatically-retrieve-dependency-from-maven-central">Simplest Ivy code to programmatically retrieve dependency from Maven Central - Stack Overflow</a></li>
-<li><a href="http://makandracards.com/evgeny-goldin/5817-calling-ivy-from-groovy-or-java">Calling Ivy from Groovy or Java</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -685,6 +642,10 @@ Assume that we&rsquo;d like to download <code>spark-core</code> library (<code>g
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/19/grails-2-dot-5-0-debug-in-intellij-idea/">Grails 2.5.0 Debug in IntelliJ IDEA</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/18/golang-presentation-tool/">Go Presentation Tool</a>
       </li>
     
@@ -700,15 +661,11 @@ Assume that we&rsquo;d like to download <code>spark-core</code> library (<code>g
         <a href="/blog/2015/03/17/how-to-download-jars-from-maven-central/">How to Download Jars From Maven Central</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/02/17/how-to-install-octopress-on-windows/">How to Install Octopress on Windows?</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <span id="tag-cloud"><a href='/blog/categories/architecture' style='font-size: 107.5%'>architecture(1)</a> <a href='/blog/categories/bash' style='font-size: 115.0%'>bash(2)</a> <a href='/blog/categories/blog' style='font-size: 107.5%'>blog(1)</a> <a href='/blog/categories/books' style='font-size: 115.0%'>books(2)</a> <a href='/blog/categories/conference' style='font-size: 107.5%'>conference(1)</a> <a href='/blog/categories/golang' style='font-size: 107.5%'>golang(1)</a> <a href='/blog/categories/groovy' style='font-size: 122.5%'>groovy(3)</a> <a href='/blog/categories/h2' style='font-size: 107.5%'>h2(1)</a> <a href='/blog/categories/ivy' style='font-size: 107.5%'>ivy(1)</a> <a href='/blog/categories/java' style='font-size: 160.0%'>java(8)</a> <a href='/blog/categories/java-se' style='font-size: 115.0%'>java se(2)</a> <a href='/blog/categories/jdbc' style='font-size: 107.5%'>jdbc(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 107.5%'>jeeconf(1)</a> <a href='/blog/categories/languages' style='font-size: 107.5%'>languages(1)</a> <a href='/blog/categories/learning' style='font-size: 107.5%'>learning(1)</a> <a href='/blog/categories/maven' style='font-size: 115.0%'>maven(2)</a> <a href='/blog/categories/octopress' style='font-size: 115.0%'>octopress(2)</a> <a href='/blog/categories/rails' style='font-size: 107.5%'>rails(1)</a> <a href='/blog/categories/review' style='font-size: 115.0%'>review(2)</a> <a href='/blog/categories/ruby' style='font-size: 122.5%'>ruby(3)</a> <a href='/blog/categories/scala' style='font-size: 107.5%'>scala(1)</a> <a href='/blog/categories/scripting' style='font-size: 107.5%'>scripting(1)</a> <a href='/blog/categories/shell' style='font-size: 115.0%'>shell(2)</a> <a href='/blog/categories/spring' style='font-size: 107.5%'>spring(1)</a> <a href='/blog/categories/textmate' style='font-size: 115.0%'>textmate(2)</a> <a href='/blog/categories/tomcat' style='font-size: 107.5%'>tomcat(1)</a> <a href='/blog/categories/windows' style='font-size: 107.5%'>windows(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/architecture' style='font-size: 107.5%'>architecture(1)</a> <a href='/blog/categories/bash' style='font-size: 115.0%'>bash(2)</a> <a href='/blog/categories/blog' style='font-size: 107.5%'>blog(1)</a> <a href='/blog/categories/books' style='font-size: 115.0%'>books(2)</a> <a href='/blog/categories/conference' style='font-size: 107.5%'>conference(1)</a> <a href='/blog/categories/golang' style='font-size: 107.5%'>golang(1)</a> <a href='/blog/categories/grails' style='font-size: 107.5%'>grails(1)</a> <a href='/blog/categories/groovy' style='font-size: 130.0%'>groovy(4)</a> <a href='/blog/categories/h2' style='font-size: 107.5%'>h2(1)</a> <a href='/blog/categories/ivy' style='font-size: 107.5%'>ivy(1)</a> <a href='/blog/categories/java' style='font-size: 160.0%'>java(8)</a> <a href='/blog/categories/java-se' style='font-size: 115.0%'>java se(2)</a> <a href='/blog/categories/jdbc' style='font-size: 107.5%'>jdbc(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 107.5%'>jeeconf(1)</a> <a href='/blog/categories/languages' style='font-size: 107.5%'>languages(1)</a> <a href='/blog/categories/learning' style='font-size: 107.5%'>learning(1)</a> <a href='/blog/categories/maven' style='font-size: 115.0%'>maven(2)</a> <a href='/blog/categories/octopress' style='font-size: 115.0%'>octopress(2)</a> <a href='/blog/categories/rails' style='font-size: 107.5%'>rails(1)</a> <a href='/blog/categories/review' style='font-size: 115.0%'>review(2)</a> <a href='/blog/categories/ruby' style='font-size: 122.5%'>ruby(3)</a> <a href='/blog/categories/scala' style='font-size: 107.5%'>scala(1)</a> <a href='/blog/categories/scripting' style='font-size: 107.5%'>scripting(1)</a> <a href='/blog/categories/shell' style='font-size: 115.0%'>shell(2)</a> <a href='/blog/categories/spring' style='font-size: 107.5%'>spring(1)</a> <a href='/blog/categories/textmate' style='font-size: 115.0%'>textmate(2)</a> <a href='/blog/categories/tomcat' style='font-size: 107.5%'>tomcat(1)</a> <a href='/blog/categories/windows' style='font-size: 107.5%'>windows(1)</a> </span>
 </section>
 
   

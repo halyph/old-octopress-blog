@@ -4,7 +4,7 @@
   <title><![CDATA[Knowledge Is Everything]]></title>
   <link href="http://halyph.com/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-05-19T01:20:38+03:00</updated>
+  <updated>2015-05-20T20:15:48+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -12,6 +12,76 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Grails 2.5.0 Debug in IntelliJ IDEA]]></title>
+    <link href="http://halyph.com/blog/2015/05/19/grails-2-dot-5-0-debug-in-intellij-idea/"/>
+    <updated>2015-05-19T17:48:59+03:00</updated>
+    <id>http://halyph.com/blog/2015/05/19/grails-2-dot-5-0-debug-in-intellij-idea</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://halyph.com/images/blog/grails.jpg"></p>
+
+<p>I&rsquo;ve been using Grails v.2.5.0 and tried to debug Grails app via traditional Intellij IDEA 14 Debug with no success.</p>
+
+<p><em>To be short</em>: using IDEA <em>Debug</em> allows us debug Grails build system <strong>only</strong>. Why?</p>
+
+<blockquote><p>Forked execution is configured via the <code>grails-app/conf/BuildConfig.groovy</code> file. The following is the default configuration:</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">grails</span><span class="o">.</span><span class="na">project</span><span class="o">.</span><span class="na">fork</span> <span class="o">=</span> <span class="o">[</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'>   <span class="nl">run:</span> <span class="o">[</span><span class="nl">maxMemory:</span> <span class="mi">768</span><span class="o">,</span> <span class="nl">minMemory:</span> <span class="mi">64</span><span class="o">,</span> <span class="nl">debug:</span> <span class="kc">false</span><span class="o">,</span> <span class="nl">maxPerm:</span> <span class="mi">256</span><span class="o">],</span> <span class="c1">// configure settings for the run-app JVM</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>Based on this we should create two IDEA Run/Debug Configurations:</em></p>
+
+<ul>
+<li>Create simple Grails <em>Run</em> configuration with <code>--debug-fork</code> parameter: <code>run-app --debug-fork</code>.
+E.g.</li>
+</ul>
+
+
+<p><img src="http://halyph.com/images/posts/2015-05-19/idea1.png">
+And run this Configuration. We should get the next output</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Listening</span> <span class="k">for</span> <span class="n">transport</span> <span class="n">dt_socket</span> <span class="n">at</span> <span class="nl">address:</span> <span class="mi">5005</span>
+</span><span class='line'><span class="o">|</span><span class="n">Server</span> <span class="n">running</span><span class="o">.</span> <span class="n">Browse</span> <span class="n">to</span> <span class="nl">http:</span><span class="c1">//localhost:8080/TekDays</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+This socket address will be used for <em>Remote</em> connection.</p>
+
+<ul>
+<li>Create IDEA <code>Remote</code> Configuration (<em>Run/Debug Configuration</em> -> <em>Remote</em>)</li>
+</ul>
+
+
+<p><img src="http://halyph.com/images/posts/2015-05-19/idea2.png">
+And run this Configuation. Now, we are able to <em>debug</em> our application.</p>
+
+<p>The main idea is that we should have two running <em>Configurations</em>!</p>
+
+<a name="References"></a>
+<h2>References</h2>
+
+<ul>
+<li><a href="http://mrhaki.blogspot.com/2013/12/grails-goodness-debugging-app-in-forked.html">Grails Goodness: Debugging App in Forked Mode</a></li>
+<li><a href="http://grails.github.io/grails-doc/2.5.0/guide/single.html#forkedMode">Grails 2.5 Forked Execution</a></li>
+<li><a href="http://stackoverflow.com/questions/19247944/intellij-idea-debugger-isnt-working-on-a-grails-project">Stackoverflow - IntelliJ IDEA Debugger isn&rsquo;t working on a Grails Project</a></li>
+<li><a href="http://grails.io/post/43484836985/road-to-grails-2-3-forked-execution">Road to Grails 2.3: Forked Execution</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Go Presentation Tool]]></title>
@@ -3576,46 +3646,6 @@ usage also.</p>
 <li><a href="http://stackoverflow.com/questions/5663519/namespacing-thor-commands-in-a-standalone-ruby-executable">Namespacing Thor commands in a standalone ruby executable</a></li>
 <li><a href="http://stackoverflow.com/questions/5729071/how-to-compose-thor-tasks-in-separate-classes-modules-files">Packaging Thor commands in separate classes/modules/files</a></li>
 <li><a href="http://stackoverflow.com/questions/6561912/ruby-thor-based-executable-with-namespaces">Ruby Thor based executable with namespaces</a></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Review: Making Java Groovy]]></title>
-    <link href="http://halyph.com/2014/03/review-making-java-groovy.html"/>
-    <updated>2014-03-17T23:27:00+02:00</updated>
-    <id>http://halyph.com/2014/03/review-making-java-groovy</id>
-    <content type="html"><![CDATA[<p><img class="center" src="http://halyph.com/images/posts/book_making_java_groovy.jpg"></p>
-
-<p>I can say that this book is special. It’s not a Groovy “cookbook”.
-You won’t find tons of tricky recipes around Groovy. You won’t learn
-black art of Groovy meta programming. Strange, doesn’t it. :-) Then why
-you should read it. Or who should read this book?</p>
-
-<p>The answer is very simple - Every Java programmer who wants to be productive in daily work must read this book. The author <a href="http://www.amazon.com/Ken-Kousen/e/B003NUYREE/ref=ntt_athr_dp_pel_1">Ken Kousen</a> did really great job showing different aspects of Groovy as a language, tool and ecosystem. The reader will understand that there are tons of different appliances of Groovy:</p>
-
-<ul>
-<li>Groovy scripting (@Grab)</li>
-<li>Gradle, Maven/Ant automation</li>
-<li>Groovy as prototyping language: REST, DB, etc.</li>
-<li>Web micro-frameworks</li>
-<li>Testing: Spock, mocks</li>
-<li>Java/Groovy integration</li>
-<li>JSON/XML manipulation</li>
-</ul>
-
-
-<p>The most important thing is to understand that Groovy should <strong>NOT</strong> be
-used only with Grails. Java programmers must re-discover Groovy as super
-pragmatic language. Everything which is written in Java can be written
-in Groovy. Save your time and automate with Groovy.</p>
-
-<a name="References:"></a>
-<h2>References:</h2>
-
-<ul>
-<li> <a href="http://www.manning.com/kousen/">Making Java Groovy, by Ken Kousen</a></li>
 </ul>
 
 ]]></content>
