@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Jeeconf | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/jeeconf/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-05-20T20:15:48+03:00</updated>
+  <updated>2015-05-26T01:57:38+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[JJEEConf - Kiev, 2015 - Report]]></title>
+    <link href="http://halyph.com/blog/2015/05/25/jeeconf-kiev/"/>
+    <updated>2015-05-25T00:45:51+03:00</updated>
+    <id>http://halyph.com/blog/2015/05/25/jeeconf-kiev</id>
+    <content type="html"><![CDATA[<p><img class="center" src="/images/blog/jeeconf.png"></p>
+
+<p>It happened again - I attend <a href="http://jeeconf.com">JEEConf</a>, May 22-23, 2015. And as usual it was inspiring. Also, I can say that this year <a href="http://www.scala-lang.org/">Scala</a> was dominated buzz word on this conference.</p>
+
+<p>So, I attended the next talks:</p>
+
+<ul>
+<li><p><strong>Pragmatic Functional Refactoring with Java 8, by Richard Warburton</strong> Java 8 functional features were introduced here. And were shown how we can refactor OOP program in functional way. I can say it&rsquo;s still a new way of thinking for Java developers.</p></li>
+<li><p><strong>Just what are you doing, HotSpot? by Gleb Smirnov</strong> - Gleb gave us several advices for understanding tricky HotSpot behavior and why we should read HotSpot sources.</p></li>
+<li><p><strong>Lessons from Implementing a Modern B2C System in Scala, by Yuriy Guts</strong> It was a case study talk about starting new project with Scala. The most interesting  was the issues appeared during project development, team&rsquo;s relationship with Scala, and Scala influences on non-Scala developers.</p></li>
+<li><p><strong>Spring Puzzlers, by Evgeny Borisov and Baruch Sadogursky</strong> - We can say that this topic is unique. At least I&rsquo;m not aware of similar talks on other Java conferences. Spring Puzzlers is a variation of classic Java puzzlers, but in Spring. It&rsquo;s really great collection of tricky Spring parts.</p></li>
+<li><p><strong>JVM Languages Q&amp;A Panel with Jacek Laskowski, Baruch Sadogursky, Dmytro Mantula, Alexander Podkhalyuzin, Tomer Gabel</strong> We can say that this panel was Groovy vs Scala. There are no other &ldquo;languages&rdquo; on this talk.</p></li>
+<li><p><strong>Building an Enterprise-less online bank, Anton Keks</strong> - Anton doesn&rsquo;t love bloated Spring and likes simple and clean solution. He doesn&rsquo;t use Play Framework 2 on Scala because of slow compilation. Instead of this, he told us about his banking platform implemented on <em>Play 1.3</em> and <em>Java 8</em>, and all other items included in his stack.</p></li>
+<li><p><strong>Everything you wanted to know about writing async, high-concurrency HTTP applications in Java, but were afraid to ask, by Baruch Sadogursky</strong> - Baruch shared his experience about implementing asynchronous file downloader in Java.</p></li>
+<li><p><strong>Scala Rock-Painting, by Dmytro Mantula</strong> - This talk was like Scala puzzlers and/or Scala tricky parts. Speaker also gave us several suggesting how we can learn Scala more effectively via practicing <em>code katas</em> and/or <a href="http://ankisrs.net">Anki</a> flesh cards. This talk highlighted the &ldquo;dark&rdquo; side of Scala. Really, recommend it.</p></li>
+<li><p><strong>Groovy under Macroscope, by Sergei Egorov and Baruch Sadogursky</strong> - Sergei demoed us very hacky Groovy library <a href="https://github.com/bsideup/MacroGroovy">MacroGroovy</a>. It&rsquo;s nice to see true Groovy hacker and his creature.</p></li>
+<li><p><strong>About concurrency abstractions with Observable’s, Future’s, Akka (actors) in Scala, by Jacek Laskowski</strong> - Jacek did Scala concurrency overview talk and highlighted other non-Akka libraries. It&rsquo;s nice to know that there are other <em>&ldquo;good&rdquo;</em> way to do concurrency without Akka.</p></li>
+<li><p><strong>Node.js and Evented I/O Alternatives on the JVM, by Niko Köbler</strong> - I definitely heard about <a href="https://avatar-js.java.net">Avatar.js</a>, but Niko told us that <a href="http://blog.n-k.de/2015/01/is-oracles-avatar-dead.html">Avatar.js is dead</a> and  <a href="http://blog.n-k.de/2015/02/current-status-of-oracles-project-avatar.html">Oracle put development of Avatar on hold</a>, i.e. full stop. As alternative were mentioned two alternative solutions: <strong><a href="http://dynjs.org">DynJS</a></strong> an ECMAScript runtime for the JVM and <strong><a href="http://nodyn.io/">Nodyn</a></strong> - Node.js compatible framework on JVM. It&rsquo;s very interesting to see what will happen with them. <em>Nodyn</em> has strong support via RedHat. Let&rsquo;s hope it&rsquo;s much stronger than Oracles one.</p></li>
+<li><p><strong>Do we need JMS in 21st century? by Mikalai Alimenkou</strong> - The simple statements can be extracted from this talk: a) there are other non-JMS Message queues (MQs); b) we don&rsquo;t need bloated JMS for every tasks; c) use right MQ for right job</p></li>
+</ul>
+
+
+<a name="Summary"></a>
+<h2>Summary</h2>
+
+<ul>
+<li><p>JEEConf has dedicated JVM track: 50% of this track was occupied by Scala (7 talks). As for me this is the sign ;-) Scala bandwagon reached Ukraine.</p></li>
+<li><p><em>Microservices</em> everywhere. If you are not doing <em>microservices</em> - you should :-)</p></li>
+</ul>
+
+
+<p>Yes, JEEConf is simply the best. <a href="http://xpinjection.com/">XP Injection</a> did amazing work.</p>
+
+<p><strong>Have fun, love Java!</strong></p>
+
+<a name="References"></a>
+<h2>References</h2>
+
+<ul>
+<li><a href="http://halyph.com/2014/05/jeeconf-kiev-2014-report.html">JEEConf - Kiev, 2014 - Report</a></li>
+<li><a href="http://halyph.blogspot.com/2013/05/jeeconf-kiev-2013-report.html">JEEConf - Kiev, 2013 - Report</a></li>
+<li><a href="http://halyph.blogspot.com/2012/05/this-year-we-had-second-jeeconf.html">JEEConf - Kiev, 2012 - Report</a></li>
+<li><a href="http://halyph.blogspot.com/2011/05/jeeconf-kiev-2011-report.html">JEEConf - Kiev, 2011 - Report</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[JEEConf - Kiev, 2014 - Report]]></title>
