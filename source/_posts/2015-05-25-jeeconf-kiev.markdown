@@ -8,7 +8,7 @@ categories: [conference, jeeconf]
 
 {% img center /images/blog/jeeconf.png %}
 
-It happened again - I attend [JEEConf](http://jeeconf.com), May 22-23, 2015. And as usual it was inspiring. Also, I can say that this year [Scala](http://www.scala-lang.org/) was dominated buzz word on this conference.  
+It happened again - I attend [JEEConf](http://jeeconf.com), May 22-23, 2015. And as usual it was inspiring. Also, I can say that this year [Scala](http://www.scala-lang.org/) was dominated buzz word at this conference.
 
 So, I attended the next talks:
 
