@@ -8,7 +8,7 @@ categories: [conference, devoxx]
 
 {% img right /images/posts/2015-06/Devoxx-Poland-2015.png %}
 
-This summer I've decided to attend my 1<sup>st</sup> foreign conference - [DevoxxPL](http://devoxx.pl). It was very important experience, because I wanted to compare it with our local Ukrainian conference. Long story short - the quality is equal. Any conference is based on speakers (I'd like to be "Captain Obvious"). And even awesome conference location can't make **great** conference in general.
+This summer I've decided to attend my 1<sup>st</sup> foreign conference - [DevoxxPL](http://devoxx.pl). It was very important experience, because I wanted to compare it with our local Ukrainian conference. Long story short - the quality is equal. Any conference is based on speakers (I'd like to be "Captain Obvious"). And even awesome conference location can't make conference **great** in general.
 
 So, I've attended the next talks:
 
@@ -17,7 +17,8 @@ So, I've attended the next talks:
 - "The Silver Bullet Syndrome" by [Hadi Hariri](http://hadihariri.com/)
 - "Tips and tricks for clean relational db schemas" by [Clément Delafargue](https://twitter.com/clementd)
 - "JRebel under the covers - how is it even possible?" by [Simon Maple](https://twitter.com/sjmaple)
-- "Corporate startup and Scala" by [Filip Rogaczewski](https://plus.google.com/114974986229567009127/posts)
+- "Corporate startup and Scala" by [Filip Rogaczewski](https://plus.google.com/114974986229567009127/posts) from [Spartez](spartez.com)
+  - It was really nice case study about building project with Scala. Pros&cons were "honestly" highlighted.
 - "Refactoring to Functional" by [Hadi Hariri](http://hadihariri.com/)
 - "You're an Architect...Now What?" by [Nathaniel Schutta](https://twitter.com/ntschutta)
 
@@ -25,6 +26,7 @@ So, I've attended the next talks:
 - "Why software developers should care about deployment and monitoring" by [Michał Kosmulski](http://allegrotech.io/authors/michal.kosmulski/) from Allegro Group
 - "Modern Java Component Design with Spring 4.2" by [Juergen Hoeller](https://twitter.com/springjuergen) from Pivotal
 - "Make sense of your (BIG) data!" by [David Pilato](https://twitter.com/dadoonet) from ElasticSearch
+  - [Blog](http://david.pilato.fr)
 - "Building an Asynchronous Reactive NoSQL SDK with RxJava" by [Simon Baslé](https://about.me/simonbasle) from Couchbase
 - "Lazy Evaluations" by [Venkat Subramaniam](https://twitter.com/venkat_s)
   - [Blogpost - Lazy in Java](http://blog.agiledeveloper.com/2015/06/lazy-in-java_24.html)
@@ -42,6 +44,12 @@ So, I've attended the next talks:
 
 ## Summary
 
+This conference had a huge buzz around microservices. I've been inspired by some talks and planning to look deeper into:
+* [Elasticsearch](https://www.elastic.co/products/elasticsearch)
+* [Logstash](https://www.elastic.co/products/logstash)
+* [Kibana](https://www.elastic.co/products/kibana)
+* [RxJava](https://github.com/ReactiveX/RxJava)
+* and OMG ;-) Scala. This language has pissed me off.
 
 ## References
 * Allegro
