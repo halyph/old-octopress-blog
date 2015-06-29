@@ -8,7 +8,7 @@ categories: [conference, devoxx]
 
 {% img right /images/posts/2015-06/Devoxx-Poland-2015.png %}
 
-This summer I've decided to attend my 1<sup>st</sup> foreign conference - [DevoxxPL - Krakow, Poland, 22-25 June 2015](http://devoxx.pl). It was very important experience, because I wanted to compare it with our local Ukrainian conference. Long story short - the quality is equal. Any conference is based on speakers (I'd like to be "Captain Obvious"). And even awesome conference location can't make conference **great**.
+This summer I've decided to attend my 1<sup>st</sup> foreign conference - [DevoxxPL - Krakow, Poland, 22-25 June 2015](http://devoxx.pl). It was very important experience, because I wanted to compare it with our local Ukrainian conferences. Long story short - the quality is equal. Any conference is based on speakers (I'd like to be "Captain Obvious"). And even awesome conference location can't make conference **great**.
 
 So, I've attended the next talks:
 
