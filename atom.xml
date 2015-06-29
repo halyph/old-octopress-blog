@@ -4,7 +4,7 @@
   <title><![CDATA[Knowledge Is Everything]]></title>
   <link href="http://halyph.com/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-05-26T02:09:35+03:00</updated>
+  <updated>2015-06-29T23:54:23+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -12,6 +12,126 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[DevoxxPL - Krakow, 2015 - Report]]></title>
+    <link href="http://halyph.com/blog/2015/06/29/devoxxpl/"/>
+    <updated>2015-06-29T13:00:51+03:00</updated>
+    <id>http://halyph.com/blog/2015/06/29/devoxxpl</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://halyph.com/images/posts/2015-06/Devoxx-Poland-2015.png"></p>
+
+<p>This summer I&rsquo;ve decided to attend my 1<sup>st</sup> foreign conference - <a href="http://devoxx.pl">DevoxxPL - Krakow, Poland, 22-25 June 2015</a>. It was very important experience, because I wanted to compare it with our local Ukrainian conferences. Long story short - the quality is equal. Any conference is based on speakers (I&rsquo;d like to be &ldquo;Captain Obvious&rdquo;). And even awesome conference location can&rsquo;t make conference <strong>great</strong>.</p>
+
+<p>So, I&rsquo;ve attended the next talks:</p>
+
+<a name="Day.1"></a>
+<h2>Day 1</h2>
+
+<ul>
+<li><strong>&ldquo;The Silver Bullet Syndrome&rdquo;</strong> by <a href="http://hadihariri.com/">Hadi Hariri</a></li>
+<li><strong>&ldquo;Tips and tricks for clean relational db schemas&rdquo;</strong> by <a href="https://twitter.com/clementd">Clément Delafargue</a></li>
+<li><strong>&ldquo;JRebel under the covers - how is it even possible?&rdquo;</strong> by <a href="https://twitter.com/sjmaple">Simon Maple</a></li>
+<li><strong>&ldquo;Corporate startup and Scala&rdquo;</strong> by <a href="https://plus.google.com/114974986229567009127/posts">Filip Rogaczewski</a> from <a href="spartez.com">Spartez</a>
+
+<ul>
+<li>It was really nice case study about building project with Scala. Pros&amp;cons were &ldquo;honestly&rdquo; highlighted.</li>
+</ul>
+</li>
+<li><strong>&ldquo;Refactoring to Functional&rdquo;</strong> by <a href="http://hadihariri.com/">Hadi Hariri</a></li>
+<li><strong>&ldquo;You&rsquo;re an Architect&hellip;Now What?&rdquo;</strong> by <a href="https://twitter.com/ntschutta">Nathaniel Schutta</a></li>
+</ul>
+
+
+<a name="Day.2"></a>
+<h2>Day 2</h2>
+
+<ul>
+<li><strong>&ldquo;Why software developers should care about deployment and monitoring&rdquo;</strong> by <a href="http://allegrotech.io/authors/michal.kosmulski/">Michał Kosmulski</a> from Allegro Group</li>
+<li><strong>&ldquo;Modern Java Component Design with Spring 4.2&rdquo;</strong> by <a href="https://twitter.com/springjuergen">Juergen Hoeller</a> from Pivotal</li>
+<li><strong>&ldquo;Make sense of your (BIG) data!&rdquo;</strong> by <a href="https://twitter.com/dadoonet">David Pilato</a> from ElasticSearch
+
+<ul>
+<li><a href="http://david.pilato.fr">Blog</a></li>
+</ul>
+</li>
+<li><strong>&ldquo;Building an Asynchronous Reactive NoSQL SDK with RxJava&rdquo;</strong> by <a href="https://about.me/simonbasle">Simon Baslé</a> from Couchbase</li>
+<li><strong>&ldquo;Lazy Evaluations&rdquo;</strong> by <a href="https://twitter.com/venkat_s">Venkat Subramaniam</a>
+
+<ul>
+<li><a href="http://blog.agiledeveloper.com/2015/06/lazy-in-java_24.html">Blogpost - Lazy in Java</a></li>
+</ul>
+</li>
+<li><strong>&ldquo;Get Past the Syntax, The Real Scare is in the Semantics&rdquo;</strong> by <a href="https://twitter.com/venkat_s">Venkat Subramaniam</a></li>
+</ul>
+
+
+<a name="Day.3"></a>
+<h2>Day 3</h2>
+
+<ul>
+<li><strong>&ldquo;PubSub++ - few tips that make your life with kafka easier&rdquo;</strong> by <a href="https://twitter.com/DebskiChris">Krzysztof Debski</a> from Allegro Group</li>
+<li><strong>&ldquo;Deep dive into Reactive Java&rdquo;</strong> by <a href="https://twitter.com/tkowalcz">Tomasz Kowalczewski</a> from Codewise:
+
+<ul>
+<li><a href="http://www.slideshare.net/tkowalcz/deep-dive-reactive-java-devoxxpl">Slides</a></li>
+<li><a href="https://github.com/tkowalcz/presentations">Github</a></li>
+</ul>
+</li>
+<li><strong>&ldquo;Event Sourcing &amp; Functional Programming - a pair made in heaven&rdquo;</strong> by <a href="https://twitter.com/rabbitonweb">Paweł Szulc</a>
+
+<ul>
+<li><a href="http://www.rabbitonweb.com/">Blog</a></li>
+</ul>
+</li>
+<li><strong>&ldquo;Functional Programming: Technical Reasons to Adapt&rdquo;</strong> by <a href="https://twitter.com/venkat_s">Venkat Subramaniam</a></li>
+<li><strong>&ldquo;Why I love Logstash and you should too&rdquo;</strong> by <a href="https://twitter.com/jsvd">João Duarte</a> from ElasticSearch</li>
+</ul>
+
+
+<a name="Summary"></a>
+<h2>Summary</h2>
+
+<p>This conference had a huge buzz around microservices. I&rsquo;ve been inspired by some talks and planning to look deeper into:</p>
+
+<ul>
+<li><a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a></li>
+<li><a href="https://www.elastic.co/products/logstash">Logstash</a></li>
+<li><a href="https://www.elastic.co/products/kibana">Kibana</a></li>
+<li><a href="https://github.com/ReactiveX/RxJava">RxJava</a></li>
+<li>and OMG ;-) <a href="http://www.scala-lang.org/">Scala</a></li>
+</ul>
+
+
+<a name="References"></a>
+<h2>References</h2>
+
+<ul>
+<li>Allegro
+
+<ul>
+<li><a href="http://allegrotech.io/open-source/">Open Source</a></li>
+<li><a href="http://allegrotech.io/">Tech blog</a></li>
+</ul>
+</li>
+<li><a href="https://www.elastic.co">Elastic</a>
+
+<ul>
+<li><a href="https://www.elastic.co/blog">Blog</a></li>
+<li>Products:
+
+<ul>
+<li><a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a></li>
+<li><a href="https://www.elastic.co/products/logstash">Logstash</a></li>
+<li><a href="https://www.elastic.co/products/kibana">Kibana</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="http://babun.github.io/">Babun - a windows shell you will love</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[JEEConf - Kiev, 2015 - Report]]></title>
@@ -3605,71 +3725,6 @@ java.io.NotSerializableException: com.MyClass
 
 <ul>
 <li><a href="http://www.amazon.com/Programming-Groovy-Productivity-Developer-Pragmatic/dp/1937785300/">Programming Groovy 2: Dynamic Productivity for the Java Developer</a></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[JEEConf - Kiev, 2014 - Report]]></title>
-    <link href="http://halyph.com/2014/05/jeeconf-kiev-2014-report.html"/>
-    <updated>2014-05-25T23:41:00+03:00</updated>
-    <id>http://halyph.com/2014/05/jeeconf-kiev-2014-report</id>
-    <content type="html"><![CDATA[<p><img class="center" src="http://halyph.com/images/blog/jeeconf.png"></p>
-
-<p>I attended the forth <a href="http://jeeconf.com">JEEConf</a>, May 23-24, 2014. The situation in my country (Ukraine) is difficult that’s why I was amazed to see so many foreign speakers. The organizers did really tremendous work.</p>
-
-<p>This year I divided topics by the next directions:</p>
-
-<a name="Spring"></a>
-<h3>Spring</h3>
-
-<ul>
-<li><em>Spring 4, Java EE 7 or Both? by Ivar Grimstad</em> &ndash; The main idea of the talk was to show similar and different parts of Spring 4 and Java EE 7. And have an ability easily identify when to use one or another. There are trade-offs and we should be aware of them.</li>
-<li><em>Spring configuration: how to do it right (experience report), Mikalai Alimenkou</em> &ndash; Mikalai shared his experience related to Spring configs. Nice talk. I&rsquo;m going to borrow some ideas ;-)</li>
-<li><em>Spring the Ripper, by Evgeny Borisov</em> &ndash; It was the most dynamic talk at this conference. The presenter shown Spring life-cycle internals in action. Well done. It should be seen by every Spring dev :-)</li>
-</ul>
-
-
-<a name="Frameworks"></a>
-<h3>Frameworks</h3>
-
-<ul>
-<li><em>Apache Lucene/Solr Internals, by Anatoliy Sokolenko</em> &ndash; I had no experience with these technologies. And it was really nice intro. Now I have some clue how it works.</li>
-<li><em>Streamline your processes with jBPM 6, by Jiri Svitak</em> &ndash; It was an into talk into jBPM 6. I had small experience with competitor framework <a href="http://activiti.org/">Activiti</a>. It&rsquo;s always interesting to see the similar framework&rsquo;s features.</li>
-</ul>
-
-
-<a name="Java.JVM.Compiler"></a>
-<h3>Java/JVM/Compiler</h3>
-
-<ul>
-<li><em>Java8: Stream Style, by Sergey Kuksenko</em> &ndash; It was Java 8 Stream introduction. There were shown different stream features and approaches.</li>
-<li><em><a href="http://shipilev.net/blog/2014/heapdump-is-a-lie/">What Heap Dumps Are Lying To You About, by Aleksey Shipilёv</a></em> &ndash; It&rsquo;s a very special talk related to Java &ldquo;internals&rdquo;. Actually, this talk was about Java object size calculation and what happens under the hood.</li>
-<li><em>Reflection Madness, by Heinz Kabutz</em> &ndash; The presenter told us about Java reflection magic, when to use it and why it&rsquo;s dangerous.</li>
-</ul>
-
-
-<a name="Miscellaneous"></a>
-<h3>Miscellaneous</h3>
-
-<ul>
-<li><em>Tooling of a Test-Driven Developer, by Paweł Lipiński</em> &ndash; There were highlighted two very interesting libraries for TDD on top of JUnit: <a href="http://joel-costigliola.github.io/assertj/">AssertJ</a> and <a href="https://code.google.com/p/junitparams/">JUnitParams</a>.Very interesting libraries</li>
-<li><em>Web Apps in LISP!? EWW!, by Anatoly Polinsky</em> &ndash; Here was shown different aspects of web development in Clojure for beginners. It&rsquo;s was real intro, but very interesting, especially when you&rsquo;d like to spread your mind into alternative JVM-related communities.</li>
-</ul>
-
-
-<p>It was very productive conference for me. I&rsquo;ve got new portion of inspiration, new knowledge and passion to ordinary things.</p>
-
-<p><img class="center" src="http://halyph.com/images/posts/jeeconf2014.jpg"></p>
-
-<a name="References"></a>
-<h2>References</h2>
-
-<ul>
-<li><a href="http://halyph.blogspot.com/2013/05/jeeconf-kiev-2013-report.html">JEEConf - Kiev, 2013 - Report</a></li>
-<li><a href="http://halyph.blogspot.com/2012/05/this-year-we-had-second-jeeconf.html">JEEConf - Kiev, 2012 - Report</a></li>
-<li><a href="http://halyph.blogspot.com/2011/05/jeeconf-kiev-2011-report.html">JEEConf - Kiev, 2011 - Report</a></li>
 </ul>
 
 ]]></content>
