@@ -71,11 +71,11 @@ It can generate both back-end (REST endpoint) and front-end (Angular.js Single-p
 There is a very special category Domain-driven frameworks. For this category I've selected two most popular frameworks: [OpenXava](http://www.openxava.org/) and [Apache Isis](http://isis.apache.org/). The main idea is that they can generate views and RESTs based on domain entities. Both frameworks have active community. They have "own" concepts and no hipsters technologies. The usage domain is very narrow, I guess they can be easily used to quickly general application's back-offices (aka admin pages) and prototyping.
 
 ## Others
-There are several others frameworks ([Ninja](http://www.ninjaframework.org/), Javalight](http://javalite.io/), [Jodd µicro frameworks](http://joddframework.org/)). They are build by small communities (or my single developer) and have some applications. But, it's risky to invest in them. You can look into because of curiosity, but not more. As for me it's much safe to use Play/Grails than some unpopular frameworks.
+There are several others frameworks [Ninja](http://www.ninjaframework.org/), [Javalight](http://javalite.io/), [Jodd](http://joddframework.org/), [Jobby](http://jooby.org/) and [airlift](https://github.com/airlift/airlift). They are build by small communities (or my single developer) and have some applications. But, it's risky to invest in them. You can look into because of curiosity, but not more. As for me it's much safe to use Play/Grails than some unpopular frameworks.
 
 ## Summary
 
-So, Java ecosystem has two full stack frameworks which use Java language minimally: **Grails** (Groovy/Java) and **Play** (Scala/Java). Also, we have a bunch on code generation frameworks and domain-driven frameworks (which occupy really special niche).
+So, Java ecosystem has two full stack frameworks which use Java language minimally: **Grails** (Groovy/Java) and **Play** (Scala/Java). Also, we have a bunch of code generation frameworks and domain-driven frameworks (which occupy really special niche).
 
 ## References
 - Full stack
@@ -93,5 +93,7 @@ So, Java ecosystem has two full stack frameworks which use Java language minimal
   - [Ninja](http://www.ninjaframework.org/)  
   - [Javalight](http://javalite.io/)
   - [Jodd](http://jodd.org/) and [Jodd µicro frameworks](http://joddframework.org/)
+  - [Jobby](http://jooby.org/)
+  - [airlift](https://github.com/airlift/airlift)
   - [Web4j](http://www.web4j.com/)
   - [Rife](http://rifers.org/) - dead
