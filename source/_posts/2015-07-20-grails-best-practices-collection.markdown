@@ -31,3 +31,12 @@ However, I found several nice resources and I'm quoting them here. I keep refere
 ### Videos
 
   - [Cut your Grails application to pieces - build feature plugins](https://www.youtube.com/watch?v=LZQ-1f9RGqg)
+  - [Greach 2014 - Hexagonal Architecture in Grails by David Dawson](https://www.youtube.com/watch?v=-izTlOpZ7VA)
+  - [Philosophical Architecture in Grails by David Dawson](https://www.youtube.com/watch?v=nx8XMY7evbA)
+  - [Experiences Using Grails in a Micro Service Architecture](https://www.youtube.com/watch?v=wF8gjfh0Kyw)
+  - [Application architectures with Grails](https://www.youtube.com/watch?v=4wuRuC4_G7w)
+
+
+  Interesting Grails people
+http://www.anyware.co.uk/2005/2011/09/12/optimising-your-application-with-grails-resources-plugin/ 
+http://www.bobbywarner.com/ 
