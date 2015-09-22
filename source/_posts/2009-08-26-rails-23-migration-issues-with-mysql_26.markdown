@@ -12,7 +12,6 @@ blogger:
     postid: "2772777033509564413"
     comments: "12"
 categories: [rails]
-published: false
 ---
 
 ```
@@ -57,5 +56,5 @@ d:/Tools/Ruby/bin/rake:19:in `load'
 d:/Tools/Ruby/bin/rake:19
 ```
 
-As I understood the client MySQL library doesn't work well with Rails 2.3. We can resolve this by using the older MySQL client library (libmySQL.dll). You can get it here [http://instantrails.rubyforge.org/svn/trunk/InstantRails-win/InstantRails/mysql/bin/libmySQL.dll](http://forums.aptana.com/viewtopic.php?f=20&amp;t=7563&amp;p=27407&amp;hilit=libmysql.dll#p27407).
+As I understood the client MySQL library doesn't work well with Rails 2.3. We can resolve this by using the older MySQL client library (libmySQL.dll). You can get it here [http://instantrails.rubyforge.org/svn/trunk/InstantRails-win/InstantRails/mysql/bin/libmySQL.dll](http://instantrails.rubyforge.org/svn/trunk/InstantRails-win/InstantRails/mysql/bin/libmySQL.dll).
 Just put it in <span style="font-family: Courier New;">&lt;ruby base dir&gt;\bin\</span> and restart MySQL service.

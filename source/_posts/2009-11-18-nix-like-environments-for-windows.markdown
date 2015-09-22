@@ -12,7 +12,6 @@ blogger:
     postid: "4499959497318399531"
     comments: "0"
 categories: [Cygwin, MinGW, Linux]
-published: false
 ---
 
 \*nix like environment is good for developer and sysadmins, and really useful for end-user. That's why we've got KDE, Gnome and similar. But, I like it a lot even if I'm Windows user ;-). There are several cases to set up \*nix environment on Windows:

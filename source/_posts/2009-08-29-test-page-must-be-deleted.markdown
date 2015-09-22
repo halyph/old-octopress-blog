@@ -12,7 +12,6 @@ blogger:
     postid: "6237127218844503543"
     comments: "0"
 categories: [Blogging]
-published: false
 ---
 
 How to highlight code in Blogger? You can use [SyntaxHighlighter](http://alexgorbatchev.com/wiki/SyntaxHighlighter).
