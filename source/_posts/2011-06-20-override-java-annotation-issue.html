@@ -1,0 +1,14 @@
+---
+layout: post
+title: "@Override Java Annotation Issue"
+date: '2011-06-20T00:55:00.000+03:00'
+author: Orest Ivasiv
+tags:
+- java
+- annotation
+modified_time: '2011-06-20T00:55:52.358+03:00'
+blogger_id: tag:blogger.com,1999:blog-7372777165432727866.post-5359131935032843095
+blogger_orig_url: http://www.halyph.com/2011/06/override-java-annotation-issue.html
+---
+
+Let's create one simple interface and class which implements this interface:<br /><br /><pre class="brush: java;">public interface IOverride {<br />    void doSomething();<br />}<br />public class Overridden implements IOverride {<br />    @Override<br />    public void doSomething() {<br />    }<br />}<br /></pre><br />And compile this stuff on JDK v.1.5:<br /><pre class="brush: java;"># javac -d classes src\*.java<br />src\Overridden.java:2: method does not override a method from its superclass<br />        @Override<br />         ^<br />1 error<br /></pre><br />Let's try to do the same on JDK v.1.6 - And, You've got no compilation error.<br /><blockquote>Between Java 5 and Java 6 changes to the specification of @Override have been made. In Java 6 it is possible to add the @Override annotation to methods that implement methods of an interface which is not allowed in Java 5. (<a href="http://dertompson.com/2008/01/25/override-specification-changes-in-java-6/">http://dertompson.com/2008/01/25/override-specification-changes-in-java-6/</a>)</blockquote><br />Also, I've found very interesting discussion on Stackoverflow: <a href="http://stackoverflow.com/questions/94361/when-do-you-use-javas-override-annotation-and-why">http://stackoverflow.com/questions/94361/when-do-you-use-javas-override-annotation-and-why:</a><br /><br /><span style="font-size: large;">Q:</span><br /><blockquote>What are the best practices for using Java's @Override annotation and why?<br />It seems like it would be overkill to mark every single overridden method with the @Override annotation. Are there certain programming situations that call for using the @Override and others that should never use the @Override?</blockquote><br /><span style="font-size: large;">A:</span> <br /><blockquote>Use it every time you override a method for two benefits. Do it so that you can take advantage of the compiler checking to make sure you actually are overriding a method when you think you are. This way, if you make a common mistake of misspelling a method name or not correctly matching the parameters, you will be warned that you method does not actually override as you think it does. Secondly, it makes your code easier to understand because it is more obvious when methods are overwritten.<br /><br />Additionally, in Java 1.6 you can use it to mark when a method implements an interface for the same benefits. I think it would be better to have a separate annotation (like <i><b>@Implements</b></i>), but it's better than nothing.</blockquote>

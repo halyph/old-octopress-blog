@@ -1,0 +1,33 @@
+---
+layout: post
+title: How to run ANT script from .BAT/.CMD?
+date: '2011-11-03T15:04:00.003+02:00'
+author: Orest Ivasiv
+tags:
+- ant
+modified_time: '2011-11-03T15:08:02.856+02:00'
+blogger_id: tag:blogger.com,1999:blog-7372777165432727866.post-262671567787467990
+blogger_orig_url: http://www.halyph.com/2011/11/how-to-run-ant-script-from-batcmd.html
+---
+
+Imagine you need to call ANT script from BAT/CMD file.
+<br />Ant script:
+<br /><pre class="brush: xml;">&lt;project default=&quot;bat-test&quot; name=&quot;Blog&quot;&gt;
+    &lt;target description=&quot;check ant run&quot; name=&quot;bat-test&quot;&gt;
+        &lt;echo message=&quot;Message from ANT&quot;&gt; &lt;/echo&gt;
+    &lt;/target&gt;
+&lt;/project&gt;
+</pre>And here is BAT file:
+<br />
+<br /><pre class="brush: bash;">@echo off<br />echo BAT - Before Ant run<br />ant -f build.xml<br />echo BAT - After Ant run<br /></pre>
+<br />Unfortunately, when you run this BAT you get the next output:
+<br /><pre class="brush: bash;">BAT - Before Ant run<br />Buildfile: D:\Projects\blog\build.xml<br /><br />bat-test:<br />     [echo] Message from ANT<br /><br />BUILD SUCCESSFUL<br />Total time: 0 seconds<br /></pre>
+<br />So, where is the <b>"BAT - After Ant run"</b> echo message?
+<br />
+<br />The problem is that Ant on Windows executed via <b>ant.bat</b> file and based on this we're calling one BAT file from another. We have to use CALL command to solve this issues, here is official note from CALL help:
+<br />
+<blockquote class="tr_bq" style="font-family: &quot;Courier New&quot;,Courier,monospace;">Calls one batch program from another.
+    <br />CALL [drive:][path]filename [batch-parameters]
+    <br />batch-parameters&nbsp;&nbsp; Specifies any command-line information required by the batch program.&nbsp;</blockquote>And, here is the update BAT file:
+<br />
+<br /><pre class="brush: bash;">@echo off<br />echo BAT - Before Ant run<br />call ant -f build.xml<br />echo BAT - After Ant run<br /></pre>

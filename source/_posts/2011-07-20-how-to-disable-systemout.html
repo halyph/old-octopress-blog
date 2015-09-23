@@ -1,0 +1,13 @@
+---
+layout: post
+title: How to disable System.out?
+date: '2011-07-20T23:29:00.001+03:00'
+author: Orest Ivasiv
+tags:
+- java
+modified_time: '2011-07-20T23:29:33.556+03:00'
+blogger_id: tag:blogger.com,1999:blog-7372777165432727866.post-7656113624794859762
+blogger_orig_url: http://www.halyph.com/2011/07/how-to-disable-systemout.html
+---
+
+I have a legacy code base with tons of <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">System.out.println()</span>. Actually, I don't need this in production, but during development it's cool enough to have. So, I've decided to disable <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">System.out</span>:<br /><pre class="brush: java;">package org.halyph;<br /><br />import java.io.OutputStream;<br />import java.io.PrintStream;<br /><br />public class DisableMain {<br />	public static void main(String[] args) {<br />		PrintStream printStreamOriginal = System.out;<br /><br />		boolean DEBUG = true;<br />		if (!DEBUG) {<br />			System.setOut(new PrintStream(new OutputStream() {<br />				public void close() {}<br />				public void flush() {}<br />				public void write(byte[] b) {}<br />				public void write(byte[] b, int off, int len) {}<br />				public void write(int b) {<br />				}<br />			}));<br />		}<br /><br />		long a = System.currentTimeMillis();<br />		for (int i = 0; i &lt; 1000000; i++) {<br />			System.out.println("Hello");<br />		}<br /><br />		long b = System.currentTimeMillis() - a;<br /><br />		System.setOut(printStreamOriginal);<br />		System.out.println(b);<br />	}<br />}<br /></pre><br />So, plain looped <b style="font-family: &quot;Courier New&quot;,Courier,monospace;">println </b>required ~10 seconds on my laptop, and only ~1 second with null output stream.<br /><br />
