@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Intellij Idea | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/intellij-idea/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[First Steps With IntelliJ IDEA]]></title>
+    <link href="http://halyph.com/blog/2013/02/27/first-steps-with-intellij-idea/"/>
+    <updated>2013-02-27T00:37:00+02:00</updated>
+    <id>http://halyph.com/blog/2013/02/27/first-steps-with-intellij-idea</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://4.bp.blogspot.com/-JcBx9J38j8w/US0sbUGpeSI/AAAAAAAABMI/_W86eP_wQho/s1600/IntellIJ-IDEA-Logo.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://4.bp.blogspot.com/-JcBx9J38j8w/US0sbUGpeSI/AAAAAAAABMI/_W86eP_wQho/s1600/IntellIJ-IDEA-Logo.png" /></a>
+</div>
+
+
+<p>I am old an Eclipse user. I&rsquo;ve been trying several times to switch to <a href="http://www.jetbrains.com/idea/" target="_blank">IntelliJ IDEA</a>.
+<br />You can ask me &ldquo;what&rsquo;s wrong with my Eclipse experience&rdquo; - actually &ldquo;nothing&rdquo; :-) But I have some influence from:
+<br /></p>
+
+<ul>
+    <li>co-workers and friends</li>
+    <li>famous Java people are using this IDE</li>
+    <li>I&#8217;m constantly hearing the positive feedback about IntelliJ IDEA at different conferences</li>
+</ul>
+
+
+<p>That&rsquo;s why I&rsquo;ve decided to try IntelliJ IDEA once more. This time I&rsquo;ve selected for myself some restriction and &ldquo;motivation&rdquo; factors ;-)
+<br />
+<br /><b>Restriction</b> is very simple - use ONLY IntelliJ IDEA, forget about Eclipse.
+<br /><b>Motivation</b> is to learn the IntelliJ IDEA&rsquo;s productivity best practices. I suspect that something cool must be in this IDE.
+<br />
+<br />First step is to collect the main IntelliJ IDEA resources and constantly grab knowledge out of there:
+<br /></p>
+
+<ul>
+    <li><a href="http://tv.jetbrains.net/channel/intellij-idea" target="_blank">JetBrains TV - IntelliJ IDEA</a> - over hundreds screencast related with IntelliJ IDEA</li>
+    <li><a href="http://blogs.jetbrains.com/idea/" target="_blank">JetBrains IntelliJ IDEA Blog</a></li>
+    <li>Review <a href="http://www.jetbrains.com/idea/features/index.html" target="_blank">IntelliJ IDEA Features</a></li>
+    <li>Review <a href="http://wiki.jetbrains.net/intellij/" target="_blank">IntelliJ IDEA Encyclopedia</a> (FAQs, tutorials, how-tos &amp; articles)</li>
+    <ul>
+        <li>&nbsp;especially <a href="http://wiki.jetbrains.net/intellij/Eclipse_FAQ" title="Eclipse FAQ">FAQ for Eclipse users</a></li>
+    </ul>
+    <li>&nbsp;Two nice articles by Andrey Cheptsov</li>
+    <ul>
+        <li><a href="http://jetbrains.dzone.com/articles/top-20-code-completions-in-intellij-idea" target="_blank">Top 20 Features of Code Completion in IntelliJ IDEA</a></li>
+        <li><a href="http://jetbrains.dzone.com/articles/top-20-refactoring-features" target="_blank">Top 20 Refactoring Features in IntelliJ IDEA</a></li>
+    </ul>
+    <li><a href="http://www.jetbrains.com/idea/docs/IntelliJIDEA_ReferenceCard_Mac.pdf" target="_blank">Keymap for Mac OS X</a> or <a href="http://www.jetbrains.com/idea/docs/IntelliJIDEA_ReferenceCard.pdf" target="_blank">Keymap for Windows/Linux</a>
+        <br />
+    </li>
+</ul>
+
+
+<p>And the last inspiration went from Neal Ford:
+<br />His main advice is &ldquo;When coding, always prefer keyboard to mouse&rdquo;:
+<br /><b>Learning shortcuts</b>
+<br /></p>
+
+<ul>
+    <li>make yourself use the shortcuts even if you&#8217;ve gotten there another way&nbsp;</li>
+    <li>have someone/something pester you about it&nbsp;</li>
+    <ul>
+        <li>pair programmer&nbsp;</li>
+        <li>key promoter plug-in for IntelliJ IDEA&nbsp;</li>
+    </ul>
+    <li>repeat them to yourself&nbsp;</li>
+    <li>write down handy menu combination</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

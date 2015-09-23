@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Python | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Why Should I Attend Conferences?]]></title>
+    <link href="http://halyph.com/blog/2010/10/31/why-should-i-attend-conferences/"/>
+    <updated>2010-10-31T23:18:00+02:00</updated>
+    <id>http://halyph.com/blog/2010/10/31/why-should-i-attend-conferences</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m mainly a Java developer. But, I always do some &ldquo;diving&rdquo; around new technologies, trends and just around other interesting stuff (read blogs, watch screencasts, etc.). And it&rsquo;s not enough for me. So, I&rsquo;ve decided to attend some conferences. Here is the chronological list of conferences I&rsquo;ve attended:<br /><br /><ol><li><a href="http://coffee-n-code.org.ua/home/event/september_2009_barcamp">Ruby Bar Camp</a> (September 26, 2009) </li><li><a href="http://coffee-n-code.org.ua/">Ruby Shift</a> (May 21, 2010)</li><li><a href="http://agilebasecamp.org/">Agile Base Camp</a> (January 23, 2010) </li><li><a href="http://agilebasecamp.org/">Agile Base Camp</a> (May 29, 2010)</li><li><a href="http://ua.pycon.org/">PyCon Ukraine</a> (October 23-24, 2010)</li></ol>All these conference related to non-Java technologies. And what? The main benefit I&rsquo;ve got is the real face-to-face communication with technology addicted people.<br />I&rsquo;ve seen great, good and <i>ugly </i>presentations. This experience has opened my mind. Why? <br />Every conference which I&rsquo;ve attended gave me the additional energy for the next attempts to learn something new, something great and interesting. Even if it&rsquo;s unpopular in my company and inside my local developer&rsquo;s community.<br />These conferences showed me the real people which stand behind the blog posts, forum posts, frameworks and libraries.<br />I&rsquo;m a 100% sure that every developer must attend a conference just to feel the spirit of community.</p>
+]]></content>
+  </entry>
+  
+</feed>

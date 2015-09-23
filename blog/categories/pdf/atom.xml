@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Pdf | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/pdf/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Graphics Unit Conversion]]></title>
+    <link href="http://halyph.com/blog/2013/05/23/graphics-unit-conversion/"/>
+    <updated>2013-05-23T14:35:00+03:00</updated>
+    <id>http://halyph.com/blog/2013/05/23/graphics-unit-conversion</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/-OcQd9aLAnoc/T2HQNCIz5hI/AAAAAAAAAgk/wynszvwrfzw/s1600/1331810342_Java.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://3.bp.blogspot.com/-OcQd9aLAnoc/T2HQNCIz5hI/AAAAAAAAAgk/wynszvwrfzw/s1600/1331810342_Java.png" /></a></div>
+
+
+<p>Working with PDF files and with scanned images it always required to convert from point to millimeter, or from millimeter to pixel, and so on.<br /><br />There is very interesting quote from <a href="http://www.manning.com/lowagie2/" target="_blank">iText in Action</a> book:<br /><blockquote class="tr_bq">What is the measurement unit in PDF documents? Most of the measurements in PDFs are expressed in user space units. ISO-32000-1 (section 8.3.2.3) tells us “the&nbsp; default&nbsp; for&nbsp; the&nbsp; size&nbsp; of&nbsp; the&nbsp; unit&nbsp; in&nbsp; default&nbsp; user&nbsp; space&nbsp; (1/72&nbsp; inch)&nbsp; is approximately&nbsp; the&nbsp; same&nbsp; as&nbsp; a&nbsp; point&nbsp; (pt),&nbsp; a&nbsp; unit&nbsp; widely&nbsp; used&nbsp; in&nbsp; the&nbsp; printing industry. It is not exactly the same; there is no universal definition of a point.” In short, 1 in. = 25.4 mm = 72 user units (which roughly corresponds to 72 pt).</blockquote><br />Of course,&nbsp; you can easily write these utilities by yourself. But, sometimes it makes sense to look around in your project, maybe you&rsquo;ve already had all required utils.<br /><br />So, here are code snippets from several libraries<br /><br /><a href="http://barcode4j.sourceforge.net/" target="_blank"><span style="font-size: large;">1. Barcode4j</span></a><br /><br /><pre class="brush: java;">package org.krysalis.barcode4j.tools;<br /><br />/<strong><br /> * Utility class for unit conversions.<br /> * <br /> * @author Jeremias Maerki<br /> * @version $Id: UnitConv.java,v 1.2 2004/09/04 20:25:56 jmaerki Exp $<br /> */<br />public class UnitConv {<br /><br />    /</strong><br />     * Utility class: Constructor prevents instantiating when subclassed.<br />     <em>/<br />    protected UnitConv() {<br />        throw new UnsupportedOperationException();<br />    }<br />    <br />    /**<br />     * Converts millimeters (mm) to points (pt)<br />     * @param mm the value in mm<br />     * @return the value in pt<br />     </em>/<br />    public static double mm2pt(double mm) {<br />        return mm * 2.835;<br />    }<br /><br />    /<strong><br />     * Converts points (pt) to millimeters (mm)<br />     * @param pt the value in pt<br />     * @return the value in mm<br />     */<br />    public static double pt2mm(double pt) {<br />        return pt / 2.835;<br />    }<br />    <br />    /</strong><br />     * Converts millimeters (mm) to inches (in)<br />     * @param mm the value in mm<br />     * @return the value in inches<br />     <em>/<br />    public static double mm2in(double mm) {<br />        return mm / 25.4;<br />    }<br />    <br />    /**<br />     * Converts inches (in) to millimeters (mm)<br />     * @param in the value in inches<br />     * @return the value in mm<br />     </em>/<br />    public static double in2mm(double in) {<br />        return in * 25.4;<br />    }<br />    <br />    /<strong><br />     * Converts millimeters (mm) to pixels (px)<br />     * @param mm the value in mm<br />     * @param resolution the resolution in dpi (dots per inch)<br />     * @return the value in pixels<br />     */<br />    public static int mm2px(double mm, int resolution) {<br />        return (int)Math.round(mm2in(mm) * resolution);<br />    }<br />}<br /></pre><a href="https://github.com/ymasory/iText-4.2.0" target="_blank"><span style="font-size: large;">2. iText v.4.2</span></a><br /><pre class="brush: java;">package com.lowagie.text;<br /><br />/</strong><br /> * A collection of convenience methods that were present in many different iText<br /> * classes.<br /> <em>/<br /><br />public class Utilities {<br /><br />&hellip;<br /> <br /> /**<br />  * Measurement conversion from millimeters to points.<br />  * @param value a value in millimeters<br />  * @return a value in points<br />  * @since 2.1.2<br />  </em>/<br /> public static final float millimetersToPoints(float value) {<br />     return inchesToPoints(millimetersToInches(value));<br /> }<br /><br /> /<strong><br />  * Measurement conversion from millimeters to inches.<br />  * @param value a value in millimeters<br />  * @return a value in inches<br />  * @since 2.1.2<br />  */<br /> public static final float millimetersToInches(float value) {<br />     return value / 25.4f;<br /> }<br /><br /> /</strong><br />  * Measurement conversion from points to millimeters.<br />  * @param value a value in points<br />  * @return a value in millimeters<br />  * @since 2.1.2<br />  <em>/<br /> public static final float pointsToMillimeters(float value) {<br />     return inchesToMillimeters(pointsToInches(value));<br /> }<br /><br /> /**<br />  * Measurement conversion from points to inches.<br />  * @param value a value in points<br />  * @return a value in inches<br />  * @since 2.1.2<br />  </em>/<br /> public static final float pointsToInches(float value) {<br />     return value / 72f;<br /> }<br /><br /> /<strong><br />  * Measurement conversion from inches to millimeters.<br />  * @param value a value in inches<br />  * @return a value in millimeters<br />  * @since 2.1.2<br />  */<br /> public static final float inchesToMillimeters(float value) {<br />     return value * 25.4f;<br /> }<br /><br /> /</strong><br />  * Measurement conversion from inches to points.<br />  * @param value a value in inches<br />  * @return a value in points<br />  * @since 2.1.2<br />  <em>/<br /> public static final float inchesToPoints(float value) {<br />     return value * 72f;<br /> }<br />    &hellip;<br />}<br /></pre><a href="http://xmlgraphics.apache.org/fop/" target="_blank"><span style="font-size: large;">3. FOP</span></a><br /><pre class="brush: java;"><br />package org.apache.fop.util;<br /><br />import java.awt.geom.AffineTransform;<br /><br />/**<br /> * Utility class for unit conversions.<br /> * @deprecated use org.apache.xmlgraphics.util.UnitConv instead.<br /> </em>/<br />public final class UnitConv {<br /><br />    /<strong><br />     * conversion factory from millimeters to inches.<br />     * @deprecated use org.apache.xmlgraphics.util.UnitConv.IN2MM instead.<br />     */<br />    public static final float IN2MM = org.apache.xmlgraphics.util.UnitConv.IN2MM;<br /><br />    /</strong><br />     * conversion factory from centimeters to inches.<br />     * @deprecated use org.apache.xmlgraphics.util.UnitConv.IN2CM instead.<br />     <em>/<br />    public static final float IN2CM = org.apache.xmlgraphics.util.UnitConv.IN2CM;<br /><br />    /**<br />     * conversion factory from inches to points.<br />     * @deprecated use org.apache.xmlgraphics.util.UnitConv.IN2PT instead.<br />     </em>/<br />    public static final int IN2PT = org.apache.xmlgraphics.util.UnitConv.IN2PT;<br /><br />    /<strong><br />     * Converts millimeters (mm) to points (pt)<br />     * @param mm the value in mm<br />     * @return the value in pt<br />     * @deprecated use org.apache.xmlgraphics.util.UnitConv.mm2pt(mm) instead.<br />     */<br />    public static double mm2pt(double mm) {<br />        return org.apache.xmlgraphics.util.UnitConv.mm2pt(mm);<br />    }<br /><br />    /</strong><br />     * Converts millimeters (mm) to millipoints (mpt)<br />     * @param mm the value in mm<br />     * @return the value in mpt<br />     * @deprecated use org.apache.xmlgraphics.util.UnitConv.mm2mpt(mm) instead.<br />     <em>/<br />    public static double mm2mpt(double mm) {<br />        return org.apache.xmlgraphics.util.UnitConv.mm2mpt(mm);<br />    }<br /><br />    /**<br />     * Converts points (pt) to millimeters (mm)<br />     * @param pt the value in pt<br />     * @return the value in mm<br />     * @deprecated use org.apache.xmlgraphics.util.UnitConv.pt2mm(pt) instead.<br />     </em>/<br />    public static double pt2mm(double pt) {<br />        return org.apache.xmlgraphics.util.UnitConv.pt2mm(pt);<br />    }<br /><br />    /<strong><br />     * Converts millimeters (mm) to inches (in)<br />     * @param mm the value in mm<br />     * @return the value in inches<br />     * @deprecated use org.apache.xmlgraphics.util.UnitConv.pt2mm(pt) instead.<br />     */<br />    public static double mm2in(double mm) {<br />        return org.apache.xmlgraphics.util.UnitConv.mm2in(mm);<br />    }<br /><br />    /</strong><br />     * Converts inches (in) to millimeters (mm)<br />     * @param in the value in inches<br />     * @return the value in mm<br />     * @deprecated use org.apache.xmlgraphics.util.UnitConv.in2mm(in) instead.<br />     <em>/<br />    public static double in2mm(double in) {<br />        return org.apache.xmlgraphics.util.UnitConv.in2mm(in);<br />    }<br /><br />    /**<br />     * Converts inches (in) to millipoints (mpt)<br />     * @param in the value in inches<br />     * @return the value in mpt<br />     * @deprecated use org.apache.xmlgraphics.util.UnitConv.in2mpt(in) instead.<br />     </em>/<br />    public static double in2mpt(double in) {<br />        return org.apache.xmlgraphics.util.UnitConv.in2mpt(in);<br />    }<br /><br />    /<strong><br />     * Converts inches (in) to points (pt)<br />     * @param in the value in inches<br />     * @return the value in pt<br />     * @deprecated use org.apache.xmlgraphics.util.UnitConv.in2pt(in) instead.<br />     */<br />    public static double in2pt(double in) {<br />        return org.apache.xmlgraphics.util.UnitConv.in2pt(in);<br />    }<br /><br />    /</strong><br />     * Converts millipoints (mpt) to inches (in)<br />     * @param mpt the value in mpt<br />     * @return the value in inches<br />     * @deprecated use org.apache.xmlgraphics.util.UnitConv.mpt2in(mpt) instead.<br />     <em>/<br />    public static double mpt2in(double mpt) {<br />        return org.apache.xmlgraphics.util.UnitConv.mpt2in(mpt);<br />    }<br /><br />    /**<br />     * Converts millimeters (mm) to pixels (px)<br />     * @param mm the value in mm<br />     * @param resolution the resolution in dpi (dots per inch)<br />     * @return the value in pixels<br />     * @deprecated use org.apache.xmlgraphics.util.UnitConv.mm2px(mm, resolution) instead.<br />     </em>/<br />    public static double mm2px(double mm, int resolution) {<br />        return org.apache.xmlgraphics.util.UnitConv.mm2px(mm, resolution);<br />    }<br /><br />    /<strong><br />     * Converts millipoints (mpt) to pixels (px)<br />     * @param mpt the value in mpt<br />     * @param resolution the resolution in dpi (dots per inch)<br />     * @return the value in pixels<br />     * @deprecated use org.apache.xmlgraphics.util.UnitConv.mpt2px(mpt, resolution) instead.<br />     */<br />    public static double mpt2px(double mpt, int resolution) {<br />        return org.apache.xmlgraphics.util.UnitConv.mpt2px(mpt, resolution);<br />    }<br /><br />    /</strong><br />     * Converts a millipoint-based transformation matrix to points.<br />     * @param at a millipoint-based transformation matrix<br />     * @return a point-based transformation matrix<br />     * @deprecated use org.apache.xmlgraphics.util.UnitConv.mptToPt(at) instead.<br />     <em>/<br />    public static AffineTransform mptToPt(AffineTransform at) {<br />        return org.apache.xmlgraphics.util.UnitConv.mptToPt(at);<br />    }<br /><br />    /**<br />     * Converts a point-based transformation matrix to millipoints.<br />     * @param at a point-based transformation matrix<br />     * @return a millipoint-based transformation matrix<br />     * @deprecated use org.apache.xmlgraphics.util.UnitConv.ptToMpt(at) instead.<br />     </em>/<br />    public static AffineTransform ptToMpt(AffineTransform at) {<br />        return org.apache.xmlgraphics.util.UnitConv.ptToMpt(at);<br />    }<br />}<br /></pre></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iText Useful Resources]]></title>
+    <link href="http://halyph.com/blog/2013/05/13/itext-useful-resources/"/>
+    <updated>2013-05-13T20:42:00+03:00</updated>
+    <id>http://halyph.com/blog/2013/05/13/itext-useful-resources</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/-OcQd9aLAnoc/T2HQNCIz5hI/AAAAAAAAAgk/wynszvwrfzw/s1600/1331810342_Java.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://3.bp.blogspot.com/-OcQd9aLAnoc/T2HQNCIz5hI/AAAAAAAAAgk/wynszvwrfzw/s1600/1331810342_Java.png" /></a></div>
+
+
+<p>Recently I&rsquo;ve begun using iText PDF generation library due to my work needs. I must admit that this library is quite powerful, but for really quick start I needed several resources with nice working samples. Here is the list:<br /><ol><li><a href="http://www.amazon.com/iText-Action-Bruno-Lowagie/dp/1935182617" target="_blank">iText in Action, Second Edition, by Bruno Lowagie</a> book is a must have if you really need to dive into library details. Also, it&rsquo;s very important to work in parallel with book samples <a href="https://itext.svn.sourceforge.net/svnroot/itext/book"><a href="https://itext.svn.sourceforge.net/svnroot/itext/book">https://itext.svn.sourceforge.net/svnroot/itext/book</a></a>. I&rsquo;ve reviewed the <a href="http://www.manning.com/lowagie/" target="_blank">1st edition</a> of this book and must admit that the 2d is much better. I.e. don&rsquo;t waste your time and stick to 2d edition only.</li><li>&nbsp;iText and iTextSharp are very similar libraries. I.e. you can use iTextSharp code snippets as samples for iText. For this purpose I&rsquo;ve selected the next two blogs:</li><ul><li><a href="http://kuujinbo.info/code_index.aspx?tab=2">kuujinbo.info</a> - Code snippets and articles.</li><li><a href="http://www.mikesdotnetting.com/Category/20">Mikesdotnetting</a> - Code snippets and articles.</li></ul><li><a href="http://www.roseindia.net/java/itext/index.shtml">RoseIndia iText Examples</a> - nice and basic iText samples.</li><li>And the last item is <a href="http://itext-general.2136553.n4.nabble.com/" target="_blank">iText forum</a> </li></ol>In general item 1 can solve almost all your needs.&nbsp; <br /><ol><ul></ul></ol></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java PDF Libraries]]></title>
+    <link href="http://halyph.com/blog/2013/04/23/java-pdf-libraries/"/>
+    <updated>2013-04-23T22:57:00+03:00</updated>
+    <id>http://halyph.com/blog/2013/04/23/java-pdf-libraries</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://1.bp.blogspot.com/-Bz0z-763Xn4/UXbWZ-2NNpI/AAAAAAAABOA/rHVXPF3UMF8/s1600/1366760659_pdf.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://1.bp.blogspot.com/-Bz0z-763Xn4/UXbWZ-2NNpI/AAAAAAAABOA/rHVXPF3UMF8/s1600/1366760659_pdf.png" /></a>
+</div>
+
+
+<p>Recently I had a task to select some Java PDF libraries for PDF generation. But it wasn&rsquo;t a simple task.
+<br />The first thing which came into my mind was iText. It&rsquo;s well know Java library with good reputation. But&hellip; there is some stopper. iText version 5+ is released under the AGPL license. I.e. we have to pay money if we want to use iText in commercial product.
+<br />
+<br />I&rsquo;ve created the next small checklist which covers project needs:
+<br /></p>
+
+<ol>
+    <li>liberal license</li>
+    <li>support maximum amount of project features (e.g. absolute element positioning)</li>
+    <li>good documentation</li>
+    <li>huge amount of samples</li>
+    <li>possibility to render HTML to PDF </li>
+</ol>
+
+
+<p>I&rsquo;ve reviewed the next libraries:
+<br /></p>
+
+<ul id="ext-gen1074">
+    <li id="ext-gen1094"><a href="http://itextpdf.com/" id="ext-gen1072" rel="nofollow">iText 5.0+</a> AGPL license</li>
+    <li id="ext-gen1088"><a href="https://github.com/ymasory/iText-4.2.0" id="ext-gen1108">iText 4.2</a> MPL/LGPL licenses</li>
+    <li id="ext-gen1075"><a href="http://pdfbox.apache.org/" id="ext-gen1073" rel="nofollow">PDF Box</a> Apache License, Version 2.0</li>
+    <li id="ext-gen1076"><a href="http://sourceforge.net/projects/jpedal/" rel="nofollow">JPedal</a> JPedal has a LGPL release to provide a full java PDF viewer under a LGPL license</li>
+    <li id="ext-gen1087"><a href="http://xml.apache.org/fop/" id="ext-gen1077" rel="nofollow">FOP</a> Apache License, Version 2.0</li>
+    <li id="ext-gen1052"><a href="http://gnujpdf.sourceforge.net/" rel="nofollow">gnujpdf</a> LGPL License</li>
+    <li id="ext-gen1078"><a href="http://sourceforge.net/projects/pjx/" rel="nofollow">PJX</a> GPLv2 License</li>
+    <li id="ext-gen1053"><a href="http://pdfjet.com/os/edition.html" rel="nofollow">PDFjet</a> Strange Open Source license model</li>
+    <li id="ext-gen1079"><a href="http://sourceforge.net/projects/jpodlib/" id="ext-gen1118" rel="nofollow">jPod </a>BSD License</li>
+    <li id="ext-gen1086"><a href="http://java.net/projects/pdf-renderer" id="ext-gen1113">PDF Renderer</a> Maintaining is not active</li>
+</ul>
+
+
+<h3><b>iText review</b></h3>
+
+
+<ul>
+    <li>iText 2.1.7: the latest official release under the MPL &amp; LGPL license;</li>
+    <li>iText 4.2.0: the latest unofficial release under the MPL &amp; LGPL license;</li>
+    <li>iText 5.0.0 and higher: released under the AGPL license.<b> </b></li>
+</ul>
+
+
+<p><a href="https://github.com/ymasory/iText-4.2.0#background" target="_blank">Notes about iText 5.0+ vs iText 4.2</a>
+<br /></p>
+
+<blockquote class="tr_bq"><i>Beginning with iText version 5.0 the developers have moved to the AGPL to improve their ability to sell commercial licenses. .. To assist those desiring to stick with the old license was made the final MPL/LGPL version more easily available and forked on github.</i></blockquote>
+
+
+<h3 id="ext-gen1083">&nbsp;</h3>
+
+
+<h3 id="ext-gen1083">Apache™ FOP</h3>
+
+
+<div id="ext-gen1082">Apache™ FOP (Formatting Objects Processor) is a print formatter driven by XSL formatting objects (XSL-FO) and an output independent formatter. It is a Java application that reads a formatting object (FO) tree and renders the resulting pages to a specified output. This lib doesn&#8217;t have enough flexibility for absolute page element positioning. But, it might be really valuable as content convertor.</div>
+
+
+<h3>&nbsp;</h3>
+
+
+<h3>Apache PDFBox</h3>
+
+
+<p>Very interesting project. It has very impressive amount of features. And most important it&rsquo;s in active development.
+<br /></p>
+
+<h3>&nbsp;</h3>
+
+
+<h3>Summary</h3>
+
+
+<p>I&rsquo;ve selected <b>iText</b> v.4.2 which has acceptable license and huge community. But the most important feature it&rsquo;s a very good documentation (actually it&rsquo;s a book <a href="http://itextpdf.com/book/" target="_blank">iText in Action — 2nd Edition</a>), tons of samples. Almost all samples for iText v.5 can be easily applied to iText v.4.2.
+<br />Other libraries have not so much samples/demos. And for quick start it&rsquo;s very important.
+<br />
+<br />Here is maven dependency info:
+<br /></p>
+
+<pre class="brush: xml;">&lt;dependency&gt;
+    &lt;groupid&gt;com.lowagie&lt;/groupid&gt;
+    &lt;artifactid&gt;itext&lt;/artifactid&gt;
+    &lt;version&gt;4.2.0&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+
+
+<p><b>PDFBox</b> is selected as backup library. I.e. I will use it when iText has some limitations.
+<br />
+<br />
+<br /><b>References</b>:
+<br /></p>
+
+<ul>
+    <li><a href="http://stackoverflow.com/questions/14213195/itext-latest-maven-dependency">http://stackoverflow.com/questions/14213195/itext-latest-maven-dependency</a></li>
+    <li><a href="http://java-source.net/open-source/pdf-libraries">http://java-source.net/open-source/pdf-libraries</a></li>
+    <li><a href="http://javatoolbox.com/categories/pdf" target="_blank">http://javatoolbox.com/categories/pdf </a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

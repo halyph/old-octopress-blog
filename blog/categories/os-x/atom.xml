@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Os X | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/os-x/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Install the Latest Git on OS X]]></title>
+    <link href="http://halyph.com/blog/2013/06/25/how-to-install-latest-git-on-os-x/"/>
+    <updated>2013-06-25T01:08:00+03:00</updated>
+    <id>http://halyph.com/blog/2013/06/25/how-to-install-latest-git-on-os-x</id>
+    <content type="html"><![CDATA[<div style="text-align: center;"><img border="0" src="http://3.bp.blogspot.com/-D4VYLGwDCpA/Uci_q0qUKVI/AAAAAAAABmM/M_wNuu4muRk/s1600/homebrew.png" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img border="0" height="83" src="http://4.bp.blogspot.com/-PpkCLrGAdmE/UH8NW3zQGSI/AAAAAAAAAsc/zYChVLpt1iY/s200/Git-Logo-1788C.png" width="200" />&nbsp;</div>
+
+
+<p><br />I&rsquo;ve been using git v.1.7.10.2 long time, despite the fact that git v.1.8+ released several months ago. So, I&rsquo;ve decided to updated my local git via <a href="http://mxcl.github.io/homebrew/" target="_blank">homebrew</a>.<br /><br /><pre class="brush: bash;">$ git &ndash;version<br />git version 1.7.10.2 (Apple Git-33)<br /><br />$ brew install git<br /><br />==&gt; Downloading <a href="http://git-core.googlecode.com/files/git-1.8.3.1.tar.gz">http://git-core.googlecode.com/files/git-1.8.3.1.tar.gz</a><br />######################################################################## 100.0%<br />==&gt; make prefix=/usr/local/Cellar/git/1.8.3.1 CC=cc CFLAGS= LDFLAGS= install<br />==&gt; make CC=cc CFLAGS= LDFLAGS=<br />==&gt; make clean<br />==&gt; make CC=cc CFLAGS= LDFLAGS=<br />==&gt; Downloading <a href="http://git-core.googlecode.com/files/git-manpages-1.8.3.1.tar.gz">http://git-core.googlecode.com/files/git-manpages-1.8.3.1.tar.gz</a><br />######################################################################## 100.0%<br />==&gt; Downloading <a href="http://git-core.googlecode.com/files/git-htmldocs-1.8.3.1.tar.gz">http://git-core.googlecode.com/files/git-htmldocs-1.8.3.1.tar.gz</a><br />######################################################################## 100.0%<br />==&gt; Caveats<br />The OS X keychain credential helper has been installed to:<br />  /usr/local/bin/git-credential-osxkeychain<br /><br />The &lsquo;contrib&rsquo; directory has been installed to:<br />  /usr/local/share/git-core/contrib<br /><br />Bash completion has been installed to:<br />  /usr/local/etc/bash_completion.d<br /><br />zsh completion has been installed to:<br />  /usr/local/share/zsh/site-functions<br />==&gt; Summary<br />  /usr/local/Cellar/git/1.8.3.1: 1324 files, 28M, built in 113 seconds<br /><br />$ git &ndash;version<br />git version 1.7.10.2 (Apple Git-33)<br /></pre>As you can see the latest git isn&rsquo;t on PATH. Than I&rsquo;ve asked the doctor&rsquo;s help: <br /><pre class="brush: bash;">$ brew doctor<br />Warning: /usr/bin occurs before /usr/local/bin<br />This means that system-provided programs will be used instead of those<br />provided by Homebrew. The following tools exist at both paths:<br /><br />    git<br />    git-cvsserver<br />    git-receive-pack<br />    git-shell<br />    git-upload-archive<br />    git-upload-pack<br />    gitk<br /><br />Consider amending your PATH so that /usr/local/bin<br />occurs before /usr/bin in your PATH.<br /></pre>I.e. I need to put the homebrew git before system git: <br /><pre class="brush: bash;">$ echo &lsquo;export PATH=/usr/local/bin:$PATH&rsquo; &gt;&gt; ~/.bash_profile</pre>After the terminal&rsquo;s restart I&rsquo;ve got the next: <br /><pre class="brush: bash;">$ git &ndash;version<br />git version 1.8.3.1</pre></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Jenkins on Mac OS X Tips and Tricks]]></title>
+    <link href="http://halyph.com/blog/2013/03/28/jenkins-on-mac-os-x-tips-and-tricks/"/>
+    <updated>2013-03-28T22:36:00+02:00</updated>
+    <id>http://halyph.com/blog/2013/03/28/jenkins-on-mac-os-x-tips-and-tricks</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/-G0y3vRvF8Gk/UODT7t-pUCI/AAAAAAAABF4/JxoydHYGUvQ/s1600/logo.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="200" src="http://3.bp.blogspot.com/-G0y3vRvF8Gk/UODT7t-pUCI/AAAAAAAABF4/JxoydHYGUvQ/s200/logo.png" width="144" /></a></div>
+
+
+<p><br />Here I&rsquo;m going to collect useful Jenkins Mac OS X tips and tricks:<br /><ul><li><a href="http://www.blogger.com/blogger.g?blogID=7372777165432727866" name="stop"></a><b>Stop Jenkins</b></li><pre class="brush: bash;">sudo launchctl unload /Library/LaunchDaemons/org.jenkins-ci.plist</pre><li><a href="http://www.blogger.com/blogger.g?blogID=7372777165432727866" name="start"></a><b>Start Jenkins</b></li><pre class="brush: bash;">sudo launchctl load /Library/LaunchDaemons/org.jenkins-ci.plist</pre><li><a href="http://www.blogger.com/blogger.g?blogID=7372777165432727866" name="defport"></a><b>Change Jenkins default port</b></li><pre class="brush: bash;">sudo defaults write /Library/LaunchDaemons/org.jenkins-ci httpPort &lsquo;9999&rsquo;</pre>Verify this settings: <pre class="brush: bash;">defaults read /Library/LaunchDaemons/org.jenkins-ci</pre>Then restart (stop, start) Jenkins daemon&nbsp; <li><b>Disable Jenkins start after OS X reboot</b></li><pre class="brush: bash;">sudo defaults write /Library/LaunchDaemons/org.jenkins-ci RunAtLoad -bool NO</pre><li><a href="http://www.blogger.com/blogger.g?blogID=7372777165432727866" name="uninstall"></a><b>Uninstall Jenkins</b></li>The next command requires admin password: <pre class="brush: bash;">/Library/Application Support/Jenkins/Uninstall.command</pre><li><a href="http://www.blogger.com/blogger.g?blogID=7372777165432727866" name="upgrade"></a><b>Upgrade Jenkins</b></li><ol><li>Download the latest war of Jenkins from the website</li><li>Stop Jenkins</li><li>Copy the downloaded &ldquo;war&rdquo; from your download directory to the &ldquo;/Applications/Jenkins/&rdquo; folder.&nbsp;</li><li>Start Jenkins</li></ol>When Jenkins is started You should have an updated installation. </ul>Links:<br /><ul><li><a href="http://www.luscarpa.com/snippets/jenkins/start-stop-jenkins-daemon-on-mac-os-x/"><a href="http://www.luscarpa.com/snippets/jenkins/start-stop-jenkins-daemon-on-mac-os-x/">http://www.luscarpa.com/snippets/jenkins/start-stop-jenkins-daemon-on-mac-os-x/</a></a></li><li><a href="http://stackoverflow.com/questions/11608996/how-to-uninstall-jenkins"><a href="http://stackoverflow.com/questions/11608996/how-to-uninstall-jenkins">http://stackoverflow.com/questions/11608996/how-to-uninstall-jenkins</a></a></li><li><a href="http://blog.laurent.etiemble.com/index.php?post/2011/10/02/How-to-upgrade-Jenkins-on-Mac-OS-X-%28daemon-mode%29"><a href="http://blog.laurent.etiemble.com/index.php?post/2011/10/02/How-to-upgrade-Jenkins-on-Mac-OS-X-%28daemon-mode%29">http://blog.laurent.etiemble.com/index.php?post/2011/10/02/How-to-upgrade-Jenkins-on-Mac-OS-X-%28daemon-mode%29</a></a></li></ul></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Configure Git Diff and Merge Tools?]]></title>
+    <link href="http://halyph.com/blog/2012/11/02/how-to-configure-git-diff-and-merge/"/>
+    <updated>2012-11-02T19:10:00+02:00</updated>
+    <id>http://halyph.com/blog/2012/11/02/how-to-configure-git-diff-and-merge</id>
+    <content type="html"><![CDATA[<div style="text-align: center;"><a href="http://2.bp.blogspot.com/-kKG2ycquT3Y/UJP7h58FIfI/AAAAAAAAAxM/LoNs-fCFWfI/s1600/06ada5204a4e0f281f988507ba90ebb4-763234.jpeg"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5806260904517771762" src="http://2.bp.blogspot.com/-kKG2ycquT3Y/UJP7h58FIfI/AAAAAAAAAxM/LoNs-fCFWfI/s320/06ada5204a4e0f281f988507ba90ebb4-763234.jpeg" /></a>&nbsp;</div>
+
+
+<p>Git can use external tools to perform merge and diff:  <br /><div><br /></div><b>Use default tool:</b><br /><pre class="brush: bash;"> <br />git difftool <br />git mergetool<br /></pre><div><br /><b>Use custom tool:</b></div><pre class="brush: bash;">git difftool -t tool_name<br />git mergetool -t tool_name</pre><div><br /><div>There are tons on diff/merge tools, I&rsquo;d like highlight git configuration for three of them:</div></div><div><ul><li><a href="http://www.sourcegear.com/diffmerge/">DiffMerge</a></li><li><a href="http://kdiff3.sourceforge.net/">Kdiff3</a></li><li><a href="https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/opendiff.1.html">opendiff</a></li></ul><div></div></div><b>Sample ~/.gitconfig (Windows):</b>  <br /><pre class="brush: bash;"> <br />[difftool &ldquo;kdiff3&rdquo;]<br />     path = D:/Tools/KDiff3/kdiff3.exe<br />     keepBackup = false<br />     trustExitCode = false<br />[mergetool &ldquo;kdiff3&rdquo;]<br />     path = D:/Tools/KDiff3/kdiff3.exe<br />     keepBackup = false<br />     trustExitCode = false<br />[difftool &ldquo;diffmerge&rdquo;]<br />     cmd = \&ldquo;C:/Program Files/SourceGear/Common/DiffMerge/sgdm.exe\&rdquo;  \&ldquo;$LOCAL\&rdquo; \&ldquo;$REMOTE\&rdquo;<br />[mergetool &ldquo;diffmerge&rdquo;]<br />     cmd = \&ldquo;D:/Tools/Git/cmd/git-diffmerge-merge.sh\&rdquo; \&ldquo;$BASE\&rdquo; \&ldquo;$LOCAL\&rdquo; \&ldquo;$REMOTE\&rdquo; \&ldquo;$MERGED\&rdquo;<br />     trustExitCode = false<br /><br />[diff]<br />    tool = kdiff3<br />[merge]<br />    tool = kdiff3<br /></pre><br /><div></div><div><b>Content of&nbsp;git-diffmerge-merge.sh:</b></div><pre class="brush: bash;"> <br />$cat D:/Tools/Git/cmd/git-diffmerge-merge.sh<br />#!/bin/sh<br />localPath=&ldquo;$2&rdquo;<br />basePath=&ldquo;$1&rdquo;<br />remotePath=&ldquo;$3&rdquo;<br />resultPath=&ldquo;$4&rdquo;<br />if [ ! -f $basePath ]<br />then<br />    basePath=&ldquo;~/diffmerge-empty&rdquo;<br />fi<br />&ldquo;C:/Program Files/SourceGear/Common/DiffMerge/sgdm.exe&rdquo; &ndash;merge &ndash;result=&ldquo;$resultPath&rdquo; &ldquo;$localPath&rdquo; &ldquo;$basePath&rdquo; &ldquo;$remotePath&rdquo; &ndash;title1=&ldquo;Mine&rdquo; &ndash;title2=&ldquo;Merged: $4&rdquo; &ndash;title3=&ldquo;Theirs&rdquo;<br /></pre><div><br /></div><div><b>Sample ~/.gitconfig (OS X):</b></div><pre class="brush: bash;"> <br />[diff]<br />    tool = opendiff<br />[merge]<br />    tool = opendiff<br /></pre><div><a href="https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/opendiff.1.html">opendiff</a>&nbsp;is bundled with Xcode Tools.</div><div><br /></div><div>Sample usage:</div><pre class="brush: bash;"> <br />$ git difftool -t diffmerge HEAD..HEAD~1<br /></pre>Links: <br /><div><ul><li><a href="http://www.gitshah.com/2010/12/how-to-setup-kdiff-as-diff-tool-for-git.html">How to setup KDiff as the diff tool for GIT</a>&nbsp;</li><li><a href="http://www.devinprogress.info/2012/01/how-to-configure-your-git-diff-or-merge.html">how to configure your git diff or merge tool&nbsp;</a></li><li><a href="http://adventuresincoding.com/2010/04/how-to-setup-git-to-use-diffmerge%20">How to setup Git to use Diffmerge</a></li></ul></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac OS X Terminal Supports Colored Output]]></title>
+    <link href="http://halyph.com/blog/2012/10/27/mac-os-x-terminal-supports-colored/"/>
+    <updated>2012-10-27T11:48:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/10/27/mac-os-x-terminal-supports-colored</id>
+    <content type="html"><![CDATA[<p><br /><div class="ennote" style="-webkit-line-break: after-white-space; -webkit-nbsp-mode: space; word-wrap: break-word;"><div>Mac OS X Mountain Lion Terminal hasn&rsquo;t been configured to support coloured output.</div><div>You can check it via simple command run &ldquo;ls -la&rdquo;:</div><div><a href="http://1.bp.blogspot.com/-vmyR4FsmIQI/UIerGLnj15I/AAAAAAAAAwY/JedlHyBEd_s/s1600/04f03222f5b762cbcff40bd0719b9630-739718.png"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5802794767576455058" src="http://1.bp.blogspot.com/-vmyR4FsmIQI/UIerGLnj15I/AAAAAAAAAwY/JedlHyBEd_s/s320/04f03222f5b762cbcff40bd0719b9630-739718.png" /></a>&nbsp;&nbsp;</div><div>Let&rsquo;s fix this.</div><div><br /></div>1. Add the next string to &nbsp;<b>.bash_profile</b>  <br /><div><pre class="brush: bash;">export CLICOLOR=1</pre><div><br /></div><div>2. Create<b> color.sh</b> script:</div><pre class="brush: bash;">$ cat ./color.sh<br />#!/bin/bash<br /><br />echo -e &ldquo;\033[0mCOLOR_NC (No color)&rdquo;<br />echo -e &ldquo;\033[1;37mCOLOR_WHITE\t\033[0;30mCOLOR_BLACK&rdquo;<br />echo -e &ldquo;\033[0;34mCOLOR_BLUE\t\033[1;34mCOLOR_LIGHT_BLUE&rdquo;<br />echo -e &ldquo;\033[0;32mCOLOR_GREEN\t\033[1;32mCOLOR_LIGHT_GREEN&rdquo;<br />echo -e &ldquo;\033[0;36mCOLOR_CYAN\t\033[1;36mCOLOR_LIGHT_CYAN&rdquo;<br />echo -e &ldquo;\033[0;31mCOLOR_RED\t\033[1;31mCOLOR_LIGHT_RED&rdquo;<br />echo -e &ldquo;\033[0;35mCOLOR_PURPLE\t\033[1;35mCOLOR_LIGHT_PURPLE&rdquo;<br />echo -e &ldquo;\033[0;33mCOLOR_YELLOW\t\033[1;33mCOLOR_LIGHT_YELLOW&rdquo;<br />echo -e &ldquo;\033[1;30mCOLOR_GRAY\t\033[0;37mCOLOR_LIGHT_GRAY&rdquo;<br /><br />$ chmod +x color.sh<br /></pre><div><br />3. Run ./color.sh, you should get something like this:</div><div><a href="http://1.bp.blogspot.com/-72S4VqYvi2k/UIerHNBv7bI/AAAAAAAAAwk/jh9dy3jPOuI/s1600/20041670f62c7fc098283022edf7f195-743825.png"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5802794785134603698" src="http://1.bp.blogspot.com/-72S4VqYvi2k/UIerHNBv7bI/AAAAAAAAAwk/jh9dy3jPOuI/s320/20041670f62c7fc098283022edf7f195-743825.png" /></a></div><div><br /></div><div>Also, command &ldquo;ls -la&rdquo; should produce colored output.&nbsp;</div><div><a href="http://1.bp.blogspot.com/-7HK55GUMCq0/UIerHgDV_jI/AAAAAAAAAww/NNfFuq4JulI/s1600/aed1c18719dc48d30ade63fa7092d477-745811.png"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5802794790241566258" src="http://1.bp.blogspot.com/-7HK55GUMCq0/UIerHgDV_jI/AAAAAAAAAww/NNfFuq4JulI/s320/aed1c18719dc48d30ade63fa7092d477-745811.png" /></a></div><div><br />Links:</div><div><ul><li><a href="http://blog.toddwerth.com/entries/6"> A black OS X Leopard Terminal theme that is actually readable</a></li><li><a href="http://osxdaily.com/2012/02/21/add-color-to-the-terminal-in-mac-os-x/">Add Color to the Terminal in Mac OS X</a></li><li><a href="http://www.ibm.com/developerworks/linux/library/l-tip-prompt/">Tip: Prompt magic</a>&nbsp;</li><li><a href="http://maketecheasier.com/8-useful-and-interesting-bash-prompts/2009/09/04">8 Useful and Interesting Bash Prompts</a></li></ul><div><br /></div></div></div></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Configure Mac OS X Terminal to Support Git Completion and Context Based Prompt?]]></title>
+    <link href="http://halyph.com/blog/2012/10/17/how-to-configure-mac-os-x-terminal-to/"/>
+    <updated>2012-10-17T22:48:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/10/17/how-to-configure-mac-os-x-terminal-to</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://1.bp.blogspot.com/-TQLoXCK0UjM/UH8CEqejzkI/AAAAAAAAArU/vx6ohZLn3K0/s1600/git-logo.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="200" src="http://1.bp.blogspot.com/-TQLoXCK0UjM/UH8CEqejzkI/AAAAAAAAArU/vx6ohZLn3K0/s200/git-logo.png" width="200" /></a>
+</div>
+
+
+<p><br / >Msysgit on Windows has several nice features:
+<br /></p>
+
+<ul>
+    <li>git commands completion upon press &lt;tab&gt;</li>
+    <li>current git branch name in terminal command prompt</li>
+</ul>
+
+
+<p>By default git on Mac OS X doesn&rsquo;t have these nice features. Let&rsquo;s configure OS X terminal to support them:
+<br /></p>
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://2.bp.blogspot.com/-S5Ihp1jIZJk/UH8Fyp1-ElI/AAAAAAAAArs/GqzG6j6_tFo/s1600/terminal_osx.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="82" src="http://2.bp.blogspot.com/-S5Ihp1jIZJk/UH8Fyp1-ElI/AAAAAAAAArs/GqzG6j6_tFo/s400/terminal_osx.png" width="400" /></a>
+</div>
+
+
+<ol>
+    <li>Download two scripts (in <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">$HOME/bin</span> folder) from git<span style="font-family: &quot;Courier New&quot;,Courier,monospace;"> contrib</span> which support these features (<a href="https://github.com/git/git/tree/master/contrib/completion">https://github.com/git/git/tree/master/contrib/completion</a>):</li><pre class="brush: bash;"> <br />cd ~<br />mkdir bin<br />wget https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh<br />wget https://raw.github.com/git/git/master/contrib/completion/git-completion.bash<br /> </pre>
+    <li>Now we should update <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">.bash_profile</span> file: </li><pre class="brush: bash;">export PATH="$HOME/bin:$PATH"<br />source ~/bin/git-completion.bash<br />source ~/bin/git-prompt.sh<br /><br />export PS1='[\w$(__git_ps1 " (%s)")]\n\$ '<br /></pre></ol>
+
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://2.bp.blogspot.com/-6t75Jibj6IE/UH8IVreu0oI/AAAAAAAAAsE/AvH1p4UKa18/s1600/terminal_osx_improved.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="83" src="http://2.bp.blogspot.com/-6t75Jibj6IE/UH8IVreu0oI/AAAAAAAAAsE/AvH1p4UKa18/s400/terminal_osx_improved.png" width="400" /></a>
+</div>
+
+
+<p><br />So, here we have:
+<br /></p>
+
+<ul>
+    <li><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">git-completion.bash</span> does all &lt;tab&gt; completion &#8220;magic&#8221;</li>
+    <li><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">git-prompt.sh</span> is responsible for adding git current branch info, see <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">__git_ps1</span> function call when defining PS1 variable</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

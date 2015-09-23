@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Eclipse | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/eclipse/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Github Gists in Eclipse]]></title>
+    <link href="http://halyph.com/blog/2012/10/24/github-gists-in-eclipse/"/>
+    <updated>2012-10-24T18:18:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/10/24/github-gists-in-eclipse</id>
+    <content type="html"><![CDATA[<p>I&rsquo;d like to describe simple steps regarding integrating GitHub Gists in Eclipse. <br /><div>There are several sources which provoke me to do this:</div><div><ul><li><a href="https://github.com/blog/852-github-mylyn-connector-for-eclipse">GitHub Mylyn connector for Eclipse</a></li><li><a href="http://wiki.eclipse.org/EGit/GitHub/UserGuide#Gists">EGit/GitHub/User Guide</a></li><li><a href="http://eclipse.github.com/"><a href="http://eclipse.github.com">http://eclipse.github.com</a></a></li></ul></div><div>I&rsquo;ve been using Eclipse Java EE destibution, Mylyn plugin has been already installed there:</div><div><a href="http://2.bp.blogspot.com/-3Z_hURak8G4/UILASAmxfRI/AAAAAAAAAuo/-j0hZ6PaeiQ/s1600/ff1e766a3c4e15f398afdb3470841256-784120.jpeg"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5801410685639425298" src="http://2.bp.blogspot.com/-3Z_hURak8G4/UILASAmxfRI/AAAAAAAAAuo/-j0hZ6PaeiQ/s320/ff1e766a3c4e15f398afdb3470841256-784120.jpeg" /></a></div><div>1. Install EGit plugin via Eclipse Marketplace:</div><div><a href="http://4.bp.blogspot.com/-U-_lL67-pN8/UILASnFl4OI/AAAAAAAAAu0/0xP3TBIte80/s1600/564ca57d1601eb9f957f7179d76aaa26-786209.jpeg"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5801410695969235170" src="http://4.bp.blogspot.com/-U-_lL67-pN8/UILASnFl4OI/AAAAAAAAAu0/0xP3TBIte80/s320/564ca57d1601eb9f957f7179d76aaa26-786209.jpeg" /></a></div><div><br /></div><div>2. Install GitHub Mylyn Connector via Eclipse Marketplace:</div><div><a href="http://3.bp.blogspot.com/-LRbHSTlYG5E/UILATEL2tQI/AAAAAAAAAvA/iZqa3gnF5PY/s1600/e511908de0afb387c3bffa6e0ba69cf5-788260.png"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5801410703780132098" src="http://3.bp.blogspot.com/-LRbHSTlYG5E/UILATEL2tQI/AAAAAAAAAvA/iZqa3gnF5PY/s320/e511908de0afb387c3bffa6e0ba69cf5-788260.png" /></a></div><div>3. Open View &ldquo;Task List&rdquo; and click &ldquo;Add Repository&rdquo;:</div><div><a href="http://4.bp.blogspot.com/-BZu_A6ghNtw/UILATv9l3xI/AAAAAAAAAvM/bQuqsNhtzzA/s1600/0070942779976b8094ef45d4624ca121-790484.png"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5801410715531468562" src="http://4.bp.blogspot.com/-BZu_A6ghNtw/UILATv9l3xI/AAAAAAAAAvM/bQuqsNhtzzA/s320/0070942779976b8094ef45d4624ca121-790484.png" /></a>&nbsp;</div><div>4. Add Mylyn Task repository - &ldquo;GitHub Gists&rdquo;:</div><div><a href="http://3.bp.blogspot.com/-6XD7-QwV6ec/UILAUIlqE2I/AAAAAAAAAvY/f2D7BSC1-xM/s1600/03efb0556696de00094b0be93f49bdba-792290.png"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5801410722141967202" src="http://3.bp.blogspot.com/-6XD7-QwV6ec/UILAUIlqE2I/AAAAAAAAAvY/f2D7BSC1-xM/s320/03efb0556696de00094b0be93f49bdba-792290.png" /></a></div><div>5 .Then you should create Mylyn Query to fetch all Gists:</div><div><a href="http://2.bp.blogspot.com/-A4hpDa9tAfs/UILAUpN7yLI/AAAAAAAAAvk/yGBTcDWOCW8/s1600/752fbce7520318f4346860b6d4beb789-794619.png"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5801410730900834482" src="http://2.bp.blogspot.com/-A4hpDa9tAfs/UILAUpN7yLI/AAAAAAAAAvk/yGBTcDWOCW8/s320/752fbce7520318f4346860b6d4beb789-794619.png" /></a></div><div><br /></div><div><a href="http://3.bp.blogspot.com/-G3YCtAR0Kfs/UILAVFwa56I/AAAAAAAAAvw/5SBjSKB6dyI/s1600/cead0d373d1f7e0053db9445683ba012-796629.png"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5801410738561673122" src="http://3.bp.blogspot.com/-G3YCtAR0Kfs/UILAVFwa56I/AAAAAAAAAvw/5SBjSKB6dyI/s320/cead0d373d1f7e0053db9445683ba012-796629.png" /></a></div><div><br /></div><div>6. You should get something like this:</div><div><a href="http://3.bp.blogspot.com/-RQoPryNGtpU/UILAVsXYQ-I/AAAAAAAAAv8/vSy55AqVWos/s1600/5e2e39cf8655c2563f3f193088e6025d-798367.png"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5801410748925625314" src="http://3.bp.blogspot.com/-RQoPryNGtpU/UILAVsXYQ-I/AAAAAAAAAv8/vSy55AqVWos/s320/5e2e39cf8655c2563f3f193088e6025d-798367.png" /></a></div>That&rsquo;s it. Have fun.<br /><br /><i>PS</i>. Please note I&rsquo;ve excluded such common sense steps as providing credentials for your GitHub account.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Set ${user} Property in Eclipse?]]></title>
+    <link href="http://halyph.com/blog/2010/12/29/how-to-set-user-property-in-eclipse/"/>
+    <updated>2010-12-29T00:47:00+02:00</updated>
+    <id>http://halyph.com/blog/2010/12/29/how-to-set-user-property-in-eclipse</id>
+    <content type="html"><![CDATA[<p>Select <b>Preferences -&gt; Java -&gt; Code Style -&gt; Code Template -&gt; Section Comment -&gt; Type</b><br />You can replace the <i><b>author tag</b></i> by whatever value you need and it will have an effect on new generated classes.<br /><div class="separator" style="clear: both; text-align: center;"><a href="http://4.bp.blogspot.com/_vLotBlgiVfE/TRpkZDenFyI/AAAAAAAAAag/Ei5FLfFyP34/s1600/Clipboard-1.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="325" src="http://4.bp.blogspot.com/_vLotBlgiVfE/TRpkZDenFyI/AAAAAAAAAag/Ei5FLfFyP34/s400/Clipboard-1.png" width="400" /></a></div><br />${user} uses the value of the user.name environment variable. You can check it via <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">System.getProperty(&ldquo;user.name&rdquo;)</span>.<br /><br /><br />There are several solutions:<br /><ul><li>define it via command line: <br /><pre class="brush: bash;">C:/eclipse/eclipse.exe -vmargs -Duser.name=&ldquo;someUserName&rdquo;<br /></pre></li><li>define it via eclipse.ini:<br /><pre class="brush: bash;">-showsplash<br />org.eclipse.platform<br />&ndash;launcher.XXMaxPermSize<br />256M<br />-vmargs<br />-Dosgi.requiredJavaVersion=1.5<br />-Duser.name=&ldquo;someUserName&rdquo;<br />-Xms40m<br />-Xmx512m<br /></pre></li></ul></p>
+]]></content>
+  </entry>
+  
+</feed>

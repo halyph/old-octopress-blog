@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Annotation | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/annotation/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[@Override Java Annotation Issue]]></title>
+    <link href="http://halyph.com/blog/2011/06/20/override-java-annotation-issue/"/>
+    <updated>2011-06-20T00:55:00+03:00</updated>
+    <id>http://halyph.com/blog/2011/06/20/override-java-annotation-issue</id>
+    <content type="html"><![CDATA[<p>Let&rsquo;s create one simple interface and class which implements this interface:<br /><br /><pre class="brush: java;">public interface IOverride {<br />    void doSomething();<br />}<br />public class Overridden implements IOverride {<br />    @Override<br />    public void doSomething() {<br />    }<br />}<br /></pre><br />And compile this stuff on JDK v.1.5:<br /><pre class="brush: java;"># javac -d classes src*.java<br />src\Overridden.java:2: method does not override a method from its superclass<br />        @Override<br />         ^<br />1 error<br /></pre><br />Let&rsquo;s try to do the same on JDK v.1.6 - And, You&rsquo;ve got no compilation error.<br /><blockquote>Between Java 5 and Java 6 changes to the specification of @Override have been made. In Java 6 it is possible to add the @Override annotation to methods that implement methods of an interface which is not allowed in Java 5. (<a href="http://dertompson.com/2008/01/25/override-specification-changes-in-java-6/"><a href="http://dertompson.com/2008/01/25/override-specification-changes-in-java-6/">http://dertompson.com/2008/01/25/override-specification-changes-in-java-6/</a></a>)</blockquote><br />Also, I&rsquo;ve found very interesting discussion on Stackoverflow: <a href="http://stackoverflow.com/questions/94361/when-do-you-use-javas-override-annotation-and-why"><a href="http://stackoverflow.com/questions/94361/when-do-you-use-javas-override-annotation-and-why:">http://stackoverflow.com/questions/94361/when-do-you-use-javas-override-annotation-and-why:</a></a><br /><br /><span style="font-size: large;">Q:</span><br /><blockquote>What are the best practices for using Java&rsquo;s @Override annotation and why?<br />It seems like it would be overkill to mark every single overridden method with the @Override annotation. Are there certain programming situations that call for using the @Override and others that should never use the @Override?</blockquote><br /><span style="font-size: large;">A:</span> <br /><blockquote>Use it every time you override a method for two benefits. Do it so that you can take advantage of the compiler checking to make sure you actually are overriding a method when you think you are. This way, if you make a common mistake of misspelling a method name or not correctly matching the parameters, you will be warned that you method does not actually override as you think it does. Secondly, it makes your code easier to understand because it is more obvious when methods are overwritten.<br /><br />Additionally, in Java 1.6 you can use it to mark when a method implements an interface for the same benefits. I think it would be better to have a separate annotation (like <i><b>@Implements</b></i>), but it&rsquo;s better than nothing.</blockquote></p>
+]]></content>
+  </entry>
+  
+</feed>

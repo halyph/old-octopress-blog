@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Uml | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/uml/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[UML Sketching Tools]]></title>
+    <link href="http://halyph.com/blog/2012/02/13/uml-sketching-tools/"/>
+    <updated>2012-02-13T01:18:00+02:00</updated>
+    <id>http://halyph.com/blog/2012/02/13/uml-sketching-tools</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://2.bp.blogspot.com/-UyWzfrWKbDY/Tzg-7adYovI/AAAAAAAAAgU/zlejHhzAX6M/s1600/mola.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="http://2.bp.blogspot.com/-UyWzfrWKbDY/Tzg-7adYovI/AAAAAAAAAgU/zlejHhzAX6M/s1600/mola.png" /></a></div>
+
+
+<p>UML drawing is painful in case your model should evolve very fast and you have to adjust it on the way. Such tool as Visio (and similar) is doing their job well till you don&rsquo;t need &ldquo;aggressive&rdquo; redrawing ;-) Have you ever tried to draw &ldquo;huge&rdquo; sequence, activity diagrams in Visio? I&rsquo;ve &ldquo;<span class="example">struggled</span>&rdquo; with grouping, layouting, styling, etc. So, I have decided to concentrate more on modelling and switched to &ldquo;easy-going&rdquo; UML tools also knowing as <b>&ldquo;Textual UML tools&rdquo;.</b><br />Here is the list of my favorite:<br /><ul><li><a href="http://plantuml.sourceforge.net/">PlantUML</a> - very powerful tool. It supports very intuitive diagram language. Seven diagram types, nice styling. And very good documentation.</li><li><a href="http://www.umlet.com/">UMLet</a> - It&rsquo;s true sketching tool. Very very simple. And you shouldn&rsquo;t expect sexy UI ;-) BUT! It&rsquo;s so &ldquo;right tool for the job&rdquo;. You just have to try it.</li><li><a href="http://www.umlgraph.org/">UMLGraph</a> - It can be used to generate UML class and sequence diagrams. It has nice integration with javadocs tool.</li></ul>I think that this <a href="http://www.holub.com/goodies/uml/">Allen Holub&rsquo;s UML Quick Reference</a> (example based and very pragmatic) might be helpful.</p>
+]]></content>
+  </entry>
+  
+</feed>

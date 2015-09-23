@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ant | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/ant/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Run ANT Script From .BAT/.CMD?]]></title>
+    <link href="http://halyph.com/blog/2011/11/03/how-to-run-ant-script-from-batcmd/"/>
+    <updated>2011-11-03T15:04:00+02:00</updated>
+    <id>http://halyph.com/blog/2011/11/03/how-to-run-ant-script-from-batcmd</id>
+    <content type="html"><![CDATA[<p>Imagine you need to call ANT script from BAT/CMD file.
+<br />Ant script:
+<br /><pre class="brush: xml;">&lt;project default=&quot;bat-test&quot; name=&quot;Blog&quot;&gt;
+    &lt;target description=&quot;check ant run&quot; name=&quot;bat-test&quot;&gt;
+        &lt;echo message=&quot;Message from ANT&quot;&gt; &lt;/echo&gt;
+    &lt;/target&gt;
+&lt;/project&gt;
+</pre>And here is BAT file:
+<br />
+<br /><pre class="brush: bash;">@echo off<br />echo BAT - Before Ant run<br />ant -f build.xml<br />echo BAT - After Ant run<br /></pre>
+<br />Unfortunately, when you run this BAT you get the next output:
+<br /><pre class="brush: bash;">BAT - Before Ant run<br />Buildfile: D:\Projects\blog\build.xml<br /><br />bat-test:<br />     [echo] Message from ANT<br /><br />BUILD SUCCESSFUL<br />Total time: 0 seconds<br /></pre>
+<br />So, where is the <b>&ldquo;BAT - After Ant run&rdquo;</b> echo message?
+<br />
+<br />The problem is that Ant on Windows executed via <b>ant.bat</b> file and based on this we&rsquo;re calling one BAT file from another. We have to use CALL command to solve this issues, here is official note from CALL help:
+<br /></p>
+
+<blockquote class="tr_bq" style="font-family: &quot;Courier New&quot;,Courier,monospace;">Calls one batch program from another.
+    <br />CALL [drive:][path]filename [batch-parameters]
+    <br />batch-parameters&nbsp;&nbsp; Specifies any command-line information required by the batch program.&nbsp;</blockquote>
+
+
+<pre><code> here is the update BAT file:
+</code></pre>
+
+<p><br />
+<br /><pre class="brush: bash;">@echo off<br />echo BAT - Before Ant run<br />call ant -f build.xml<br />echo BAT - After Ant run<br /></pre></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java Build Tools and Future]]></title>
+    <link href="http://halyph.com/blog/2010/12/15/java-build-tools-and-future/"/>
+    <updated>2010-12-15T01:00:00+02:00</updated>
+    <id>http://halyph.com/blog/2010/12/15/java-build-tools-and-future</id>
+    <content type="html"><![CDATA[<div style="font-family: inherit;"></div>
+
+
+<div style="font-family: inherit; margin: 0in;"><span style="font-size: small;">It&#8217;s always interesting to read comparison of Java build tools. There are two major player so far: Ant and Maven. But, I&#8217;d like to know more about other tools.</span><span style="font-size: small;">&nbsp; </span></div>
+
+
+<div style="font-family: inherit; margin: 0in;"><span style="font-size: small;"><br /></span></div>
+
+
+<div style="font-family: inherit; margin: 0in;"><span style="font-size: small;">Here are some interesting links:</span><span style="font-size: small;">&nbsp;</span><br /><ul><li><span style="font-size: small;"><a href="http://www.hjug.org/present/Java_Build_Tool_Comparison.ppt">www.hjug.org/present/Java_Build_Tool_Comparison.ppt</a></span><span style="font-size: small;"> - short comparison matrix,      it&#8217;s really useful for overview</span></li><li><span style="font-size: small;"><a href="http://adam.pohorecki.pl/?p=27">The future of Java build tools</a></span><span style="font-size: small;"> - conceptual review, worth      reading, especially comments</span></li><li><span style="font-size: small;"><a href="http://java.dzone.com/news/maven-or-ant">http://java.dzone.com/news/maven-or-ant</a></span><span style="font-size: small;"> - pros and      cons for both Maven and Ant</span></li><li><span style="font-size: small;"><a href="http://www.webforefront.com/archives/2009/09/java_build_tool.html">http://www.webforefront.com/archives/2009/09/java_build_tool.html</a></span><span style="font-size: small;"> - small Maven criticism</span></li><li><span style="font-size: small;"><a href="http://kent.spillner.org/blog/work/2009/11/14/java-build-tools.html">http://kent.spillner.org/blog/work/2009/11/14/java-build-tools.html</a></span><span style="font-size: small;"> - &#8220;Java Build Tools:      Ant vs. Maven&#8221;, I think it&#8217;s really famous article in the Internet.      Just read arguments of Maven hater. </span></li><li><span style="font-size: small;"><a href="http://community.jboss.org/wiki/Gradlewhy">http://community.jboss.org/wiki/Gradlewhy</a></span><span style="font-size: small;"> - Hibernate moved from      Maven2 to Gradle!</span></li></ul></div>
+
+
+<ul style="direction: ltr; font-family: inherit; margin-bottom: 0in; margin-left: 0.375in; margin-top: 0in; unicode-bidi: embed;" type="disc"></ul>
+
+
+<div style="font-family: inherit; margin: 0in;"><span style="font-size: small;">Top 3 Java build tools:</span> </div>
+
+
+<div style="font-family: inherit; margin: 0in;"><span style="font-size: small;"> </span></div>
+
+
+<ul><li><span style="font-size: small;">Ant + Ivy (<a href="http://ant.apache.org/">http://ant.apache.org/</a></span><span style="font-size: small;">)</span></li><li><span style="font-size: small;">Maven (<a href="http://maven.apache.org/">http://maven.apache.org</a></span><span style="font-size: small;">)</span></li><li><span style="font-size: small;">Gradle (<a href="http://gradle.org/">http://gradle.org/</a></span><span style="font-size: small;">)</span></li></ul>
+
+
+<ul style="direction: ltr; font-family: inherit; margin-bottom: 0in; margin-left: 0.375in; margin-top: 0in; unicode-bidi: embed;" type="disc"></ul>
+
+
+<p>I don’t want to mention the other tools. The list isn&rsquo;t small. I&rsquo;m not sure if it worth spending time for learning/investigating new build tools. We should follow the trends. <br /><br />Ant and Maven are good enough for any projects. But Gradle evolves really quickly. So, we can get additional &ldquo;big&rdquo; player on Java build tools field.</p>
+]]></content>
+  </entry>
+  
+</feed>

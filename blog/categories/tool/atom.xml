@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tool | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/tool/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Configure Git Diff and Merge Tools?]]></title>
+    <link href="http://halyph.com/blog/2012/11/02/how-to-configure-git-diff-and-merge/"/>
+    <updated>2012-11-02T19:10:00+02:00</updated>
+    <id>http://halyph.com/blog/2012/11/02/how-to-configure-git-diff-and-merge</id>
+    <content type="html"><![CDATA[<div style="text-align: center;"><a href="http://2.bp.blogspot.com/-kKG2ycquT3Y/UJP7h58FIfI/AAAAAAAAAxM/LoNs-fCFWfI/s1600/06ada5204a4e0f281f988507ba90ebb4-763234.jpeg"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5806260904517771762" src="http://2.bp.blogspot.com/-kKG2ycquT3Y/UJP7h58FIfI/AAAAAAAAAxM/LoNs-fCFWfI/s320/06ada5204a4e0f281f988507ba90ebb4-763234.jpeg" /></a>&nbsp;</div>
+
+
+<p>Git can use external tools to perform merge and diff:  <br /><div><br /></div><b>Use default tool:</b><br /><pre class="brush: bash;"> <br />git difftool <br />git mergetool<br /></pre><div><br /><b>Use custom tool:</b></div><pre class="brush: bash;">git difftool -t tool_name<br />git mergetool -t tool_name</pre><div><br /><div>There are tons on diff/merge tools, I&rsquo;d like highlight git configuration for three of them:</div></div><div><ul><li><a href="http://www.sourcegear.com/diffmerge/">DiffMerge</a></li><li><a href="http://kdiff3.sourceforge.net/">Kdiff3</a></li><li><a href="https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/opendiff.1.html">opendiff</a></li></ul><div></div></div><b>Sample ~/.gitconfig (Windows):</b>  <br /><pre class="brush: bash;"> <br />[difftool &ldquo;kdiff3&rdquo;]<br />     path = D:/Tools/KDiff3/kdiff3.exe<br />     keepBackup = false<br />     trustExitCode = false<br />[mergetool &ldquo;kdiff3&rdquo;]<br />     path = D:/Tools/KDiff3/kdiff3.exe<br />     keepBackup = false<br />     trustExitCode = false<br />[difftool &ldquo;diffmerge&rdquo;]<br />     cmd = \&ldquo;C:/Program Files/SourceGear/Common/DiffMerge/sgdm.exe\&rdquo;  \&ldquo;$LOCAL\&rdquo; \&ldquo;$REMOTE\&rdquo;<br />[mergetool &ldquo;diffmerge&rdquo;]<br />     cmd = \&ldquo;D:/Tools/Git/cmd/git-diffmerge-merge.sh\&rdquo; \&ldquo;$BASE\&rdquo; \&ldquo;$LOCAL\&rdquo; \&ldquo;$REMOTE\&rdquo; \&ldquo;$MERGED\&rdquo;<br />     trustExitCode = false<br /><br />[diff]<br />    tool = kdiff3<br />[merge]<br />    tool = kdiff3<br /></pre><br /><div></div><div><b>Content of&nbsp;git-diffmerge-merge.sh:</b></div><pre class="brush: bash;"> <br />$cat D:/Tools/Git/cmd/git-diffmerge-merge.sh<br />#!/bin/sh<br />localPath=&ldquo;$2&rdquo;<br />basePath=&ldquo;$1&rdquo;<br />remotePath=&ldquo;$3&rdquo;<br />resultPath=&ldquo;$4&rdquo;<br />if [ ! -f $basePath ]<br />then<br />    basePath=&ldquo;~/diffmerge-empty&rdquo;<br />fi<br />&ldquo;C:/Program Files/SourceGear/Common/DiffMerge/sgdm.exe&rdquo; &ndash;merge &ndash;result=&ldquo;$resultPath&rdquo; &ldquo;$localPath&rdquo; &ldquo;$basePath&rdquo; &ldquo;$remotePath&rdquo; &ndash;title1=&ldquo;Mine&rdquo; &ndash;title2=&ldquo;Merged: $4&rdquo; &ndash;title3=&ldquo;Theirs&rdquo;<br /></pre><div><br /></div><div><b>Sample ~/.gitconfig (OS X):</b></div><pre class="brush: bash;"> <br />[diff]<br />    tool = opendiff<br />[merge]<br />    tool = opendiff<br /></pre><div><a href="https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/opendiff.1.html">opendiff</a>&nbsp;is bundled with Xcode Tools.</div><div><br /></div><div>Sample usage:</div><pre class="brush: bash;"> <br />$ git difftool -t diffmerge HEAD..HEAD~1<br /></pre>Links: <br /><div><ul><li><a href="http://www.gitshah.com/2010/12/how-to-setup-kdiff-as-diff-tool-for-git.html">How to setup KDiff as the diff tool for GIT</a>&nbsp;</li><li><a href="http://www.devinprogress.info/2012/01/how-to-configure-your-git-diff-or-merge.html">how to configure your git diff or merge tool&nbsp;</a></li><li><a href="http://adventuresincoding.com/2010/04/how-to-setup-git-to-use-diffmerge%20">How to setup Git to use Diffmerge</a></li></ul></div></p>
+]]></content>
+  </entry>
+  
+</feed>

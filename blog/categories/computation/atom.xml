@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Computation | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/computation/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[State of Numerical Computation Languages]]></title>
+    <link href="http://halyph.com/blog/2012/02/26/state-of-numerical-computation/"/>
+    <updated>2012-02-26T20:19:00+02:00</updated>
+    <id>http://halyph.com/blog/2012/02/26/state-of-numerical-computation</id>
+    <content type="html"><![CDATA[<p>When I was a student I spent a huge amount of time doing difference numerical computation with MATLAB and Maple. I must say I was falling in love with MATLAB. This environment, language and visualization possibilities were amazing and very powerful. I simply couldn&rsquo;t choose another stuff. It gave me a chance fully concentrate on engineering problems I had been trying to solve.<br /><br />But now I must admit that MATLAB is very expensive software. And we should look around for other open-source mathematical computation environments. Today I&rsquo;m biased because I prefer to invest time in general purpose language then in specialized computation languages (like MATLAB, R).<br /><br />I&rsquo;ve found very interested comparison (<a href="http://mathesaurus.sourceforge.net/">Mathesaurus</a>): <br /><div id="__ss_11756513" style="width: 477px;"><b style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/halyph/math-synonyms" target="_blank" title="Math synonyms">Math synonyms</a></b> <iframe frameborder="0" height="510" marginheight="0" marginwidth="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/11756513" width="477"></iframe> <br /><div style="padding: 5px 0 12px;">View more <a href="http://www.slideshare.net/" target="_blank">documents</a> from <a href="http://www.slideshare.net/halyph" target="_blank">Orest Ivasiv</a> </div></div><br />Also, <a href="http://hyperpolyglot.org/">Hyperpolyglot</a> provides nice comparison <a href="http://hyperpolyglot.org/numerical-analysis">&ldquo;Numerical Analysis Software: Fortran, MATLAB, R, NumPy&rdquo;</a>.<br /><br />Based on these two comparisons I&rsquo;ve selected several factors for choosing the &ldquo;right&rdquo; numerical environments:<br /><ol><li>Commercial or open-source</li><li>Visualization possibilities</li><li>Language itself (MATLAB, Maple, R, etc.): computational specific or general purpose (Python, Clojure/<a href="http://incanter.org/">Incanter</a>, etc. )</li><li>Integration with Fortran/C/C++ etc.</li><li>GUI features</li></ol></p>
+]]></content>
+  </entry>
+  
+</feed>

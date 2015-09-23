@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Hibernate | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/hibernate/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Create Session Factory in Hibernate 4]]></title>
+    <link href="http://halyph.com/blog/2012/06/25/how-to-create-session-factory-in/"/>
+    <updated>2012-06-25T21:06:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/06/25/how-to-create-session-factory-in</id>
+    <content type="html"><![CDATA[<p>You&rsquo;ve probably noticed that <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">org.hibernate.cfg.Configuration.buildSessionFactory</span> is deprecated in Hibernate4, check out Javadocs:<br /><br /><pre class="brush: java;">/<em><em><br /> * Create a {@link SessionFactory} using the properties and mappings in this configuration. The<br /> * {@link SessionFactory} will be immutable, so changes made to {@code this} {@link Configuration} after<br /> * building the {@link SessionFactory} will not affect it.<br /> </em><br /> * @return The build {@link SessionFactory}<br /> </em><br /> * @throws HibernateException usually indicates an invalid configuration or invalid mapping information<br /> <em><br /> * @deprecated Use {@link #buildSessionFactory(ServiceRegistry)} instead<br /> </em>/<br />public SessionFactory buildSessionFactory() throws HibernateException <br /></pre><br />E.g. We have the next old-fashion Hibernate3 code snippets:<br /><pre class="brush: java;">SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();<br /><br />Session session = sessionFactory.openSession();<br />session.beginTransaction();<br />session.save(new Event(&ldquo;Our very first event!&rdquo;, new Date()));<br />session.save(new Event(&ldquo;A follow up event&rdquo;, new Date()));<br />session.getTransaction().commit();<br />session.close();<br /></pre><br />Based on Javadocs above we have to apply the next small changes to support new Hibernate 4 <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">buildSessionFactory(ServiceRegistry)</span>: <br /><pre class="brush: java;">Configuration configuration = new Configuration();<br />configuration.configure();<br />ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();<br />SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);<br /><br />Session session = sessionFactory.openSession();<br />session.beginTransaction();<br />session.save(new Event(&ldquo;Our very first event!&rdquo;, new Date()));<br />session.save(new Event(&ldquo;A follow up event&rdquo;, new Date()));<br />session.getTransaction().commit();<br />session.close();<br /></pre>You can clone code sample from <a href="https://github.com/halyph/hibernate4-session-factory-sample"><a href="https://github.com/halyph/hibernate4-session-factory-sample">https://github.com/halyph/hibernate4-session-factory-sample</a></a></p>
+]]></content>
+  </entry>
+  
+</feed>

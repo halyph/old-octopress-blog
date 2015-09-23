@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Centos | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/centos/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Install Git 1.8.3.4 on CentOS 6.4]]></title>
+    <link href="http://halyph.com/blog/2013/08/21/how-to-install-git-1834-on-centos-64/"/>
+    <updated>2013-08-21T15:45:00+03:00</updated>
+    <id>http://halyph.com/blog/2013/08/21/how-to-install-git-1834-on-centos-64</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/-8tSaZBIgOh8/UhSywqivolI/AAAAAAAABqE/u2B3RdZZJoY/s1600/CentOS_logo.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://1.bp.blogspot.com/-8tSaZBIgOh8/UhSywqivolI/AAAAAAAABqE/u2B3RdZZJoY/s1600/CentOS_logo.png" /></a></div>
+
+
+<ol><li>Check the CentOS version</li><pre class="brush: bash;">$ cat /etc/redhat-release<br />CentOS release 6.4 (Final)<br /></pre><li>Check git version</li><pre class="brush: bash;">$ git --version<br />git version 1.7.1<br /></pre><li>Enable/disable <b>yum </b>proxy settings (find/add &#8220;proxy&#8221; string with related proxy server) <pre class="brush: bash;">$ vim /etc/yum.conf<br /></pre></li><li>Try to update <b>git </b>via <b>yum </b>package manager. But you will get the message that git is up to date</li><pre class="brush: bash;">$ sudo yum update git <br /></pre><li>Based on instruction from <a href="http://git-scm.com/book/en/Getting-Started-Installing-Git">Getting Started Installing Git</a> install git from sources:</li><pre class="brush: bash;">$ yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc<br />$ wget https://www.kernel.org/pub/software/scm/git/git-1.8.3.4.tar.gz<br />$ tar xzvf git-1.8.3.4.tar.gz<br />$ cd git-1.8.3.4<br />$ sudo make prefix=/usr/local all<br />$ sudo make prefix=/usr/local install<br /></pre><li>Re-run bash shell and verify the current git version</li><pre class="brush: bash;">$ git --version<br />git version 1.8.3.4<br /></pre></ol>
+
+
+<p><b>References</b>:<br /><ul><li><a href="http://johnathanmarksmith.com/linux/git/programming/2013/05/15/how-to-install-git-182-on-fedora-centos-red-hat-and-scientific-linux/" target="_blank">How to install Git 1.8.2 on Fedora, CentOS, Red Hat and Scientific Linux</a></li><li><a href="http://git-scm.com/book/en/Getting-Started-Installing-Git">Getting Started Installing Git</a></li></ul></p>
+]]></content>
+  </entry>
+  
+</feed>

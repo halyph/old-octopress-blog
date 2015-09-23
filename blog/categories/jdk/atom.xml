@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Jdk | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/jdk/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Install Rubymine 4.5.x on Ubuntu 12.04]]></title>
+    <link href="http://halyph.com/blog/2012/09/08/install-rubymine-45x-on-ubuntu-1204/"/>
+    <updated>2012-09-08T03:00:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/09/08/install-rubymine-45x-on-ubuntu-1204</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"></div>
+
+
+<div class="separator" style="clear: both; text-align: center;"><a href="http://2.bp.blogspot.com/-lwxR6JedPIM/UEqBIBx1CoI/AAAAAAAAAoY/CUK1k-bTeLY/s1600/Untitled.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="200" src="http://2.bp.blogspot.com/-lwxR6JedPIM/UEqBIBx1CoI/AAAAAAAAAoY/CUK1k-bTeLY/s200/Untitled.png" width="200" /></a></div>
+
+
+<p><br />As you probable know NetBeans has dropped Ruby support. And now, <a href="http://www.jetbrains.com/ruby/download/" target="_blank">RubyMine</a> is one of the best Ruby IDE. Here I&rsquo;d like to describe the steps for installing RubyMine on Ubuntu 12.04.<br /><br />Official requirement is &ldquo;<a href="http://www.jetbrains.com/ruby/download/" target="_blank">Sun JDK 1.6. (OpenJDK is not supported)</a>&rdquo;. I&rsquo;ve decided to install Oracle JDK v.1.7.<br /><br />I&rsquo;ve used the next advices from &ldquo;<a href="http://www.devsniper.com/ubuntu-12-04-install-sun-jdk-6-7/" target="_blank">Ubuntu 12.04 – install sun jdk 6-7</a>&rdquo; (see re-post below):<br /><br /><b>Install Sun JDK 7 on Ubuntu 12.04:</b><br />Download the sun jdk 7 tar file from <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk-7u4-downloads-1591156.html" target="_blank">here</a><br />Extract the tar file: <br /><pre class="brush: bash;">tar -xvzf jdk-7u4-linux-x64.tar.gz<br /></pre>Move extracted folder to this location: <br /><pre class="brush: bash;">sudo mv jdk1.7.0_04 /usr/lib/jvm/<br /></pre>Install Update Java package (see <a href="http://www.webupd8.org/2011/09/how-to-install-oracle-java-7-jdk-in.html" target="_blank">here</a>) <br /><pre class="brush: bash;">sudo add-apt-repository ppa:nilarimogard/webupd8<br />sudo apt-get update<br />sudo apt-get install update-java<br />sudo update-java<br /></pre><br />Install new java source in system: <br /><pre class="brush: bash;">sudo update-alternatives &ndash;install /usr/bin/javac javac /usr/lib/jvm/jdk1.7.0_04/bin/javac 1<br />sudo update-alternatives &ndash;install /usr/bin/java java /usr/lib/jvm/jdk1.7.0_04/bin/java 1<br />sudo update-alternatives &ndash;install /usr/bin/javaws javaws /usr/lib/jvm/jdk1.7.0_04/bin/javaws 1<br /></pre>Choose default java: <br /><pre class="brush: bash;">sudo update-alternatives &ndash;config javac<br />sudo update-alternatives &ndash;config java<br />sudo update-alternatives &ndash;config javaws<br /></pre>java version test: <br /><pre class="brush: bash;">java -version<br />javac -version</pre>Verify the symlinks all point to the new java location: <br /><pre class="brush: bash;">ls -la /etc/alternatives/java*<br /></pre><b>JAVA_HOME configuration</b><br />You can set JAVA_HOME in Ubuntu so simple: Edit the file .bashrc under your home directory and add the following lines: (if .bashrc is hidden click in Nautilus Menu View &gt; Show Hidden Files) <br /><pre class="brush: bash;">export JAVA_HOME=/path/your/jdk<br />export PATH=$JAVA_HOME/bin:$PATH<br /></pre><b>Install RubyMine (see official)</b><br />Unpack the rubymine-4.5.3.tar.gz file using the following command:<br /><pre class="brush: bash;">tar xfz rubymine-4.5.3.tar.gz<br /><br /></pre>Run <b><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">rubymine.sh</span></b> from the bin sub-directory  <br /><br />Links:<br /><ul><li><a href="http://www.devsniper.com/ubuntu-12-04-install-sun-jdk-6-7/" target="_blank">Ubuntu 12.04 – install sun jdk 6-7</a></li><li><a href="http://www.webupd8.org/2011/09/how-to-install-oracle-java-7-jdk-in.html" target="_blank">How To Install Oracle Java 7 (JDK) In Ubuntu</a></li></ul></p>
+]]></content>
+  </entry>
+  
+</feed>

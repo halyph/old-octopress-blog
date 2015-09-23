@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Vim | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/vim/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Change the Default Editor in Ubuntu?]]></title>
+    <link href="http://halyph.com/blog/2010/04/26/how-to-change-default-editor-in-ubuntu/"/>
+    <updated>2010-04-26T00:13:00+03:00</updated>
+    <id>http://halyph.com/blog/2010/04/26/how-to-change-default-editor-in-ubuntu</id>
+    <content type="html"><![CDATA[<p>The default editor in Ubuntu is <code>nano</code>. But I like <code>Vim</code>.<br /><br /><pre class="brush: bash;">$ sudo update-alternatives &ndash;config editor<br /></pre><br />And You will get the next:<br /><br /><pre class="brush: bash;">There are 6 choices for the alternative editor (providing /usr/bin/editor).<br /><br />  Selection    Path                    Priority   Status<br />&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;<br /><em> 0            /bin/nano                40        auto mode<br />  1            /bin/ed                 -100       manual mode<br />  2            /bin/nano                40        manual mode<br />  3            /usr/bin/mcedit-debian   25        manual mode<br />  4            /usr/bin/vim.basic       30        manual mode<br />  5            /usr/bin/vim.nox         40        manual mode<br />  6            /usr/bin/vim.tiny        10        manual mode<br /><br />Press enter to keep the current choice[</em>], or type selection number: 4<br />update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/editor (editor) in manual mode. <br /></pre>Select 4, in this case and that&rsquo;s it.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Setup Ruby/Rails Development Environment, Part 2 - E-TextEditor]]></title>
+    <link href="http://halyph.com/blog/2010/04/22/how-to-setup-rubyrails-development_22/"/>
+    <updated>2010-04-22T01:30:00+03:00</updated>
+    <id>http://halyph.com/blog/2010/04/22/how-to-setup-rubyrails-development_22</id>
+    <content type="html"><![CDATA[<p>There are tons of text editors which are good enough for Ruby/Rails/web development. And it&rsquo;s not so easier to choose the &ldquo;best&rdquo; editor.
+<br />I&rsquo;d like to talk about my top three editors which like the most:
+<br /></p>
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <div class="separator" style="clear: both; text-align: center;">
+                    <a href="http://3.bp.blogspot.com/_vLotBlgiVfE/S8kW9Jrzs8I/AAAAAAAAAW8/KWlGtADhPWg/s1600/images.jpeg" imageanchor="1" ><img border="0" src="http://3.bp.blogspot.com/_vLotBlgiVfE/S8kW9Jrzs8I/AAAAAAAAAW8/KWlGtADhPWg/s320/images.jpeg" /></a>
+                </div>
+            </td>
+            <td>
+                <br /><a href="http://notepad-plus.sourceforge.net/"><b>Notepad++</b></a>
+                <br />It&#8217;s the base text editor on my workstation. It has active community, plug-in repository developing fast enough. But, this editor doesn&#8217;t have Rails syntax highlight, here I mean ERB files. So, for Rails editing I have to skip it (for now)</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="separator" style="clear: both; text-align: center;">
+                    <a href="http://1.bp.blogspot.com/_vLotBlgiVfE/S8kW5uPHbDI/AAAAAAAAAWs/INRyOfGhWjc/s1600/app-thumbnail.png" imageanchor="1" ><img border="0" src="http://1.bp.blogspot.com/_vLotBlgiVfE/S8kW5uPHbDI/AAAAAAAAAWs/INRyOfGhWjc/s320/app-thumbnail.png" /></a>
+                </div>
+            </td>
+            <td><a href="http://www.vim.org/"><b>Vim</b></a>
+                <br />Cross<b>-</b>platform text editor. It has BIG, super active community with tons of plugins.</td>
+        </tr>
+        <tr>
+            <td>
+                <br />
+                <div class="separator" style="clear: both; text-align: center;">
+                    <a href="http://4.bp.blogspot.com/_vLotBlgiVfE/S89xU4N-bvI/AAAAAAAAAXc/aU5CYbOPPwc/s1600/e-texteditor.jpg" imageanchor="1" ><img border="0" src="http://4.bp.blogspot.com/_vLotBlgiVfE/S89xU4N-bvI/AAAAAAAAAXc/aU5CYbOPPwc/s1600/e-texteditor.jpg" /></a>
+                </div>
+            </td>
+            <td><a href="http://www.e-texteditor.com/"><b>E-TextEditor</b></a>
+                <br />It&#8217;s Textmate clone for Windows.</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<p><br />There are two choices for using these text editors:
+<br /></p>
+
+<ol>
+    <li>Use Notepad++/E-TextEditor (or other editors) on host machine and connect to Ubuntu VM via tool such as <b><a href="http://www.expandrive.com/windows">ExpanDrive</a><span style="font-weight: normal;">.</span></b></li>
+    <li>Use Vim via SSH (Putty) terminal. You&#8217;ll have got plain linux terminal with all restrictions, but in this case you shouldn&#8217;t install such tool as ExpanDrive which cost some money.</li>
+</ol>
+
+
+<p>So, I will describe first solutions in this post and second - in the next post.
+<br />
+<br /><strong>E-TextEditor and ExpanDrive</strong>
+<br />I assume that you install both e-texteditor and ExpanDrive.
+<br />Now, we can create some Rails project:
+<br /><pre class="brush: bash;">$ rails bar</pre>And check IP address our Ubuntu VM:
+<br /><pre class="brush: bash;">$ ifconfig<br />eth0      Link encap:Ethernet  HWaddr 00:0c:29:2b:58:78<br />          inet addr:192.168.72.132  Bcast:192.168.72.255  Mask:255.255.255.0<br />          inet6 addr: fe80::20c:29ff:fe2b:5878/64 Scope:Link<br />          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1<br />          RX packets:185 errors:0 dropped:0 overruns:0 frame:0<br />          TX packets:191 errors:0 dropped:0 overruns:0 carrier:0<br />          collisions:0 txqueuelen:1000<br />          RX bytes:20339 (20.3 KB)  TX bytes:33193 (33.1 KB)<br />          Interrupt:18 Base address:0x2000</pre>Now open ExpanDrive and setup connection to VM:
+<br /></p>
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://3.bp.blogspot.com/_vLotBlgiVfE/S8948vFk8CI/AAAAAAAAAXg/oF3cdR5hJuI/s1600/expandrive_01.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="265" src="http://3.bp.blogspot.com/_vLotBlgiVfE/S8948vFk8CI/AAAAAAAAAXg/oF3cdR5hJuI/s400/expandrive_01.png" width="400" /></a>
+</div>
+
+
+<p><br /></p>
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://4.bp.blogspot.com/_vLotBlgiVfE/S895y_VxvuI/AAAAAAAAAXk/t3-WtDqg6RU/s1600/expandrive_02.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="298" src="http://4.bp.blogspot.com/_vLotBlgiVfE/S895y_VxvuI/AAAAAAAAAXk/t3-WtDqg6RU/s400/expandrive_02.png" width="400" /></a>
+</div>
+
+
+<p><br />As you can see my Ubuntu VM disk is mapped to host machine and I can use it for my Rails development.
+<br />Now, we can use any Windows based text editor and made modification directly on Ubuntu VM disk:
+<br /></p>
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://3.bp.blogspot.com/_vLotBlgiVfE/S8965_bxI-I/AAAAAAAAAXo/-FBArym-D6w/s1600/expandrive_03.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="338" src="http://3.bp.blogspot.com/_vLotBlgiVfE/S8965_bxI-I/AAAAAAAAAXo/-FBArym-D6w/s400/expandrive_03.png" width="400" /></a>
+</div>
+
+
+<p><br />For Rails scaffolding we use SSH/Putty terminal.<b></b>
+<br /><b><br /></b>
+<br /><b>References:</b>
+<br /><a href="http://halyph.com/2010/04/how-to-setup-rubyrails-development.html">How to setup Ruby/Rails development environment, Part 1 - Ubuntu VM</a></p>
+]]></content>
+  </entry>
+  
+</feed>

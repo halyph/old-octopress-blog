@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Maven | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/maven/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-07-14T00:58:51+03:00</updated>
+  <updated>2015-09-23T06:22:09+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -686,6 +686,467 @@ $ target/appassembler/bin/app
 <li><a href="http://mojo.codehaus.org/appassembler/appassembler-maven-plugin/usage-program.html">Maven Application Assembler Plugin</a></li>
 <li><a href="http://blog.plesslweb.ch/post/6628462331/wrapper-script-for-java-command-line-applications">Wrapper Script for Java Command-Line Applications</a></li>
 </ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Maven Build Number Plugin - Sample Usage]]></title>
+    <link href="http://halyph.com/blog/2012/06/27/maven-build-number-plugin-sample-usage/"/>
+    <updated>2012-06-27T23:29:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/06/27/maven-build-number-plugin-sample-usage</id>
+    <content type="html"><![CDATA[<p><a href="http://mojo.codehaus.org/buildnumber-maven-plugin" target="_blank">buildnumber-maven-plugin</a>.
+<br />
+<br />This post is based on:
+<br /></p>
+
+<ul>
+    <li><a href="http://mojo.codehaus.org/buildnumber-maven-plugin/usage.html">http://mojo.codehaus.org/buildnumber-maven-plugin/usage.html</a></li>
+    <li><a href="http://www.site.lalitbhatt.com/maven-build-number-plugin">http://www.site.lalitbhatt.com/maven-build-number-plugin</a></li>
+    <li><a href="http://blog.peterlynch.ca/2009/11/buildnumber-maven-plugin-helpful.html">http://blog.peterlynch.ca/2009/11/buildnumber-maven-plugin-helpful.html</a></li>
+    <li><a href="http://apollo.ucalgary.ca/tlcprojectswiki/index.php/Public/Project_Versioning_-_Best_Practices#Build_Versioning">http://apollo.ucalgary.ca/tlcprojectswiki/index.php/Public/Project_Versioning_-_Best_Practices#Build_Versioning</a> </li>
+</ul>
+
+
+<p><br />We have some project and need to include into jar manifest file sequential build number which isn&rsquo;t based on VCS (SVN, Git, Mercurial, etc.) revision number. Let&rsquo;s create appropriate <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">pom.xml</span> file and implement small demo to verify the result.
+<br />
+<br /><span style="font-size: large;">Generate maven project</span>
+<br /><pre class="brush: bash;">$ mvn archetype:generate -DgroupId=org.halyph -DartifactId=buildNoTest\<br />-DarchetypeArtifactId=maven-archetype-quickstart \<br />-DinteractiveMode=false<br /></pre>
+<br /><span style="font-size: large;">Create the pom.xml</span>
+<br /></p>
+
+<pre class="brush: xml;">&lt;project xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xsi:schemalocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+ &lt;modelversion&gt;4.0.0&lt;/modelversion&gt;
+ &lt;groupid&gt;org.halyph&lt;/groupid&gt;
+ &lt;artifactid&gt;buildNoTest&lt;/artifactid&gt;
+ &lt;packaging&gt;jar&lt;/packaging&gt;
+ &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+ &lt;name&gt;buildNoTest&lt;/name&gt;
+ &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+ 
+ &lt;dependencies&gt;
+  &lt;dependency&gt;
+   &lt;groupid&gt;junit&lt;/groupid&gt;
+   &lt;artifactid&gt;junit&lt;/artifactid&gt;
+   &lt;version&gt;3.8.1&lt;/version&gt;
+   &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+ &lt;/dependencies&gt;
+ 
+ &lt;properties&gt;
+  &lt;project .build.sourceencoding=&quot;&quot;&gt;UTF-8&lt;/project&gt;
+ &lt;/properties&gt;
+ 
+ &lt;!-- 
+ If you have access to scm then you can place actual url's. 
+ Otherwise with &lt;revisionOnScmFailure /&gt; you can give some fake URLs as follows. 
+ --&gt;
+ &lt;scm&gt;
+  &lt;connection&gt;scm:svn:http://none&lt;/connection&gt;
+  &lt;developerconnection&gt;scm:svn:https://none&lt;/developerconnection&gt;
+  &lt;url&gt;scm:svn:https://none&lt;/url&gt;
+ &lt;/scm&gt;
+ 
+ &lt;build&gt;
+  &lt;resources&gt;
+   &lt;resource&gt;
+    &lt;directory&gt;src/main/resources&lt;/directory&gt;
+   &lt;/resource&gt;
+   &lt;resource&gt;
+    &lt;directory&gt;src/main/filtered-resources&lt;/directory&gt;
+    &lt;filtering&gt;true&lt;/filtering&gt;
+   &lt;/resource&gt;
+  &lt;/resources&gt;
+  &lt;plugins&gt;
+   &lt;plugin&gt;
+    &lt;groupid&gt;org.codehaus.mojo&lt;/groupid&gt;
+    &lt;artifactid&gt;buildnumber-maven-plugin&lt;/artifactid&gt;
+    &lt;version&gt;1.1&lt;/version&gt;
+    &lt;executions&gt;
+     &lt;execution&gt;
+      &lt;phase&gt;generate-resources&lt;/phase&gt;
+      &lt;goals&gt;
+       &lt;goal&gt;create&lt;/goal&gt;
+      &lt;/goals&gt;
+     &lt;/execution&gt;
+    &lt;/executions&gt;
+    &lt;configuration&gt;
+     &lt;!-- 
+      doCheck and doUpdate actually talk to repository if it's true,
+      Check would check that there are no local changes. 
+      Update would update it 
+     --&gt;
+     &lt;docheck&gt;false&lt;/docheck&gt;
+     &lt;doupdate&gt;false&lt;/doupdate&gt;
+     &lt;!-- 
+      This ensures that even if we are not connected to scm than also
+      take the version from local .svn file 
+     --&gt;
+     &lt;revisiononscmfailure&gt;
+      
+     &lt;!--
+      Generate sequence build number based on:
+      build number and timestamp      
+     --&gt;
+     &lt;format&gt;Build: #{0} ({1,date})&lt;/format&gt;
+     &lt;items&gt;
+      &lt;item&gt;buildNumber\d*&lt;/item&gt;
+      &lt;item&gt;timestamp&lt;/item&gt;
+     &lt;/items&gt;
+    &lt;/revisiononscmfailure&gt;&lt;/configuration&gt;
+   &lt;/plugin&gt;
+   &lt;plugin&gt;
+    &lt;groupid&gt;org.apache.maven.plugins&lt;/groupid&gt;
+    &lt;artifactid&gt;maven-jar-plugin&lt;/artifactid&gt;
+    &lt;version&gt;2.1&lt;/version&gt;
+    &lt;configuration&gt;
+     &lt;archive&gt;
+      &lt;!-- will put the entries into META-INF/MANIFEST.MF file --&gt;
+      &lt;manifestentries&gt;
+       &lt;implementation-version&gt;${project.version}&lt;/implementation-version&gt;
+       &lt;implementation-build&gt;${buildNumber}&lt;/implementation-build&gt;
+      &lt;/manifestentries&gt;
+     &lt;/archive&gt;
+    &lt;/configuration&gt;
+   &lt;/plugin&gt;
+  &lt;/plugins&gt;
+ &lt;/build&gt;
+&lt;/project&gt;
+</pre>
+
+
+<p><br /><span style="font-size: large;">Create demo application to verify the results</span>
+<br /><pre class="brush: java;">package org.halyph;<br /><br />import java.io.IOException;<br />import java.util.ResourceBundle;<br />import java.util.jar.Attributes;<br />import java.util.jar.Manifest;<br /><br />public class App<br />{<br />    public static void main( String[] args ) throws IOException<br />    {<br />        System.out.println(&ldquo;Verify Resource bundle&rdquo; );<br />  <br /> // Check filtered resources based on generated build number<br />        ResourceBundle bundle = ResourceBundle.getBundle( &ldquo;build&rdquo; );<br />        String msg = bundle.getString( &ldquo;build.message&rdquo; );<br />        System.out.println(msg);<br /><br />        System.out.println(&ldquo;\nVerify Generated MANIFEST.MF Properties&rdquo; );<br /><br /> // Check Manifest file based on generated build number<br />        Manifest mf = new Manifest();<br />        mf.read(Thread.currentThread().getContextClassLoader().getResourceAsStream(&ldquo;META-INF/MANIFEST.MF&rdquo;));<br /><br />        Attributes atts = mf.getMainAttributes();<br /><br />        System.out.println(&ldquo;Implementation-Versio: &rdquo; + atts.getValue(&ldquo;Implementation-Version&rdquo;));<br />        System.out.println(&ldquo;Implementation-Build: &rdquo; + atts.getValue(&ldquo;Implementation-Build&rdquo;));<br />    }<br />}<br /></pre>
+<br /><span style="font-size: large;">Build </span><span style="font-size: large;">application several time </span><span style="font-size: large;">and Run </span>
+<br /><pre class="brush: bash;">$ mvn install </pre><pre class="brush: bash;">$ mvn install&nbsp;</pre><pre class="brush: bash;">$ mvn install &nbsp;</pre><pre class="brush: bash;">$ java -cp target\buildNoTest-1.0-SNAPSHOT.jar org.halyph.App<br />Verify Resource bundle<br />Build: #3 (Jun 27, 2012)<br /><br />Verify Generated MANIFEST.MF Properties<br />Implementation-Versio: 1.0-SNAPSHOT<br />Implementation-Build: Build: #3 (Jun 27, 2012)<br /></pre>
+<br /><span style="font-size: large;">Summary</span>
+<br /></p>
+
+<ol>
+    <li>We should inform <a href="http://mojo.codehaus.org/buildnumber-maven-plugin" target="_blank">buildnumber-maven-plugin</a> that we won&#8217;t use version control revision as build number via adding fake <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&lt;scm&gt;</span> section into <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">pom.xml</span> and <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&lt;revisionOnScmFailure /&gt;</span> into <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">buildnumber-maven-plugin</span> <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&lt;configuration&gt;</span></li>
+    <li>Implemented custom build number format, see <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">buildnumber-maven-plugin &lt;configuration&gt;/&lt;format&gt; </span>and <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&lt;configuration&gt;/&lt;items&gt;</span>.</li>
+    <li>Added build number into jar manifest, see <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">maven-jar-plugin</span> <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">pom.xml</span> section </li>
+    <li>Tested if generated build number can be properly added in filtered resources</li>
+    <ul>
+        <li>created <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">src\main\filtered-resources\build.properties</span> file</li><pre class="brush: bash;">build.message=${buildNumber}<br /></pre>
+        <li>added resource filtering, see section <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&lt;resource&gt;</span> flag <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&lt;filtering&gt;true&lt;/filtering&gt;</span></li>
+    </ul>
+    <li>Demo application verifying the filtered resources and build number in jar manifest file</li>
+</ol>
+
+
+<p>&nbsp;You can git clone this project <a href="https://github.com/halyph/blog-sandbox/tree/master/Maven/blogpost_062712">github</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Maven Resource Filtering]]></title>
+    <link href="http://halyph.com/blog/2012/06/11/maven-resource-filtering/"/>
+    <updated>2012-06-11T16:08:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/06/11/maven-resource-filtering</id>
+    <content type="html"><![CDATA[<p><br /></p>
+
+<ul>
+    <li> <a href="http://www.manydesigns.com/en/portofino/documentation/tutorials/using-maven-profiles-and-resource-filtering">Using Maven profiles and resource filtering</a></li>
+    <li><a href="http://maven.apache.org/guides/getting-started/index.html#How_do_I_add_resources_to_my_JAR">How do I add resources to my JAR?</a></li>
+</ul>
+
+
+<p>I assume that reader has a basic understanding of Maven resources.
+<br />
+<br /></p>
+
+<h3>                Simple resource filtering </h3>
+
+
+<p>Let&rsquo;s generate the project:
+<br /><pre class="brush: bash;">$ mvn archetype:generate -DgroupId=org.halyph -DartifactId=proptest -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false<br /></pre>
+<br /></p>
+
+<pre class="brush: xml;">
+&lt;project xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xsi:schemalocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+    &lt;modelversion&gt;4.0.0&lt;/modelversion&gt;
+    &lt;groupid&gt;org.halyph&lt;/groupid&gt;
+    &lt;artifactid&gt;proptest&lt;/artifactid&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;proptest&lt;/name&gt;
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupid&gt;junit&lt;/groupid&gt;
+            &lt;artifactid&gt;junit&lt;/artifactid&gt;
+            &lt;version&gt;3.8.1&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</pre>
+
+
+<p>Now, we have an application property file with bunch of properties which must be filtered <i>\proptest\src\main\resources\application.properties</i>:
+<br /><pre class="brush: bash;">application.username=${jdbc.username}<br />application.password=${jdbc.password}<br />application.databaseName=${jdbc.databaseName}<br /></pre>We have to add <i>build/resources</i> and <i>properties</i> section into pom.xml:
+<br /></p>
+
+<pre class="brush: xml;">&lt;project xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xsi:schemalocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+    &lt;modelversion&gt;4.0.0&lt;/modelversion&gt;
+    &lt;groupid&gt;org.halyph&lt;/groupid&gt;
+    &lt;artifactid&gt;proptest&lt;/artifactid&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;proptest&lt;/name&gt;
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupid&gt;junit&lt;/groupid&gt;
+            &lt;artifactid&gt;junit&lt;/artifactid&gt;
+            &lt;version&gt;3.8.1&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+        &lt;resources&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/resources&lt;/directory&gt;
+                &lt;filtering&gt;true&lt;/filtering&gt;
+            &lt;/resource&gt;
+        &lt;/resources&gt;
+    &lt;/build&gt;
+    &lt;properties&gt;
+        &lt;jdbc .username=&quot;&quot;&gt;default_username&lt;/jdbc&gt;
+        &lt;jdbc .password=&quot;&quot;&gt;default_password&lt;/jdbc&gt;
+        &lt;jdbc .databasename=&quot;&quot;&gt;default_databaseName&lt;/jdbc&gt;
+    &lt;/properties&gt;
+&lt;/project&gt;</pre>
+
+
+<p>Lets run maven resource filtering and check the resulted <i>\proptest\target/classes/application.properties</i> file:
+<br />
+<br /><pre class="brush: bash;">$ mvn process-resources<br />$ cat target/classes/application.properties<br /><br />application.username=default_username<br />application.password=default_password<br />application.databaseName=default_databaseName<br /></pre>As you can see property values were successfully substituted.
+<br /></p>
+
+<h3>      &nbsp;</h3>
+
+
+<h3>      Resource filtering with external properties file</h3>
+
+
+<p>We can extract Maven properties in external property file <i>\proptest_extfile\src\main\filters\mysql_filters.properties:</i>
+<br /><pre class="brush: bash;">jdbc.username=mysql_username<br />jdbc.password=mysql_password<br />jdbc.databaseName=mysql_databaseName<br /></pre>also, we have to adjust pom.xml to work properly with external filters (added <i>build/filters</i> and removed <i>properties</i>):
+<br /></p>
+
+<pre class="brush: bash;">&lt;project xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xsi:schemalocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+    &lt;modelversion&gt;4.0.0&lt;/modelversion&gt;
+    &lt;groupid&gt;org.halyph&lt;/groupid&gt;
+    &lt;artifactid&gt;proptest&lt;/artifactid&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;proptest&lt;/name&gt;
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupid&gt;junit&lt;/groupid&gt;
+            &lt;artifactid&gt;junit&lt;/artifactid&gt;
+            &lt;version&gt;3.8.1&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+        &lt;filters&gt;
+            &lt;filter&gt;src/main/filters/mysql_filters.properties&lt;/filter&gt;
+        &lt;/filters&gt;
+        &lt;resources&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/resources&lt;/directory&gt;
+                &lt;filtering&gt;true&lt;/filtering&gt;
+            &lt;/resource&gt;
+        &lt;/resources&gt;
+    &lt;/build&gt;
+&lt;/project&gt;</pre>
+
+
+<p>Let&rsquo;s check the resulted <i>\proptest\target\classes\application.properties</i> file:
+<br /><pre class="brush: bash;">$ mvn process-resources<br />$ cat target/classes/application.properties<br /><br />application.username=mysql_username<br />application.password=mysql_password<br />application.databaseName=mysql_databaseName<br /></pre></p>
+
+<h3>      &nbsp;</h3>
+
+
+<h3>      Mixed resource filtering with external/internal properties&nbsp;</h3>
+
+
+<p>What happen if we have overlapped properties in pom.xml with external property file.
+<br />Modified pom.xml:
+<br /></p>
+
+<pre class="brush: xml;">
+&lt;project xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xsi:schemalocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+    &lt;modelversion&gt;4.0.0&lt;/modelversion&gt;
+    &lt;groupid&gt;org.halyph&lt;/groupid&gt;
+    &lt;artifactid&gt;proptest&lt;/artifactid&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;proptest&lt;/name&gt;
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupid&gt;junit&lt;/groupid&gt;
+            &lt;artifactid&gt;junit&lt;/artifactid&gt;
+            &lt;version&gt;3.8.1&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+        &lt;filters&gt;
+            &lt;filter&gt;src/main/filters/mysql_filters.properties&lt;/filter&gt;
+        &lt;/filters&gt;
+        &lt;resources&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/resources&lt;/directory&gt;
+                &lt;filtering&gt;true&lt;/filtering&gt;
+            &lt;/resource&gt;
+        &lt;/resources&gt;
+    &lt;/build&gt;
+    &lt;properties&gt;
+        &lt;jdbc .databasename=&quot;&quot;&gt;default_databaseName&lt;/jdbc&gt;
+    &lt;/properties&gt;
+&lt;/project&gt;
+</pre>
+
+
+<p>Now, check the resulted <i>\proptest\target\classes\application.properties</i> file:
+<br /><pre class="brush: bash;">$ mvn process-resources<br />$ cat target/classes/application.properties<br /><br />application.username=mysql_username<br />application.password=mysql_password<br />application.databaseName=default_databaseName<br /></pre>In this case Maven uses <i>application.databaseName</i> property from pom.xml
+<br />
+<br /></p>
+
+<h3>     Managing properties with <a href="http://mojo.codehaus.org/properties-maven-plugin/">properties-maven-plugin</a>&nbsp;</h3>
+
+
+<p>Please check the plugin home page for more details <a href="http://mojo.codehaus.org/properties-maven-plugin"><a href="http://mojo.codehaus.org/properties-maven-plugin">http://mojo.codehaus.org/properties-maven-plugin</a></a>
+<br />
+<br />This plugin read external property and they behave like were declared in pom.xml.
+<br />Modified pom.xml:
+<br /></p>
+
+<pre class="brush: xml;">
+&lt;project xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xsi:schemalocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+    &lt;modelversion&gt;4.0.0&lt;/modelversion&gt;
+    &lt;groupid&gt;org.halyph&lt;/groupid&gt;
+    &lt;artifactid&gt;proptest&lt;/artifactid&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;proptest&lt;/name&gt;
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupid&gt;junit&lt;/groupid&gt;
+            &lt;artifactid&gt;junit&lt;/artifactid&gt;
+            &lt;version&gt;3.8.1&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupid&gt;org.codehaus.mojo&lt;/groupid&gt;
+                &lt;artifactid&gt;properties-maven-plugin&lt;/artifactid&gt;
+                &lt;version&gt;1.0-alpha-2&lt;/version&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;phase&gt;initialize&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;read-project-properties&lt;/goal&gt;
+                        &lt;/goals&gt;
+                        &lt;configuration&gt;
+                            &lt;files&gt;
+                                &lt;file&gt;src/main/filters/cust_mysql_filters.properties&lt;/file&gt;
+                            &lt;/files&gt;
+                        &lt;/configuration&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+        &lt;filters&gt;
+            &lt;filter&gt;src/main/filters/mysql_filters.properties&lt;/filter&gt;
+        &lt;/filters&gt;
+        &lt;resources&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/resources&lt;/directory&gt;
+                &lt;filtering&gt;true&lt;/filtering&gt;
+            &lt;/resource&gt;
+        &lt;/resources&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</pre>
+
+
+<p>Also, we have to add new external property file just to verify the property overlapping issue:
+<br /><i>\proptest_extfile\src\main\filters\cust_mysql_filters.properties:</i>
+<br /><pre class="brush: bash;">jdbc.username=cust_mysql_username<br />jdbc.password=cust_mysql_password<br />jdbc.databaseName=cust_mysql_databaseName<br /></pre>Now, it&rsquo;s time to check the resulted file <i>\proptest\target\classes\application.properties</i> file:
+<br /><pre class="brush: bash;">$ mvn process-resources<br />$ cat target/classes/application.properties<br /><br />application.username=cust_mysql_username<br />application.password=cust_mysql_password<br />application.databaseName=cust_mysql_databaseName<br /></pre>
+<br /><b>Have you noticed that we&rsquo;ve got properties values from <i>cust_mysql_filters.properties</i> and Maven hasn&rsquo;t applied properties from <i>mysql_filters.properties </i>file<i>?</i></b>
+<br />
+<br />So, as you can see we have several ways for managing/filtering properties with Maven. And, it&rsquo;s very convenient.
+<br />
+<br />You can checkout code snippets from <a href="https://github.com/halyph/blog-sandbox/tree/master/Maven/blogpost_061112">github</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[First Steps in Maven]]></title>
+    <link href="http://halyph.com/blog/2012/06/11/first-steps-in-maven/"/>
+    <updated>2012-06-11T10:53:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/06/11/first-steps-in-maven</id>
+    <content type="html"><![CDATA[<p>Here I&rsquo;m going to collect the most important resources which helps quickly use Maven in the &ldquo;right&rdquo; way.
+<br /></p>
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://3.bp.blogspot.com/-HLT4LRIKJRk/T9WeuyWcXaI/AAAAAAAAAlE/UFjf4e6w1nA/s1600/maven-logo.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://3.bp.blogspot.com/-HLT4LRIKJRk/T9WeuyWcXaI/AAAAAAAAAlE/UFjf4e6w1nA/s1600/maven-logo.png" /></a>
+</div>
+
+
+<h3>Intro Tutorials</h3>
+
+
+<ol>
+    <li><a href="http://javabrains.koushik.org/p/maven.html">Java Brains: Maven</a> - 10 video tutorials cover very basic Maven use cases.&nbsp; </li>
+    <li><span><a href="http://www.sonatype.com/index.php/Support/Books/Maven-By-Example">Maven By Example </a>- free e-book which step-by-step how the Maven &#8220;world.&#8221; I&#8217;ve notices that off-line PDF book is a little bit outdated (i.e. some </span><span>POM </span><span>samples)</span></li>
+    <li><a href="http://maven.apache.org/guides/getting-started/index.html">Maven Getting Started Guide</a> - guide from Apache Maven Project</li>
+</ol>
+
+
+<p><span>I must say that item 1 is optional, but item 2 is mandatory for newcomers. </span>
+<br /><span></span>
+<br /></p>
+
+<h3><span>Tutorial, How-tos and FAQs</span></h3>
+
+
+<ol>
+    <li><a href="http://www.mkyong.com/tutorials/maven-tutorials/"><span>Mkyong.com </span>Maven Tutorial</a> - short and descriptive Q&amp;A tutorials.</li>
+    <li><a href="http://www.avajava.com/tutorials/categories/maven">AVAJAVA - Maven Tutorials</a> - very huge collection of how-to&#8217;s and Q&amp;A, there are about 80+ articles.&nbsp; </li>
+</ol>
+
+
+<h4>Cheat Sheets</h4>
+
+
+<ol>
+    <li><a href="http://refcardz.dzone.com/refcardz/apache-maven-2%20">Dzone Maven 2</a> </li>
+    <li><a href="http://cheat.errtheblog.com/s/maven/">http://cheat.errtheblog.com/s/maven/</a></li>
+    <li><a href="http://blog.cliffano.com/2006/07/27/my-maven2-cheat-sheet/">http://blog.cliffano.com/2006/07/27/my-maven2-cheat-sheet/</a> </li>
+</ol>
+
+
+<p><br />
+<br />Newcomers should clarify for yourself the next maven items which can potentially boost their productivity in future:
+<br /></p>
+
+<ol>
+    <li>Maven lifecycles</li>
+    <li>Multi-module project </li>
+    <li>Resource filtering</li>
+    <li>Maven Profiles</li>
+</ol>
 
 ]]></content>
   </entry>

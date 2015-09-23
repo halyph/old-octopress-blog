@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Javascript | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Modern Java Web Developer]]></title>
+    <link href="http://halyph.com/blog/2013/07/04/the-modern-java-web-developer/"/>
+    <updated>2013-07-04T00:41:00+03:00</updated>
+    <id>http://halyph.com/blog/2013/07/04/the-modern-java-web-developer</id>
+    <content type="html"><![CDATA[<div><div class="separator" style="clear: both; text-align: center;"><a href="http://4.bp.blogspot.com/-G4Zpbg9G9wM/UdSZ0hfCkHI/AAAAAAAABns/0RcteRVheYA/s183/JavaScriptLogo.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://4.bp.blogspot.com/-G4Zpbg9G9wM/UdSZ0hfCkHI/AAAAAAAABns/0RcteRVheYA/s183/JavaScriptLogo.png" /></a></div><br />I&#8217;ve decided to make some notes regarding&nbsp;<a href="http://raibledesigns.com/about.jsp">Matt Raible</a>&nbsp;presentations:</div>
+
+
+<ul><li><a href="http://www.slideshare.net/mraible/the-modern-java-web-developer-denver-jug-2013">http://www.slideshare.net/mraible/the-modern-java-web-developer-denver-jug-2013</a><a href="http://www.slideshare.net/mraible/the-modern-java-web-developer-denver-jug-2013"><br /></a></li><li><a href="http://www.slideshare.net/mraible/comparing-jvm-web-frameworks-devoxx-france-2013">http://www.slideshare.net/mraible/comparing-jvm-web-frameworks-devoxx-france-2013</a></li></ul>
+
+
+<div><br /></div>
+
+
+<div style="text-align: center;"><a href="http://1.bp.blogspot.com/-4RNkWRESb8A/UdSYDWY5zTI/AAAAAAAABng/5BIY5LqWGmQ/s1600/49c6989f6e381afef6e3fedd9957979e-752690.png"><img alt="" border="0" height="276" id="BLOGGER_PHOTO_ID_5896504995451882802" src="http://1.bp.blogspot.com/-4RNkWRESb8A/UdSYDWY5zTI/AAAAAAAABng/5BIY5LqWGmQ/s640/49c6989f6e381afef6e3fedd9957979e-752690.png" width="640" /></a></div>
+
+
+<div><br /></div>
+
+
+<div>Now, I restrict my language set to: Java and JavaScript. There are huge hype around Scala/Play (was Ruby/Rails).</div>
+
+
+<div>This decision is based on the local job market.</div>
+
+
+<div><br /></div>
+
+
+<div>So, the modern Java Web developer should have skills in the next areas:</div>
+
+
+<div><ul><li>Concepts:</li><li style="display: inline; list-style: none;">  <ul><li>High performance web site</li><li>Security consideration</li><li>Web for Mobile devices</li><li>Cloud base deployment</li><li>Caching</li><li>Page Speed</li><li>RESTful Architecture</li><li>Clustering</li></ul></li><li>JavaScript, HTML5, CSS3, LESS</li><li>jQuery, jQuery UI</li><li>Twitter Bootstrap</li></ul><ul><li>FireBug, Chrome DevTools (<a href="http://www.igvita.com/slides/2012/devtools-tips-and-tricks/#1">http://www.igvita.com/slides/2012/devtools-tips-and-tricks/#1</a>)</li><li>IDE: STS, Intellij IDEA</li></ul><ul><li>Spring,&nbsp;Hibernate/JPA,&nbsp;Spring Data,&nbsp;Servlet 3</li><li>Jackson (for JSON)</li><li>nginx(static content provider, load balancer)</li><li>wro4j (<a href="http://code.google.com/p/wro4j/">http://code.google.com/p/wro4j/</a>)</li><li>WebJars (<a href="http://www.webjars.org/">http://www.webjars.org/</a>)</li></ul><ul><li><b>Frameworks</b>:</li><li style="display: inline; list-style: none;">  <ul><li><b>Full Stack Frameworks</b></li><li style="display: inline; list-style: none;">  <ul><li>Spring Roo</li><li>JBoss Forge</li></ul></li><li><b>API Frameworks</b></li><li style="display: inline; list-style: none;">  <ul><li>Jersey</li><li>RESTEasy</li><li>Apache CXF</li><li>Dropwizard</li></ul></li><li><b>JavaScript MVC Framework</b> (see&nbsp;<a href="http://codebrief.com/2012/01/the-top-10-javascript-mvc-frameworks-reviewed/">http://codebrief.com/2012/01/the-top-10-javascript-mvc-frameworks-reviewed/</a>):</li><li style="display: inline; list-style: none;">  <ul><li>Backbone.js</li><li>Angular.js</li><li>Ember.js</li><li>Knockout.js</li></ul></li><li><b>Pure JVM Web Framewroks</b></li><li style="display: inline; list-style: none;">  <ul><li>JSF (Primefaces)</li><li>Spring MVC</li></ul></li></ul></li><li>Document REST API</li><li style="display: inline; list-style: none;">  <ul><li>enunciate (<a href="http://enunciate.codehaus.org/">http://enunciate.codehaus.org/</a>)</li><li>swagger (<a href="https://developers.helloreverb.com/swagger/">https://developers.helloreverb.com/swagger/</a>)</li></ul></li></ul></div>
+
+
+<div>Avoid languages which compile to JavaScript:</div>
+
+
+<div><ul><li>CoffeeScript</li><li>TypeScript</li><li>Dart</li></ul></div>
+
+]]></content>
+  </entry>
+  
+</feed>

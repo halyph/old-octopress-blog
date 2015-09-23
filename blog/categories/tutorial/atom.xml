@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tutorial | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/tutorial/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Java Related Free Video Trainings]]></title>
+    <link href="http://halyph.com/blog/2012/03/15/java-related-free-screencasts/"/>
+    <updated>2012-03-15T13:30:00+02:00</updated>
+    <id>http://halyph.com/blog/2012/03/15/java-related-free-screencasts</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/-OcQd9aLAnoc/T2HQNCIz5hI/AAAAAAAAAgk/wynszvwrfzw/s1600/1331810342_Java.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://3.bp.blogspot.com/-OcQd9aLAnoc/T2HQNCIz5hI/AAAAAAAAAgk/wynszvwrfzw/s1600/1331810342_Java.png" /></a></div>
+
+
+<p>I&rsquo;ve decided to collect Java related video tutorials and screencasts. Here is the initial list: <br /><ul><li><a href="http://eclipsetutorial.sourceforge.net/">Eclipse Video Tutorials</a></li><li><a href="http://marakana.com/training/java/java_web_development_with_spring_and_hibernate.html">Marakana: Java Web, Spring and Hibernate Training</a><a href="http://marakana.com/training/java/java_web_development_with_spring_and_hibernate.html"></a></li><li><a href="http://www.youtube.com/playlist?list=PL5745BA630E2195D9">Hibernate Tutorial</a></li><li><a href="http://javabrains.koushik.org/">Java Trainings: JSP/Servlets, Hibernate, Spring, Maven, Struts2</a></li></ul></p>
+]]></content>
+  </entry>
+  
+</feed>

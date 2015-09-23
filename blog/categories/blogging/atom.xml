@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Blogging | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/blogging/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Review: You Should Write Blogs?]]></title>
+    <link href="http://halyph.com/blog/2011/01/14/review-you-should-write-blogs/"/>
+    <updated>2011-01-14T01:56:00+02:00</updated>
+    <id>http://halyph.com/blog/2011/01/14/review-you-should-write-blogs</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/_vLotBlgiVfE/TS-Q1PIKm0I/AAAAAAAAAa8/nRXqErpLNls/s1600/1294962747_blog.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://3.bp.blogspot.com/_vLotBlgiVfE/TS-Q1PIKm0I/AAAAAAAAAa8/nRXqErpLNls/s1600/1294962747_blog.png" /></a></div>
+
+
+<p>I&rsquo;ve just finished reading the Steve Yegge&rsquo;s post <a href="http://sites.google.com/site/steveyegge2/you-should-write-blogs">&ldquo;You Should Write Blogs&rdquo;</a>.<br />As for me it&rsquo;s very impressive and honest writing about blogging I&rsquo;ve ever read. I like this style of writing.<br />The general idea is to explain why You should write blogs.<br /><blockquote>So don&rsquo;t worry about whether people will read it. Just write it! </blockquote><blockquote>No matter where you are in your education, some people will be interested in hearing your struggles. This is an important thing to keep in mind when you&rsquo;re blogging. Each person in your audience is on a different clock, and all of them are ahead of you in some ways and behind you in others. The point of blogging is that we all agree to share where we&rsquo;re at, and not poke fun at people who seem to be behind us, because they may know other things that we won&rsquo;t truly understand for years, if ever.</blockquote>He described some reasons why people don&rsquo;t like to write blogs and commented it:<br /><ol><li>I&rsquo;m too busy.</li><li>I&rsquo;m afraid to put my true thoughts on public record.</li><li>Nobody will read my blog.</li><li>Blogging is narcissistic.</li></ol>I must say that Steve inspired me to write more. Just for fun.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Syntax Highlighting Code in Blogger]]></title>
+    <link href="http://halyph.com/2009/08/test-page-must-be-deleted.html"/>
+    <updated>2009-08-29T00:30:00+03:00</updated>
+    <id>http://halyph.com/2009/08/test-page-must-be-deleted</id>
+    <content type="html"><![CDATA[<p>How to highlight code in Blogger? You can use <a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter">SyntaxHighlighter</a>.
+I don&rsquo;t want to repeat other useful posts about adjusting Blogger for <a href="http://en.wikipedia.org/wiki/Syntax_highlighting" title="http://en.wikipedia.org/wiki/Syntax_highlighting">code syntax highlighter</a>, so take look at these:</p>
+
+<ul>
+<li><a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter:Integration">http://alexgorbatchev.com/wiki/SyntaxHighlighter:Integration</a></li>
+<li><a href="http://yacoding.blogspot.com/2008/05/how-to-add-syntax-highlight-to-blogger.html">http://yacoding.blogspot.com/2008/05/how-to-add-syntax-highlight-to-blogger.html</a></li>
+<li><a href="http://fahdshariff.blogspot.com/2008/07/syntax-highlighting-code-in-webpages.html">http://fahdshariff.blogspot.com/2008/07/syntax-highlighting-code-in-webpages.html</a></li>
+</ul>
+
+
+<p>There is one useful feature in <a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter">SyntaxHighlighter</a> &ndash; <a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter:Themes" title="SyntaxHighlighter:Themes">Bundled themes</a>.</p>
+
+<p>Here is small example:
+&#8220;`</p>
+
+<pre class="brush: java;">public void printHello() {  
+     System.out.println("Hello World");  
+ }  
+</pre>
+
+
+<p>&#8220;`</p>
+]]></content>
+  </entry>
+  
+</feed>

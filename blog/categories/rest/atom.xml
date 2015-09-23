@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Rest | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/rest/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[REST With JAX-RS: Part 3 - Embedded Jetty]]></title>
+    <link href="http://halyph.com/blog/2013/10/21/rest-with-jax-rs-part-3-embedded-jetty/"/>
+    <updated>2013-10-21T08:00:00+03:00</updated>
+    <id>http://halyph.com/blog/2013/10/21/rest-with-jax-rs-part-3-embedded-jetty</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/-KC2gFdfkvnE/Ul8JQLUCq9I/AAAAAAAABs0/IhySnzRFWd4/s1600/rest_logo_small.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://1.bp.blogspot.com/-KC2gFdfkvnE/Ul8JQLUCq9I/AAAAAAAABs0/IhySnzRFWd4/s1600/rest_logo_small.png" /></a></div>
+
+
+<p><br />See previous posts:<br /><ul><li><a href="http://www.halyph.com/2013/10/rest-with-jax-rs-part-1-spring-java.html">REST with JAX-RS: Part 1 - Spring Java Config</a></li><li><a href="http://www.halyph.com/2013/10/rest-with-jax-rs-part-2-spring-java.html">REST with JAX-RS: Part 2 - Spring Java Config and CXF Improvement</a></li></ul>There is one feature which I&rsquo;d like to add. It&rsquo;s embedded Jetty server. I.e. we should be able to run our application from <i>main()</i> method. <br /><br />Update pom.xml, add jetty server as dependency<br /><pre class="brush: xml;">&hellip;<br /> &lt;org.eclipse.jetty.version&gt;9.0.6.v20130930&lt;/org.eclipse.jetty.version&gt;<br />&hellip;<br /> <dependency><br />    <groupid>org.eclipse.jetty</groupid><br />    <artifactid>jetty-webapp</artifactid><br />    <version>${org.eclipse.jetty.version}</version><br /> </dependency><br />&hellip;<br /></pre>Create special <b>Launcher </b>class which runs embedded Jetty Server. Jetty configuration registers port, host, base REST URL (<b><i>&ldquo;/api/*&rdquo;</i></b>) and the most important - proper Spring config.   <br /><pre class="brush: java;">package com.halyph;<br /><br />import com.halyph.config.AppConfig;<br />import org.apache.cxf.transport.servlet.CXFServlet;<br />import org.eclipse.jetty.server.Server;<br />import org.eclipse.jetty.servlet.ServletContextHandler;<br />import org.eclipse.jetty.servlet.ServletHolder;<br />import org.springframework.web.context.ContextLoaderListener;<br />import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;<br /><br /><br />public class Launcher {<br /><br />    public static final int PORT = 8080;<br /><br />    public static void main(final String[] args) throws Exception {<br />        Server server = new Server(PORT);<br /><br />        // Register and map the dispatcher servlet<br />        final ServletHolder servletHolder = new ServletHolder(new CXFServlet());<br />        final ServletContextHandler context = new ServletContextHandler();<br />        context.setContextPath(&ldquo;/&rdquo;);<br />        context.addServlet(servletHolder, AppConfig.API_BASE);<br />        context.addEventListener(new ContextLoaderListener());<br /><br />        context.setInitParameter(&ldquo;contextClass&rdquo;, AnnotationConfigWebApplicationContext.class.getName());<br />        context.setInitParameter(&ldquo;contextConfigLocation&rdquo;, AppConfig.class.getName());<br /><br />        server.setHandler(context);<br />        server.start();<br />        server.join();<br />    }<br />}<br /><br /><br /></pre><br /><img border="0" src="http://4.bp.blogspot.com/-19PdlvA340g/UmJjzXEXT6I/AAAAAAAABtM/hu7TPhIwD0U/s1600/Logos-Github-icon.png" />&nbsp;&nbsp; You can find sources on <a href="https://github.com/halyph/jaxrs-tutorials/tree/part/03-embedded-jetty">GitHub</a><br /><br /><b>References</b><br /><ol><li><a href="http://aredko.blogspot.com/2013/01/going-rest-embedding-jetty-with-spring.html">Going REST: embedding Jetty with Spring and JAX-RS (Apache CXF)</a> </li><li><a href="http://www.hascode.com/2013/07/embedding-jetty-or-tomcat-in-your-java-application/">Embedding Jetty or Tomcat in your Java Application</a></li></ol></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[REST With JAX-RS: Part 2 - Spring Java Config and CXF Improvement]]></title>
+    <link href="http://halyph.com/blog/2013/10/20/rest-with-jax-rs-part-2-spring-java/"/>
+    <updated>2013-10-20T10:00:00+03:00</updated>
+    <id>http://halyph.com/blog/2013/10/20/rest-with-jax-rs-part-2-spring-java</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/-KC2gFdfkvnE/Ul8JQLUCq9I/AAAAAAAABs0/IhySnzRFWd4/s1600/rest_logo_small.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://1.bp.blogspot.com/-KC2gFdfkvnE/Ul8JQLUCq9I/AAAAAAAABs0/IhySnzRFWd4/s1600/rest_logo_small.png" /></a></div>
+
+
+<p><br />See previous post:<br /><ul><li><a href="http://www.halyph.com/2013/10/rest-with-jax-rs-part-1-spring-java.html">REST with JAX-RS: Part 1 - Spring Java Config</a>&nbsp; </li></ul>Sample application from part 1 has several issues:<br /><ol><li>It doesn&rsquo;t have application wide REST exception handler. This handler should catch and wrap all internal exceptions and present in some &ldquo;standard&rdquo; JSON format</li><li>There are no autowiring for REST Resources and JAX-RS providers. I.e. we shouldn&rsquo;t declare REST service beans/providers manually in AppConfig (see <a href="http://www.halyph.com/2013/10/rest-with-jax-rs-part-1-spring-java.html">part1</a>)</li><li>CXF object mapper (Jackson) should be configured and registered in CXF somehow</li></ol>Let&rsquo;s try to fix all these issues.<br /><br />JAX-RS has special approach for exception handling - <a href="http://cxf.apache.org/docs/jax-rs-basics.html#JAX-RSBasics-Exceptionhandling">ExceptionMapper</a>.<br />Let&rsquo;s define two mappers:<br /><ul><li><b>GeneralExceptionMapper</b> - will catch and handle all <b>Exceptions</b></li><li><b>NotFoundExceptionMapper</b> - will catch and handle only <b>NotFoundException</b></li></ul><pre class="brush: java;"> <br />package com.halyph.rest.provider;<br /><br />import javax.ws.rs.NotFoundException;<br />import javax.ws.rs.Produces;<br />import javax.ws.rs.core.MediaType;<br />import javax.ws.rs.core.Response;<br />import javax.ws.rs.ext.ExceptionMapper;<br />import javax.ws.rs.ext.Provider;<br />import java.util.Date;<br />import java.util.HashMap;<br />import java.util.Map;<br /><br />@Provider<br />@Produces(MediaType.APPLICATION_JSON)<br />public class NotFoundExceptionMapper implements ExceptionMapper&lt;NotFoundException&gt; {<br />    /<strong><br />     * Map an exception to a {@link javax.ws.rs.core.Response}.<br />     <em><br />     * @param exception the exception to map to a response.<br />     * @return a response mapped from the supplied exception.<br />     </em>/<br />    @Override<br />    public Response toResponse(final NotFoundException exception) {<br />        Map&lt;String, Object&gt; info = new HashMap&lt;&gt;();<br />        info.put(&ldquo;msg&rdquo;, exception.getMessage());<br />        info.put(&ldquo;date&rdquo;, new Date());<br />        info.put(&ldquo;details&rdquo;, &ldquo;The requested resource hasn&rsquo;t been found&rdquo;);<br /><br />        return Response<br />                .status(Response.Status.INTERNAL_SERVER_ERROR)<br />                .entity(info)<br />                .type(MediaType.APPLICATION_JSON)<br />                .build();<br />    }<br />}<br /></pre><pre class="brush: java;"> <br />package com.halyph.rest.provider;<br /><br />import javax.ws.rs.Produces;<br />import javax.ws.rs.core.MediaType;<br />import javax.ws.rs.core.Response;<br />import javax.ws.rs.ext.ExceptionMapper;<br />import javax.ws.rs.ext.Provider;<br />import java.util.Date;<br />import java.util.HashMap;<br />import java.util.Map;<br /><br />@Provider<br />@Produces(MediaType.APPLICATION_JSON)<br />public class GeneralExceptionMapper implements ExceptionMapper&lt;exception&gt; {<br />    /</strong><br />     * Map an exception to a {@link javax.ws.rs.core.Response}.<br />     <em><br />     * @param exception the exception to map to a response.<br />     * @return a response mapped from the supplied exception.<br />     </em>/<br />    @Override<br />    public Response toResponse(final Exception exception) {<br />        Map&lt;String, Object&gt; info = new HashMap&lt;&gt;();<br />        info.put(&ldquo;msg&rdquo;, exception.getMessage());<br />        info.put(&ldquo;date&rdquo;, new Date());<br /><br />        return Response<br />                .status(Response.Status.INTERNAL_SERVER_ERROR)<br />                .entity(info)<br />                .type(MediaType.APPLICATION_JSON)<br />                .build();<br />    }<br />}<br /></pre><br />And, modify <b>UserResource</b> which throws <b>NotFoundException</b> when some user can&rsquo;t be found by specified id <br /><pre class="brush: java;"> <br />@RestService<br />@Path(&ldquo;/users&rdquo;)<br />@Produces({MediaType.APPLICATION_JSON})<br />@Consumes({MediaType.APPLICATION_JSON})<br />public class UserResource {<br /><br /> &hellip;<br />    @GET<br />    @Path(&ldquo;/{id}&rdquo;)<br />    public User getUser(@PathParam(&ldquo;id&rdquo;) Integer id) {<br />        User user = service.getUser(id);<br />        if (user == null) {<br />            throw new NotFoundException();<br />        } else {<br />            return user;<br />        }<br />    }<br /><br />    &hellip;<br />}<br /></pre><br />Now, we have to implement REST resource/provider autowiring. 1st we create custom @RestService annotation.<br /><pre class="brush: java;"> <br />package com.halyph.util.annotation;<br /><br />import java.lang.annotation.Documented;<br />import java.lang.annotation.ElementType;<br />import java.lang.annotation.Retention;<br />import java.lang.annotation.RetentionPolicy;<br />import java.lang.annotation.Target;<br /><br />@Retention(RetentionPolicy.RUNTIME)<br />@Target(ElementType.TYPE)<br />@Documented<br />public @interface RestService {<br />}<br /></pre><br />Now we have to implement Spring bean scanners which scan specified package and register &ldquo;selected&rdquo; beans in Spring context.<br /><br /><pre class="brush: java;"> <br />package com.halyph.util;<br /><br />import org.springframework.context.ApplicationContext;<br />import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;<br />import org.springframework.context.support.GenericApplicationContext;<br />import org.springframework.core.type.filter.AnnotationTypeFilter;<br /><br />import javax.ws.rs.ext.Provider;<br />import java.util.ArrayList;<br />import java.util.List;<br /><br />public final class RestProviderBeanScanner {<br /><br />    private RestProviderBeanScanner() { }<br />    public static List&lt;Object&gt; scan(ApplicationContext applicationContext, String&hellip; basePackages) {<br />        GenericApplicationContext genericAppContext = new GenericApplicationContext();<br />        ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(genericAppContext, false);<br /><br />        scanner.addIncludeFilter(new AnnotationTypeFilter(Provider.class));<br />        scanner.scan(basePackages);<br />        genericAppContext.setParent(applicationContext);<br />        genericAppContext.refresh();<br /><br />        return new ArrayList&lt;&gt;(genericAppContext.getBeansWithAnnotation(Provider.class).values());<br />    }<br />}<br /></pre><pre class="brush: java;"> <br />package com.halyph.util;<br /><br />import com.halyph.util.annotation.RestService;<br />import org.springframework.context.ApplicationContext;<br />import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;<br />import org.springframework.context.support.GenericApplicationContext;<br />import org.springframework.core.type.filter.AnnotationTypeFilter;<br /><br />import java.util.ArrayList;<br />import java.util.List;<br /><br />public final class RestServiceBeanScanner {<br /><br />    private RestServiceBeanScanner() { }<br /><br />    public static List&lt;Object&gt; scan(ApplicationContext applicationContext, String&hellip; basePackages) {<br />        GenericApplicationContext genericAppContext = new GenericApplicationContext();<br />        ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(genericAppContext, false);<br /><br />        scanner.addIncludeFilter(new AnnotationTypeFilter(RestService.class));<br />        scanner.scan(basePackages);<br />        genericAppContext.setParent(applicationContext);<br />        genericAppContext.refresh();<br /><br />        List&lt;Object&gt; restResources = new ArrayList&lt;&gt;(genericAppContext.getBeansWithAnnotation(RestService.class).values());<br /><br />        return restResources;<br />    }<br />}</pre>These two classes (scanner) <b>RestServiceBeanScanner</b> and <b>RestProviderBeanScanner</b> are almost identical and should be refactored to support generic scanner type. Let&rsquo;s left this for home work. <br /><br />There is additional issue with missed Object Mapper configuration: <br /><pre class="brush: java;"> <br />package com.halyph.rest.provider;<br /><br />import com.fasterxml.jackson.databind.ObjectMapper;<br />import com.fasterxml.jackson.databind.SerializationFeature;<br /><br />import javax.ws.rs.ext.ContextResolver;<br />import javax.ws.rs.ext.Provider;<br />import java.text.DateFormat;<br />import java.text.SimpleDateFormat;<br />import java.util.TimeZone;<br /><br />@Provider<br />public class ObjectMapperProvider implements ContextResolver&lt;Objectmapper&gt; {<br /><br />    final ObjectMapper objectMapper;<br /><br />    public ObjectMapperProvider() {<br />        this.objectMapper = new ObjectMapper();<br />        this.objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);<br /><br />        //set up ISO 8601 date/time stamp format:<br />        final DateFormat df = new SimpleDateFormat(&ldquo;yyyy-MM-dd&rsquo;T'HH:mm:sss'Z'&rdquo;);<br />        df.setTimeZone(TimeZone.getTimeZone(&ldquo;UTC&rdquo;));<br />        this.objectMapper.setDateFormat(df);<br />    }<br /><br />    @Override<br />    public ObjectMapper getContext(Class type) {<br />        return this.objectMapper;<br />    }<br />}<br /></pre><br />We have to update AppConfig:<br /><ul><li>&nbsp;Add <b>@ComponentScan</b> to register services</li><li>Call <b>RestProviderBeanScanner </b>to register providers: json provider, <i>ExceptionMapper</i> and&nbsp; ObjectMapperProvider</li><li>Call <b>RestServiceBeanScanner </b>to register REST services marked with <b>@RestService</b> annotation</li></ul><pre class="brush: java;"> <br />package com.halyph.config;<br /><br />import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;<br />import com.halyph.util.RestProviderBeanScanner;<br />import com.halyph.util.RestServiceBeanScanner;<br />import org.apache.cxf.bus.spring.SpringBus;<br />import org.apache.cxf.endpoint.Server;<br />import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;<br />import org.springframework.context.ApplicationContext;<br />import org.springframework.context.annotation.Bean;<br />import org.springframework.context.annotation.ComponentScan;<br />import org.springframework.context.annotation.Configuration;<br />import org.springframework.context.annotation.DependsOn;<br /><br />import javax.ws.rs.ApplicationPath;<br />import javax.ws.rs.core.Application;<br />import javax.ws.rs.ext.RuntimeDelegate;<br />import java.util.List;<br /><br />@Configuration<br />@ComponentScan(AppConfig.SERVICE_PACKAGE)<br />public class AppConfig {<br /><br />    public static final String BASE_PACKAGE = &ldquo;com.halyph&rdquo;;<br />    public static final String SERVICE_PACKAGE = BASE_PACKAGE + &ldquo;.service&rdquo;;<br />    private static final String RESOURCES_PACKAGE = BASE_PACKAGE + &ldquo;.rest&rdquo;;<br />    private static final String PROVIDER_PACKAGE = BASE_PACKAGE + &ldquo;.rest.provider&rdquo;;<br /><br />    @ApplicationPath(&ldquo;/&rdquo;)<br />    public class JaxRsApiApplication extends Application { }<br /><br />    @Bean(destroyMethod = &ldquo;shutdown&rdquo;)<br />    public SpringBus cxf() {<br />        return new SpringBus();<br />    }<br /><br />    @Bean<br />    @DependsOn(&ldquo;cxf&rdquo;)<br />    public Server jaxRsServer(ApplicationContext appContext) {<br />        JAXRSServerFactoryBean factory = RuntimeDelegate.getInstance().createEndpoint(jaxRsApiApplication(), JAXRSServerFactoryBean.class);<br />        factory.setServiceBeans(restServiceList(appContext));<br />        factory.setAddress(&ldquo;/&rdquo; + factory.getAddress());<br />        factory.setProviders(restProviderList(appContext, jsonProvider()));<br />        return factory.create();<br />    }<br /><br />    @Bean<br />    public JaxRsApiApplication jaxRsApiApplication() {<br />        return new JaxRsApiApplication();<br />    }<br /><br />    @Bean<br />    public JacksonJsonProvider jsonProvider() {<br />        return new JacksonJsonProvider();<br />    }<br /><br />    private List&lt;Object&gt; restServiceList(ApplicationContext appContext) {<br />        return RestServiceBeanScanner.scan(appContext, AppConfig.RESOURCES_PACKAGE);<br />    }<br /><br />    private List&lt;Object&gt; restProviderList(final ApplicationContext appContext,<br />                                          final JacksonJsonProvider jsonProvider) {<br />        final List&lt;Object&gt; providers = RestProviderBeanScanner.scan(appContext, PROVIDER_PACKAGE);<br />        providers.add(jsonProvider);<br />        return providers;<br />    }<br /><br />}<br /></pre><br />Now, we should test this. 1st run application:<br /><pre class="brush: bash;">mvn clean tomcat7:run</pre><br />Verify REST API calls: <br /><pre class="brush: bash;"># pretty printed JSON, see ObjectMapperProvider <br />$  curl <a href="http://localhost:8080/api/users">http://localhost:8080/api/users</a><br />[ {<br />  &ldquo;id&rdquo; : 1,<br />  &ldquo;name&rdquo; : &ldquo;foo&rdquo;<br />}, {<br />  &ldquo;id&rdquo; : 2,<br />  &ldquo;name&rdquo; : &ldquo;bar&rdquo;<br />}, {<br />  &ldquo;id&rdquo; : 3,<br />  &ldquo;name&rdquo; : &ldquo;baz&rdquo;<br />} ]<br /><br /># try to get non-existent user, expected to get NotFoundException JSON<br />$ curl <a href="http://localhost:8080/api/users/100">http://localhost:8080/api/users/100</a><br />{<br />  &ldquo;details&rdquo; : &ldquo;The requested resource hasn&rsquo;t been found&rdquo;,<br />  &ldquo;date&rdquo; : &ldquo;2013-10-19T13:39:034Z&rdquo;,<br />  &ldquo;msg&rdquo; : null<br />}<br /><br /># try to get GeneralException JSON<br />$  curl <a href="http://localhost:8080/api/exception">http://localhost:8080/api/exception</a><br />{<br />  &ldquo;date&rdquo; : &ldquo;2013-10-19T13:40:049Z&rdquo;,<br />  &ldquo;msg&rdquo; : &ldquo;generateException from ExceptionResource&rdquo;<br />}<br /></pre><br /><img border="0" src="http://4.bp.blogspot.com/-19PdlvA340g/UmJjzXEXT6I/AAAAAAAABtM/hu7TPhIwD0U/s1600/Logos-Github-icon.png" />&nbsp;&nbsp; You can find sources on <a href="https://github.com/halyph/jaxrs-tutorials/tree/part/02-spring-java-config-improved">GitHub</a><br /><br /><b>References</b><br /><ol><li><a href="http://www.luckyryan.com/2013/06/15/apache-cxf-exception-handler-for-jaxrs-rest/">Apache CXF exception handler for jaxrs (REST) </a></li><li><a href="http://cxf.apache.org/docs/jax-rs-basics.html#JAX-RSBasics-Exceptionhandling">Official documentation: Apache CXF Exception handling</a><b><br /></b></li></ol></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[REST With JAX-RS: Part 1 - Spring Java Config]]></title>
+    <link href="http://halyph.com/blog/2013/10/19/rest-with-jax-rs-part-1-spring-java/"/>
+    <updated>2013-10-19T14:42:00+03:00</updated>
+    <id>http://halyph.com/blog/2013/10/19/rest-with-jax-rs-part-1-spring-java</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://3.bp.blogspot.com/-KC2gFdfkvnE/Ul8JQLUCq9I/AAAAAAAABsw/s6vFi78Y4u0/s1600/rest_logo_small.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://3.bp.blogspot.com/-KC2gFdfkvnE/Ul8JQLUCq9I/AAAAAAAABsw/s6vFi78Y4u0/s1600/rest_logo_small.png" /></a>
+</div>
+
+
+<div class="separator" style="clear: both; text-align: left;">There are many Java REST frameworks. We can devide these frameworks on three groups:</div>
+
+
+<ol>
+    <li>Spring MVC. It can be used to implement RESTful services. This framework has been widly used, mature, etc. But, Spring, in general, does not support JAX-RS standard.</li>
+    <li>JAX-RS implementation. I know at least four frameworks:</li>
+    <ul>
+        <li><a href="http://cxf.apache.org/" title="Apache CXF">Apache CXF</a>&nbsp;</li>
+        <li><a class="external text" href="http://jersey.java.net/" rel="nofollow">Jersey</a>, the <a href="http://en.wikipedia.org/wiki/Reference_implementation" title="Reference implementation">reference implementation</a> from <a href="http://en.wikipedia.org/wiki/Oracle_Corporation" title="Oracle Corporation">Oracle</a>&nbsp;</li>
+        <li><a class="external text" href="http://www.jboss.org/resteasy" rel="nofollow">RESTeasy</a>, <a class="mw-redirect" href="http://en.wikipedia.org/wiki/JBoss" title="JBoss">JBoss</a>&#8217;s implementation</li>
+        <li><a href="http://restlet.org/" title="Restlet">Restlet</a></li>
+    </ul>
+    <li>Non-Standard. I.e. frameworks which do not support JAX-RS, or addition many other features. Please note, it assume that Spring MVC can be called &#8220;standard&#8221; ;-)</li>
+    <ul>
+        <li><a href="http://dropwizard.codahale.com/">Dropwizard</a> very cool frameworks. It supports not only JAX-RS.&nbsp;</li>
+        <li><a href="http://restx.io/">RESTX</a>, lightweight framework.</li>
+    </ul>
+</ol>
+
+
+<p>It&rsquo;s logically to ask yourself why don&rsquo;t use Spring MVC for REST services development. There is a&nbsp; very good article on InfoQ: <a href="http://www.infoq.com/articles/springmvc_jsx-rs">A Comparison of Spring MVC and JAX-RS</a>. I consider to use JAX-RS frameworks for REST API and Spring MVC for everything else . The most popular are <a href="http://cxf.apache.org/" title="Apache CXF">Apache CXF</a>&nbsp; and <a class="external text" href="http://jersey.java.net/" rel="nofollow">Jersey</a>. Also, <a href="http://cxf.apache.org/" title="Apache CXF">Apache CXF</a> has SOAP services support. Actually, you can easily switch between JAX-RS frameworks till you use standard approaches.
+<br />
+<br />Let&rsquo;s create simple Spring JAX-RS application with Spring Java Configs (see sample application based on Spring context xml [3])
+<br />
+<br />Create pom.xml file
+<br /></p>
+
+<pre class="brush: xml;">
+&lt;project xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xsi:schemalocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+    &lt;modelversion&gt;4.0.0&lt;/modelversion&gt;
+    &lt;groupid&gt;jaxrs-tutorials&lt;/groupid&gt;
+    &lt;artifactid&gt;jaxrs-tutorials&lt;/artifactid&gt;
+    &lt;packaging&gt;war&lt;/packaging&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;jaxrs-tutorials Maven Webapp&lt;/name&gt;
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+ 
+    &lt;properties&gt;
+        &lt;project .build.sourceencoding=&quot;&quot;&gt;UTF-8&lt;/project&gt;
+        &lt;java-version&gt;1.7&lt;/java-version&gt;
+ 
+        &lt;cxf .version=&quot;&quot;&gt;2.7.6&lt;/cxf&gt;
+        &lt;org .springframework-version=&quot;&quot;&gt;3.2.3.RELEASE&lt;/org&gt;
+        &lt;org .slf4j-version=&quot;&quot;&gt;1.7.5&lt;/org&gt;
+        &lt;ch .qos.logback-version=&quot;&quot;&gt;1.0.13&lt;/ch&gt;
+        &lt;servlet-version&gt;3.0.1&lt;/servlet-version&gt;
+        &lt;jackson-version&gt;2.0.2&lt;/jackson-version&gt;
+ 
+        &lt;maven-compiler-plugin-version&gt;3.0&lt;/maven-compiler-plugin-version&gt;
+        &lt;tomcat7-maven-plugin-version&gt;2.0&lt;/tomcat7-maven-plugin-version&gt;
+        &lt;maven-war-plugin-version&gt;2.2&lt;/maven-war-plugin-version&gt;
+        &lt;maven-resources-plugin-version&gt;2.6&lt;/maven-resources-plugin-version&gt;
+    &lt;/properties&gt;
+ 
+    &lt;dependencies&gt;
+ 
+        &lt;dependency&gt;
+            &lt;groupid&gt;org.apache.cxf&lt;/groupid&gt;
+            &lt;artifactid&gt;cxf-rt-frontend-jaxrs&lt;/artifactid&gt;
+            &lt;version&gt;${cxf.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+ 
+        &lt;!-- Spring --&gt;
+        &lt;dependency&gt;
+            &lt;groupid&gt;org.springframework&lt;/groupid&gt;
+            &lt;artifactid&gt;spring-context&lt;/artifactid&gt;
+            &lt;version&gt;${org.springframework-version}&lt;/version&gt;
+            &lt;exclusions&gt;
+                &lt;!-- Exclude Commons Logging in favor of SLF4j --&gt;
+                &lt;exclusion&gt;
+                    &lt;groupid&gt;commons-logging&lt;/groupid&gt;
+                    &lt;artifactid&gt;commons-logging&lt;/artifactid&gt;
+                &lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupid&gt;org.springframework&lt;/groupid&gt;
+            &lt;artifactid&gt;spring-webmvc&lt;/artifactid&gt;
+            &lt;version&gt;${org.springframework-version}&lt;/version&gt;
+        &lt;/dependency&gt;
+ 
+        &lt;!-- Logging --&gt;
+        &lt;dependency&gt;
+            &lt;groupid&gt;org.slf4j&lt;/groupid&gt;
+            &lt;artifactid&gt;slf4j-api&lt;/artifactid&gt;
+            &lt;version&gt;${org.slf4j-version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupid&gt;org.slf4j&lt;/groupid&gt;
+            &lt;artifactid&gt;jcl-over-slf4j&lt;/artifactid&gt;
+            &lt;version&gt;${org.slf4j-version}&lt;/version&gt;
+            &lt;scope&gt;runtime&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupid&gt;ch.qos.logback&lt;/groupid&gt;
+            &lt;artifactid&gt;logback-classic&lt;/artifactid&gt;
+            &lt;version&gt;${ch.qos.logback-version}&lt;/version&gt;
+        &lt;/dependency&gt;
+ 
+        &lt;!-- Servlet --&gt;
+        &lt;dependency&gt;
+            &lt;groupid&gt;javax.servlet&lt;/groupid&gt;
+            &lt;artifactid&gt;javax.servlet-api&lt;/artifactid&gt;
+            &lt;version&gt;${servlet-version}&lt;/version&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+ 
+        &lt;!-- JSON Provider --&gt;
+        &lt;dependency&gt;
+            &lt;groupid&gt;com.fasterxml.jackson.jaxrs&lt;/groupid&gt;
+            &lt;artifactid&gt;jackson-jaxrs-json-provider&lt;/artifactid&gt;
+            &lt;version&gt;${jackson-version}&lt;/version&gt;
+        &lt;/dependency&gt;
+ 
+    &lt;/dependencies&gt;
+ 
+    &lt;build&gt;
+ 
+        &lt;finalname&gt;jaxrs-tutorials&lt;/finalname&gt;
+ 
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupid&gt;org.apache.tomcat.maven&lt;/groupid&gt;
+                &lt;artifactid&gt;tomcat7-maven-plugin&lt;/artifactid&gt;
+                &lt;version&gt;2.0&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;path&gt;/&lt;/path&gt;
+                    &lt;port&gt;8080&lt;/port&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+                &lt;groupid&gt;org.apache.maven.plugins&lt;/groupid&gt;
+                &lt;artifactid&gt;maven-compiler-plugin&lt;/artifactid&gt;
+                &lt;version&gt;${maven-compiler-plugin-version}&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;source&gt;${java-version}
+                    &lt;target&gt;${java-version}&lt;/target&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</pre>
+
+
+<p>Create some sample entity
+<br /><pre class="brush: java;">package com.halyph.entity;<br /><br />public class User {<br /><br />    private Integer id;<br />    private String name;<br /><br />    public User() {<br />    }<br /><br />    public User(Integer id, String name) {<br />        this.id = id;<br />        this.name = name;<br />    }<br /><br />    public Integer getId() {<br />        return id;<br />    }<br /><br />    public void setId(Integer id) {<br />        this.id = id;<br />    }<br /><br />    public void setName(String name) {<br />        this.name = name;<br />    }<br /><br />    public String getName() {<br />        return name;<br />    }<br /><br />    @Override<br />    public String toString() {<br />        return String.format(&ldquo;{id=%s,name=%s}&rdquo;, id, name);<br />    }<br />}<br /></pre>We should implement Service(s) which manages this entity:
+<br /><pre class="brush: java;">package com.halyph.service;<br /><br />import com.halyph.entity.User;<br /><br />import javax.ws.rs.core.Response;<br />import java.util.Collection;<br /><br />public interface UserService {<br /><br />    Collection&lt;User&gt; getUsers();<br /><br />    User getUser(Integer id);<br /><br />    Response add(User user);<br /><br />}<br /></pre><pre class="brush: java;">package com.halyph.service;<br /><br />import com.halyph.entity.User;<br />import org.springframework.stereotype.Service;<br /><br />import javax.ws.rs.core.Response;<br />import java.util.Collection;<br />import java.util.HashMap;<br />import java.util.Map;<br /><br />@Service(&ldquo;userService&rdquo;)<br />public class UserServiceImpl implements UserService {<br /><br />     private static Map&lt;Integer, User&gt; users = new HashMap&lt;Integer, User&gt;();<br /><br />    static {<br />        users.put(1, new User(1, &ldquo;foo&rdquo;));<br />        users.put(2, new User(2, &ldquo;bar&rdquo;));<br />        users.put(3, new User(3, &ldquo;baz&rdquo;));<br />    }<br /><br />    public UserServiceImpl() {<br />    }<br /><br />    @Override<br />    public Collection&lt;User&gt; getUsers() {<br />        return users.values();<br />    }<br /><br />    @Override<br />    public User getUser(Integer id) {<br />        return users.get(id);<br />    }<br /><br />    @Override<br />    public Response add(User user) {<br />        user.setId(users.size()+1);<br />        users.put(user.getId(), user);<br /><br />        //do more stuff to add user to the system..<br />        return Response.status(Response.Status.OK).build();<br />    }<br /><br />}<br /></pre>It&rsquo;s time to introduce REST services. with the next endpoints <b>/api/users</b> and <b>/api/exception</b>. So, we&nbsp; have bunch of REST URIs:
+<br /></p>
+
+<ul>
+    <li><b>GET /api/users</b> - get all users</li>
+    <li><b>GET /api/users/{id}</b> - get user with id</li>
+    <li><b>POST /api/users</b> - accept &#8220;user&#8221; json and create the specified user on back-end</li>
+    <li><b>GET /api/exception</b> - throw exception</li>
+</ul>
+
+
+<pre class="brush: java;"> <br />package com.halyph.rest;<br /><br />import com.halyph.entity.User;<br />import com.halyph.service.UserService;<br />import org.slf4j.Logger;<br />import org.slf4j.LoggerFactory;<br />import org.springframework.beans.factory.annotation.Autowired;<br /><br />import javax.ws.rs.Consumes;<br />import javax.ws.rs.GET;<br />import javax.ws.rs.POST;<br />import javax.ws.rs.Path;<br />import javax.ws.rs.PathParam;<br />import javax.ws.rs.Produces;<br />import javax.ws.rs.core.MediaType;<br />import javax.ws.rs.core.Response;<br />import java.util.Collection;<br /><br />@Path("/users")<br />@Produces({MediaType.APPLICATION_JSON})<br />@Consumes({MediaType.APPLICATION_JSON})<br />public class UserResource {<br /><br />    private static Logger log = LoggerFactory.getLogger(UserResource.class);<br /><br />    @Autowired<br />    UserService service;<br /><br />    public UserResource() {<br />    }<br /><br />    @GET<br />    public Collection&lt;User&gt; getUsers() {<br />        return service.getUsers();<br />    }<br /><br />    @GET<br />    @Path("/{id}")<br />    public User getUser(@PathParam("id") Integer id) {<br />        return service.getUser(id);<br />    }<br /><br />    @POST<br />    public Response add(User user) {<br />        log.info("Adding user {}", user.getName());<br />        service.add(user);<br />        return Response.status(Response.Status.OK).build();<br />    }<br />}<br /></user></pre>
+
+
+<p>Also we added <b>/api/exception</b> REST url to demonstrate how CXF deals with exceptions:
+<br /><pre class="brush: java;">package com.halyph.rest;<br /><br />import javax.ws.rs.GET;<br />import javax.ws.rs.Path;<br />import javax.ws.rs.Produces;<br />import javax.ws.rs.core.MediaType;<br /><br />@Path(&ldquo;/exception&rdquo;)<br />public class ExceptionResource {<br /><br />    public ExceptionResource() { }<br /><br />    @GET<br />    @Produces(MediaType.TEXT_PLAIN)<br />    public String generateException() throws Exception {<br />        throw new Exception(&ldquo;generateException from ExceptionResource&rdquo;);<br />    }<br />}<br /><br /></pre>So, what&rsquo;s left? In general we are creating some web.xml where we configure Apache CXF, etc. But, we will use Spring feature and implement all our configuration in Spring Java Configs.
+<br />Our web.xml willl be empty, some App Servers still require it:
+<br /><pre class="brush: xml;"><web-app version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemalocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"><br /></web-app></pre>Next, we should create some class which does the same work which had been done by web.xml:
+<br /><pre class="brush: java;">package com.halyph.config;<br /><br />import org.apache.cxf.transport.servlet.CXFServlet;<br />import org.springframework.web.WebApplicationInitializer;<br />import org.springframework.web.context.ContextLoaderListener;<br />import org.springframework.web.context.WebApplicationContext;<br />import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;<br /><br />import javax.servlet.ServletContext;<br />import javax.servlet.ServletException;<br />import javax.servlet.ServletRegistration;<br />import java.util.Set;<br /><br />public class WebAppInitializer implements WebApplicationInitializer {<br /><br />    @Override<br />    public void onStartup(ServletContext servletContext) throws ServletException {<br />        servletContext.addListener(new ContextLoaderListener(createWebAppContext()));<br />        addApacheCxfServlet(servletContext);<br />    }<br /><br />    private void addApacheCxfServlet(ServletContext servletContext) {<br />        CXFServlet cxfServlet = new CXFServlet();<br /><br />        ServletRegistration.Dynamic appServlet = servletContext.addServlet(&ldquo;CXFServlet&rdquo;, cxfServlet);<br />        appServlet.setLoadOnStartup(1);<br /><br />        Set&lt;String&gt; mappingConflicts = appServlet.addMapping(&ldquo;/api/*&rdquo;);<br />    }<br /><br />    private WebApplicationContext createWebAppContext() {<br />        AnnotationConfigWebApplicationContext appContext = new AnnotationConfigWebApplicationContext();<br />        appContext.register(AppConfig.class);<br />        return appContext;<br />    }<br /><br />}<br /></pre>So, &ldquo;web.xml&rdquo; is configured, now we should configure Spring context:
+<br /><pre class="brush: java;">package com.halyph.config;<br /><br />import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;<br />import com.halyph.rest.UserResource;<br />import org.apache.cxf.bus.spring.SpringBus;<br />import org.apache.cxf.endpoint.Server;<br />import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;<br />import com.halyph.rest.ExceptionResource;<br />import com.halyph.service.UserService;<br />import com.halyph.service.UserServiceImpl;<br />import org.springframework.context.ApplicationContext;<br />import org.springframework.context.annotation.Bean;<br />import org.springframework.context.annotation.Configuration;<br />import org.springframework.context.annotation.DependsOn;<br /><br />import javax.ws.rs.ApplicationPath;<br />import javax.ws.rs.core.Application;<br />import javax.ws.rs.ext.RuntimeDelegate;<br />import java.util.Arrays;<br /><br />@Configuration<br />public class AppConfig {<br /><br />    @ApplicationPath(&ldquo;/&rdquo;)<br />    public class JaxRsApiApplication extends Application { }<br /><br />    @Bean(destroyMethod = &ldquo;shutdown&rdquo;)<br />    public SpringBus cxf() {<br />        return new SpringBus();<br />    }<br /><br />    @Bean<br />    @DependsOn(&ldquo;cxf&rdquo;)<br />    public Server jaxRsServer(ApplicationContext appContext) {<br />        JAXRSServerFactoryBean factory = RuntimeDelegate.getInstance().createEndpoint(jaxRsApiApplication(), JAXRSServerFactoryBean.class);<br />        factory.setServiceBeans(Arrays.&lt;Object&gt;asList(userResource(), exceptionResource()));<br />        factory.setAddress(&ldquo;/&rdquo; + factory.getAddress());<br />        factory.setProvider(jsonProvider());<br />        return factory.create();<br />    }<br /><br />    @Bean<br />    public JaxRsApiApplication jaxRsApiApplication() {<br />        return new JaxRsApiApplication();<br />    }<br /><br />    @Bean<br />    public JacksonJsonProvider jsonProvider() {<br />        return new JacksonJsonProvider();<br />    }<br /><br />    @Bean<br />    public UserService userService() {<br />        return new UserServiceImpl();<br />    }<br /><br />    @Bean<br />    public UserResource userResource() {<br />        return new UserResource();<br />    }<br /><br />    @Bean<br />    public ExceptionResource exceptionResource() {<br />        return new ExceptionResource();<br />    }<br />}<br /></pre>Please note, how service and rest beans have been registered, also we added jackson provider which serialize bean in JSON format.
+<br />
+<br />We almost done, now we should verify out work. Run application:
+<br /><pre class="brush: bash;">mvn clean tomcat7:run</pre>
+<br />Test REST API:
+<br /><pre class="brush: bash;">curl <a href="http://localhost:8080/api/users">http://localhost:8080/api/users</a><br />curl <a href="http://localhost:8080/api/users/1">http://localhost:8080/api/users/1</a><br />curl -v <a href="http://localhost:8080/api/exception">http://localhost:8080/api/exception</a><br />curl <a href="http://localhost:8080/api/users">http://localhost:8080/api/users</a> -X POST -H &ldquo;Content-Type: application/json&rdquo; -d &lsquo;{&ldquo;name&rdquo;:&ldquo;John&rdquo;}&rsquo;<br />curl <a href="http://localhost:8080/api/users">http://localhost:8080/api/users</a><br /></pre></p>
+
+<div class="separator" style="clear: both; text-align: center;">
+    <br />
+</div>
+
+
+<div class="separator" style="clear: both; text-align: left;">After the last call you should get four users from back-end.</div>
+
+
+<pre class="brush: bash;">$ curl http://localhost:8080/api/users<br />[{"id":1,"name":"foo"},{"id":2,"name":"bar"},{"id":3,"name":"baz"}]<br /><br />$ curl http://localhost:8080/api/users -X POST -H "Content-Type: application/json" -d '{"name":"John"}'<br /><br />$  curl http://localhost:8080/api/users<br />[{"id":1,"name":"foo"},{"id":2,"name":"bar"},{"id":3,"name":"baz"},{"id":4,"name":"John"}]<br /></pre>
+
+
+<div class="separator" style="clear: both; text-align: left;">
+    <br />
+</div>
+
+
+<p><img border="0" src="http://4.bp.blogspot.com/-19PdlvA340g/UmJjzXEXT6I/AAAAAAAABtM/hu7TPhIwD0U/s1600/Logos-Github-icon.png" />&nbsp;&nbsp; You can find sources on <a href="http://github.com/halyph/jaxrs-tutorials/tree/part/01-spring-java-config">GitHub</a>.
+<br />
+<br /><b>References</b>
+<br /></p>
+
+<ol>
+    <li><a href="http://www.infoq.com/articles/springmvc_jsx-rs">InfoQ: A Comparison of Spring MVC and JAX-RS</a></li>
+    <li><a href="http://deepintojee.wordpress.com/2010/12/07/rest-client-cxf-server-jax-rs-or-spring-mvc/">REST client, CXF server : JAX-RS or SPRING-MVC ? </a></li>
+    <li><a href="http://www.buildfortheweb.com/2013/03/04/restful-web-services-with-jax-rs-apache-cxf-and-spring-security/">REST web services with JAX-RS, Apache CXF and Spring Security</a></li>
+    <li><a href="http://cxf.apache.org/docs/jaxrs-services-configuration.html#JAXRSServicesConfiguration-ConfiguringJAXRSservicesincontainerwithSpringconfigurationfile.">Official Apache CXF Doc: Configuring JAX-RS services in container with Spring configuration file</a>. </li>
+    <li><a href="http://www.jroller.com/gmazza/entry/jersey_samples_on_cxf">Converting Jersey REST Examples to Apache CXF </a></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

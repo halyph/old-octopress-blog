@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Plugin | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/plugin/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Jenkins Enhancements Without Plugins]]></title>
+    <link href="http://halyph.com/blog/2012/12/31/jenkins-enhancements-without-plugins/"/>
+    <updated>2012-12-31T01:50:00+02:00</updated>
+    <id>http://halyph.com/blog/2012/12/31/jenkins-enhancements-without-plugins</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://3.bp.blogspot.com/-G0y3vRvF8Gk/UODT7t-pUCI/AAAAAAAABF4/JxoydHYGUvQ/s1600/logo.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="200" src="http://3.bp.blogspot.com/-G0y3vRvF8Gk/UODT7t-pUCI/AAAAAAAABF4/JxoydHYGUvQ/s200/logo.png" width="144" /></a>
+</div>
+
+
+<p><a href="http://jenkins-ci.org/">Jenkins</a> is a popular open source continuous integration server. I use it heavily. Jenkins is super extensible CI server with huge plugins repository.
+<br />But I must admit that there are a lot of cases when all these Jenkins plugin&rsquo;s &ldquo;zoo&rdquo; doesn&rsquo;t help. What does it mean?:
+<br /></p>
+
+<ul>
+    <li>we need a tons of plugin to solve some non-trivial problem,</li>
+    <li>too many plugins dependencies which must be properly managed</li>
+    <li>some available plugins partially provide required functionality</li>
+    <li>some plugins provide required functionality but contain bugs</li>
+    <li>or it might be impossible to find necessary plugin, and task have to be done ASAP</li>
+</ul>
+
+
+<p>Based on these cases mentioned above we have at least two solutions:
+<br /></p>
+
+<ol>
+    <li>Implement own plugin which will provide all required functionality. It will take some time and slowdown the overall progress for this particular business task</li>
+    <li>Use some Jenkins extra facilities which gives us a chance for Jenkins automation without plugin writing</li>
+</ol>
+
+
+<p>I&rsquo;m a real fun od 2d solution (at least as a prototyping phase or quick-and-dirty solution right-now-right-away).
+<br />
+<br />So, what&rsquo;s the magic? Jenkins has two nice plugins (of cause there are much more similar plugin, but these two are the best for quick start) which give us a possibility to write Groovy scripts for <i><b>build</b></i> and <i><b>post-build</b></i> phases:
+<br /></p>
+
+<ul>
+    <li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Groovy+plugin">Groovy plugin</a> for Build phase</li>
+    <li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Groovy+Postbuild+Plugin">Groovy Postbuild Plugin</a> for Post-build phase</li>
+</ul>
+
+
+<p><strong>Pros</strong>:
+<br /></p>
+
+<ul>
+    <li>Groovy scripts have access to whole Jenkins infrastructure (Jenkins packages) and can invoke functionality of third-party plugins installed in this Jenkins instance</li>
+    <li>It&#8217;s very easy to prototype your ideas and validate automation approaches</li>
+    <li>It gives us very quick business results</li>
+    <li>Groovy scripts can automate really amazing and non-trivial tasks</li>
+</ul>
+
+
+<p><strong>Cons:</strong>
+<br /></p>
+
+<ul>
+    <li>at the end these Groovy scripts are not easy for automated testing</li>
+    <li>version managements for these scripts involve additional work (implement simple import/export tool for job configuration)</li>
+    <li>these Groovy scripts can have dependency on some third-party plugins and these dependency must me somehow managed as well</li>
+    <li>testing and debugging are really painful activities, because it involve too many interactions with Jenkins UI, etc. (yes, it can be somehow improved via extending both Groovy plugins, but it&#8217;s extra work)</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Maven Build Number Plugin - Sample Usage]]></title>
+    <link href="http://halyph.com/blog/2012/06/27/maven-build-number-plugin-sample-usage/"/>
+    <updated>2012-06-27T23:29:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/06/27/maven-build-number-plugin-sample-usage</id>
+    <content type="html"><![CDATA[<p><a href="http://mojo.codehaus.org/buildnumber-maven-plugin" target="_blank">buildnumber-maven-plugin</a>.
+<br />
+<br />This post is based on:
+<br /></p>
+
+<ul>
+    <li><a href="http://mojo.codehaus.org/buildnumber-maven-plugin/usage.html">http://mojo.codehaus.org/buildnumber-maven-plugin/usage.html</a></li>
+    <li><a href="http://www.site.lalitbhatt.com/maven-build-number-plugin">http://www.site.lalitbhatt.com/maven-build-number-plugin</a></li>
+    <li><a href="http://blog.peterlynch.ca/2009/11/buildnumber-maven-plugin-helpful.html">http://blog.peterlynch.ca/2009/11/buildnumber-maven-plugin-helpful.html</a></li>
+    <li><a href="http://apollo.ucalgary.ca/tlcprojectswiki/index.php/Public/Project_Versioning_-_Best_Practices#Build_Versioning">http://apollo.ucalgary.ca/tlcprojectswiki/index.php/Public/Project_Versioning_-_Best_Practices#Build_Versioning</a> </li>
+</ul>
+
+
+<p><br />We have some project and need to include into jar manifest file sequential build number which isn&rsquo;t based on VCS (SVN, Git, Mercurial, etc.) revision number. Let&rsquo;s create appropriate <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">pom.xml</span> file and implement small demo to verify the result.
+<br />
+<br /><span style="font-size: large;">Generate maven project</span>
+<br /><pre class="brush: bash;">$ mvn archetype:generate -DgroupId=org.halyph -DartifactId=buildNoTest\<br />-DarchetypeArtifactId=maven-archetype-quickstart \<br />-DinteractiveMode=false<br /></pre>
+<br /><span style="font-size: large;">Create the pom.xml</span>
+<br /></p>
+
+<pre class="brush: xml;">&lt;project xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xsi:schemalocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+ &lt;modelversion&gt;4.0.0&lt;/modelversion&gt;
+ &lt;groupid&gt;org.halyph&lt;/groupid&gt;
+ &lt;artifactid&gt;buildNoTest&lt;/artifactid&gt;
+ &lt;packaging&gt;jar&lt;/packaging&gt;
+ &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+ &lt;name&gt;buildNoTest&lt;/name&gt;
+ &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+ 
+ &lt;dependencies&gt;
+  &lt;dependency&gt;
+   &lt;groupid&gt;junit&lt;/groupid&gt;
+   &lt;artifactid&gt;junit&lt;/artifactid&gt;
+   &lt;version&gt;3.8.1&lt;/version&gt;
+   &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+ &lt;/dependencies&gt;
+ 
+ &lt;properties&gt;
+  &lt;project .build.sourceencoding=&quot;&quot;&gt;UTF-8&lt;/project&gt;
+ &lt;/properties&gt;
+ 
+ &lt;!-- 
+ If you have access to scm then you can place actual url's. 
+ Otherwise with &lt;revisionOnScmFailure /&gt; you can give some fake URLs as follows. 
+ --&gt;
+ &lt;scm&gt;
+  &lt;connection&gt;scm:svn:http://none&lt;/connection&gt;
+  &lt;developerconnection&gt;scm:svn:https://none&lt;/developerconnection&gt;
+  &lt;url&gt;scm:svn:https://none&lt;/url&gt;
+ &lt;/scm&gt;
+ 
+ &lt;build&gt;
+  &lt;resources&gt;
+   &lt;resource&gt;
+    &lt;directory&gt;src/main/resources&lt;/directory&gt;
+   &lt;/resource&gt;
+   &lt;resource&gt;
+    &lt;directory&gt;src/main/filtered-resources&lt;/directory&gt;
+    &lt;filtering&gt;true&lt;/filtering&gt;
+   &lt;/resource&gt;
+  &lt;/resources&gt;
+  &lt;plugins&gt;
+   &lt;plugin&gt;
+    &lt;groupid&gt;org.codehaus.mojo&lt;/groupid&gt;
+    &lt;artifactid&gt;buildnumber-maven-plugin&lt;/artifactid&gt;
+    &lt;version&gt;1.1&lt;/version&gt;
+    &lt;executions&gt;
+     &lt;execution&gt;
+      &lt;phase&gt;generate-resources&lt;/phase&gt;
+      &lt;goals&gt;
+       &lt;goal&gt;create&lt;/goal&gt;
+      &lt;/goals&gt;
+     &lt;/execution&gt;
+    &lt;/executions&gt;
+    &lt;configuration&gt;
+     &lt;!-- 
+      doCheck and doUpdate actually talk to repository if it's true,
+      Check would check that there are no local changes. 
+      Update would update it 
+     --&gt;
+     &lt;docheck&gt;false&lt;/docheck&gt;
+     &lt;doupdate&gt;false&lt;/doupdate&gt;
+     &lt;!-- 
+      This ensures that even if we are not connected to scm than also
+      take the version from local .svn file 
+     --&gt;
+     &lt;revisiononscmfailure&gt;
+      
+     &lt;!--
+      Generate sequence build number based on:
+      build number and timestamp      
+     --&gt;
+     &lt;format&gt;Build: #{0} ({1,date})&lt;/format&gt;
+     &lt;items&gt;
+      &lt;item&gt;buildNumber\d*&lt;/item&gt;
+      &lt;item&gt;timestamp&lt;/item&gt;
+     &lt;/items&gt;
+    &lt;/revisiononscmfailure&gt;&lt;/configuration&gt;
+   &lt;/plugin&gt;
+   &lt;plugin&gt;
+    &lt;groupid&gt;org.apache.maven.plugins&lt;/groupid&gt;
+    &lt;artifactid&gt;maven-jar-plugin&lt;/artifactid&gt;
+    &lt;version&gt;2.1&lt;/version&gt;
+    &lt;configuration&gt;
+     &lt;archive&gt;
+      &lt;!-- will put the entries into META-INF/MANIFEST.MF file --&gt;
+      &lt;manifestentries&gt;
+       &lt;implementation-version&gt;${project.version}&lt;/implementation-version&gt;
+       &lt;implementation-build&gt;${buildNumber}&lt;/implementation-build&gt;
+      &lt;/manifestentries&gt;
+     &lt;/archive&gt;
+    &lt;/configuration&gt;
+   &lt;/plugin&gt;
+  &lt;/plugins&gt;
+ &lt;/build&gt;
+&lt;/project&gt;
+</pre>
+
+
+<p><br /><span style="font-size: large;">Create demo application to verify the results</span>
+<br /><pre class="brush: java;">package org.halyph;<br /><br />import java.io.IOException;<br />import java.util.ResourceBundle;<br />import java.util.jar.Attributes;<br />import java.util.jar.Manifest;<br /><br />public class App<br />{<br />    public static void main( String[] args ) throws IOException<br />    {<br />        System.out.println(&ldquo;Verify Resource bundle&rdquo; );<br />  <br /> // Check filtered resources based on generated build number<br />        ResourceBundle bundle = ResourceBundle.getBundle( &ldquo;build&rdquo; );<br />        String msg = bundle.getString( &ldquo;build.message&rdquo; );<br />        System.out.println(msg);<br /><br />        System.out.println(&ldquo;\nVerify Generated MANIFEST.MF Properties&rdquo; );<br /><br /> // Check Manifest file based on generated build number<br />        Manifest mf = new Manifest();<br />        mf.read(Thread.currentThread().getContextClassLoader().getResourceAsStream(&ldquo;META-INF/MANIFEST.MF&rdquo;));<br /><br />        Attributes atts = mf.getMainAttributes();<br /><br />        System.out.println(&ldquo;Implementation-Versio: &rdquo; + atts.getValue(&ldquo;Implementation-Version&rdquo;));<br />        System.out.println(&ldquo;Implementation-Build: &rdquo; + atts.getValue(&ldquo;Implementation-Build&rdquo;));<br />    }<br />}<br /></pre>
+<br /><span style="font-size: large;">Build </span><span style="font-size: large;">application several time </span><span style="font-size: large;">and Run </span>
+<br /><pre class="brush: bash;">$ mvn install </pre><pre class="brush: bash;">$ mvn install&nbsp;</pre><pre class="brush: bash;">$ mvn install &nbsp;</pre><pre class="brush: bash;">$ java -cp target\buildNoTest-1.0-SNAPSHOT.jar org.halyph.App<br />Verify Resource bundle<br />Build: #3 (Jun 27, 2012)<br /><br />Verify Generated MANIFEST.MF Properties<br />Implementation-Versio: 1.0-SNAPSHOT<br />Implementation-Build: Build: #3 (Jun 27, 2012)<br /></pre>
+<br /><span style="font-size: large;">Summary</span>
+<br /></p>
+
+<ol>
+    <li>We should inform <a href="http://mojo.codehaus.org/buildnumber-maven-plugin" target="_blank">buildnumber-maven-plugin</a> that we won&#8217;t use version control revision as build number via adding fake <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&lt;scm&gt;</span> section into <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">pom.xml</span> and <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&lt;revisionOnScmFailure /&gt;</span> into <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">buildnumber-maven-plugin</span> <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&lt;configuration&gt;</span></li>
+    <li>Implemented custom build number format, see <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">buildnumber-maven-plugin &lt;configuration&gt;/&lt;format&gt; </span>and <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&lt;configuration&gt;/&lt;items&gt;</span>.</li>
+    <li>Added build number into jar manifest, see <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">maven-jar-plugin</span> <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">pom.xml</span> section </li>
+    <li>Tested if generated build number can be properly added in filtered resources</li>
+    <ul>
+        <li>created <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">src\main\filtered-resources\build.properties</span> file</li><pre class="brush: bash;">build.message=${buildNumber}<br /></pre>
+        <li>added resource filtering, see section <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&lt;resource&gt;</span> flag <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&lt;filtering&gt;true&lt;/filtering&gt;</span></li>
+    </ul>
+    <li>Demo application verifying the filtered resources and build number in jar manifest file</li>
+</ol>
+
+
+<p>&nbsp;You can git clone this project <a href="https://github.com/halyph/blog-sandbox/tree/master/Maven/blogpost_062712">github</a></p>
+]]></content>
+  </entry>
+  
+</feed>

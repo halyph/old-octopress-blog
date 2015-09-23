@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Itext | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/itext/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[iText Useful Resources]]></title>
+    <link href="http://halyph.com/blog/2013/05/13/itext-useful-resources/"/>
+    <updated>2013-05-13T20:42:00+03:00</updated>
+    <id>http://halyph.com/blog/2013/05/13/itext-useful-resources</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/-OcQd9aLAnoc/T2HQNCIz5hI/AAAAAAAAAgk/wynszvwrfzw/s1600/1331810342_Java.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://3.bp.blogspot.com/-OcQd9aLAnoc/T2HQNCIz5hI/AAAAAAAAAgk/wynszvwrfzw/s1600/1331810342_Java.png" /></a></div>
+
+
+<p>Recently I&rsquo;ve begun using iText PDF generation library due to my work needs. I must admit that this library is quite powerful, but for really quick start I needed several resources with nice working samples. Here is the list:<br /><ol><li><a href="http://www.amazon.com/iText-Action-Bruno-Lowagie/dp/1935182617" target="_blank">iText in Action, Second Edition, by Bruno Lowagie</a> book is a must have if you really need to dive into library details. Also, it&rsquo;s very important to work in parallel with book samples <a href="https://itext.svn.sourceforge.net/svnroot/itext/book"><a href="https://itext.svn.sourceforge.net/svnroot/itext/book">https://itext.svn.sourceforge.net/svnroot/itext/book</a></a>. I&rsquo;ve reviewed the <a href="http://www.manning.com/lowagie/" target="_blank">1st edition</a> of this book and must admit that the 2d is much better. I.e. don&rsquo;t waste your time and stick to 2d edition only.</li><li>&nbsp;iText and iTextSharp are very similar libraries. I.e. you can use iTextSharp code snippets as samples for iText. For this purpose I&rsquo;ve selected the next two blogs:</li><ul><li><a href="http://kuujinbo.info/code_index.aspx?tab=2">kuujinbo.info</a> - Code snippets and articles.</li><li><a href="http://www.mikesdotnetting.com/Category/20">Mikesdotnetting</a> - Code snippets and articles.</li></ul><li><a href="http://www.roseindia.net/java/itext/index.shtml">RoseIndia iText Examples</a> - nice and basic iText samples.</li><li>And the last item is <a href="http://itext-general.2136553.n4.nabble.com/" target="_blank">iText forum</a> </li></ol>In general item 1 can solve almost all your needs.&nbsp; <br /><ol><ul></ul></ol></p>
+]]></content>
+  </entry>
+  
+</feed>

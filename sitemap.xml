@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://halyph.com/blog/2015/07/20/grails-best-practices-collection/</loc>
+    <lastmod>2015-07-20T23:52:19+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://halyph.com/blog/2015/06/29/devoxxpl/</loc>
     <lastmod>2015-06-29T13:00:51+03:00</lastmod>
     <priority>0.8</priority>
@@ -152,24 +158,660 @@
     <priority>0.8</priority>
   </url>
   
+  <url>
+    <loc>http://halyph.com/blog/2013/10/21/rest-with-jax-rs-part-3-embedded-jetty/</loc>
+    <lastmod>2013-10-21T08:00:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/10/20/rest-with-jax-rs-part-2-spring-java/</loc>
+    <lastmod>2013-10-20T10:00:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/10/19/rest-with-jax-rs-part-1-spring-java/</loc>
+    <lastmod>2013-10-19T14:42:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/10/03/java-object-to-object-mapper/</loc>
+    <lastmod>2013-10-03T01:35:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/08/27/how-to-remove-svn-folders-recursively/</loc>
+    <lastmod>2013-08-27T16:28:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/08/21/how-to-install-git-1834-on-centos-64/</loc>
+    <lastmod>2013-08-21T15:45:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/08/17/git-jenkins-gerrit-code-review-and-pre/</loc>
+    <lastmod>2013-08-17T13:16:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/08/06/typical-gitignore-for-java-projects/</loc>
+    <lastmod>2013-08-06T00:22:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/07/04/the-modern-java-web-developer/</loc>
+    <lastmod>2013-07-04T00:41:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/07/02/concurrency-vs-parallelism-definitions/</loc>
+    <lastmod>2013-07-02T10:00:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/07/01/jai-and-image-processing-in-java/</loc>
+    <lastmod>2013-07-01T12:45:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/06/25/how-to-install-latest-git-on-os-x/</loc>
+    <lastmod>2013-06-25T01:08:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/06/14/java-barcode-generation-and-scanning/</loc>
+    <lastmod>2013-06-14T22:33:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/05/27/jeeconf-kiev-2013-report/</loc>
+    <lastmod>2013-05-27T13:56:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/05/23/graphics-unit-conversion/</loc>
+    <lastmod>2013-05-23T14:35:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/05/20/equals-hashcode-and-tostring-in-java/</loc>
+    <lastmod>2013-05-20T23:19:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/05/18/short-article-review-about-jsp/</loc>
+    <lastmod>2013-05-18T11:11:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/05/13/itext-useful-resources/</loc>
+    <lastmod>2013-05-13T20:42:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/04/27/the-long-way-to-evernote/</loc>
+    <lastmod>2013-04-27T16:39:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/04/23/java-pdf-libraries/</loc>
+    <lastmod>2013-04-23T22:57:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/03/28/jenkins-on-mac-os-x-tips-and-tricks/</loc>
+    <lastmod>2013-03-28T22:36:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/03/04/delicious-evernote-move-bookmarks/</loc>
+    <lastmod>2013-03-04T16:23:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/02/27/first-steps-with-intellij-idea/</loc>
+    <lastmod>2013-02-27T00:37:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/02/09/i18n-vs-l10n/</loc>
+    <lastmod>2013-02-09T19:00:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/02/02/review-deploying-with-jruby/</loc>
+    <lastmod>2013-02-02T21:00:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/01/26/jenkins-hierarchical-jobs-and-jobs/</loc>
+    <lastmod>2013-01-26T21:00:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/01/21/auto-install-required-ruby-gems-via/</loc>
+    <lastmod>2013-01-21T15:08:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2013/01/03/custom-puttykitty-color-scheme/</loc>
+    <lastmod>2013-01-03T19:09:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/12/31/jenkins-enhancements-without-plugins/</loc>
+    <lastmod>2012-12-31T01:50:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/12/12/groovy-or-jruby-for-java-developer/</loc>
+    <lastmod>2012-12-12T01:40:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/11/18/xp-days-ukraine-2012-conference-report/</loc>
+    <lastmod>2012-11-18T23:06:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/11/02/how-to-configure-git-diff-and-merge/</loc>
+    <lastmod>2012-11-02T19:10:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/10/27/mac-os-x-terminal-supports-colored/</loc>
+    <lastmod>2012-10-27T11:48:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/10/24/github-gists-in-eclipse/</loc>
+    <lastmod>2012-10-24T18:18:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/10/20/git-command-extention/</loc>
+    <lastmod>2012-10-20T22:56:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/10/17/how-to-configure-mac-os-x-terminal-to/</loc>
+    <lastmod>2012-10-17T22:48:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/10/08/review-practices-of-agile-developer/</loc>
+    <lastmod>2012-10-08T23:41:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/10/01/rubyshift-2012-conference-report/</loc>
+    <lastmod>2012-10-01T23:04:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/09/28/review-clean-coder-code-of-conduct-for/</loc>
+    <lastmod>2012-09-28T00:59:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/09/23/pacemaker-lamp-conference-report/</loc>
+    <lastmod>2012-09-23T01:10:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/09/13/outlook-two-time-zones-in-calendar/</loc>
+    <lastmod>2012-09-13T11:50:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/09/12/install-rails-on-ubuntu-1204-with-rvm/</loc>
+    <lastmod>2012-09-12T22:51:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/09/10/ruby-style-guides/</loc>
+    <lastmod>2012-09-10T00:55:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/09/08/install-rubymine-45x-on-ubuntu-1204/</loc>
+    <lastmod>2012-09-08T03:00:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/09/04/how-to-prepare-to-pass-oracle-web/</loc>
+    <lastmod>2012-09-04T21:55:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/08/13/how-to-use-ssh-agent-in-msysgit/</loc>
+    <lastmod>2012-08-13T19:33:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/06/27/maven-build-number-plugin-sample-usage/</loc>
+    <lastmod>2012-06-27T23:29:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/06/25/how-to-create-session-factory-in/</loc>
+    <lastmod>2012-06-25T21:06:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/06/12/how-to-improve-cmdexe-prompt/</loc>
+    <lastmod>2012-06-12T20:38:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/06/11/maven-resource-filtering/</loc>
+    <lastmod>2012-06-11T16:08:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/06/11/first-steps-in-maven/</loc>
+    <lastmod>2012-06-11T10:53:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/05/20/this-year-we-had-second-jeeconf/</loc>
+    <lastmod>2012-05-20T16:15:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/05/02/review-java-brains-spring-framework/</loc>
+    <lastmod>2012-05-02T18:35:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/04/24/review-getting-good-with-git-by-andrew/</loc>
+    <lastmod>2012-04-24T20:15:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/03/27/why-you-should-join-user-group/</loc>
+    <lastmod>2012-03-27T01:09:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/03/15/java-related-free-screencasts/</loc>
+    <lastmod>2012-03-15T13:30:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/02/26/state-of-numerical-computation/</loc>
+    <lastmod>2012-02-26T20:19:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/02/13/uml-sketching-tools/</loc>
+    <lastmod>2012-02-13T01:18:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/01/21/quick-way-to-join-array-of-string-in/</loc>
+    <lastmod>2012-01-21T16:31:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2012/01/09/what-is-best-book-for-scjpocpjp-exam/</loc>
+    <lastmod>2012-01-09T13:25:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/12/25/how-to-decide-which-technology-hype-is/</loc>
+    <lastmod>2011-12-25T21:16:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/11/03/how-to-run-ant-script-from-batcmd/</loc>
+    <lastmod>2011-11-03T15:04:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/10/21/java-reflection-invoke-constructor/</loc>
+    <lastmod>2011-10-21T13:37:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/10/10/overview-optimistic-vs-pessimistic/</loc>
+    <lastmod>2011-10-10T00:17:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/08/31/java-code-quality-tools-overview/</loc>
+    <lastmod>2011-08-31T02:06:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/08/15/recently-ive-read-amazing-blog-post/</loc>
+    <lastmod>2011-08-15T00:52:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/07/30/it-booze-meetup-2-scala-clojure-groovy/</loc>
+    <lastmod>2011-07-30T16:11:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/07/20/how-to-disable-systemout/</loc>
+    <lastmod>2011-07-20T23:29:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/07/19/ubuntu-server-10042-vm-basic/</loc>
+    <lastmod>2011-07-19T01:45:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/06/28/how-to-add-jars-at-runtime/</loc>
+    <lastmod>2011-06-28T14:34:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/06/20/override-java-annotation-issue/</loc>
+    <lastmod>2011-06-20T00:55:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/06/12/itevent-2011-local-conference-report/</loc>
+    <lastmod>2011-06-12T02:28:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/06/06/top-15-java-web-resources/</loc>
+    <lastmod>2011-06-06T01:41:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/06/01/how-to-choose-between-scala-and-clojure/</loc>
+    <lastmod>2011-06-01T01:55:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/05/24/jeeconf-kiev-2011-report/</loc>
+    <lastmod>2011-05-24T00:41:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/05/03/xp-scrum-and-kanban-how-to-make-first/</loc>
+    <lastmod>2011-05-03T01:28:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/04/17/axis2-and-tomcat-work-together-with/</loc>
+    <lastmod>2011-04-17T00:57:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/02/15/lisp-balkanization/</loc>
+    <lastmod>2011-02-15T01:02:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/02/11/how-to-choose-next-programming-language/</loc>
+    <lastmod>2011-02-11T00:50:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/01/26/review-language-grubbing/</loc>
+    <lastmod>2011-01-26T02:58:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/01/25/review-beating-averages/</loc>
+    <lastmod>2011-01-25T01:08:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/01/22/lisp-ruby-acceptable-and-not-acceptable/</loc>
+    <lastmod>2011-01-22T17:10:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/01/14/review-you-should-write-blogs/</loc>
+    <lastmod>2011-01-14T01:56:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/01/12/should-i-learn-lisp/</loc>
+    <lastmod>2011-01-12T02:05:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2011/01/10/review-how-to-become-hacker/</loc>
+    <lastmod>2011-01-10T23:53:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2010/12/29/how-to-set-user-property-in-eclipse/</loc>
+    <lastmod>2010-12-29T00:47:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2010/12/28/my-bookshelf-part-zero/</loc>
+    <lastmod>2010-12-28T01:28:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2010/12/15/java-build-tools-and-future/</loc>
+    <lastmod>2010-12-15T01:00:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2010/12/10/how-to-use-dropbox-as-svn-repository/</loc>
+    <lastmod>2010-12-10T00:13:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2010/11/25/review-pomodoro-technique-by-francesco/</loc>
+    <lastmod>2010-11-25T01:48:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2010/10/31/why-should-i-attend-conferences/</loc>
+    <lastmod>2010-10-31T23:18:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2010/09/11/review-pomodoro-technique-illustrated/</loc>
+    <lastmod>2010-09-11T18:34:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2010/08/12/jruby-or-groovy-for-scripting-in-java/</loc>
+    <lastmod>2010-08-12T00:11:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2010/04/30/oracle-undo-dbf-issues/</loc>
+    <lastmod>2010-04-30T01:58:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2010/04/26/how-to-change-default-editor-in-ubuntu/</loc>
+    <lastmod>2010-04-26T00:13:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2010/04/26/how-to-use-sudo-without-password-on/</loc>
+    <lastmod>2010-04-26T00:05:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2010/04/22/how-to-setup-rubyrails-development_22/</loc>
+    <lastmod>2010-04-22T01:30:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2010/04/16/how-to-setup-rubyrails-development/</loc>
+    <lastmod>2010-04-16T00:55:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/blog/2010/03/05/ui-prototyping-gets-easier/</loc>
+    <lastmod>2010-03-05T01:37:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/2009/12/why-i-chosen-ruby-as-main-scripting.html</loc>
+    <lastmod>2009-12-27T12:42:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/2009/11/nix-like-environments-for-windows.html</loc>
+    <lastmod>2009-11-18T01:02:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/2009/11/gnustep-getting-started.html</loc>
+    <lastmod>2009-11-08T23:08:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/2009/08/test-page-must-be-deleted.html</loc>
+    <lastmod>2009-08-29T00:30:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/2009/08/rails-23-migration-issues-with-mysql_26.html</loc>
+    <lastmod>2009-08-26T00:13:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/2009/06/ruby-screencast-resources.html</loc>
+    <lastmod>2009-06-02T22:32:00+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://halyph.com/2009/03/effective-way-to-be-expert.html</loc>
+    <lastmod>2009-03-16T19:35:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
   
   <url>
     <loc>http://halyph.com/blog/archives/</loc>
-    <lastmod>2015-07-14T00:58:51+03:00</lastmod>
+    <lastmod>2015-09-23T06:22:09+03:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://halyph.com/</loc>
-    <lastmod>2015-07-14T00:58:51+03:00</lastmod>
+    <lastmod>2015-09-23T06:22:09+03:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>http://halyph.com/about/</loc>
-    <lastmod>2015-07-14T00:58:51+03:00</lastmod>
+    <lastmod>2015-09-23T06:22:09+03:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

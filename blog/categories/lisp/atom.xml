@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Lisp | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/lisp/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Lisp Balkanization?]]></title>
+    <link href="http://halyph.com/blog/2011/02/15/lisp-balkanization/"/>
+    <updated>2011-02-15T01:02:00+02:00</updated>
+    <id>http://halyph.com/blog/2011/02/15/lisp-balkanization</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve heard this words&#8217; pair too often and I never knew what does it mean?<br /><br />Until I read these two posts: <a href="http://gilesbowkett.blogspot.com/2008/02/ultra-balkanization-makes-lisp-autistic.html">Ultra-Balkanization Makes Lisp Autistic</a> and <a href="http://www.findinglisp.com/blog/2005/12/reddit-and-lisp-psychosis.html">Reddit and Lisp psychosis</a>.<br /><br />In general every Lisp developer tends to write &ldquo;new&rdquo; super-puper Lisp, invent the wheel, write own &ldquo;cool&rdquo; emacs extension and tell to the world that he is a HACKER. I love this.<br /><br />Nowadays, Clojure is the real answer for Lisp guys. It can consolidate the Lisp language flexibility and JVM power. I think it&rsquo;s a good choice.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Review: Beating the Averages]]></title>
+    <link href="http://halyph.com/blog/2011/01/25/review-beating-averages/"/>
+    <updated>2011-01-25T01:08:00+02:00</updated>
+    <id>http://halyph.com/blog/2011/01/25/review-beating-averages</id>
+    <content type="html"><![CDATA[<p>This Paul&rsquo;s Graham essay (<a href="http://www.paulgraham.com/avg.html">Beating the Averages</a>) is very popular among Lisp community. Someone told that it was the new Lisp push, the new Lisp wave. I read this essay and companion technical article &ldquo;<a href="http://lib.store.yahoo.net/lib/paulgraham/bbnexcerpts.txt">Lisp in Web-Based Applications</a>&rdquo; in one short. It&rsquo;s really inspired reading.<br /><br />Paul Graham described the &ldquo;hidden&rdquo; power of Lisp. Unfortunately, the Common Lisp community is fragmented so much. Too many different implementations. It hurts Lisp as a sub-culture. I hope this situation will be resolved by Clojure vibrant community<br /><br />Definitely, if you want to open your Lisp mind you should read this essay. Nothing special from technical point of view, but really cool as Lisp catalyst. Read it, feel the power, feel the spirit.<br /><br />The general idea (IMHO): startup is the right place to try something new and revolutionary to &ldquo;kill&rdquo; your competitors.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lisp, Ruby, Acceptable and Not Acceptable]]></title>
+    <link href="http://halyph.com/blog/2011/01/22/lisp-ruby-acceptable-and-not-acceptable/"/>
+    <updated>2011-01-22T17:10:00+02:00</updated>
+    <id>http://halyph.com/blog/2011/01/22/lisp-ruby-acceptable-and-not-acceptable</id>
+    <content type="html"><![CDATA[<p>There is one really (in)famous essay <a href="http://www.randomhacks.net/articles/2005/12/03/why-ruby-is-an-acceptable-lisp">Why Ruby is an acceptable LISP</a> by Eric Kidd. The most interesting of all this stuff are comments and other responsive blog posts (e.g. <a href="http://steve-yegge.blogspot.com/2006/04/lisp-is-not-acceptable-lisp.html">Lisp is Not an Acceptable Lisp</a> by Steve Yegge)<br />I can say this is something like &ldquo;vs&rdquo; essay which is very popular nowadays. <br /><br />Here is the list of some quotes and key ideas:<br /><br /><ul><li>Lisp macros are far more powerful than the trivial use cases you’ve listed. I could give a lot of examples here, but just ask yourself: why is most of the programming community so fond with “Design Patterns”, while the Lisp community generally isn’t? <b>Well, that’s because patterns are nothing but high-level specifications for code being rewritten again and again and again. The Lisp approach is to create some macros and auxiliary functions that actually implement the pattern, thus extending the language capabilities and avoiding continuous reinvention of the wheel.</b></li><li>This article sounds like it was written for folks who really want to use Lisp, but have chosen Ruby because all the<i> cool kids</i> are using it and want to reasonably justify an emotional decision. </li><li>If you want to learn a language that can change with the times and incorporate whatever latest fad the programming cool kids have to offer, Lisp is the choice. Lisp is the red pill.</li><li>A final example: look at the 2 open source Computer Algebra Systems written in Common Lisp available as Open Source: 1) Axiom – originally from IBM Thomas Watson Research Center; 2) Maxima – originally Department of Energy (US). This is software written in the 70s. You can’t write software that lasts so long with a language that is a moving target. This is the kind of survival and complex domain which shows the power of Lisp.</li><li>The real reason that brought me to Lisp (and never will get me away from it) is simply this:<br />You can build it out of 7 (s-e-v-e-n) primitive operators!<br />And, as a consequence, no other language can be expressed in itself as short as Lisp. (As you probably know, quite any language can be expressed in itself.)<br />So let me repeat: <b>really no other language can be expressed in itself that short, and (as a natural consequence) can be built out of less primitive operators.</b><br /></li><li>Ruby has a syntax, and Ruby needs a full parser to get from that syntax to an AST. Because Lisp code is naturally an AST, things are very different</li></ul>And small summary of the Steve&rsquo;s blog post <a href="http://steve-yegge.blogspot.com/2006/04/lisp-is-not-acceptable-lisp.html">Lisp is Not an Acceptable Lisp</a>:<br /><blockquote>There is no acceptable Lisp. This is a problem. It&rsquo;s not a little teeny one, either. The Lisp communities (yeah, there are a bunch) are going to have to realize that if Lisp is ever going to be massively successful, it needs an overhaul. Or maybe a revolution. Contrary to what some might tell you, it doesn&rsquo;t need a committee, and it doesn&rsquo;t need a bunch of money. Linux proved exactly the opposite. <span style="font-size: x-large;">Lisp needs a benevolent dictator</span>. Lisp needs to ditch the name &ldquo;Lisp&rdquo;, since it scares people. And Lisp needs to learn from the lessons of the 45 years of languages that have followed it.</blockquote>Based on this comments and I&rsquo;m attaching this funny picture:<br /><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="http://2.bp.blogspot.com/_vLotBlgiVfE/TTryfUy5UwI/AAAAAAAAAbA/1e6SWfopmQw/s1600/media_httpwwwdeimeken_rvzBA.gif.scaled661.gif" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="640" src="http://2.bp.blogspot.com/_vLotBlgiVfE/TTryfUy5UwI/AAAAAAAAAbA/1e6SWfopmQw/s640/media_httpwwwdeimeken_rvzBA.gif.scaled661.gif" width="288" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;"><a href="http://danelliott.me/the-programmers-superiority-complex-in-hierar">The programmer&rsquo;s superiority complex&hellip; in hierarchy format.</a></td></tr></tbody></table></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Should I Learn Lisp?]]></title>
+    <link href="http://halyph.com/blog/2011/01/12/should-i-learn-lisp/"/>
+    <updated>2011-01-12T02:05:00+02:00</updated>
+    <id>http://halyph.com/blog/2011/01/12/should-i-learn-lisp</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://2.bp.blogspot.com/_vLotBlgiVfE/TSzhI4nRqoI/AAAAAAAAAa4/3bZ1_uqpiho/s1600/Lisplogo_alien_256.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="http://2.bp.blogspot.com/_vLotBlgiVfE/TSzhI4nRqoI/AAAAAAAAAa4/3bZ1_uqpiho/s1600/Lisplogo_alien_256.png" /></a>
+</div>
+
+
+<p>I had been asking this question myself every time I had found something (blog post, article, book title, etc.) interesting related to Lisp. But those “ugly” brackets put me away again and again :-). So, what was happen and why I changed my vision?
+<br />
+<br />I think I’ve got three triggers to change my mind: a) friends of mine works with <a href="http://www.gensym.com/">Gensym/G2</a> platform and they are really inspired by Lisp power; b) I saw several <a href="http://clojure.blip.tv/%20">Rich Hickey’s talks about Clojure</a> and the last one c) <a href="http://www.paulgraham.com/">Paul Graham essays</a>.
+<br />
+<br />Then, I started googling to find other opinions about Lisp (when I say “Lisp” I mean Common Lisp, Scheme, Clojure and other Lisp dialects).
+<br />
+<br />
+<a name='more'></a>
+<br />
+<br /><span style="font-size: large;">Lisp Quotes</span>
+<br /><span style="font-size: small;"><a href="http://bc.tech.coop/blog/040314.html">Bill Clementson wrote about this</a>:</span>
+<br /></p>
+
+<blockquote><span style="font-size: small;">“Usually, rather than trying to convince people … I feel it is better to just spread the &#8220;seeds&#8221; and let people convince themselves. This is often better done with quotes and/or stories because these often highlight some salient feature that resonates better with people than arguments do.”</span></blockquote>
+
+
+<p><span style="font-size: small;">Also, check <a href="http://paulgraham.com/quotes.html">Paul Graham Quotes List</a>.<br />I like this one: </span>
+<br /></p>
+
+<blockquote><span style="font-size: small;">&#8220;Lisp is worth learning for the profound enlightenment experience you will have when you finally get it; that experience will make you a better programmer for the rest of your days, even if you never actually use Lisp itself a lot.&#8221; (<a href="http://www.catb.org/%7Eesr/faqs/hacker-howto.html">Eric Raymond, &#8220;How to Become a Hacker&#8221;</a>)&#8221;</span></blockquote>
+
+
+<p><span style="font-size: large;">Lisp Dialects</span>
+<br />Here is the lisp of the major Lisp dialect, as for me:
+<br />
+<br /></p>
+
+<ul>
+    <li>Common Lisp (CLOS)</li>
+    <li>Scheme</li>
+    <li>Clojure</li>
+    <li>Dylan</li>
+    <li>Arc</li>
+    <li>newLisp</li>
+    <li>Emacs Lisp</li>
+</ul>
+
+
+<p>I&rsquo;m sure this lisp uncompleted, but from my point of view other stuff is too specific.
+<br />
+<br />Additionally you should check this page to get some syntax overview: <a href="http://hyperpolyglot.org/lisp">Lisp: A side-by-side reference sheet</a>
+<br />
+<br />I think there are two major player, IMHO: Common Lisp and Clojure.
+<br />Common Lisp is just golden standard for all <i>Lisp</i>s. Plus, all major Lisp related books were written for Common Lisp.
+<br />
+<br />I would choose Clojure for practical reason. It just has JVM background and can use Java ecosystem. And it&rsquo;s the major features. The other good point is that Clojure is much simpler than Common Lisp.
+<br />
+<br /><span style="font-size: large;">Beginner Lisp Books</span>
+<br /><strong>Common Lisp: </strong>Practical Common Lisp, by Peter Seibel, 2005
+<br />
+<strong>Clojure: </strong>Programming Clojure, by Stuart Halloway, 2009
+<br /><strong>Scheme: </strong>Structure and Interpretation of Computer Programs, by Harold Abelson, Gerald Jay Sussman, Julie Sussman
+<br />
+<img alt="" border="0" height="1" src="http://www.assoc-amazon.com/e/ir?t=knowisever-20&amp;l=bil&amp;camp=213689&amp;creative=392969&amp;o=1&amp;a=0262692201" style="border: medium none ! important; margin: 0px ! important; padding: 0px ! important;" width="1" />
+<br />People suggest to choose one &ldquo;lisp&rdquo; for start. I think Common Lisp must be in your learning roadmap, but it shouldn&rsquo;t be a start point.
+<br />
+<br /><span style="font-size: large;">Development Environment</span>
+<br />I&rsquo;ve analyzed a lot of opinions and made an obvious (and expected) conclusion. Whatever Lisp you want to use Emacs is the only one true way for the real Lisp development.
+<br />Emacs is very powerful and very complicated text editor. I have to invest a huge amount of your time to be really productive with it. But real lisper can&rsquo;t suggest your other editors.
+<br />
+<br />Even for Clojure people suggest to use Emacs.
+<br />Don&rsquo;t forget that you&rsquo;ll get additional Lisp on your shelf with Emacs - Emacs Lisp (elisp). It uses for Emacs scripting and you must know it to tune Emacs properly.
+<br />
+<br /><span style="font-size: large;">Summary</span>
+<br /></p>
+
+<ol>
+    <li>I like Lisp after this small overview. This language has huge power and conceptual background which is different from what I&#8217;ve see so far. It&#8217;s mean that Lisp can extent my conceptual horizon.</li>
+    <li>I should chose the only one Lisp for start. It&#8217;s no simple task. I think that Clojure is better choice for me as for Java developer. But, Common Lisp has big legacy (books, community and history) which is very interested for me. In any case List is just for fun. I can&#8217;t use it on my work :-(</li>
+    <li>I should invest noticeable amount of time for Emacs learning. And I don&#8217;t like this.</li>
+    <li>Unfortunately, I can&#8217;t learn Lisp this year. Because it will be fragmented learning process. And I have such approach. I like to dive into the subject and live with it. I have to set List as a goal for 2012 year.</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

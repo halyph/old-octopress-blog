@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ubuntu Server 10.04.2 VM Basic Configuration - Knowledge Is Everything</title>
+  <meta name="author" content="Orest Ivasiv">
+
+  
+  <meta name="description" content="&nbsp;+ + Required tools: VMware WorstationUbuntu Server 10.04.2Kitty (Putty ssh client fork)I suppose that You know how to setup plain VM via &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://halyph.com/blog/2011/07/19/ubuntu-server-10042-vm-basic">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Knowledge Is Everything" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-54626671-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <!-- <header role="banner"><hgroup>
+  <h1><a href="/">Knowledge Is Everything</a></h1>
+  
+</hgroup>
+
+</header> -->
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:halyph.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+    <li><a href="/">
+        <span class="blue_light">
+            Knowledge Is Everything
+        </span>
+       
+    </a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About me</a></li>
+  <li><a href="http://halyph.blogspot.com">Old Blog</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Ubuntu Server 10.04.2 VM Basic Configuration</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2011-07-19T01:45:00+03:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>1:45 am</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://halyph.com">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div style="text-align: center;"><img border="0" src="http://2.bp.blogspot.com/-qp-nTnpstbg/TiSxvkDbx0I/AAAAAAAAAdk/8jgWmGkr_5o/s1600/bg-logo.gif" /> <span style="font-size: x-large;"><b>&nbsp;+</b> </span><img border="0" height="48px" src="http://2.bp.blogspot.com/-aTuq4gG_ZoI/S8ehmbmqNAI/AAAAAAAAAV8/FAQFVMjoox8/s1600/1271369264_start-here-ubuntuoriginal.png" width="48px" /><span style="font-size: x-large;"> <b>+</b> </span><img border="0" src="http://2.bp.blogspot.com/-yj-eVJbdFPE/TiSweVkJDbI/AAAAAAAAAdg/Hei8Ko3FBBg/s1600/kitty.png" /></div>Required tools:<br /><ul><li> VMware Worstation</li><li><a href="http://www.ubuntu.com/">Ubuntu </a>Server 10.04.2</li><li><a href="http://kitty.9bis.com/">Kitty </a>(Putty ssh client fork)</li></ul>I suppose that You know how to setup plain VM via VMware.<br />And here is my basic Ubuntu VM configuration:<br /><ol><li><a href="http://www.ubuntu.com/">Ubuntu </a>Server 10.04.2 doesn't include SSH server by default. That's why you have to install it:</li><pre class="brush: bash;">sudo apt-get install ssh<br /></pre><li>Check your Ubuntu VM IP:</li><pre class="brush: bash;">$ ifconfig<br />eth0      Link encap:Ethernet  HWaddr 00:0c:29:04:55:d6<br />          inet addr:192.168.11.134  Bcast:192.168.11.255  Mask:255.255.255.0<br />          inet6 addr: fe80::20c:29ff:fe04:55d6/64 Scope:Link<br />          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1<br />          RX packets:50 errors:0 dropped:0 overruns:0 frame:0<br />          TX packets:52 errors:0 dropped:0 overruns:0 carrier:0<br />          collisions:0 txqueuelen:1000<br />          RX bytes:6303 (6.3 KB)  TX bytes:7366 (7.3 KB)<br />          Interrupt:19 Base address:0x2000<br /></pre><li>Configure Kitty connection host name:&nbsp; </li><img border="0" height="320" src="http://4.bp.blogspot.com/-rZ_fYBE3CFE/TiS0rfsEN7I/AAAAAAAAAdo/Lv7-_Vl7Ijs/s320/Clipboard-1.png" width="244" /><li>Create two scripts for:</li><ul><li>startup VM in background (<b><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">start_vm.bat</span></b>)</li><pre class="brush: bash;">set MYVM="F:\VMs\ubuntu-10.04.2-server\Ubuntu Server 10.04.2.vmx"<br />set VMRUN="E:\Program Files\VMware\VMware Workstation\vmrun"<br /><br />%VMRUN% -T ws start %MYVM% nogui<br /></pre><li>shutdown VM (<b><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">stop_vm.ba</span></b>t)<br /></li><pre class="brush: bash;">set MYVM="F:\VMs\ubuntu-10.04.2-server\Ubuntu Server 10.04.2.vmx"<br />set VMRUN="E:\Program Files\VMware\VMware Workstation\vmrun"<br /><br />%VMRUN% stop %MYVM% soft<br /></pre></ul><li>Configure Kitty for auto-login:</li><img border="0" src="http://3.bp.blogspot.com/-pK4AnYImpbo/TiS2j12G8YI/AAAAAAAAAds/OGov-utOIOw/s1600/kitty_cfg.PNG" /><li>VM startup and Kitty run can be combined into one script</li></ol><br /></div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Orest Ivasiv</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2011-07-19T01:45:00+03:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>1:45 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://halyph.com/blog/2011/07/19/ubuntu-server-10042-vm-basic/" data-via="halyph" data-counturl="http://halyph.com/blog/2011/07/19/ubuntu-server-10042-vm-basic/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/06/28/how-to-add-jars-at-runtime/" title="Previous Post: How to Add Jars at Runtime?">&laquo; How to Add Jars at Runtime?</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/07/20/how-to-disable-systemout/" title="Next Post: How to disable System.out?">How to disable System.out? &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p> <img class="left" src="/images/blog.jpeg">
+ Orest Ivasiv <br />Software Engineer</p>
+  <br />
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/07/20/grails-best-practices-collection/">Grails Best Practices Collection</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/29/devoxxpl/">DevoxxPL - Krakow, 2015 - Report</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/25/jeeconf-kiev/">JEEConf - Kiev, 2015 - Report</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/19/grails-2-dot-5-0-debug-in-intellij-idea/">Grails 2.5.0 Debug in IntelliJ IDEA</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/18/golang-presentation-tool/">Go Presentation Tool</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <span id="tag-cloud"><a href='/blog/categories/agile' style='font-size: 104.73684210526315%'>agile(3)</a> <a href='/blog/categories/annotation' style='font-size: 101.57894736842105%'>annotation(1)</a> <a href='/blog/categories/ant' style='font-size: 103.15789473684211%'>ant(2)</a> <a href='/blog/categories/architecture' style='font-size: 101.57894736842105%'>architecture(1)</a> <a href='/blog/categories/automation' style='font-size: 103.15789473684211%'>automation(2)</a> <a href='/blog/categories/barcode' style='font-size: 101.57894736842105%'>barcode(1)</a> <a href='/blog/categories/bash' style='font-size: 104.73684210526315%'>bash(3)</a> <a href='/blog/categories/blog' style='font-size: 101.57894736842105%'>blog(1)</a> <a href='/blog/categories/blogging' style='font-size: 103.15789473684211%'>blogging(2)</a> <a href='/blog/categories/books' style='font-size: 115.78947368421052%'>books(10)</a> <a href='/blog/categories/centos' style='font-size: 101.57894736842105%'>centos(1)</a> <a href='/blog/categories/certification' style='font-size: 101.57894736842105%'>certification(1)</a> <a href='/blog/categories/ci' style='font-size: 101.57894736842105%'>ci(1)</a> <a href='/blog/categories/clojure' style='font-size: 103.15789473684211%'>clojure(2)</a> <a href='/blog/categories/cmd-dot-exe' style='font-size: 101.57894736842105%'>cmd.exe(1)</a> <a href='/blog/categories/code-quality' style='font-size: 101.57894736842105%'>code quality(1)</a> <a href='/blog/categories/code-style' style='font-size: 101.57894736842105%'>code style(1)</a> <a href='/blog/categories/computation' style='font-size: 101.57894736842105%'>computation(1)</a> <a href='/blog/categories/conference' style='font-size: 117.36842105263158%'>conference(11)</a> <a href='/blog/categories/console' style='font-size: 101.57894736842105%'>console(1)</a> <a href='/blog/categories/craftsmanship' style='font-size: 103.15789473684211%'>craftsmanship(2)</a> <a href='/blog/categories/cxf' style='font-size: 104.73684210526315%'>cxf(3)</a> <a href='/blog/categories/cygwin' style='font-size: 101.57894736842105%'>cygwin(1)</a> <a href='/blog/categories/db' style='font-size: 101.57894736842105%'>db(1)</a> <a href='/blog/categories/devoxx' style='font-size: 101.57894736842105%'>devoxx(1)</a> <a href='/blog/categories/diff' style='font-size: 101.57894736842105%'>diff(1)</a> <a href='/blog/categories/eclipse' style='font-size: 103.15789473684211%'>eclipse(2)</a> <a href='/blog/categories/evernote' style='font-size: 103.15789473684211%'>evernote(2)</a> <a href='/blog/categories/general' style='font-size: 104.73684210526315%'>general(3)</a> <a href='/blog/categories/gerrit' style='font-size: 101.57894736842105%'>gerrit(1)</a> <a href='/blog/categories/gist' style='font-size: 101.57894736842105%'>gist(1)</a> <a href='/blog/categories/git' style='font-size: 115.78947368421052%'>git(10)</a> <a href='/blog/categories/github' style='font-size: 101.57894736842105%'>github(1)</a> <a href='/blog/categories/gnustep' style='font-size: 101.57894736842105%'>gnustep(1)</a> <a href='/blog/categories/golang' style='font-size: 101.57894736842105%'>golang(1)</a> <a href='/blog/categories/gradle' style='font-size: 101.57894736842105%'>gradle(1)</a> <a href='/blog/categories/grails' style='font-size: 103.15789473684211%'>grails(2)</a> <a href='/blog/categories/groovy' style='font-size: 118.94736842105263%'>groovy(12)</a> <a href='/blog/categories/h2' style='font-size: 101.57894736842105%'>h2(1)</a> <a href='/blog/categories/hibernate' style='font-size: 101.57894736842105%'>hibernate(1)</a> <a href='/blog/categories/i18n' style='font-size: 101.57894736842105%'>i18n(1)</a> <a href='/blog/categories/intellij-idea' style='font-size: 101.57894736842105%'>intellij idea(1)</a> <a href='/blog/categories/itbooze' style='font-size: 103.15789473684211%'>itbooze(2)</a> <a href='/blog/categories/itext' style='font-size: 101.57894736842105%'>itext(1)</a> <a href='/blog/categories/ivy' style='font-size: 101.57894736842105%'>ivy(1)</a> <a href='/blog/categories/java' style='font-size: 160.0%'>java(38)</a> <a href='/blog/categories/java-se' style='font-size: 103.15789473684211%'>java se(2)</a> <a href='/blog/categories/javascript' style='font-size: 101.57894736842105%'>javascript(1)</a> <a href='/blog/categories/jax-rs' style='font-size: 104.73684210526315%'>jax-rs(3)</a> <a href='/blog/categories/jdbc' style='font-size: 101.57894736842105%'>jdbc(1)</a> <a href='/blog/categories/jdk' style='font-size: 101.57894736842105%'>jdk(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 107.89473684210526%'>jeeconf(5)</a> <a href='/blog/categories/jenkins' style='font-size: 106.3157894736842%'>jenkins(4)</a> <a href='/blog/categories/jetty' style='font-size: 101.57894736842105%'>jetty(1)</a> <a href='/blog/categories/jsp' style='font-size: 101.57894736842105%'>jsp(1)</a> <a href='/blog/categories/kanban' style='font-size: 101.57894736842105%'>kanban(1)</a> <a href='/blog/categories/l10n' style='font-size: 101.57894736842105%'>l10n(1)</a> <a href='/blog/categories/languages' style='font-size: 109.47368421052632%'>languages(6)</a> <a href='/blog/categories/learning' style='font-size: 106.3157894736842%'>learning(4)</a> <a href='/blog/categories/library' style='font-size: 104.73684210526315%'>library(3)</a> <a href='/blog/categories/linux' style='font-size: 115.78947368421052%'>linux(10)</a> <a href='/blog/categories/lisp' style='font-size: 106.3157894736842%'>lisp(4)</a> <a href='/blog/categories/maven' style='font-size: 109.47368421052632%'>maven(6)</a> <a href='/blog/categories/merge' style='font-size: 101.57894736842105%'>merge(1)</a> <a href='/blog/categories/mingw' style='font-size: 101.57894736842105%'>mingw(1)</a> <a href='/blog/categories/msysgit' style='font-size: 101.57894736842105%'>msysgit(1)</a> <a href='/blog/categories/objective-c' style='font-size: 101.57894736842105%'>objective-c(1)</a> <a href='/blog/categories/ocpjp' style='font-size: 101.57894736842105%'>ocpjp(1)</a> <a href='/blog/categories/octopress' style='font-size: 103.15789473684211%'>octopress(2)</a> <a href='/blog/categories/os-x' style='font-size: 107.89473684210526%'>os x(5)</a> <a href='/blog/categories/pdf' style='font-size: 104.73684210526315%'>pdf(3)</a> <a href='/blog/categories/plugin' style='font-size: 103.15789473684211%'>plugin(2)</a> <a href='/blog/categories/pomodoro' style='font-size: 103.15789473684211%'>pomodoro(2)</a> <a href='/blog/categories/productivity' style='font-size: 103.15789473684211%'>productivity(2)</a> <a href='/blog/categories/prompt' style='font-size: 103.15789473684211%'>prompt(2)</a> <a href='/blog/categories/prototyping' style='font-size: 103.15789473684211%'>prototyping(2)</a> <a href='/blog/categories/python' style='font-size: 101.57894736842105%'>python(1)</a> <a href='/blog/categories/rails' style='font-size: 109.47368421052632%'>rails(6)</a> <a href='/blog/categories/reflection' style='font-size: 101.57894736842105%'>reflection(1)</a> <a href='/blog/categories/rest' style='font-size: 104.73684210526315%'>rest(3)</a> <a href='/blog/categories/review' style='font-size: 112.63157894736842%'>review(8)</a> <a href='/blog/categories/ruby' style='font-size: 128.42105263157896%'>ruby(18)</a> <a href='/blog/categories/rvm' style='font-size: 101.57894736842105%'>rvm(1)</a> <a href='/blog/categories/scala' style='font-size: 106.3157894736842%'>scala(4)</a> <a href='/blog/categories/scjp' style='font-size: 101.57894736842105%'>scjp(1)</a> <a href='/blog/categories/screencast' style='font-size: 104.73684210526315%'>screencast(3)</a> <a href='/blog/categories/scripting' style='font-size: 103.15789473684211%'>scripting(2)</a> <a href='/blog/categories/scrum' style='font-size: 101.57894736842105%'>scrum(1)</a> <a href='/blog/categories/servlet' style='font-size: 101.57894736842105%'>servlet(1)</a> <a href='/blog/categories/shell' style='font-size: 103.15789473684211%'>shell(2)</a> <a href='/blog/categories/sketching' style='font-size: 101.57894736842105%'>sketching(1)</a> <a href='/blog/categories/spring' style='font-size: 106.3157894736842%'>spring(4)</a> <a href='/blog/categories/ssh' style='font-size: 103.15789473684211%'>ssh(2)</a> <a href='/blog/categories/ssh-agent' style='font-size: 101.57894736842105%'>ssh-agent(1)</a> <a href='/blog/categories/static-analysis' style='font-size: 101.57894736842105%'>static analysis(1)</a> <a href='/blog/categories/svn' style='font-size: 101.57894736842105%'>svn(1)</a> <a href='/blog/categories/terminal' style='font-size: 103.15789473684211%'>terminal(2)</a> <a href='/blog/categories/textmate' style='font-size: 103.15789473684211%'>textmate(2)</a> <a href='/blog/categories/time-management' style='font-size: 103.15789473684211%'>time management(2)</a> <a href='/blog/categories/tomcat' style='font-size: 101.57894736842105%'>tomcat(1)</a> <a href='/blog/categories/tool' style='font-size: 101.57894736842105%'>tool(1)</a> <a href='/blog/categories/tools' style='font-size: 109.47368421052632%'>tools(6)</a> <a href='/blog/categories/top' style='font-size: 101.57894736842105%'>top(1)</a> <a href='/blog/categories/tutorial' style='font-size: 101.57894736842105%'>tutorial(1)</a> <a href='/blog/categories/tutorials' style='font-size: 101.57894736842105%'>tutorials(1)</a> <a href='/blog/categories/ui' style='font-size: 101.57894736842105%'>ui(1)</a> <a href='/blog/categories/uml' style='font-size: 101.57894736842105%'>uml(1)</a> <a href='/blog/categories/video' style='font-size: 101.57894736842105%'>video(1)</a> <a href='/blog/categories/vim' style='font-size: 103.15789473684211%'>vim(2)</a> <a href='/blog/categories/vs' style='font-size: 104.73684210526315%'>vs(3)</a> <a href='/blog/categories/windows' style='font-size: 101.57894736842105%'>windows(1)</a> <a href='/blog/categories/xp' style='font-size: 101.57894736842105%'>xp(1)</a> </span>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Orest Ivasiv -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'kie-by-halyph';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Vs | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/vs/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Groovy or JRuby for Java Developer]]></title>
+    <link href="http://halyph.com/blog/2012/12/12/groovy-or-jruby-for-java-developer/"/>
+    <updated>2012-12-12T01:40:00+02:00</updated>
+    <id>http://halyph.com/blog/2012/12/12/groovy-or-jruby-for-java-developer</id>
+    <content type="html"><![CDATA[<div style="text-align: center;"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5820833570729520530" src="http://4.bp.blogspot.com/-bBjekY9Rh9Q/UMfBSuAAbZI/AAAAAAAABFM/YqbH9TUAVEw/s320/79f6c018bc6ba03f649125c3605a6d8c-726584.jpeg" />  </div>
+
+
+<div>Today I&#8217;ve decided to share my own perception about the subject &#8220;Groovy vs JRuby&#8221; for Java developers.</div>
+
+
+<div>When we are talking about any dynamic/scripting language like Ruby, Python, Groovy, etc. we are talking about quick development feedback (e.g. run - fix - run) no compilation, no packaging.</div>
+
+
+<div>I must admit that mentioned above languages cover the same tasks&#8217; domain with own pros&amp;cons. Now, we should differentiate <i>pragmatic</i> and <i>ecstatic</i> sides for each of them.</div>
+
+
+<div><br /></div>
+
+
+<p>When we are talking about programming language we should clearly understand the difference between: <br /><ol><li>language (as syntax and semantic soup) - ecstatic side   </li><li>language&rsquo;s ecosystem (community, tools, libraries, etc.) - pragmatic side </li></ol>Let&rsquo;s discuss item (1). I think that learning a new programming language expand developer&rsquo;s mind. If we know many programming languages it helps us pick up any new language very quickly. I.e. to be pragmatic programmers we should learn many languages, dead simple. <br />In my opinion Ruby has much &ldquo;nicer&rdquo; syntax and language features in comparison to Groovy. Ruby meta model is very flexible that&rsquo;s why it has so many beatify frameworks and libraries (Rails, Cucumber, Rspec, etc.). But …<br /><div><br /></div><div>But Ruby ecosystem is totally different from Java/Groovy world. And it&rsquo;s really noticible when we are trying to mix Ruby and Java in the same project.</div><div>Mixing JRuby and Java isn&rsquo;t a difficult task. But using Java API in Ruby code doesn&rsquo;t looks natural. And developing in mixed Java/Ruby environment isn&rsquo;t very comfortable:</div><div><ul><li>we have two package types: JARs and gems</li><li>library versioning and dependency management is different</li><li>Ruby/JRuby still has some cross-plafrom issues, especially on Windows (i.e. many Ruby gems do not support Windows and they must be fixed to support it, very annoying)</li><li>it might be difficult to convince teammates to use Ruby on Java project&nbsp;</li></ul></div><div>I thought that Groovy isn&rsquo;t a (J)Ruby competitor until I&rsquo;ve tried to automate some simple tasks in Groovy. I&rsquo;ve got seamless integration with Java. It&rsquo;s really transparent and comfortable coding tool for Java developer. I have no mess with gems (Groovy uses JARs). And the Java ecosystem stays the same. Groovy has the similar dynamic power as Ruby. Yes, in some cases this &ldquo;sugar&rdquo; isn&rsquo;t so sweet as in Ruby. But, Groovy is really pragmatic choice for Java developer.</div><br /><b>Conclusion</b>: Ruby language is beautiful and sexy language, no doubts. But, we need a time to master Ruby ecosystem, deployment issues and tools philosophy. Also, JRuby/Java integration doesn&rsquo;t looks to me so pragmatic as Groovy/Java. It means investment in Ruby might be expensive.<br />I will recommend to learn Ruby just to open another community for yourself (if you are Java developer), it should be as self-education task, no more. <br /><div><br /></div><div>Links:</div><div><ul><li>Transforming to Groovy:&nbsp;<a href="http://www.infoq.com/presentations/Transforming-to-Groovy"><a href="http://www.infoq.com/presentations/Transforming-to-Groovy">http://www.infoq.com/presentations/Transforming-to-Groovy</a></a></li><li>Miro shared his thoughts about similar issue:&nbsp;<a href="http://thinkwrap.wordpress.com/2009/03/17/bye-bye-ruby-hello-groovy/"><a href="http://thinkwrap.wordpress.com/2009/03/17/bye-bye-ruby-hello-groovy/">http://thinkwrap.wordpress.com/2009/03/17/bye-bye-ruby-hello-groovy/</a></a></li></ul></div><div><br /></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Choose Between Scala and Clojure?]]></title>
+    <link href="http://halyph.com/blog/2011/06/01/how-to-choose-between-scala-and-clojure/"/>
+    <updated>2011-06-01T01:55:00+03:00</updated>
+    <id>http://halyph.com/blog/2011/06/01/how-to-choose-between-scala-and-clojure</id>
+    <content type="html"><![CDATA[<div style="text-align: center;"><img border="0" src="http://3.bp.blogspot.com/-TSZUHnPf1Vo/TeVzTeSMD4I/AAAAAAAAAbg/Zy19YqzOfTo/s1600/scala-icon.png" /><span style="font-size: x-large;"> vs. </span>
+    <a href="http://4.bp.blogspot.com/-Z2uFWB3np-Q/TeVzZOmDHTI/AAAAAAAAAbk/sOJtanqor7U/s1600/clojure-icon.gif" imageanchor="1"><img border="0" src="http://4.bp.blogspot.com/-Z2uFWB3np-Q/TeVzZOmDHTI/AAAAAAAAAbk/sOJtanqor7U/s1600/clojure-icon.gif" /></a>
+</div>
+
+
+<p><br />I think it&rsquo;s very popular question nowadays. The Java-haters produce so many buzz around this. So, want you or not, but You passively have been trying to choose the <i>Java.next()</i>.
+<br />
+<br />I&rsquo;ve found several interesting posts which cover pretty much about this subject:
+<br /><br /><strong>by Stephan Schmidt</strong>
+<br /></p>
+
+<ul>
+    <li><a href="http://codemonkeyism.com/scala-vs-clojure/%20"><span id="goog_1314162347"></span>Scala vs. Clojure<span id="goog_1314162348"></span></a></li>
+    <li><a href="http://codemonkeyism.com/clojure-scala-part-2/"><span id="goog_1314162354"></span>Clojure vs Scala, Part 2<span id="goog_1314162355"></span></a></li>
+    <li><a href="http://codemonkeyism.com/scala-vsclojure-part-3-similarities">Scala vs.Clojure, part 3 – the similarities</a></li>
+    <li><a href="http://codemonkeyism.com/scala-vs-clojure-flawed-loc-comparison/">Anatomy of a Flawed Clojure vs. Scala LOC Comparison</a></li>
+</ul>
+
+
+<p><strong>by Lau B. Jensen </strong>
+<br /></p>
+
+<ul>
+    <li><a href="http://www.bestinclass.dk/index.clj/2010/04/clojure-scala-similarities-twins-separated-at-birth.html">Clojure &amp; Scala Similarities - Twins separated at birth?</a></li>
+    <li><a href="http://www.bestinclass.dk/index.clj/2009/09/scala-vs-clojure-lets-get-down-to-business.html">Scala Vs Clojure - Lets get down to business</a></li>
+    <li><a href="http://www.bestinclass.dk/index.clj/2009/09/scala-vs-clojure-round-2-concurrency.html">Scala vs Clojure - Round 2: Concurrency!</a></li>
+</ul>
+
+
+<p><strong>Others</strong>
+<br /></p>
+
+<ul>
+    <li><a href="http://gregosuri.com/on-scala-vs-clojure-what-the-market-thinks">On &#8220;Scala Vs Clojure&#8221;, What the market thinks. </a></li>
+    <li><a href="http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure">LOTY Time Again: Scala or Clojure?!?! </a></li>
+</ul>
+
+
+<p><i>Hint</i>: Try to read comments to these posts, there are very interesting discussions. Some of them are even more useful than the actual post(s)/article(s).
+<br />
+<br />These articles don&rsquo;t give you any advices or strong opinions which language is the best. But, it&rsquo;s a good start point, for sure.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lisp, Ruby, Acceptable and Not Acceptable]]></title>
+    <link href="http://halyph.com/blog/2011/01/22/lisp-ruby-acceptable-and-not-acceptable/"/>
+    <updated>2011-01-22T17:10:00+02:00</updated>
+    <id>http://halyph.com/blog/2011/01/22/lisp-ruby-acceptable-and-not-acceptable</id>
+    <content type="html"><![CDATA[<p>There is one really (in)famous essay <a href="http://www.randomhacks.net/articles/2005/12/03/why-ruby-is-an-acceptable-lisp">Why Ruby is an acceptable LISP</a> by Eric Kidd. The most interesting of all this stuff are comments and other responsive blog posts (e.g. <a href="http://steve-yegge.blogspot.com/2006/04/lisp-is-not-acceptable-lisp.html">Lisp is Not an Acceptable Lisp</a> by Steve Yegge)<br />I can say this is something like &ldquo;vs&rdquo; essay which is very popular nowadays. <br /><br />Here is the list of some quotes and key ideas:<br /><br /><ul><li>Lisp macros are far more powerful than the trivial use cases you’ve listed. I could give a lot of examples here, but just ask yourself: why is most of the programming community so fond with “Design Patterns”, while the Lisp community generally isn’t? <b>Well, that’s because patterns are nothing but high-level specifications for code being rewritten again and again and again. The Lisp approach is to create some macros and auxiliary functions that actually implement the pattern, thus extending the language capabilities and avoiding continuous reinvention of the wheel.</b></li><li>This article sounds like it was written for folks who really want to use Lisp, but have chosen Ruby because all the<i> cool kids</i> are using it and want to reasonably justify an emotional decision. </li><li>If you want to learn a language that can change with the times and incorporate whatever latest fad the programming cool kids have to offer, Lisp is the choice. Lisp is the red pill.</li><li>A final example: look at the 2 open source Computer Algebra Systems written in Common Lisp available as Open Source: 1) Axiom – originally from IBM Thomas Watson Research Center; 2) Maxima – originally Department of Energy (US). This is software written in the 70s. You can’t write software that lasts so long with a language that is a moving target. This is the kind of survival and complex domain which shows the power of Lisp.</li><li>The real reason that brought me to Lisp (and never will get me away from it) is simply this:<br />You can build it out of 7 (s-e-v-e-n) primitive operators!<br />And, as a consequence, no other language can be expressed in itself as short as Lisp. (As you probably know, quite any language can be expressed in itself.)<br />So let me repeat: <b>really no other language can be expressed in itself that short, and (as a natural consequence) can be built out of less primitive operators.</b><br /></li><li>Ruby has a syntax, and Ruby needs a full parser to get from that syntax to an AST. Because Lisp code is naturally an AST, things are very different</li></ul>And small summary of the Steve&rsquo;s blog post <a href="http://steve-yegge.blogspot.com/2006/04/lisp-is-not-acceptable-lisp.html">Lisp is Not an Acceptable Lisp</a>:<br /><blockquote>There is no acceptable Lisp. This is a problem. It&rsquo;s not a little teeny one, either. The Lisp communities (yeah, there are a bunch) are going to have to realize that if Lisp is ever going to be massively successful, it needs an overhaul. Or maybe a revolution. Contrary to what some might tell you, it doesn&rsquo;t need a committee, and it doesn&rsquo;t need a bunch of money. Linux proved exactly the opposite. <span style="font-size: x-large;">Lisp needs a benevolent dictator</span>. Lisp needs to ditch the name &ldquo;Lisp&rdquo;, since it scares people. And Lisp needs to learn from the lessons of the 45 years of languages that have followed it.</blockquote>Based on this comments and I&rsquo;m attaching this funny picture:<br /><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="http://2.bp.blogspot.com/_vLotBlgiVfE/TTryfUy5UwI/AAAAAAAAAbA/1e6SWfopmQw/s1600/media_httpwwwdeimeken_rvzBA.gif.scaled661.gif" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="640" src="http://2.bp.blogspot.com/_vLotBlgiVfE/TTryfUy5UwI/AAAAAAAAAbA/1e6SWfopmQw/s640/media_httpwwwdeimeken_rvzBA.gif.scaled661.gif" width="288" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;"><a href="http://danelliott.me/the-programmers-superiority-complex-in-hierar">The programmer&rsquo;s superiority complex&hellip; in hierarchy format.</a></td></tr></tbody></table></p>
+]]></content>
+  </entry>
+  
+</feed>

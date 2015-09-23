@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: I18n | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/i18n/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[I18n vs L10n]]></title>
+    <link href="http://halyph.com/blog/2013/02/09/i18n-vs-l10n/"/>
+    <updated>2013-02-09T19:00:00+02:00</updated>
+    <id>http://halyph.com/blog/2013/02/09/i18n-vs-l10n</id>
+    <content type="html"><![CDATA[<div style="text-align: center;"><img alt="" border="0" id="BLOGGER_PHOTO_ID_5842490196966451442" src="http://3.bp.blogspot.com/-PirdEBbp6xI/URSx4RnjKPI/AAAAAAAABLw/lGoV_BZGXsI/s320/36081cc2d92d9875e9e9d1116c900c41-753153.png" /></div>
+
+
+<div>I always had a trouble how to explain this subject to other people. That&#8217;s why I&#8217;ve decided to collect the main definitions (and explanations) of internationalization and localization in one place.</div>
+
+
+<div>
+    <br /><a href="http://www.w3.org/International/questions/qa-i18n">W3C </a>explain this concept pretty well:
+    <br />
+    <blockquote class="tr_bq"><b>Internationalization </b>is the design and development of a product, application or document content that enables easy localization for target audiences that vary in culture, region, or language.&nbsp;</blockquote>
+    <blockquote class="tr_bq">&nbsp;<b>Localization </b>refers to the adaptation of a product, application or document content to meet the language, cultural and other requirements of a specific target market (a locale). </blockquote>
+</div>
+
+
+<div>
+    <br />Let&#8217;s <span class="active"><span class="translation">paraphrase </span></span>these definitions based on <a href="https://developer.apple.com/library/mac/#documentation/MacOSX/Conceptual/BPInternational/Articles/InternatAndLocaliz.html#//apple_ref/doc/uid/20000277-SW1">Apple guides</a>:
+    <br />
+    <ul>
+        <li><b>Internationalization (i18n) </b>is the process of designing and building an application to facilitate localization. The main concern is that application can be adapted to various languages and regions without engineering changes.</li>
+        <li><b>Localization (l10n) </b>is the cultural and linguistic adaptation of an internationalized application to two or more culturally-distinct markets</li>
+    </ul>
+    <br />
+    <blockquote class="tr_bq">
+        <div>The primary task of localization is translating the user interface elements and documentation. Localization involves not only changing the language interaction, but also other relevant changes such as display of numbers, dates, currency, and so on. Other types of data, such as sounds and images, may require localization if they are culturally sensitive. The better internationalized an application is, the easier it is to localize it for a particular language and character encoding scheme. (<a href="http://docs.oracle.com/javase/tutorial/i18n/intro/index.html">http://docs.oracle.com/javase/tutorial/i18n/intro/index.html</a>)</div>
+    </blockquote>
+    <br /><span style="font-size: large;">Definitions from <a href="http://www-archive.mozilla.org/docs/refList/i18n/">Mozilla Internationalization &amp; Localization Guidelines</a>:</span>
+    <br />
+    <table border="1" cellpadding="4" style="border:1px solid black;">
+        <tbody>
+            <tr>
+                <td>Internationalization
+                    <br />(a.k.a. Globalization, a.k.a. Enabling) </td>
+                <td>Designing and developing a software product to function in multiple locales. This process involves identifying the locales that must be supported, designing features which support those locales, and writing code that functions equally well in any of the supported locales. </td>
+            </tr>
+            <tr>
+                <td>Localization</td>
+                <td>Modifying or adapting a software product to fit the requirements of a particular locale. This process includes (but may not be limited to) translating the user interface, documentation and packaging, changing dialog box geometries, customizing features (if necessary), and testing the translated product to ensure that it still works (at least as well as the original). </td>
+            </tr>
+            <tr>
+                <td>Localizability</td>
+                <td>The degree to which a software product can be localized. Localizable products separate data from code, correctly display the target language and function properly after being localized. </td>
+            </tr>
+            <tr>
+                <td>i18n</td>
+                <td>Acronym for &#8220;internationalization&#8221; (&#8220;i&#8221; + 18 letters + &#8220;n&#8221;; lower case i is used to distinguish it from the numeral 1 (one)). </td>
+            </tr>
+            <tr>
+                <td>L10n</td>
+                <td>Acronym for &#8220;localization&#8221; (&#8220;L&#8221; + 10 letters + &#8220;n&#8221;; upper case L is used to distinguish it from the numeral 1 (one)). </td>
+            </tr>
+            <tr>
+                <td>L12y</td>
+                <td>Acronym for &#8220;localizability&#8221; (&#8220;L&#8221; + 12 letters + &#8220;y&#8221;; upper case L is used to distinguish it from the numeral 1 (one)). </td>
+            </tr>
+            <tr>
+                <td>Locale</td>
+                <td>A set of conventions affected or determined by human language and customs, as defined within a particular geo-political region. These conventions include (but are not necessarily limited to) the written language, formats for dates, numbers and currency, sorting orders, etc. </td>
+            </tr>
+            <tr>
+                <td>Resource</td>
+                <td>1. Any part of a program which can appear to the user or be changed or configured by the user.
+                    <br />2. Any piece of the program&#8217;s data, as opposed to its code. </td>
+            </tr>
+            <tr>
+                <td>Core product</td>
+                <td>The language independent portion of a software product (as distinct from any particular localized version of that product - including the English language version). Sometimes, however, this term is used to refer to the English product as opposed to other localizations. </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div>
+    <br />
+</div>
+
+
+<div></div>
+
+
+<div>Links:</div>
+
+
+<ul>
+    <li><a href="http://www.w3.org/International/questions/qa-i18n">Localization vs. Internationalization</a></li>
+    <li><a href="http://www-archive.mozilla.org/docs/refList/i18n/">Mozilla Internationalization &amp; Localization Guidelines</a></li>
+    <li><a href="https://developer.apple.com/library/mac/#documentation/MacOSX/Conceptual/BPInternational/Articles/InternatAndLocaliz.html#//apple_ref/doc/uid/20000277-SW1">Mac Developer Library: Internationalization and Localization</a>&nbsp; </li>
+    <li><a href="http://docs.oracle.com/javase/tutorial/i18n/intro/index.html">http://docs.oracle.com/javase/tutorial/i18n/intro/index.html</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

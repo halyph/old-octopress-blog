@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Scrum | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/scrum/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[XP, Scrum and Kanban: How to Make the First Step?]]></title>
+    <link href="http://halyph.com/blog/2011/05/03/xp-scrum-and-kanban-how-to-make-first/"/>
+    <updated>2011-05-03T01:28:00+03:00</updated>
+    <id>http://halyph.com/blog/2011/05/03/xp-scrum-and-kanban-how-to-make-first</id>
+    <content type="html"><![CDATA[<p>There are so many books, articles and blog posts about the topic. And it&rsquo;s not the easy way to chose the right one, laconic and simple, with pragmatic advices and some real case studies.<br />The biggest issues for almost every &ldquo;agile&rdquo; related book is their size, about 300 pages (in general). But what about brief, all-sufficient book?<br />I can suggest two, short enough, books: <a href="http://www.infoq.com/minibooks/scrum-xp-from-the-trenches">Scrum and XP from the Trenches</a> and <a href="http://www.infoq.com/minibooks/kanban-scrum-minibook">Kanban and Scrum - making the most of both</a>. The names of the books are self-explained.<br /><br />You&rsquo;ve got the &ldquo;big picture&rdquo; after the reading of these books.</p>
+]]></content>
+  </entry>
+  
+</feed>

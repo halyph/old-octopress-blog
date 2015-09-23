@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Itbooze | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/itbooze/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Why You Should Join a User Group?]]></title>
+    <link href="http://halyph.com/blog/2012/03/27/why-you-should-join-user-group/"/>
+    <updated>2012-03-27T01:09:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/03/27/why-you-should-join-user-group</id>
+    <content type="html"><![CDATA[<p><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/-VEwmiZMVtfc/T3Dp5f52omI/AAAAAAAAAhw/t_woMeyxTHo/s1600/1332798208_users.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://1.bp.blogspot.com/-VEwmiZMVtfc/T3Dp5f52omI/AAAAAAAAAhw/t_woMeyxTHo/s1600/1332798208_users.png" /></a></div><br />Here I&rsquo;d like to highlight the most important benefits for me:<br /><ul><li><strong>Networking </strong>- ability to make social connections with developers from other companies</li><li><strong>Learning </strong>- it&rsquo;s the right place to learn something for free and improve you skills.</li><li><strong>Knowledge sharing</strong> - you shouldn&rsquo;t always take also you can give something to others. In our case it&rsquo;s your knowledge. Most people are very kind and really like to share own experience.</li><li><strong>Public Visibility</strong> - here you can promote yourself as passionate and well skilled developer</li><li><strong>Job Opportunities</strong> - you can find new contact which suggest a new job</li><li><strong>Find Expert</strong> - it&rsquo;s the right place to find the right people which might help you to solve some technical problems</li><li><strong>Become an Expert</strong> - it can happen </li><li><strong>Meet Nice People</strong> - just fact :)</li></ul><div>If you have other nice benefits please add in comments.</div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[IT Booze Meetup #2: Scala, Clojure, Groovy]]></title>
+    <link href="http://halyph.com/blog/2011/07/30/it-booze-meetup-2-scala-clojure-groovy/"/>
+    <updated>2011-07-30T16:11:00+03:00</updated>
+    <id>http://halyph.com/blog/2011/07/30/it-booze-meetup-2-scala-clojure-groovy</id>
+    <content type="html"><![CDATA[<p><br />Today, I had a chance to attend local user group <a href="https://sites.google.com/site/itboozeinif/home">IT Booze</a>. It was the second meetup and it was very interesting, because of topics which were under discussion: Scala, Clojure And Groovy. I love such events especially in my town. :-)
+<br />
+<br />I&rsquo;d like to share my <i>reflections </i>regarding these cool languages.
+<br />
+<br />As you know these languages are very popular on JVM (of cause not so popular as Java :-). And I&rsquo;m sure every passionate Java/JVM developer has been thinking &ldquo;what&rsquo;s the <b>Next</b> <b>Big Language</b>&rdquo;. It&rsquo;s really hard to choose the next one.
+<br />
+<br />So, here is a short &ldquo;brain snapshot&rdquo;:
+<br /></p>
+
+<ol>
+    <li>Scala and Clojure are great languages with huge amount of interesting features, but to master them we need to use Scala (or Clojure) on daily basis.</li>
+    <li>Scala appeared as complex language. I think it requires a <span class="st">steeper learning curve then Clojure or Groovy. It means we must invest much, much more.</span></li>
+    <li><span class="st">Clojure has lisp syntax, but innovative concurrency concept is worth to look into. I say <b>lisp</b>, because it might be a stopper for someone to evaluate it as a next big language.</span></li>
+    <li><span class="st">Clojure and functional programming require to &#8220;patch&#8221; our way of thinking. And it can be difficult.</span></li>
+    <li><span class="st">Groovy is agile language. We (Java developers) can start using it right away. I think we should invest more in Groovy just to boost our productivity in: scripting, testing, automation routine work, etc. It doesn&#8217;t require big investments and we can learn as we go.</span></li>
+</ol>
+
+
+<p><span class="st"> So, here is outcome from this meetup:</span>
+<br /></p>
+
+<ul>
+    <li><span class="st">start using Groovy</span></li>
+    <li><span class="st">look into Clojure concepts</span></li>
+    <li><span class="st">postpone Scala for now</span></li>
+</ul>
+
+
+<p><span class="st">Could you please share your thoughts regarding this?</span></p>
+]]></content>
+  </entry>
+  
+</feed>

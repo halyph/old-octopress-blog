@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Learning | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/learning/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-07-14T00:58:51+03:00</updated>
+  <updated>2015-09-23T06:22:09+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -91,6 +91,76 @@ can’t change the company because of geographical constrains. Keeping all
 these in mind you should spend your time effectively and learn
 really valuable stuff. <br/>
 Try to avoid hipster <a href="http://en.wikipedia.org/wiki/Bandwagon_effect">bandwagon effect</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My Reflection on "Programming Achievements: How to Level Up as a Developer"]]></title>
+    <link href="http://halyph.com/blog/2011/08/15/recently-ive-read-amazing-blog-post/"/>
+    <updated>2011-08-15T00:52:00+03:00</updated>
+    <id>http://halyph.com/blog/2011/08/15/recently-ive-read-amazing-blog-post</id>
+    <content type="html"><![CDATA[<p>Recently, I&rsquo;ve read an amazing blog post <a href="http://jasonrudolph.com/blog/2011/08/09/programming-achievements-how-to-level-up-as-a-developer/">&ldquo;Programming Achievements: How to Level Up as a Developer&rdquo;</a>. Also, it worth to read comments to this post, they are really interesting, subjective and personal. But, in any case you&rsquo;ll get something to think about. How to measure your own professional achievements, different ways for improvements and some start point for planning all these stuff.<br /><br />The author suggests to use GitHub Gist as a natural way of improvements to keep them tracking. So, I&rsquo;ve just forked his gist and performed several initial changes (see <a href="https://gist.github.com/1141765"><a href="https://gist.github.com/1141765">https://gist.github.com/1141765</a></a>):<br /><br /><script src="https://gist.github.com/1141765.js?file=programming-achievements.md"></script></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Choose the Next Programming Language to Learn?]]></title>
+    <link href="http://halyph.com/blog/2011/02/11/how-to-choose-next-programming-language/"/>
+    <updated>2011-02-11T00:50:00+02:00</updated>
+    <id>http://halyph.com/blog/2011/02/11/how-to-choose-next-programming-language</id>
+    <content type="html"><![CDATA[<p>I believe that this question has been appearing in the brains very often.<br /><i>Note</i>: I&rsquo;m writing from Java developer point of view.<br /><br />How to solve this dilemma? I said &ldquo;dilemma&rdquo; because it&rsquo;s investment in the new knowledge. And every new knowledge should bring some benefits. The wrong investment is equal to waste of your time.<br /><br />As a Java developer I think I should invest outside the JVM. It&rsquo;s even more important in nowadays. Oracle is more aggressive then Sun was. So, investment in non-JVM &ldquo;platform&rdquo;/language can protect the own future.<br /><br />I don&rsquo;t want to write about some definite language. It&rsquo;s not important right now. The most important thing is to learn something new which is totally separated from JVM.<br /><br />Someone can say: &ldquo;Try Groovy, Scala or Clojure&rdquo;. Good point. But,&nbsp; it&rsquo;s JVM (even if they are &ldquo;beautiful&rdquo; and interesting choices). One exception: you can have a possibility to use these languages on the job project. In that case it&rsquo;s ok. Just pick the right one and start the party. In other case avoid them.<br /><br />There is NO right answer. Just define your own philosophy (language to learn) and keep it alive.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Review: How to Become a Hacker?]]></title>
+    <link href="http://halyph.com/blog/2011/01/10/review-how-to-become-hacker/"/>
+    <updated>2011-01-10T23:53:00+02:00</updated>
+    <id>http://halyph.com/blog/2011/01/10/review-how-to-become-hacker</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: left;"></div>
+
+
+<div style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;">
+    <a href="http://2.bp.blogspot.com/_vLotBlgiVfE/TSt38br1t5I/AAAAAAAAAa0/TdFtyUtBKRo/s1600/glider.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="http://2.bp.blogspot.com/_vLotBlgiVfE/TSt38br1t5I/AAAAAAAAAa0/TdFtyUtBKRo/s1600/glider.png" /></a>Recently I&#8217;ve read these philosophical essays:<a href="http://www.catb.org/esr/faqs/hacker-howto.html">  How To Become A Hacker, by Eric Steven Raymond</a> and <a href="http://norvig.com/21-days.html">Teach Yourself Programming in Ten Years, by Peter Norvig.</a></div>
+
+
+<p><br />
+<br />It&rsquo;s worth reading. I think that it&rsquo;s like hacker &ldquo;mantra&rdquo; ;-) I don&rsquo;t want to retell all that stuff. Just want to sum up.
+<br />
+<br /><span style="font-size: large;">1. Programming language learning. </span>
+<br />We should learn different programming languages from paradigm point of view: &ldquo;classical&rdquo; OOP languages (C++, C#, Java), procedural languages &copy;, functional languages (Lisp family languages: Common Lisp, Scheme, Clojure), dynamic and scripting languages (Perl, Python, Ruby) and web-related (JavaScript).
+<br /></p>
+
+<blockquote><i>&#8220;Besides being the most important &#8230; languages, they represent very different approaches to programming, and each will educate you in valuable ways.&#8221;</i></blockquote>
+
+
+<p>It means that you should&nbsp; learn languages from different paradigms to get some conceptual&nbsp; knowledge.
+<br /><i>E.g. </i>You shouldn&rsquo;t learn Java and&nbsp; C#, or Python and Ruby. I think it&rsquo;s just waste of your time.
+<br /></p>
+
+<blockquote><b><i>&#8220;To be a real hacker, you need to get to the point where you can learn a new language in days by relating what&#8217;s in the manual to what you already know.This means you should learn several very different languages.&#8221;</i></b></blockquote>
+
+
+<p><span style="font-size: large;">2. Learn Unix/Linux.</span>
+<br /><span style="font-size: small;">I think the best way to learn is to start playing with Ubuntu.</span>
+<br />
+<br /><span style="font-size: small;"><span style="font-size: large;">3. Learn English and native language.&nbsp;</span> </span>
+<br /><span style="font-size: small;">You should be able the speak and write </span>fluently in both.
+<br />
+<br /><span style="font-size: large;">4. Persistent learning </span>
+<br /><span style="font-size: small;">It&rsquo;s the key point to success in any profession.</span>
+<br />
+<br />
+<br /><span style="font-size: large;">Summary</span>
+<br /></p>
+
+<blockquote><i>&#8220;To follow the path:</i>
+    <br /><i>look to the master,</i>
+    <br /><i>follow the master,</i>
+    <br /><i>walk with the master,</i>
+    <br /><i>see through the master,</i>
+    <br /><i>become the master.&#8221;</i></blockquote>
+
 ]]></content>
   </entry>
   

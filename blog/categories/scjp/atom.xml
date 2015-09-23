@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Scjp | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/scjp/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[What Is the Best Book for SCJP/OCPJP Exam Preparation?]]></title>
+    <link href="http://halyph.com/blog/2012/01/09/what-is-best-book-for-scjpocpjp-exam/"/>
+    <updated>2012-01-09T13:25:00+02:00</updated>
+    <id>http://halyph.com/blog/2012/01/09/what-is-best-book-for-scjpocpjp-exam</id>
+    <content type="html"><![CDATA[<p>There are two major books for the exam preparation:<br /><br /><a href="http://www.amazon.com/gp/product/0071591060/ref=as_li_ss_il?ie=UTF8&amp;tag=knowisever-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0071591060"><img border="0" src="http://ws.assoc-amazon.com/widgets/q?_encoding=UTF8&amp;Format=_SL160_&amp;ASIN=0071591060&amp;MarketPlace=US&amp;ID=AsinImage&amp;WS=1&amp;tag=knowisever-20&amp;ServiceVersion=20070822" /></a><img alt="" border="0" height="1" src="http://www.assoc-amazon.com/e/ir?t=knowisever-20&amp;l=as2&amp;o=1&amp;a=0071591060" style="border: none !important; margin: 0px !important;" width="1" /><br /><b>SCJP Sun Certified Programmer for Java 6 Exam 310-065, by Katherine Sierra, Bert Bates</b><br /><br /><a href="http://www.amazon.com/gp/product/0321556054/ref=as_li_ss_il?ie=UTF8&amp;tag=knowisever-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321556054"><img border="0" src="http://ws.assoc-amazon.com/widgets/q?_encoding=UTF8&amp;Format=_SL160_&amp;ASIN=0321556054&amp;MarketPlace=US&amp;ID=AsinImage&amp;WS=1&amp;tag=knowisever-20&amp;ServiceVersion=20070822" /></a><img alt="" border="0" height="1" src="http://www.assoc-amazon.com/e/ir?t=knowisever-20&amp;l=as2&amp;o=1&amp;a=0321556054" style="border: none !important; margin: 0px !important;" width="1" /><br /><b>A Programmer&rsquo;s Guide to Java SCJP Certification: A Comprehensive Primer (3rd Edition), by Khalid Mughal, Rolf Rasmussen</b><br /><br />I&rsquo;ve read both books and must admit that &ldquo;SCJP Sun Certified Programmer for Java 6 Exam 310-065, by Katherine Sierra&rdquo; is the best. You can also have a look into  <br /><a href="http://www.amazon.com/gp/product/0072260882/ref=as_li_ss_il?ie=UTF8&amp;tag=knowisever-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0072260882"><img border="0" src="http://ws.assoc-amazon.com/widgets/q?_encoding=UTF8&amp;Format=_SL160_&amp;ASIN=0072260882&amp;MarketPlace=US&amp;ID=AsinImage&amp;WS=1&amp;tag=knowisever-20&amp;ServiceVersion=20070822" /></a><img alt="" border="0" height="1" src="http://www.assoc-amazon.com/e/ir?t=knowisever-20&amp;l=as2&amp;o=1&amp;a=0072260882" style="border: none !important; margin: 0px !important;" width="1" /><br /><b>OCP Java SE 6 Programmer Practice Exams (Exam 310-065) (Certification Press), by Bert Bates, Katherine Sierra</b><br />I can say it&rsquo;s like a companion book there are a plenty of nice mock exam questions.   <br /><br />I can say that you shouldn&rsquo;t use &ldquo;A Programmer&rsquo;s Guide to Java SCJP Certification: A Comprehensive Primer (3rd Edition), by Khalid Mughal, Rolf Rasmussen&rdquo; because:<br /><ul><li>there too many unnecessary info which is totally useless on exam</li><li>book written style isn&rsquo;t perfect, it&rsquo;s really hard to follow the main idea</li><li>explanation of some ideas is very complex and bloated, it can be simplified</li><li>book typographic style is really ugly in comparison with &ldquo;SCJP Sun Certified Programmer for Java 6 Exam 310-065, by Katherine Sierra&rdquo;&nbsp;</li></ul>Your can simplify your exam preparation if you stick to one book. Keep in mind your goal is optimize the exam preparation and avoid the redundant reading.</p>
+]]></content>
+  </entry>
+  
+</feed>

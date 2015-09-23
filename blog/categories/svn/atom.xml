@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Svn | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/svn/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Use Dropbox as SVN Repository?]]></title>
+    <link href="http://halyph.com/blog/2010/12/10/how-to-use-dropbox-as-svn-repository/"/>
+    <updated>2010-12-10T00:13:00+02:00</updated>
+    <id>http://halyph.com/blog/2010/12/10/how-to-use-dropbox-as-svn-repository</id>
+    <content type="html"><![CDATA[<p>You probably know about such cool stuff as Dropbox. So, I use it as on-line SVN repository for my own projects. It gives me an opportunity to have my own repository everywhere. <br />Check this post before go ahead: <a href="http://mlevit.wordpress.com/2009/11/18/how-to-use-subversion-dropbox-to-create-an-effective-work-managementbackup-system/">How to use Subversion &amp; Dropbox to create an effective work  management/backup&nbsp;system</a><br /><br />So,<b> 1) you have to create SVN repository in some Dropbox folder</b>; 2) do the checkout from this folder on every work machine where you need to do something with your SVN repository. That&rsquo;s it.</p>
+]]></content>
+  </entry>
+  
+</feed>

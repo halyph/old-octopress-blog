@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Books | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/books/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-07-14T00:58:51+03:00</updated>
+  <updated>2015-09-23T06:22:09+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -78,6 +78,61 @@ in Groovy. Save your time and automate with Groovy.</p>
 <ul>
 <li> <a href="http://www.manning.com/kousen/">Making Java Groovy, by Ken Kousen</a></li>
 </ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Review: Deploying With JRuby]]></title>
+    <link href="http://halyph.com/blog/2013/02/02/review-deploying-with-jruby/"/>
+    <updated>2013-02-02T21:00:00+02:00</updated>
+    <id>http://halyph.com/blog/2013/02/02/review-deploying-with-jruby</id>
+    <content type="html"><![CDATA[<div style="text-align: center;"><a href="http://www.amazon.com/gp/product/1934356972/ref=as_li_ss_il?ie=UTF8&amp;tag=knowisever-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1934356972"><img border="0" src="http://ws.assoc-amazon.com/widgets/q?_encoding=UTF8&amp;Format=_SL160_&amp;ASIN=1934356972&amp;MarketPlace=US&amp;ID=AsinImage&amp;WS=1&amp;tag=knowisever-20&amp;ServiceVersion=20070822" /></a></div>
+
+
+<p>This books is unique, because the author (Joe Kutner) did really great work collecting several JRuby on Rails deploying approaches in one book. It&rsquo;s very convenience if you need some sort of review in scope of this subject.<br /><br />I believe that any Rails developer which think that Java/JVM is enemy camp should read it. The tools which are highlighted in this book are very interesting and provide for Ruby/Rails developers broader space.<br /><br />As for Java developers it&rsquo;s a good start point for integration Rails in corporate Java environment. The reader get all required info to get started.<br /><br />Here is a list of tools:<br /><ul><li>Warbler (<a href="https://github.com/jruby/warbler"><a href="https://github.com/jruby/warbler">https://github.com/jruby/warbler</a></a>) - Warbler provides a minimal, flexible, Ruby-like way to bundle up all of your application files for deployment to a Java environment</li><li>Trinidad (<a href="https://github.com/trinidad/trinidad"><a href="https://github.com/trinidad/trinidad">https://github.com/trinidad/trinidad</a></a>) - Trinidad allows you to run Rails or Rack applications within an embedded  Apache Tomcat container. </li><li>Kirk (<a href="https://github.com/strobecorp/kirk"><a href="https://github.com/strobecorp/kirk">https://github.com/strobecorp/kirk</a></a>) - Kirk is a wrapper around Jetty that hides all of the insanity and wraps your Rack application in a loving embrace</li><li>Torquebox (<a href="http://torquebox.org/"><a href="http://torquebox.org">http://torquebox.org</a></a>) - TorqueBox is a new kind of <a href="http://www.ruby-lang.org/en/">Ruby</a> application                   platform that supports popular                   technologies such as <a href="http://rubyonrails.org/">Ruby on Rails</a> and                   <a href="http://www.sinatrarb.com/">Sinatra</a>, while extending                   the footprint of Ruby                   applications to include built-in support for services such as messaging,                   scheduling, caching, and daemons.</li><li>jetpack (<a href="https://github.com/square/jetpack"><a href="https://github.com/square/jetpack">https://github.com/square/jetpack</a></a>), it wasn&rsquo;t mentioned in book. It packages your JRuby webapp for Jetty.</li></ul>I must admit that the most impressive is Torquebox. It&rsquo;s very powerful and it uses all power of JBoss App Server:<br /><blockquote class="tr_bq">TorqueBox provides an all-in-one environment, built upon the latest                   <a href="http://www.jboss.org/jbossas/">JBoss AS</a> Java application server and                   <a href="http://jruby.org/">JRuby</a>.&nbsp; </blockquote>Such features as messaging, long running jobs, scheduled jobs are provided out of the box, have nice API which easy to use. Have a try.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Review: Practices of an Agile Developer: Working in the Real World]]></title>
+    <link href="http://halyph.com/blog/2012/10/08/review-practices-of-agile-developer/"/>
+    <updated>2012-10-08T23:41:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/10/08/review-practices-of-agile-developer</id>
+    <content type="html"><![CDATA[<div style="text-align: center;"><a href="http://www.amazon.com/gp/product/097451408X/ref=as_li_ss_il?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=097451408X&amp;linkCode=as2&amp;tag=knowisever-20"><img border="0" src="http://ws.assoc-amazon.com/widgets/q?_encoding=UTF8&amp;ASIN=097451408X&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=US&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=knowisever-20" /></a></div>
+
+
+<p>I&rsquo;ve read this book the third time. Authors (Venkat Subramaniam and Andy Hunt) shared their ideas and better practices regarding &ldquo;how to become a real agile developer&rdquo;.<br />Each chapter has predefined structure:<br /><ol><li>General idea</li><li>Why something went wrong </li><li>Applying the practice</li><li>What might go wrong if we try to follow the practice without common sense</li><li>Summary</li></ol>I can suggest this book for any developer who has been diving in the world of &ldquo;agile&rdquo;. Even more, any junior developer must read this book. After the reading and applying some of the recipes you&rsquo;ve got real improvements in your daily work. Do not hesitate and start reading right away.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Review: The Clean Coder: A Code of Conduct for Professional Programmers]]></title>
+    <link href="http://halyph.com/blog/2012/09/28/review-clean-coder-code-of-conduct-for/"/>
+    <updated>2012-09-28T00:59:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/09/28/review-clean-coder-code-of-conduct-for</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://www.amazon.com/gp/product/0137081073/ref=as_li_ss_il?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0137081073&amp;linkCode=as2&amp;tag=knowisever-20" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://ws.assoc-amazon.com/widgets/q?_encoding=UTF8&amp;ASIN=0137081073&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=US&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=knowisever-20" /></a>
+</div>
+
+
+<p><br />This book has <i>wow </i>effect for me. The author is famous <a href="https://twitter.com/unclebobmartin" target="_blank">@unclebobmartin</a>. I called books of such type as <b><i>&ldquo;craftsmanship</i></b>&rdquo; books (term borrowed from <a href="https://twitter.com/unclebobmartin" target="_blank">@unclebobmartin</a>). This book is like a companion book for <a href="http://www.amazon.com/The-Pragmatic-Programmer-Journeyman-Master/dp/020161622X/ref=pd_sim_b_3">The Pragmatic Programmer</a>, but it has a little bit another &ldquo;inflection&rdquo;:
+<br /></p>
+
+<ol>
+    <li>Book has close relation to software engineering as a profession and style is narrative. It very easy to read and follow the general idea.</li>
+    <li>Uncle Bob did very important thing (as for me), he told us about his own failures and their consequences. It is looks very honest which brings together author and reader.</li>
+    <li>He isn&#8217;t cardinal in his statements. Be pragmatic, borrow his experience and just don&#8217;t do the same mistakes.</li>
+    <li>You won&#8217;t find any technological advices in this book. There is ONLY life concepts :)</li>
+    <li>It&#8217;s like a craftsmanship Zen for software engineers.</li>
+    <li>Uncle Bob gives us bootstrap cookbook for non-technological skills.</li>
+</ol>
+
+
+<p>&nbsp;Read it. Re-think the ideas. And improve your skills.
+<br /></p>
+
+<ol></ol>
 
 ]]></content>
   </entry>

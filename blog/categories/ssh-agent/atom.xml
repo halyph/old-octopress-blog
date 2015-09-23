@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ssh-agent | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/ssh-agent/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Use SSH-Agent in Msysgit?]]></title>
+    <link href="http://halyph.com/blog/2012/08/13/how-to-use-ssh-agent-in-msysgit/"/>
+    <updated>2012-08-13T19:33:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/08/13/how-to-use-ssh-agent-in-msysgit</id>
+    <content type="html"><![CDATA[<p><b>UPDATE</b> 08/14/12: changed .bashrc file<br /><br />I assume that You&rsquo;ve generated and added SSH key as was described here: <a href="https://help.github.com/articles/generating-ssh-keys#platform-windows">Generating SSH Keys</a>.<br />It means you&rsquo;ve got something like this in Yours user folder:<br /><br /><pre class="brush: bash;">[C:\Users&amp;lt;user_name&gt;.ssh]<br />$ dir /b<br />id_rsa<br />id_rsa.pub<br />known_hosts<br /></pre>But, when You communicate with GitHub remote (via calling push/pull/fetch) You are getting the next message every time:  <br /><pre class="brush: bash;">Enter passphrase for key &lsquo;/c/Users/&lt;user_name&gt;/.ssh/id_rsa&rsquo;:</pre>There is a simple <a href="http://anterence.blogspot.com/2012/01/ssh-agent-in-msysgit.html">solution</a>:<br /><ol><li>Add a file called <b>.bashrc</b> to my home folder (C:\Users&amp;lt;user_name&gt;)</li><li><strike>Add the next content to this file:</strike></li><pre><strike>#! /bin/bash<br />eval <code>ssh-agent -s</code><br />ssh-add</strike><br /></pre><li>Approach used in case #2 it dangerous because it create <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">ssh-agent</span> instance every time you run msysgit shell.  I&rsquo;ve <a href="https://help.github.com/articles/working-with-ssh-key-passphrases#platform-windows">tested the next (similar) solution from GitHub</a> again, very carefully and&nbsp; it DOES work. So, you have to create .bashrc (or .profile) file with the next content:</li><pre class="brush: bash;">#! /bin/bash<br />SSH_ENV=&ldquo;$HOME/.ssh/environment&rdquo;<br /><br /># start the ssh-agent<br />function start_agent {<br />    echo &ldquo;Initializing new SSH agent&hellip;&rdquo;<br />    # spawn ssh-agent<br />    ssh-agent | sed &rsquo;s/^echo/#echo/&lsquo; &gt; &ldquo;$SSH_ENV&rdquo;<br />    echo succeeded<br />    chmod 600 &ldquo;$SSH_ENV&rdquo;<br />    . &ldquo;$SSH_ENV&rdquo; &gt; /dev/null<br />    ssh-add<br />}<br /><br /># test for identities<br />function test_identities {<br />    # test whether standard identities have been added to the agent already<br />    ssh-add -l | grep &ldquo;The agent has no identities&rdquo; &gt; /dev/null<br />    if [ $? -eq 0 ]; then<br />        ssh-add<br />        # $SSH_AUTH_SOCK broken so we start a new proper agent<br />        if [ $? -eq 2 ];then<br />            start_agent<br />        fi<br />    fi<br />}<br /><br /># check for running ssh-agent with proper $SSH_AGENT_PID<br />if [ -n &ldquo;$SSH_AGENT_PID&rdquo; ]; then<br />    ps -ef | grep &ldquo;$SSH_AGENT_PID&rdquo; | grep ssh-agent &gt; /dev/null<br />    if [ $? -eq 0 ]; then<br />  test_identities<br />    fi<br /># if $SSH_AGENT_PID is not properly set, we might be able to load one from<br /># $SSH_ENV<br />else<br />    if [ -f &ldquo;$SSH_ENV&rdquo; ]; then<br />  . &ldquo;$SSH_ENV&rdquo; &gt; /dev/null<br />    fi<br />    ps -ef | grep &ldquo;$SSH_AGENT_PID&rdquo; | grep ssh-agent &gt; /dev/null<br />    if [ $? -eq 0 ]; then<br />        test_identities<br />    else<br />        start_agent<br />    fi<br />fi<br /></pre></ol><br />From now on You have to enter passphrase only once when you start msysgit shell: <br /><pre class="brush: bash;">Welcome to Git (version 1.7.11-preview20120710)<br /><br /><br />Run 'git help git&rsquo; to display the help index.<br />Run &lsquo;git help &lt;command&gt;&rsquo; to display help for specific commands.<br />Initializing new SSH agent&hellip;<br />succeeded<br />Enter passphrase for /c/Users/&lt;user_name&gt;/.ssh/id_rsa:<br />Identity added: /c/Users/&lt;user_name&gt;/.ssh/id_rsa (/c/Users/&lt;user_name&gt;/.ssh/id_rsa)<br /></pre><br /><strike><b>Please note</b>: I&rsquo;ve <a href="https://help.github.com/articles/working-with-ssh-key-passphrases#platform-windows">tested the next (similar) solution from GitHub</a> and it doesn&rsquo;t work.</strike> It works.<strike><br /></strike></p>
+]]></content>
+  </entry>
+  
+</feed>

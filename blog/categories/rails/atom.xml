@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-07-14T00:58:51+03:00</updated>
+  <updated>2015-09-23T06:22:09+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -336,6 +336,204 @@ But, in the same time you&rsquo;d like to use Rails (due to it&rsquo;s productiv
 <li>&ldquo;Keeping Your Massive Rails App From Turning Into a S#!t Show with Benjamin Smith&rdquo; (see <a href="https://vimeo.com/76094344">video</a> and <a href="https://speakerdeck.com/benjaminleesmith/keeping-your-massive-rails-app-from-turning-into-a-s-number-t-show-windycityrails-2013">slides</a>)</li>
 </ul>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Install Rails on Ubuntu 12.04 With RVM Support]]></title>
+    <link href="http://halyph.com/blog/2012/09/12/install-rails-on-ubuntu-1204-with-rvm/"/>
+    <updated>2012-09-12T22:51:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/09/12/install-rails-on-ubuntu-1204-with-rvm</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/-HNu7PnKaFw8/UE46vvlhPxI/AAAAAAAAApA/2PTpOPatjl4/s1600/RVM.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://3.bp.blogspot.com/-HNu7PnKaFw8/UE46vvlhPxI/AAAAAAAAApA/2PTpOPatjl4/s1600/RVM.png" /></a></div>
+
+
+<p>Nowadays, <a href="https://rvm.io/" target="_blank">RVM</a> is very popular in Ruby/Rails community on Linux/OS X. Even more, it&rsquo;s best practice to use <a href="https://rvm.io/" target="_blank">RVM</a> for Ruby environment management. Ubuntu is my major Linux distribution. Here I&rsquo;ve collected steps for installing Ruby, Rails via RVM on Ubuntu 12.04. I must admit that in many cases it&rsquo;s the re-post from different sources.<br /><br />So, let&rsquo;s start.<br /><br /><b>Install Ruby, Rails </b>(see the <a href="https://www.digitalocean.com/community/articles/how-to-install-ruby-on-rails-on-ubuntu-12-04-lts-precise-pangolin-with-rvm" target="_blank">source</a>):<br /><pre class="brush: bash;">sudo apt-get update<br />sudo apt-get install curl<br />curl -L get.rvm.io | bash -s stable<br />source ~/.rvm/scripts/rvm<br />rvm requirements<br />rvmsudo apt-get install build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion<br />rvm install 1.9.3<br />rvm use 1.9.3 &ndash;default<br />rvm rubygems current<br />gem install rails<br /></pre>Please check the <a href="https://www.digitalocean.com/community/articles/how-to-install-ruby-on-rails-on-ubuntu-12-04-lts-precise-pangolin-with-rvm">original</a> in case you have some issues during this process.<br /><br /><b>Fix Bundler issues:</b><br />If you create Rails project or any other Ruby project which supports Bundler and run install command, you will get the next error:<br /><pre class="brush: bash;">$ bundle install<br />&hellip;<br />ERRRO: Gem bundler is not installed, run <code>gem install bundler</code> first.<br /></pre><br />But <code>gem list</code> clearly shows us that bundler has been properly installed. To fix this problem We have to tweak <code>.bashrc</code> file a little (see the <a href="http://railsforum.com/viewtopic.php?pid=149944#p149944" target="_blank">original idea</a>): <br /><pre class="brush: bash;">echo &lsquo;[[ -s &ldquo;$HOME/.rvm/scripts/rvm&rdquo; ]] &amp;&amp; . &ldquo;$HOME/.rvm/scripts/rvm&rdquo; # Load RVM function&rsquo; &gt;&gt; ~/.bashrc<br />source ~/.bashrc<br /></pre><br /><b>Fix rails server throw could not find JavaScript runtime</b><br />Now you will get the next interesting error when you tried to run <code>rails server</code>:<br /><pre class="brush: bash;">username@ubuntu:~/<em>Projects/Rails/blog$ rails server<br />/home/username/.rvm/gems/ruby-1.9.3-p194/gems/execjs-1.4.0/lib/execjs/runtimes.rb:51:in <code>autodetect': Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes. (ExecJS::RuntimeUnavailable)&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/execjs-1.4.0/lib/execjs.rb:5:in</code>&lt;module:execjs>&lsquo;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/execjs-1.4.0/lib/execjs.rb:4:in <code>&lt;top required="required"&gt;'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/coffee-script-2.2.0/lib/coffee_script.rb:1:in</code>require&rsquo;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/coffee-script-2.2.0/lib/coffee_script.rb:1:in <code>&lt;top required="required"&gt;'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/coffee-script-2.2.0/lib/coffee-script.rb:1:in</code>require&#8217;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/coffee-script-2.2.0/lib/coffee-script.rb:1:in <code>&lt;top required="required"&gt;'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/coffee-rails-3.2.2/lib/coffee-rails.rb:1:in</code>require&#8217;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/coffee-rails-3.2.2/lib/coffee-rails.rb:1:in <code>&lt;top required="required"&gt;'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/bundler-1.2.0/lib/bundler/runtime.rb:68:in</code>require&#8217;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/bundler-1.2.0/lib/bundler/runtime.rb:68:in <code>block (2 levels) in require'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/bundler-1.2.0/lib/bundler/runtime.rb:66:in</code>each&#8217;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/bundler-1.2.0/lib/bundler/runtime.rb:66:in <code>block in require'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/bundler-1.2.0/lib/bundler/runtime.rb:55:in</code>each&#8217;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/bundler-1.2.0/lib/bundler/runtime.rb:55:in <code>require'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/bundler-1.2.0/lib/bundler.rb:128:in</code>require&#8217;<br /> from /home/username/</em>Projects/Rails/blog/config/application.rb:7:in <code>&lt;top required="required"&gt;'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/lib/rails/commands.rb:53:in</code>require&#8217;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/lib/rails/commands.rb:53:in <code>block in &lt;top required="required"&gt;'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/lib/rails/commands.rb:50:in</code>tap&#8217;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/lib/rails/commands.rb:50:in <code>&lt;top required="required"&gt;'&lt;br /&gt; from script/rails:6:in</code>require&#8217;<br /> from script/rails:6:in `<main>&lsquo;<br /><br /></main></top></top></top></top></top></top></top>&lt;/module:execjs></pre>Install Node.js to fix this error: <br /><pre class="brush: bash;">$ sudo apt-get install nodejs<br /></pre>Check this wiki &ldquo;<a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager">Installing Node.js via package manager</a>&rdquo; If you have some troubles with installing node.js <br /><br /><br />Links:<br /><ul><li><a href="https://www.digitalocean.com/community/articles/how-to-install-ruby-on-rails-on-ubuntu-12-04-lts-precise-pangolin-with-rvm">How to Install Ruby on Rails on Ubuntu 12.04 with RVM</a></li><ul><li><a href="http://www.youtube.com/watch?v=RDuSrP3w06Y" target="_blank">YouTube video</a>&nbsp; </li></ul><li><a href="http://railsforum.com/viewtopic.php?pid=149944#p149944" target="_blank">railsforum.com - ERRRO: Gem bundler is not installed, but it seems to be&hellip;</a></li><li><a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager">Installing Node.js via package manager</a> </li><li><a href="http://stackoverflow.com/questions/6282307/execjs-and-could-not-find-a-javascript-runtime">ExecJS and could not find a JavaScript runtime</a></li></ul></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Setup Ruby/Rails Development Environment, Part 2 - E-TextEditor]]></title>
+    <link href="http://halyph.com/blog/2010/04/22/how-to-setup-rubyrails-development_22/"/>
+    <updated>2010-04-22T01:30:00+03:00</updated>
+    <id>http://halyph.com/blog/2010/04/22/how-to-setup-rubyrails-development_22</id>
+    <content type="html"><![CDATA[<p>There are tons of text editors which are good enough for Ruby/Rails/web development. And it&rsquo;s not so easier to choose the &ldquo;best&rdquo; editor.
+<br />I&rsquo;d like to talk about my top three editors which like the most:
+<br /></p>
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <div class="separator" style="clear: both; text-align: center;">
+                    <a href="http://3.bp.blogspot.com/_vLotBlgiVfE/S8kW9Jrzs8I/AAAAAAAAAW8/KWlGtADhPWg/s1600/images.jpeg" imageanchor="1" ><img border="0" src="http://3.bp.blogspot.com/_vLotBlgiVfE/S8kW9Jrzs8I/AAAAAAAAAW8/KWlGtADhPWg/s320/images.jpeg" /></a>
+                </div>
+            </td>
+            <td>
+                <br /><a href="http://notepad-plus.sourceforge.net/"><b>Notepad++</b></a>
+                <br />It&#8217;s the base text editor on my workstation. It has active community, plug-in repository developing fast enough. But, this editor doesn&#8217;t have Rails syntax highlight, here I mean ERB files. So, for Rails editing I have to skip it (for now)</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="separator" style="clear: both; text-align: center;">
+                    <a href="http://1.bp.blogspot.com/_vLotBlgiVfE/S8kW5uPHbDI/AAAAAAAAAWs/INRyOfGhWjc/s1600/app-thumbnail.png" imageanchor="1" ><img border="0" src="http://1.bp.blogspot.com/_vLotBlgiVfE/S8kW5uPHbDI/AAAAAAAAAWs/INRyOfGhWjc/s320/app-thumbnail.png" /></a>
+                </div>
+            </td>
+            <td><a href="http://www.vim.org/"><b>Vim</b></a>
+                <br />Cross<b>-</b>platform text editor. It has BIG, super active community with tons of plugins.</td>
+        </tr>
+        <tr>
+            <td>
+                <br />
+                <div class="separator" style="clear: both; text-align: center;">
+                    <a href="http://4.bp.blogspot.com/_vLotBlgiVfE/S89xU4N-bvI/AAAAAAAAAXc/aU5CYbOPPwc/s1600/e-texteditor.jpg" imageanchor="1" ><img border="0" src="http://4.bp.blogspot.com/_vLotBlgiVfE/S89xU4N-bvI/AAAAAAAAAXc/aU5CYbOPPwc/s1600/e-texteditor.jpg" /></a>
+                </div>
+            </td>
+            <td><a href="http://www.e-texteditor.com/"><b>E-TextEditor</b></a>
+                <br />It&#8217;s Textmate clone for Windows.</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<p><br />There are two choices for using these text editors:
+<br /></p>
+
+<ol>
+    <li>Use Notepad++/E-TextEditor (or other editors) on host machine and connect to Ubuntu VM via tool such as <b><a href="http://www.expandrive.com/windows">ExpanDrive</a><span style="font-weight: normal;">.</span></b></li>
+    <li>Use Vim via SSH (Putty) terminal. You&#8217;ll have got plain linux terminal with all restrictions, but in this case you shouldn&#8217;t install such tool as ExpanDrive which cost some money.</li>
+</ol>
+
+
+<p>So, I will describe first solutions in this post and second - in the next post.
+<br />
+<br /><strong>E-TextEditor and ExpanDrive</strong>
+<br />I assume that you install both e-texteditor and ExpanDrive.
+<br />Now, we can create some Rails project:
+<br /><pre class="brush: bash;">$ rails bar</pre>And check IP address our Ubuntu VM:
+<br /><pre class="brush: bash;">$ ifconfig<br />eth0      Link encap:Ethernet  HWaddr 00:0c:29:2b:58:78<br />          inet addr:192.168.72.132  Bcast:192.168.72.255  Mask:255.255.255.0<br />          inet6 addr: fe80::20c:29ff:fe2b:5878/64 Scope:Link<br />          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1<br />          RX packets:185 errors:0 dropped:0 overruns:0 frame:0<br />          TX packets:191 errors:0 dropped:0 overruns:0 carrier:0<br />          collisions:0 txqueuelen:1000<br />          RX bytes:20339 (20.3 KB)  TX bytes:33193 (33.1 KB)<br />          Interrupt:18 Base address:0x2000</pre>Now open ExpanDrive and setup connection to VM:
+<br /></p>
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://3.bp.blogspot.com/_vLotBlgiVfE/S8948vFk8CI/AAAAAAAAAXg/oF3cdR5hJuI/s1600/expandrive_01.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="265" src="http://3.bp.blogspot.com/_vLotBlgiVfE/S8948vFk8CI/AAAAAAAAAXg/oF3cdR5hJuI/s400/expandrive_01.png" width="400" /></a>
+</div>
+
+
+<p><br /></p>
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://4.bp.blogspot.com/_vLotBlgiVfE/S895y_VxvuI/AAAAAAAAAXk/t3-WtDqg6RU/s1600/expandrive_02.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="298" src="http://4.bp.blogspot.com/_vLotBlgiVfE/S895y_VxvuI/AAAAAAAAAXk/t3-WtDqg6RU/s400/expandrive_02.png" width="400" /></a>
+</div>
+
+
+<p><br />As you can see my Ubuntu VM disk is mapped to host machine and I can use it for my Rails development.
+<br />Now, we can use any Windows based text editor and made modification directly on Ubuntu VM disk:
+<br /></p>
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://3.bp.blogspot.com/_vLotBlgiVfE/S8965_bxI-I/AAAAAAAAAXo/-FBArym-D6w/s1600/expandrive_03.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="338" src="http://3.bp.blogspot.com/_vLotBlgiVfE/S8965_bxI-I/AAAAAAAAAXo/-FBArym-D6w/s400/expandrive_03.png" width="400" /></a>
+</div>
+
+
+<p><br />For Rails scaffolding we use SSH/Putty terminal.<b></b>
+<br /><b><br /></b>
+<br /><b>References:</b>
+<br /><a href="http://halyph.com/2010/04/how-to-setup-rubyrails-development.html">How to setup Ruby/Rails development environment, Part 1 - Ubuntu VM</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Setup Ruby/Rails Development Environment, Part 1 - Ubuntu VM]]></title>
+    <link href="http://halyph.com/blog/2010/04/16/how-to-setup-rubyrails-development/"/>
+    <updated>2010-04-16T00:55:00+03:00</updated>
+    <id>http://halyph.com/blog/2010/04/16/how-to-setup-rubyrails-development</id>
+    <content type="html"><![CDATA[<div xmlns="http://www.w3.org/1999/xhtml">
+    <div class="separator" style="clear: both; text-align: center;"></div>
+   
+        <a href="http://3.bp.blogspot.com/_vLotBlgiVfE/S8ehubzEY5I/AAAAAAAAAWE/mrBSd1rWhg8/s1600/RubyOnRails_128.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="http://3.bp.blogspot.com/_vLotBlgiVfE/S8ehubzEY5I/AAAAAAAAAWE/mrBSd1rWhg8/s320/RubyOnRails_128.png" /></a>
+        <a href="http://1.bp.blogspot.com/_vLotBlgiVfE/S8ehmbmqNAI/AAAAAAAAAV8/Ifs1dW4hrR8/s1600/1271369264_start-here-ubuntuoriginal.png" imageanchor="1" style="float: left; margin-bottom: 1em; margin-right: 2em;"><img border="0" src="http://1.bp.blogspot.com/_vLotBlgiVfE/S8ehmbmqNAI/AAAAAAAAAV8/Ifs1dW4hrR8/s320/1271369264_start-here-ubuntuoriginal.png" /></a>
+    The most popular Ruby/Rails development platform isn&#8217;t Windows. There are a lot of plug-ins, tutorials and blogs about Ruby/Rails on *nix like system. But, I&#8217;m Windows user (yes I know, Linux - rules!), so how can I use all community knowledge and easily apply it?
+    <br />I&#8217;ve decided setup VMWare VM with <a href="http://www.ubuntu.com/" target="_blank">Ubuntu Server v.9.10</a>. And perform all Ruby/Rails development there via Putty (SSH).
+    <br />I assume that You have installed Ubuntu VM.
+    <br />
+    <br />This post is base on the next articles:
+    <br />
+    <ul>
+        <li><a href="http://www.hackido.com/2009/11/install-ruby-on-rails-on-ubuntu-karmic.html" target="_blank">Install Ruby on Rails on Ubuntu Karmic Koala 9.10</a> </li>
+        <li><a href="http://wiki.rubyonrails.org/getting-started/installation/linux" target="_blank">Installing Ruby on Rails on Debian/Ubuntu</a> </li>
+        <li><a href="https://help.ubuntu.com/community/RubyOnRails" target="_blank">Ubuntu Community documentation - RubyOnRails</a>
+            <br />
+        </li>
+        <li><a href="http://blog.michaelgreenly.com/2009/03/rails-development-on-ubuntu.html" target="_blank">Rails Development On Ubuntu</a> </li>
+        <li><a href="http://www.cyberciti.biz/tips/how-do-i-enable-remote-access-to-mysql-database-server.html" target="_blank">How Do I Enable Remote Access To MySQL Database Server?</a> </li>
+    </ul>
+    <br /><b>Step 1:</b> Install Ubuntu VM - done<b>&nbsp;</b>
+    <br /><b>Step 2:</b> Install <a href="http://www.putty.org/" target="_blank">Putty</a> on Windows<b>&nbsp;</b>
+    <br /><b>Step 3</b>: Configure Putty - Ubuntu VM connection
+    <br />Check Ubuntu VM IP: <b>ifconfig</b>. Apply this VM IP in Putty setting. All next steps will be performed via Putty console<b>&nbsp;</b>
+    <br /><b>Step 4:</b> Update Ubuntu installation
+    <br /><pre class="brush: bash;">sudo apt-get update<br />sudo apt-get dist-upgrade<br /></pre>
+    <br /><b>Step 5</b>: Install all necessary libs
+    <br /><pre class="brush: bash;">sudo apt-get install build-essential<br />sudo apt-get install ruby ri rdoc mysql-server libmysql-ruby ruby1.8-dev irb1.8 libdbd-mysql-perl libdbi-perl libmysql-ruby1.8 libmysqlclient15off libnet-daemon-perl libplrpc-perl libreadline-ruby1.8 libruby1.8 mysql-client-5.1 mysql-common mysql-server-5.1 rdoc1.8 ri1.8 ruby1.8 irb libopenssl-ruby libopenssl-ruby1.8 libhtml-template-perl mysql-server-core-5.1 libmysqlclient16 libreadline5 psmisc</pre><b>Step 6:</b> During installation MySQL will ask to setup credentials:
+    <br /><pre class="brush: bash;">user = "root"<br />password = "root"</pre>Check Ruby version
+    <br /><pre class="brush: bash;">$ ruby -v<br />ruby 1.8.7 (2009-06-12 patchlevel 174) [i486-linux]</pre><b>Step 7</b>: Install RubyGems
+    <br /><pre class="brush: bash;">wget http://production.cf.rubygems.org/rubygems/rubygems-1.3.6.tgz<br />tar xvzf rubygems-1.3.6.tgz<br />cd rubygems-1.3.6<br />sudo ruby setup.rb<br /><br />sudo ln -s /usr/bin/gem1.8 /usr/bin/gem</pre>
+    <br /><b>Step 8</b>: Install Rails
+    <br /><pre class="brush: bash;">sudo gem install rails </pre><b>Step 9</b>: Install SQLlite
+    <br /><pre class="brush: bash;">sudo apt-get install sqlite3 libsqlite3-dev<br />sudo gem install sqlite3-ruby    </pre><b>Step 10</b>: Install MySQL client
+    <br /><pre class="brush: bash;">sudo apt-get install libmysqlclient-dev<br />sudo gem install mysql</pre><b>Step 11</b>: Test your Rails instalation
+    <br /><pre class="brush: bash;">$ rails myrailsapp</pre></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails 2.3 Migration Issues With MySQL 5.1.3]]></title>
+    <link href="http://halyph.com/2009/08/rails-23-migration-issues-with-mysql_26.html"/>
+    <updated>2009-08-26T00:13:00+03:00</updated>
+    <id>http://halyph.com/2009/08/rails-23-migration-issues-with-mysql_26</id>
+    <content type="html"><![CDATA[<pre><code>depot&amp;gt;rake db:migrate --trace
+(in D:/Projects/RoR/depot)
+** Invoke db:migrate (first_time)
+** Invoke environment (first_time)
+** Execute environment
+** Execute db:migrate
+rake aborted!
+Mysql::Error: query: not connected: CREATE TABLE `schema_migrations` (`version`
+varchar(255) NOT NULL) ENGINE=InnoDB
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connetion_adapters/abstract_adapter.rb:212:in `log'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connetion_adapters/mysql_adapter.rb:320:in `execute'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connetion_adapters/abstract/schema_statements.rb:114:in `create_table'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connetion_adapters/mysql_adapter.rb:473:in `create_table'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connetion_adapters/abstract/schema_statements.rb:320:in `initialize_schema_migration_table'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/migraion.rb:436:in `initialize'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/migraion.rb:400:in `new'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/migraion.rb:400:in `up'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/migraion.rb:383:in `migrate'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/tasks/databases.rake:116
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:636:in `call'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:636:in `execute'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:631:in `each'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:631:in `execute'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:597:in `invoke_with call_chain'
+d:/tools/Ruby/lib/ruby/1.8/monitor.rb:242:in `synchronize'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:590:in `invoke_with call_chain'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:583:in `invoke'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2051:in `invoke_tas'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2029:in `top_level'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2029:in `each'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2029:in `top_level'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2068:in `standard_exception_handling'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2023:in `top_level'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2001:in `run'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2068:in `standard_exception_handling'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:1998:in `run'
+d:/tools/Ruby/lib/ruby/gems/1.8/gems/rake-0.8.7/bin/rake:31
+d:/Tools/Ruby/bin/rake:19:in `load'
+d:/Tools/Ruby/bin/rake:19
+</code></pre>
+
+<p>As I understood the client MySQL library doesn&rsquo;t work well with Rails 2.3. We can resolve this by using the older MySQL client library (libmySQL.dll). You can get it here <a href="http://instantrails.rubyforge.org/svn/trunk/InstantRails-win/InstantRails/mysql/bin/libmySQL.dll">http://instantrails.rubyforge.org/svn/trunk/InstantRails-win/InstantRails/mysql/bin/libmySQL.dll</a>.
+Just put it in <span style="font-family: Courier New;">&lt;ruby base dir&gt;\bin\</span> and restart MySQL service.</p>
 ]]></content>
   </entry>
   

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Screencast | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/screencast/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Review: Java Brains Spring Framework - Core Spring, by Koushik Kothagal]]></title>
+    <link href="http://halyph.com/blog/2012/05/02/review-java-brains-spring-framework/"/>
+    <updated>2012-05-02T18:35:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/05/02/review-java-brains-spring-framework</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/-Ik0LB2qKp0g/T5_x_1IbcCI/AAAAAAAAAj8/oAoF2cJighQ/s1600/placeholder_video_spring_projects.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://3.bp.blogspot.com/-Ik0LB2qKp0g/T5_x_1IbcCI/AAAAAAAAAj8/oAoF2cJighQ/s1600/placeholder_video_spring_projects.png" /></a></div>
+
+
+<p>I&rsquo;ve recently watched the subject <a href="http://javabrains.koushik.org/p/spring-framework.html" target="_blank">Java Brains - Spring Framework</a> video tutorials and I must admit that these screencasts were well done. One of the best Java related video tutorials I&rsquo;ve ever seen. Whether you are experienced or beginner developer it worth to watch them all. It&rsquo;s very good sample how to produce qualitative and pleasure to watch screencasts.<br /><br />Let&rsquo;s review each tutorial one-by-one just to have some snapshot what was described there:<br /><br /><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-01-understanding.html"><b>01 - Understanding Dependency Injection</b></a> Dependency Injection (DI) introduction. Here was explained why do we need DI and some conceptual sample.<br /><br /><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-02-setting-up.html"><b>02 - Setting Up</b></a> Project Setup. The author avoided using any build tools (Ant, Maven) and set up Eclipse-based project via using Eclipse User Library.<br /><br /><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-03-understanding-spring.html"><b>03 - Understanding Spring Bean Factory</b></a> Explained the differences between Factory pattern and Spring Bean Factory without any technical details, plain conceptual overview.<br /><br /><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-04-writing-code-using.html"><b>04 - Writing Code Using the Bean Factory</b></a> Actually it&rsquo;s the first video with some <b>code inside</b>. Author use classical approach to introduce Spring DI in practice - wrote simple code without Spring and re-wrote it with Spring. And it has nice effect - it became very descriptive.<br />The next Spring-related things were introduced:<br /><ul><li><i>spring.xml</i></li><li><i>BeanFactory</i></li><li><i>XmlBeanFactory</i> and <i>FileSystemResources</i></li><li>bean instantiation via factory</li></ul><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-05-applicationcontext.html"><b>05 - ApplicationContext and Property Initialization</b></a> Replaced <i>BeanFactory </i>with <i>ApplicationContext</i>. How to initialize bean property via spring.xml has been shown.<br /><br /><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-06-using-constructor.html"><b>06 - Using Constructor Injection</b></a> Depicted different ways of constructor injection:<br /><ul><li>plain</li><li>index based</li><li>type based</li></ul><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-07-injecting-objects.html"><b>07 - Injecting Objects</b></a> Created simple object and shown how to inject object dependency (i.e. was used&nbsp; &ldquo;property&rdquo; tag and &ldquo;ref&rdquo; attribute, <i>&lt;property name=&ldquo;propname&rdquo; ref=&ldquo;beanref&rdquo; /&gt;</i><br /><br /><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-08-inner-beans-aliases.html"><b>08 - Inner Beans, Aliases and idref</b></a> The topic has pretty descriptive content, nothing more was here.<br /><br /><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-09-initializing.html"><b>09 - Initializing Collections</b></a> Here List was used as sample to initialize bean with collection. Stated that the same approach should be applied to Set and Map.<br /><br /><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-10-bean-autowiring.html"><b>10 - Bean Autowiring</b></a> Configured autowiring via spring.xml. Described pros&amp;cons:<br /><ul><li>byName</li><li>byType</li><li>constructor</li></ul><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-11-understanding-bean.html"><b>11 - Understanding Bean Scopes</b></a> Explained bean scopes:<br /><ul><li>Singleton</li><li>Prototype</li><li>Request</li><li>Session</li><li>Global Session</li></ul><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-12-using.html"><b>12 - Using ApplicationContextAware</b></a> Nicely shown how to use <i>ApplicationAwareContext </i>and BeanNameAware interfaces.<br /><br /><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-13-bean-definition.html"><b>13 - Bean Definition Inheritance</b></a> Nice Spring feature is bean definition inheritance and how it is different from OOP inheritance. Explained when to use it and what is the benefits. Introduced bean <i>abstract </i>and&nbsp; <i>parent</i> attributes and when to use it.<br /><br /><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-14-lifecycle-callbacks.html"><b>14 - Lifecycle Callbacks</b></a> Introduced <i>init </i>and <i>destroy </i>methods in different incarnations:<br /><ul><li>InitializingBean and DisposableBean interfaces</li><li>bean tag attributes: <i>init-method</i> and <i>destroy-method</i> </li><li>bean<i><b>s</b></i> tag attributes: <i>default-init-method</i> and <i>default-</i><i>destroy-method</i></li><li>Added<i> AbstractApplicationCantext </i>to switch on <i>redisterShutdownHook</i>()</li></ul><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-15-writing.html"><b>15 - Writing a BeanPostProcessor</b></a> Shown how to implement custom <i>BeanPostProcessor</i><br /><br /><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-16-writing.html"><b>16 - Writing a BeanFactoryPostProcessor</b></a> Shown how to implement:<br /><ul><li>custom <i>BeanFactoryPostProcessor</i></li><li>introduces properties for spring.xml via adding <i>PropertyPlaceholderConfigurer</i> (implementation of <i>BeanFactoryPostProcessor</i>)</li></ul>Explained when and why to use <i>BeanFactoryPostProcessor</i>s. Explained the differences between <i>BeanFactoryPostProcessor</i>s and <i>BeanPostProcessor.</i><br /><br /><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-17-coding-to-interfaces.html"><b>17 - Coding To Interfaces</b></a> Rewritten the initial demo project to support interface based design, the right way for developing Spring applications :-) <br /><br /><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-18-introduction-to.html"><b>18 - Introduction to Annotations and the Required Annotation</b></a> Added @Required annotation in demo project and activated it via adding bean post processor <i>RequiredAnnotationBeanPostProcessor</i>.<br /><br />  <a href="http://javabrains.koushik.org/2011/08/spring-tutorial-19-autowired-annotation.html"><b>19 - The Autowired Annotation</b></a> Shown how to use:<br /><ul><li><i>@Autowire</i> and <i>@Qualifier</i> annotations</li><li><i>&lt;context:annotation-config /&gt;</i> in<i> spring.xml</i></li></ul><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-20-some-jsr-250.html"><b>20 - Some JSR-250 Annotations</b></a> Shown how to use:<br /><ul><li><i>@Resource</i> annotation</li><li><i>@Resource</i> annotation with parameters</li><li><i>@PostConstruct </i>annotation</li><li><i>@PreDestroy </i>annotation</li></ul><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-21-component-and.html"><b>21 - Component and Stereotype Annotations</b></a> Added the <i>&lt;context:component-scan base-packaeg=&ldquo;package&rdquo; /&gt;</i> to spring.xml. Shown how to use <i>@Component</i> annotation and what rules applied to this annotation. Also, were mentioned other Spring stereotypes.<br /><br /><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-22-using-messagesource.html"><b>22 - Using MessageSource To Get Text From Property Files</b></a> Shown how to use <i>ResourceBundleMessageSource</i> to get properties. <br /><br /><a href="http://javabrains.koushik.org/2011/08/spring-tutorial-23-event-handling-in.html"><b>23 - Event Handling in Spring</b></a> Very nice introduction tutorial into the subject: even definition, event listeners and even publishing on application level.<br /><br />Ofcource, these tutorial are only intro and you should read Spring Documentation to gain the Spring &ldquo;black&rdquo; magic. But, it&rsquo;s good start point.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java Related Free Video Trainings]]></title>
+    <link href="http://halyph.com/blog/2012/03/15/java-related-free-screencasts/"/>
+    <updated>2012-03-15T13:30:00+02:00</updated>
+    <id>http://halyph.com/blog/2012/03/15/java-related-free-screencasts</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/-OcQd9aLAnoc/T2HQNCIz5hI/AAAAAAAAAgk/wynszvwrfzw/s1600/1331810342_Java.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://3.bp.blogspot.com/-OcQd9aLAnoc/T2HQNCIz5hI/AAAAAAAAAgk/wynszvwrfzw/s1600/1331810342_Java.png" /></a></div>
+
+
+<p>I&rsquo;ve decided to collect Java related video tutorials and screencasts. Here is the initial list: <br /><ul><li><a href="http://eclipsetutorial.sourceforge.net/">Eclipse Video Tutorials</a></li><li><a href="http://marakana.com/training/java/java_web_development_with_spring_and_hibernate.html">Marakana: Java Web, Spring and Hibernate Training</a><a href="http://marakana.com/training/java/java_web_development_with_spring_and_hibernate.html"></a></li><li><a href="http://www.youtube.com/playlist?list=PL5745BA630E2195D9">Hibernate Tutorial</a></li><li><a href="http://javabrains.koushik.org/">Java Trainings: JSP/Servlets, Hibernate, Spring, Maven, Struts2</a></li></ul></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Top Ruby Screencast Resources]]></title>
+    <link href="http://halyph.com/2009/06/ruby-screencast-resources.html"/>
+    <updated>2009-06-02T22:32:00+03:00</updated>
+    <id>http://halyph.com/2009/06/ruby-screencast-resources</id>
+    <content type="html"><![CDATA[<p>As you know there are several way to kick-off and learn a new programming language, environment or special tools:</p>
+
+<ul>
+<li>tutorial</li>
+<li>screencast</li>
+</ul>
+
+
+<p>But, now screencast is more popular for effective start and feature demonstration. So, I&rsquo;m trying to collect as more as possible screencast resources for learning Ruby and Rails.</p>
+
+<ul>
+<li><a href="http://railscasts.com/">http://railscasts.com</a>, it&rsquo;s the most popular free Rails screencasts</li>
+<li><a href="http://sdruby.com/">http://sdruby.com</a>, it&rsquo;s San Diego&rsquo;s Ruby community, there are about 59 Ruby and Rails screencasts</li>
+<li><a href="http://www.rubyplus.org/episodes">http://www.rubyplus.org/episodes</a>, Free Ruby and Rails Screencast, about 93 episodes</li>
+<li><a href="http://www.tekniqal.com/">http://www.tekniqal.com</a>, there are 17 tutorials covering basic Ruby topics</li>
+<li><a href="http://www.confreaks.com/events">http://www.confreaks.com/events</a>, here is located videos from several Ruby conferences</li>
+<li><a href="http://showmedo.com/videotutorials/ruby">http://showmedo.com/videotutorials/ruby</a> and <a href="http://showmedo.com/videotutorials/rubyonrails">http://showmedo.com/videotutorials/rubyonrails</a>, it&rsquo;s great resource for learning from ground up. There are a lot of interesting videos for beginners. Also, this resource includes other areas, not only Ruby/Rails related</li>
+<li><a href="http://www.bestechvideos.com/category/development/ruby">http://www.bestechvideos.com/tag/ruby-on-rails</a> and <a href="http://www.bestechvideos.com/category/development/ruby">http://www.bestechvideos.com/category/development/ruby</a>, video collection from different conferences, presentations, etc.</li>
+<li><a href="http://railslab.newrelic.com/scaling-rails">http://railslab.newrelic.com/scaling-rails</a> there are educational videos, teaching you just about everything you need to know to create a Rails application that can scale</li>
+<li><a href="http://rubytu.be/">http://rubytu.be</a> is a community driven collection of Ruby related videos and screencasts</li>
+<li><a href="http://www.learnivore.com/">http://www.learnivore.com</a> is another great screencast aggregator</li>
+<li><a href="http://www.teachmetocode.com/screencasts">http://www.teachmetocode.com/screencasts</a> is similar to railscast.com but have less posts, it&rsquo;s worth to look into</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

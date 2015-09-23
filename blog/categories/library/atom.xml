@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Library | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/library/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[JAI and Image Processing in Java]]></title>
+    <link href="http://halyph.com/blog/2013/07/01/jai-and-image-processing-in-java/"/>
+    <updated>2013-07-01T12:45:00+03:00</updated>
+    <id>http://halyph.com/blog/2013/07/01/jai-and-image-processing-in-java</id>
+    <content type="html"><![CDATA[<div style="text-align: center;"><img alt="" border="0" src="http://3.bp.blogspot.com/-zvTAugA2T0I/UdFL9ThKVdI/AAAAAAAABnA/pcw0IDuw-IA/s320/69e78929dc5d26943754abd8f6ac6991-765280.png" id="BLOGGER_PHOTO_ID_5895576903788156370" />&nbsp;</div>
+
+
+<p><br />I have minimal experience with Image Processing and when I&rsquo;m talking about it I mean: <br /><div><ul><li>read/write different image formats (jpg, png, tiff, ice, etc.)</li><li>flip, rotate image</li><li>crop and clip image by defined path</li><li>convert image&rsquo;s color (e.g. RGB to gray scale)</li><li>reduce image size</li><li>find edges</li><li>image histograms and color counting</li><li>different operations (e.g. AND, OR and XOR)</li><li>read image meta info</li></ul><div>Of course, I don&rsquo;t want to waist time implementing all these by myself, because it&rsquo;s basic operation in Image Processing (IP) domain. And I believe that all these tasks are pretty much trivial for any engineer who&rsquo;s working in&nbsp;Image Processing.</div></div><div><br /></div><div>As usual I have strict restriction regarding the licence of selected library (which can be used in any commecrial product).</div><div><br /></div><div>So, I&rsquo;ve started googling. Here is the initial (and filtered) results:</div><div><ul><li><a href="http://www.oracle.com/technetwork/java/javase/tech/jai-142803.html">Java Advanced Imaging (JAI)</a> -&nbsp;Sun Binary Code License</li><li><a href="http://rsb.info.nih.gov/ij/">ImageJ</a> -&nbsp;Open Source, Public Domain&nbsp;</li><li>Apache&nbsp;<a href="http://commons.apache.org/proper/commons-imaging/index.html">Commons Imaging</a>&nbsp;- Apache&nbsp;License&nbsp;2.0</li><li><a href="http://jaitools.org/">JAITools</a>&nbsp;-&nbsp;Simplified BSD&nbsp;License</li><li><a href="http://marvinproject.sourceforge.net/en/index.html">Marvin</a>&nbsp;- LGPL&nbsp;License</li></ul></div><div><span style="font-size: large;">JAI</span></div><div>This library was developed by SUN.&nbsp;Unfortunately, it&rsquo;s not supported anymore. But, it&rsquo;s very powerful and has nice facilities.</div><div>JAI is available for Windows, Linux, Mac OS X, and Solaris, and takes advantage of native acceleration when available. However, you can use the JAI libraries on any platform if you add the following JAR files to your classpath:&nbsp;</div><div><ul><li>jai_core.jar and&nbsp;jai_codec.jar&nbsp;(<a href="http://download.java.net/media/jai/builds/release/1_1_3/"><a href="http://download.java.net/media/jai/builds/release/1_1_3/">http://download.java.net/media/jai/builds/release/1_1_3/</a></a>)</li><li style="text-align: justify;">jai_imageio.jar (<a href="http://download.java.net/media/jai-imageio/builds/release/1.1/"><a href="http://download.java.net/media/jai-imageio/builds/release/1.1/">http://download.java.net/media/jai-imageio/builds/release/1.1/</a></a>)</li></ul><div>JAI Tutorials, Guides, Sources</div></div><div><ul><li><a href="http://www.oracle.com/technetwork/java/jaifaq-138288.html">Java Advanced Imaging API FAQ</a></li><li><a href="http://www.lac.inpe.br/JIPCookbook/">Java Image Processing Cookbook, by Rafael Santos</a> it&rsquo;s very cool book with tons of samples</li><li><a href="http://docs.oracle.com/cd/E19957-01/806-5413-10/806-5413-10.pdf">Programming in Java™&nbsp;Advanced Imaging</a> book. Just &ldquo;google&rdquo; it .&nbsp;</li></ul>Also, you should check the JAI sources. Here is the <a href="https://java.net/projects/jai">master JAI project</a> on java.net with several sub-projects:</div><div><ul><li><a href="https://java.net/projects/jai-core">Jai-core</a></li><li><a href="https://java.net/projects/jai-demos">Jai-demos</a></li><li><a href="https://java.net/projects/jai-webstart">Jai-webstart</a></li><li><a href="https://java.net/projects/jaistuff">Jaistuff</a></li></ul></div><div>JAI Licenses. It&rsquo;s very tricky question. Here is the quote from <a href="https://www.java.net//node/665499">java.net</a>:</div><blockquote class="tr_bq"><div><i>As far as I know, the libraries from JAI and JAI Image I/O Tools can be<br />  bundled with a commercial product or can be downloaded on the fly using<br />  the Java Web Start technology.</i><br /><i>You might like to take a look at how people have been using JAI and JAI<br />  Image I/O Tools:</i><br /><i><a href="http://java.sun.com/products/java-media/jai/success/" target="_blank" title="http://java.sun.com/products/java-media/jai/success/"><a href="http://java.sun.com/products/java-media/jai/success/">http://java.sun.com/products/java-media/jai/success/</a></a></i><br /><i>As for commercial license, you might like to read the LICENSE and README<br />  files for the binaries:</i><br /><i><a href="http://download.java.net/media/jai/builds/release/1_1_3/LICENSE-jai.txt" title="http://download.java.net/media/jai/builds/release/1_1_3/LICENSE-jai.txt"><a href="http://download.java.net/media/jai/builds/release/1_1_3/LICENSE-jai.txt">http://download.java.net/media/jai/builds/release/1_1_3/LICENSE-jai.txt</a></a><br /><a href="http://download.java.net/media/jai/builds/release/1_1_3/DISTRIBUTIONREADME-jai.txt" title="http://download.java.net/media/jai/builds/release/1_1_3/DISTRIBUTIONREADME-jai.txt"><a href="http://download.java.net/media/jai/builds/release/1_1_3/DISTRIBUTIONREAD...">http://download.java.net/media/jai/builds/release/1_1_3/DISTRIBUTIONREAD&#8230;</a></a><br /><a href="http://download.java.net/media/jai-imageio/builds/release/1.1/LICENSE-jai_imageio.txt" title="http://download.java.net/media/jai-imageio/builds/release/1.1/LICENSE-jai_imageio.txt"><a href="http://download.java.net/media/jai-imageio/builds/release/1.1/LICENSE-ja...">http://download.java.net/media/jai-imageio/builds/release/1.1/LICENSE-ja&#8230;</a></a><br /><a href="http://download.java.net/media/jai-imageio/builds/release/1.1/DISTRIBUTIONREADME-jai_imageio.txt" title="http://download.java.net/media/jai-imageio/builds/release/1.1/DISTRIBUTIONREADME-jai_imageio.txt"><a href="http://download.java.net/media/jai-imageio/builds/release/1.1/DISTRIBUTI...">http://download.java.net/media/jai-imageio/builds/release/1.1/DISTRIBUTI&#8230;</a></a></i><br /><i>and the licenses for the source code (if you make your own build of JAI):</i><br /><i><a href="https://jai.dev.java.net/#Licenses" title="https://jai.dev.java.net/#Licenses"><a href="https://jai.dev.java.net/#Licenses">https://jai.dev.java.net/#Licenses</a></a><br /><a href="https://jai-imageio.dev.java.net/index.html#Licenses" title="https://jai-imageio.dev.java.net/index.html#Licenses"><a href="https://jai-imageio.dev.java.net/index.html#Licenses">https://jai-imageio.dev.java.net/index.html#Licenses</a></a></i></div></blockquote><div>I&rsquo;m not sure whether you can include this library into your commercial project. You should answer on this question by yourself.&nbsp;</div><div><br /></div><div><span style="font-size: large;">ImageJ&nbsp;</span></div><div>It&rsquo;s a very popular application/library in Java community. I&rsquo;ve considered it also.&nbsp;This library has very big community. Also, it has many plugins.&nbsp;<a href="http://rsb.info.nih.gov/ij/docs/index.html">Documentation</a> (User Guide, tutorials, wiki, FAQ, etc) are located in one place, easy to find. But, I wouldn&rsquo;t use ImageJ in case of simple image processing operations.&nbsp;</div><div><br /></div><div><span style="font-size: large;">Other Libraries</span></div><div>I&rsquo;ve reviewed the mentioned above other libraries and I must say they have nice features also. But they are too heavy (as well as ImageJ) for the tasks I&rsquo;ve been trying to accomplish.<br /><br /><span style="font-size: large;">Summary</span><br /><ul><li>JAI isn&rsquo;t maintained by Oracle. You should be careful when including it in commercial product</li><li><a href="http://rsb.info.nih.gov/ij/">ImageJ</a>, <a href="http://commons.apache.org/proper/commons-imaging/index.html">Commons Imaging</a>,  <a href="http://jaitools.org/">JAITools</a> , and <a href="http://marvinproject.sourceforge.net/en/index.html">Marvin</a> are providing huge set of IP facilities, but it might be redundant in your case.</li><li>Plain Java core image library can solve almost all your needs, except TIFF/PDF file&nbsp; processing.</li><li>TIFF/PDF file processing should be done by 3d-party libraries (e.g. iText, JAI).</li></ul></div><div><b>References</b>:</div><div><ul><li><a href="http://stackoverflow.com/questions/2407113/open-source-image-processing-lib-in-java">open source image processing lib in java</a></li><li><a href="http://www.icesoft.org/wiki/display/PDF/Java+Advanced+Imaging+%28JAI%29+Library+for+Enhanced+Image+Support">Java Advanced Imaging (JAI) Library for Enhanced Image Support</a></li><li><a href="https://java.net/projects/jai"><a href="https://java.net/projects/jai">https://java.net/projects/jai</a></a>&nbsp;</li><li><a href="https://www.java.net//node/671977?force=621">Where to find an up-to-date tutorial of JAI programming</a></li><li><a href="https://www.java.net/node/665499?force=446">Commercial licence of JAI and Image IO libraries</a></li><li><a href="http://stackoverflow.com/questions/7502181/where-can-i-download-jai-and-jai-imageio">Where can I download Jai and Jai-imageio?</a></li><li><a href="https://www.java.net//forum/topic/javadesktop/java-desktop-technologies/jai-imageio/jai-still-being-maintained" target="_blank">Is JAI still being maintained?</a></li><li><a href="https://www.java.net//node/695373" target="_blank">JAI Status</a> </li></ul></div><div><br /></div><div></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java Barcode Generation and Scanning Library]]></title>
+    <link href="http://halyph.com/blog/2013/06/14/java-barcode-generation-and-scanning/"/>
+    <updated>2013-06-14T22:33:00+03:00</updated>
+    <id>http://halyph.com/blog/2013/06/14/java-barcode-generation-and-scanning</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/-HFNJgRP8_3Y/UbtqRVlBYPI/AAAAAAAABlo/h3JIbw0WQs4/s1600/chart.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://3.bp.blogspot.com/-HFNJgRP8_3Y/UbtqRVlBYPI/AAAAAAAABlo/h3JIbw0WQs4/s1600/chart.png" /></a></div>
+
+
+<p>Recently I had to pick library which can generate and scan different 2D barcodes. Actually I was interested in <a href="http://en.wikipedia.org/wiki/QR_code" target="_blank">QR Code</a> and <a href="http://en.wikipedia.org/wiki/Data_Matrix" target="_blank">Data Matrix</a>. There is only ONE open source Java library which generates and scans barcode, it&rsquo;s <a href="http://code.google.com/p/zxing/" target="_blank">Zxing</a>. You might say there are others, but they cost money.<br /><br />I&rsquo;ve been following Zxing some time and must admit that this library has very vibrant community, code base is clean, plenty of unit tests. Also, API is very clean. Here is a simple code snippet for scanning Data Matrix barcode:<br /><br /><pre class="brush: java;">String filename = &ldquo;file.png&rdquo;;<br />    <br />Map&lt;DecodeHintType,Object&gt; hints = new EnumMap&lt;DecodeHintType,Object&gt;(DecodeHintType.class);<br />hints.put(DecodeHintType.POSSIBLE_FORMATS, Arrays.asList(BarcodeFormat.DATA_MATRIX));<br />hints.put(DecodeHintType.TRY_HARDER, Boolean.TRUE);<br />BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(<br />        new BufferedImageLuminanceSource(<br />            ImageIO.read(new FileInputStream(filename)))));<br /><br />Result result = new MultiFormatReader().decode(binaryBitmap, hints);<br />System.out.println(result.getText());<br /></pre><br />I&rsquo;ve tested Zxing v.2.2 QR Code/Data Matrix scanning. And Zxing implementation for QR Code scanning is more robust and well implemented in comparison to Data Matrix. I.e. if you have freedom and can choose any of these two barcodes, than select QR Code.<br /><br />Note, there are several open source barcode generation libraries and only a few barcode scanners (actually one Zxing for Java)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java PDF Libraries]]></title>
+    <link href="http://halyph.com/blog/2013/04/23/java-pdf-libraries/"/>
+    <updated>2013-04-23T22:57:00+03:00</updated>
+    <id>http://halyph.com/blog/2013/04/23/java-pdf-libraries</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://1.bp.blogspot.com/-Bz0z-763Xn4/UXbWZ-2NNpI/AAAAAAAABOA/rHVXPF3UMF8/s1600/1366760659_pdf.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://1.bp.blogspot.com/-Bz0z-763Xn4/UXbWZ-2NNpI/AAAAAAAABOA/rHVXPF3UMF8/s1600/1366760659_pdf.png" /></a>
+</div>
+
+
+<p>Recently I had a task to select some Java PDF libraries for PDF generation. But it wasn&rsquo;t a simple task.
+<br />The first thing which came into my mind was iText. It&rsquo;s well know Java library with good reputation. But&hellip; there is some stopper. iText version 5+ is released under the AGPL license. I.e. we have to pay money if we want to use iText in commercial product.
+<br />
+<br />I&rsquo;ve created the next small checklist which covers project needs:
+<br /></p>
+
+<ol>
+    <li>liberal license</li>
+    <li>support maximum amount of project features (e.g. absolute element positioning)</li>
+    <li>good documentation</li>
+    <li>huge amount of samples</li>
+    <li>possibility to render HTML to PDF </li>
+</ol>
+
+
+<p>I&rsquo;ve reviewed the next libraries:
+<br /></p>
+
+<ul id="ext-gen1074">
+    <li id="ext-gen1094"><a href="http://itextpdf.com/" id="ext-gen1072" rel="nofollow">iText 5.0+</a> AGPL license</li>
+    <li id="ext-gen1088"><a href="https://github.com/ymasory/iText-4.2.0" id="ext-gen1108">iText 4.2</a> MPL/LGPL licenses</li>
+    <li id="ext-gen1075"><a href="http://pdfbox.apache.org/" id="ext-gen1073" rel="nofollow">PDF Box</a> Apache License, Version 2.0</li>
+    <li id="ext-gen1076"><a href="http://sourceforge.net/projects/jpedal/" rel="nofollow">JPedal</a> JPedal has a LGPL release to provide a full java PDF viewer under a LGPL license</li>
+    <li id="ext-gen1087"><a href="http://xml.apache.org/fop/" id="ext-gen1077" rel="nofollow">FOP</a> Apache License, Version 2.0</li>
+    <li id="ext-gen1052"><a href="http://gnujpdf.sourceforge.net/" rel="nofollow">gnujpdf</a> LGPL License</li>
+    <li id="ext-gen1078"><a href="http://sourceforge.net/projects/pjx/" rel="nofollow">PJX</a> GPLv2 License</li>
+    <li id="ext-gen1053"><a href="http://pdfjet.com/os/edition.html" rel="nofollow">PDFjet</a> Strange Open Source license model</li>
+    <li id="ext-gen1079"><a href="http://sourceforge.net/projects/jpodlib/" id="ext-gen1118" rel="nofollow">jPod </a>BSD License</li>
+    <li id="ext-gen1086"><a href="http://java.net/projects/pdf-renderer" id="ext-gen1113">PDF Renderer</a> Maintaining is not active</li>
+</ul>
+
+
+<h3><b>iText review</b></h3>
+
+
+<ul>
+    <li>iText 2.1.7: the latest official release under the MPL &amp; LGPL license;</li>
+    <li>iText 4.2.0: the latest unofficial release under the MPL &amp; LGPL license;</li>
+    <li>iText 5.0.0 and higher: released under the AGPL license.<b> </b></li>
+</ul>
+
+
+<p><a href="https://github.com/ymasory/iText-4.2.0#background" target="_blank">Notes about iText 5.0+ vs iText 4.2</a>
+<br /></p>
+
+<blockquote class="tr_bq"><i>Beginning with iText version 5.0 the developers have moved to the AGPL to improve their ability to sell commercial licenses. .. To assist those desiring to stick with the old license was made the final MPL/LGPL version more easily available and forked on github.</i></blockquote>
+
+
+<h3 id="ext-gen1083">&nbsp;</h3>
+
+
+<h3 id="ext-gen1083">Apache™ FOP</h3>
+
+
+<div id="ext-gen1082">Apache™ FOP (Formatting Objects Processor) is a print formatter driven by XSL formatting objects (XSL-FO) and an output independent formatter. It is a Java application that reads a formatting object (FO) tree and renders the resulting pages to a specified output. This lib doesn&#8217;t have enough flexibility for absolute page element positioning. But, it might be really valuable as content convertor.</div>
+
+
+<h3>&nbsp;</h3>
+
+
+<h3>Apache PDFBox</h3>
+
+
+<p>Very interesting project. It has very impressive amount of features. And most important it&rsquo;s in active development.
+<br /></p>
+
+<h3>&nbsp;</h3>
+
+
+<h3>Summary</h3>
+
+
+<p>I&rsquo;ve selected <b>iText</b> v.4.2 which has acceptable license and huge community. But the most important feature it&rsquo;s a very good documentation (actually it&rsquo;s a book <a href="http://itextpdf.com/book/" target="_blank">iText in Action — 2nd Edition</a>), tons of samples. Almost all samples for iText v.5 can be easily applied to iText v.4.2.
+<br />Other libraries have not so much samples/demos. And for quick start it&rsquo;s very important.
+<br />
+<br />Here is maven dependency info:
+<br /></p>
+
+<pre class="brush: xml;">&lt;dependency&gt;
+    &lt;groupid&gt;com.lowagie&lt;/groupid&gt;
+    &lt;artifactid&gt;itext&lt;/artifactid&gt;
+    &lt;version&gt;4.2.0&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+
+
+<p><b>PDFBox</b> is selected as backup library. I.e. I will use it when iText has some limitations.
+<br />
+<br />
+<br /><b>References</b>:
+<br /></p>
+
+<ul>
+    <li><a href="http://stackoverflow.com/questions/14213195/itext-latest-maven-dependency">http://stackoverflow.com/questions/14213195/itext-latest-maven-dependency</a></li>
+    <li><a href="http://java-source.net/open-source/pdf-libraries">http://java-source.net/open-source/pdf-libraries</a></li>
+    <li><a href="http://javatoolbox.com/categories/pdf" target="_blank">http://javatoolbox.com/categories/pdf </a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

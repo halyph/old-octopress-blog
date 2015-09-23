@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Jeeconf | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/jeeconf/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-07-14T00:58:51+03:00</updated>
+  <updated>2015-09-23T06:22:09+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -128,6 +128,103 @@
 <li><a href="http://halyph.blogspot.com/2011/05/jeeconf-kiev-2011-report.html">JEEConf - Kiev, 2011 - Report</a></li>
 </ul>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JEEConf - Kiev, 2013 - Report]]></title>
+    <link href="http://halyph.com/blog/2013/05/27/jeeconf-kiev-2013-report/"/>
+    <updated>2013-05-27T13:56:00+03:00</updated>
+    <id>http://halyph.com/blog/2013/05/27/jeeconf-kiev-2013-report</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/-Y0n_IQ34Gv0/UaMFv3e4GtI/AAAAAAAABX8/Yh6qvRH12l0/s1600/logo_transp2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://1.bp.blogspot.com/-Y0n_IQ34Gv0/UaMFv3e4GtI/AAAAAAAABX8/Yh6qvRH12l0/s1600/logo_transp2.png" /></a></div>
+
+
+<p><br />The third <a href="http://jeeconf.com/" target="_blank">JEEConf</a> was superb. It was well organized, with friendly atmosphere and high-quality speakers. And I had a dilemma what topics/speaker I should visit. :-)&nbsp; <br /><br />So, I&rsquo;ve selected the next speakers:<br /><ul><li><a href="http://jeeconf.com/speakers/#shelaev" target="_blank">Oleg Šelajev</a>, <a href="http://jeeconf.com/program/#java-agents">&ldquo;Taming Java Agents&rdquo;</a></li>It was really nice intro into Java Agents. Now I have a clue how and when to use them. <li><a class="speaker" href="http://jeeconf.com/speakers/#fain">Yakov Fain</a>:</li><ul><li><a href="http://jeeconf.com/program/#html5-websockets" target="_blank">&ldquo;Speed up your Web applications with HTML5 WebSockets&rdquo;</a></li>Yakov explained what is Pooling, Long Pooling and WebSockets. He has shown clear and simple demos which highlighted pros&amp;cons of each approaches. <li><a href="http://jeeconf.com/program/#professional-developer" target="_blank">&ldquo;Surviving as a professional software developer&rdquo;</a></li>It was philosophical talk. Everybody has taken something and applied on your current job. </ul><li><a href="http://jeeconf.com/speakers/#laskowski" target="_blank">Jacek Laskowski</a>:</li><ul><li>&ldquo;<a class="presentation" href="http://jeeconf.com/program/#functional-programming-in-scala">Introduction to functional programming in Scala</a>&rdquo; (see speaker blog post <a href="http://blog.japila.pl/2013/05/introduction-to-functional-programming-in-scala-at-jeeconf-in-kiev-ukraine/" target="_blank">Introduction to functional programming in Scala at JEEConf in Kiev, Ukraine</a>)</li>Jakek nicely introduced FP. Very easy to understand and without Scala magic. Very good job. <li>&ldquo;<a class="presentation" href="http://jeeconf.com/program/#web-development-in-clojure">Introduction to web application development in Clojure</a>&rdquo;  (see <a href="http://blog.japila.pl/2013/05/introduction-to-web-application-development-in-clojure-at-jeeconf-in-kiev-ukraine/">Introduction to Web Application Development in Clojure at JEEConf in Kiev, Ukraine</a>)</li>Clojure is very simple language. How can we write Web app without bloated framework? All this was shown in this talk. Also, Jacek highlighted the major Clojure ecosystem tools, approaches and practices. Nice intro for further dive in Clojure Web development. </ul><li><a class="speaker" href="http://jeeconf.com/speakers/#subramaniam">Dr. Venkat Subramaniam:</a></li><ul><li><a class="presentation" href="http://jeeconf.com/program/#programming-with-actors">&ldquo;Programming with Actors</a>&rdquo;</li>Venkat has shown the benefits of using Actors in Java.&nbsp; <li>&ldquo;<a class="presentation" href="http://jeeconf.com/program/#jvm-languages">Picking a JVM Language, which one is right for you?</a>&rdquo;</li>The main idea is NOT to be language agnostic. Use the right tool for the job. <li>&ldquo;<a class="presentation" href="http://jeeconf.com/program/#simplicity">The Art of Simplicity</a>&rdquo;</li>These talk was very inspiring. The word &ldquo;simplicity&rdquo; was nicely explained from different angles.</ul><li><a class="speaker" href="http://jeeconf.com/speakers/#kuksenko">Сергей Куксенко</a>, &ldquo;<a class="presentation" href="http://jeeconf.com/program/#jdk8-lambda-changes">JDK8: Молот лямбд</a>&rdquo;</li>In this talk the speaker has shown changes in Java 8 related with lambda. And shown how to use new API based on lambda. It was very inspiring to learn more about lambda. <br /><ul></ul></ul>Unfortunately, there were other topics which went in parallel. Now, I&rsquo;m waiting on video from organizer.<br /><br />On the photo from left to right: 3) Venkat Subramaniam, 4) Mohamed Taman 5) me, 6) Jacek Laskowsk, 7) Reza Rahma and 8)Anton Keks.  <br /><div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/-vaRC9etBpLo/UaMleUSebbI/AAAAAAAABYc/CUIAk8n-ahg/s1600/blog3.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="240" src="http://1.bp.blogspot.com/-vaRC9etBpLo/UaMleUSebbI/AAAAAAAABYc/CUIAk8n-ahg/s320/blog3.png" width="320" /></a></div><br /><br /><br />See:<br /><a href="http://halyph.com/2012/05/this-year-we-had-second-jeeconf.html" target="_blank">JEEConf - Kiev, 2012 - Report</a><br /><a href="http://halyph.com/2011/05/jeeconf-kiev-2011-report.html" target="_blank">JEEConf - Kiev, 2011 - Report </a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JEEConf - Kiev, 2012 - Report]]></title>
+    <link href="http://halyph.com/blog/2012/05/20/this-year-we-had-second-jeeconf/"/>
+    <updated>2012-05-20T16:15:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/05/20/this-year-we-had-second-jeeconf</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://1.bp.blogspot.com/-aFtjgaEje38/T7ja9v9eZ6I/AAAAAAAAAkc/dHwWudU4x74/s1600/logo_transp2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://1.bp.blogspot.com/-aFtjgaEje38/T7ja9v9eZ6I/AAAAAAAAAkc/dHwWudU4x74/s1600/logo_transp2.png" /></a>
+</div>
+
+
+<p>This year we had the second <a href="http://jeeconf.com/" target="_blank">JEEConf</a>. The amount of stages was increased from three to <strong>four </strong>stages.
+<br />I was really impressed about conference program &ldquo;notebooks&rdquo; :-) it was well done. The amount of people was really huge more then 600. I think it&rsquo;s impressive number for the second conference.
+<br />
+<br />As usual I&rsquo;ve selected the most interest topics to watch/visit to:
+<br />
+<br /><strong>1. Play with Play! by Anton Naumov</strong>
+<br />The presenter briefly has shown the Play Framework v.1.2.x features and discussed the pros&amp;cons. The most notably was that he stated the &ldquo;fails&rdquo; caused by this framework and how we can avoid similar stuff. The most loud message was &ldquo;use Spring/MVC, Hibernate and Maven&rdquo; if you are experienced with them :-). And try to use Play for prototype projects.
+<br />
+<br /><strong>2. Hibernate performance tuning by Sander Mak</strong>
+<br />It&rsquo;s very interesting and pragmatic topic. Even more I can say this presentation was a bunch of receipts for Hibernate performance improvement. There were depicted very interesting nuances which will be definitely valuable in real life codding.I&rsquo;m looking forward for slides.
+<br />
+<br /><strong>3.&nbsp; Methodology of performance optimization by Alexey Shipilyov and Sergey Kuksenko</strong>
+<br />It was the most low-level topic on this conference. Guys shown the different ways to perform the subject. They review and in pair-speech way very complicated issues in performance optimization from conceptual point of view. I can&rsquo;t say that I will be able to reuse everything from this speech, but it&rsquo;s great start point for me. They are very proficient presenters.
+<br />
+<br /><strong>4. Becoming a Professional Java Developer by Yakov Fain</strong>
+<br />I must say &ldquo;Thank you&rdquo; for this speech. It was cool. Yakov has highlighted the non-technical aspect of Professional (Java) Developer. Of course his advices and <span class="short_text" id="result_box" lang="en"><span class="hps">observation are based on own experience and might be biased for somebody. But it&rsquo;s honest and reasonable speech might open &ldquo;some&rdquo; boring minds. Also, Yakov recommended to read his free e-book &ldquo;Enterprise Software without the BS&rdquo;. I&rsquo;ve already downloaded it and I&rsquo;m planning to read it in nearest weeks.&nbsp;</span></span>
+<br />
+<br /><strong><span class="short_text" id="result_box" lang="en"><span class="hps">5. Inject Injection by Yuriy Litvinenko</span></span></strong>
+<br /><span class="short_text" id="result_box" lang="en"><span class="hps">It was like a case study report about involving DI Framework (in this case Google Guice) in legacy project. It was very interesting, because I believe it&rsquo;s challenging task. The presenter has highlighted the issues which his team faced </span></span><span class="short_text" id="result_box" lang="en"><span class="hps">with</span></span><span class="short_text" id="result_box" lang="en"><span class="hps">. I can say this experience might be valuable when somebody needs to decide the benefits and evaluate the risks of involving DI </span></span><span class="short_text" id="result_box" lang="en"><span class="hps">Framework in something &ldquo;really old</span></span><span class="short_text" id="result_box" lang="en"><span class="hps"></span></span>&rdquo;. Well done.
+<br />
+<br /><strong>6. Cloud Java platforms: what&rsquo;s inside and what&rsquo;s the difference by Ruslan Synytskyy</strong>
+<br />It was a pleasure to see ukrainian who is one of the founders of <a href="http://jelastic.com/">Jelastic</a>. Ruslan has reviewed&nbsp; different types of&nbsp; &ldquo;* as a Service&rdquo;: SaaS, PaaS and IaaS. The comparison criteria of PaaS&rsquo;s are very useful for further evaluation.
+<br />
+<br /><strong>7. Why do I hate the Hibernate? by Mikalai Alimenkou</strong>
+<br />It was pragmatic, based on real experience presentation with tons of Hibernate issues. It&rsquo;s very useful for anyone who&rsquo;s developing application with Hibernate. We must know the weaknesses of our tools. Mikalai has used very interesting approach to blame something/someone: &ldquo;nasty granny&rdquo;. You should review the slides to this presentation to understand what does it mean.
+<br />
+<br />I&rsquo;d like to say <i>&ldquo;Thank you&rdquo;</i> JEEConf organizers team. You are doing very important work for Ukrainian Java Community.
+<br />
+<br />
+<br />See: <a href="http://halyph.com/2011/05/jeeconf-kiev-2011-report.html" target="_blank">JEEConf - Kiev, 2011 - Report</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JEEConf - Kiev, 2011 - Report]]></title>
+    <link href="http://halyph.com/blog/2011/05/24/jeeconf-kiev-2011-report/"/>
+    <updated>2011-05-24T00:41:00+03:00</updated>
+    <id>http://halyph.com/blog/2011/05/24/jeeconf-kiev-2011-report</id>
+    <content type="html"><![CDATA[<p>I had a chance to attend the first and totally dedicated to <a href="http://jeeconf.com/">Java conference in Kiev</a> (May 21, 2011).
+<br />It was a great. The atmosphere was amazing. The organization was good, really good. The most noticeable thing was that almost every presentation was based on real problem, no metaphysical stuff :-)
+<br />There were three stages, that&rsquo;s why I couldn&rsquo;t attend every talk and that&rsquo;s a pity.
+<br />
+<br />Here is a short overview of all attended talks:
+<br />
+<br /><strong>1. &ldquo;What Riding the <a href="http://camel.apache.org/">Camel </a>can do to make integration easier for you&rdquo; by Claus Ibsen.</strong>
+<br />I had an idea what the Camel is, but this presentation gave me the &ldquo;big picture&rdquo;. Actually, the speaker has been well prepared and known the presentation technique very well. He showed all major aspects of Camel framework and explain its purpose.
+<br />
+<br />He&rsquo;s shown the several Camel&rsquo;s DSLs: XML-based, Java and Scala. That short code snippets were really cool and clean. So, I&rsquo;ve added into my todo list &ldquo;the Camel DSL digging&rdquo; ;-)
+<br />
+<br /><strong>2. &ldquo;The <a href="http://www.scala-lang.org/">Scala </a>and <a href="http://www.gridgain.com/">GridGain </a>usage for the distributed systems with high efficiency&rdquo; by Renat Ahmerov.</strong>
+<br />This talk and master-class inspired me to start Scala learning. I&rsquo;ve never seen the cloud computing in action. But during that master-class was created real application for distributed computing. And the code base was so tiny and clean, so my heart falling in love to this language. The last time I had had the similar feeling when I&rsquo;ve seen the Rails in action.
+<br />
+<br /><strong>3. The problem diagnosing and GC tuning in HotSpot Java VM by Vladimir Ivanov.</strong>
+<br />This talk was like a JVM magic :-). The speaker discovered the darkest GC places I&rsquo;ve never known about. He&rsquo;s opened my eyes. I even couldn&rsquo;t expect that GC tuning is so interesting.
+<br />
+<br /><strong>4. To be in ten times faster kudos <a href="http://groovy.codehaus.org/">Groovy </a>by Evgeny Kompaniec</strong>
+<br />This guy has shown the real case study:
+<br />- Why he choose the Groovy as Java substitution.
+<br />- Java code snippets vs Groovy (functionally equal) code snippets. IMHO, the most interesting and inspiration part of talk.
+<br />- Groovy knowledge sharing via pros &amp; cons.
+<br />
+<br />5. <strong><a href="http://www.unitils.org/">Unitils </a>for Java testing by Mikalai Alimenkou</strong>
+<br />To be honest I&rsquo;ve never heard about this tools. This presentation was full of practical samples and advices like a cookbook. Great talk, the presenter had a good mood and used the right jokes in the right places, he was very impressive. I wish every speaker had such good presentation technique.
+<br />
+<br /><strong>6. How Graph Databases can make you a super star by Andrés Taylor</strong>
+<br />This talk was dedicated to the &ldquo;beauty&rdquo; of <a href="http://neo4j.org/">Neo4j</a> graph DB. It was just a start point for this DB.
+<br />
+<br /><strong>7. <a href="http://vaadin.com/">Vaadin</a>, Rich Web Apps in Server-Side Java without Plug-ins or JavaScript by Joonas Lehtinen</strong>
+<br />I&rsquo;ve been following this framework about a year. And I must admit that it was really impressed to see CEO of company behind Vaadin.
+<br />The talk was short and pragmatic. The major areas of Vaadin were highlighted. Then, the presenter has shown the Vaadin in action and it was cool. The community and the whole framework evolved in one year. As for me it was great to see the real person who developed so interesting stuff.
+<br />
+<br />It was my 6th IT conference. I must admit it was the best, no doubts. I hope to attend the Java conference next year again.</p>
 ]]></content>
   </entry>
   

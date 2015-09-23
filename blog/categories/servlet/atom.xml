@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Servlet | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/servlet/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Prepare to Pass Oracle Web Component Developer Certified Expert Exam (1Z0-899)?]]></title>
+    <link href="http://halyph.com/blog/2012/09/04/how-to-prepare-to-pass-oracle-web/"/>
+    <updated>2012-09-04T21:55:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/09/04/how-to-prepare-to-pass-oracle-web</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://4.bp.blogspot.com/-932HOrNolwA/UEZMpVLmv8I/AAAAAAAAAn8/KY_qMq556PM/s1600/OCE_JavaEE6WebCompDev_clr.gif" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://4.bp.blogspot.com/-932HOrNolwA/UEZMpVLmv8I/AAAAAAAAAn8/KY_qMq556PM/s1600/OCE_JavaEE6WebCompDev_clr.gif" /></a></div>
+
+
+<p><br />I&rsquo;ve already posted the <a href="http://www.coderanch.com/t/591591/sr/certification/Passed-OCPJWCD">Certification Result report on coderanch</a>.<br />Here are the main resources for preparation for this exam:<br /><ul><li>Book: &ldquo;<a href="http://shop.oreilly.com/product/9780596516680.do">Head First Servlets and JSP&rdquo;, 2nd Edition, By Bryan Basham, Kathy Sierra, Bert Bates</a></li><li><span class="postbody"><a class="snap_shots" href="http://enthuware.com/index.php/mock-exams/oracle-certified-expert/oce-jsp-servlet-mock-questions" target="_new">Enthuware mock exams</a>, very nice software with tons of questions. I definitely recommend it if you&rsquo;d like to pass this exam</span></li><li><span class="postbody">Nikos <a class="snap_shots" href="http://nikojava.wordpress.com/tag/scwcd/" rel="nofollow" target="_new">Free SCWCD Mock exams</a> were very helpful during the reading the HFSJ book</span><span class="postbody">&nbsp;</span></li><li><span class="postbody">Piotr Nowicki&rsquo;s <a class="snap_shots" href="http://piotrnowicki.com/2011/03/jee-6-scwcd-mock-questions/" rel="nofollow" target="_new">Java EE 6 SCWCD Mock Exam</a>&nbsp;&nbsp;</span></li><li><a href="http://jcp.org/aboutJava/communityprocess/mrel/jsr315/index.html" target="_blank">Servlets 3.0 Final Release specification</a><span class="postbody"> </span><span class="postbody"></span></li></ul></p>
+]]></content>
+  </entry>
+  
+</feed>

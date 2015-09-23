@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bash | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/bash/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-07-14T00:58:51+03:00</updated>
+  <updated>2015-09-23T06:22:09+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -292,6 +292,18 @@ text
 fi
 echo &ldquo;after block comment&rdquo;
 &#8220;`</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Remove .svn Folders Recursively?]]></title>
+    <link href="http://halyph.com/blog/2013/08/27/how-to-remove-svn-folders-recursively/"/>
+    <updated>2013-08-27T16:28:00+03:00</updated>
+    <id>http://halyph.com/blog/2013/08/27/how-to-remove-svn-folders-recursively</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://4.bp.blogspot.com/-ULddOXbgKU4/UOW2RTrNQkI/AAAAAAAABI4/3RpLOAl4vzk/s1600/terminal_icon.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="200" src="http://4.bp.blogspot.com/-ULddOXbgKU4/UOW2RTrNQkI/AAAAAAAABI4/3RpLOAl4vzk/s200/terminal_icon.png" width="200" /></a></div>
+
+
+<p><br />Validate the list of folders which will be removed: <br /><pre class="brush: bash;">$ find . -name .svn -exec ls {} \;<br /></pre><br />Run recursive remove: <br /><pre class="brush: bash;">$ find . -name .svn -exec rm -rf {} \;<br /></pre>This script is run from the current folder.&nbsp; Be sure you&rsquo;ve specified <b><i>find -name</i></b> properly.<b><br /></b><br /><br /><b>References:</b><br /><ul><li><a href="http://stackoverflow.com/questions/1294590/how-to-remove-all-svn-directories-from-my-application-directories">How to remove all .svn directories from my application directories</a>&nbsp;</li></ul></p>
 ]]></content>
   </entry>
   

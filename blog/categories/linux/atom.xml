@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Linux | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Install Git 1.8.3.4 on CentOS 6.4]]></title>
+    <link href="http://halyph.com/blog/2013/08/21/how-to-install-git-1834-on-centos-64/"/>
+    <updated>2013-08-21T15:45:00+03:00</updated>
+    <id>http://halyph.com/blog/2013/08/21/how-to-install-git-1834-on-centos-64</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/-8tSaZBIgOh8/UhSywqivolI/AAAAAAAABqE/u2B3RdZZJoY/s1600/CentOS_logo.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://1.bp.blogspot.com/-8tSaZBIgOh8/UhSywqivolI/AAAAAAAABqE/u2B3RdZZJoY/s1600/CentOS_logo.png" /></a></div>
+
+
+<ol><li>Check the CentOS version</li><pre class="brush: bash;">$ cat /etc/redhat-release<br />CentOS release 6.4 (Final)<br /></pre><li>Check git version</li><pre class="brush: bash;">$ git --version<br />git version 1.7.1<br /></pre><li>Enable/disable <b>yum </b>proxy settings (find/add &#8220;proxy&#8221; string with related proxy server) <pre class="brush: bash;">$ vim /etc/yum.conf<br /></pre></li><li>Try to update <b>git </b>via <b>yum </b>package manager. But you will get the message that git is up to date</li><pre class="brush: bash;">$ sudo yum update git <br /></pre><li>Based on instruction from <a href="http://git-scm.com/book/en/Getting-Started-Installing-Git">Getting Started Installing Git</a> install git from sources:</li><pre class="brush: bash;">$ yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc<br />$ wget https://www.kernel.org/pub/software/scm/git/git-1.8.3.4.tar.gz<br />$ tar xzvf git-1.8.3.4.tar.gz<br />$ cd git-1.8.3.4<br />$ sudo make prefix=/usr/local all<br />$ sudo make prefix=/usr/local install<br /></pre><li>Re-run bash shell and verify the current git version</li><pre class="brush: bash;">$ git --version<br />git version 1.8.3.4<br /></pre></ol>
+
+
+<p><b>References</b>:<br /><ul><li><a href="http://johnathanmarksmith.com/linux/git/programming/2013/05/15/how-to-install-git-182-on-fedora-centos-red-hat-and-scientific-linux/" target="_blank">How to install Git 1.8.2 on Fedora, CentOS, Red Hat and Scientific Linux</a></li><li><a href="http://git-scm.com/book/en/Getting-Started-Installing-Git">Getting Started Installing Git</a></li></ul></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Custom Putty/Kitty Color Scheme]]></title>
+    <link href="http://halyph.com/blog/2013/01/03/custom-puttykitty-color-scheme/"/>
+    <updated>2013-01-03T19:09:00+02:00</updated>
+    <id>http://halyph.com/blog/2013/01/03/custom-puttykitty-color-scheme</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://4.bp.blogspot.com/-ULddOXbgKU4/UOW2RTrNQkI/AAAAAAAABI4/3RpLOAl4vzk/s1600/terminal_icon.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="200" src="http://4.bp.blogspot.com/-ULddOXbgKU4/UOW2RTrNQkI/AAAAAAAABI4/3RpLOAl4vzk/s200/terminal_icon.png" width="200" /></a>
+</div>
+
+
+<p><br />I&rsquo;ve been using Putty (or Kitty) as SSH client on Windows machine. And you&rsquo;ve probably noticed those ugly color default Scheme:
+<br /></p>
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://4.bp.blogspot.com/-bCkNoQKdajg/UOW25npYn5I/AAAAAAAABJA/i5GtEbBJVOE/s1600/col1.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="267" src="http://4.bp.blogspot.com/-bCkNoQKdajg/UOW25npYn5I/AAAAAAAABJA/i5GtEbBJVOE/s400/col1.png" width="400" /></a>
+</div>
+
+
+<p><br />It&rsquo;s very ugly. There is very simple steps to define you own color scheme: Configuration-&gt;Session-&gt;Windows-&gt;Colours:
+<br /></p>
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://2.bp.blogspot.com/-OhuMFoRQkf4/UOW3wWcEMjI/AAAAAAAABJM/KvGHEf_zMpQ/s1600/col2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="400" src="http://2.bp.blogspot.com/-OhuMFoRQkf4/UOW3wWcEMjI/AAAAAAAABJM/KvGHEf_zMpQ/s400/col2.png" width="308" /></a>
+</div>
+
+
+<p><br />Now you should manually (or via importing reg file) define new colors. Here is sample from <a href="http://www.darkrune.org/blog/?p=213">PuTTY Colour Schemes</a>
+<br /></p>
+
+<ul>
+    <li>Default Foreground: 255/255/255</li>
+    <li>Default Background: 51/51/51</li>
+    <li>ANSI Black: 77/77/77</li>
+    <li>ANSI Green: 152/251/152</li>
+    <li>ANSI Yellow: 240/230/140</li>
+    <li>ANSI Blue: 205/133/63</li>
+    <li>ANSI Blue Bold 135/206/235</li>
+    <li>ANSI Magenta: 255/222/173 or 205/92/92</li>
+    <li>ANSI Cyan: 255/160/160</li>
+    <li>ANSI Cyan Bold: 255/215/0</li>
+    <li>ANSI White: 245/222/179</li>
+</ul>
+
+
+<p>Also, here is screenshot from windows registry
+<br />[HKEY_CURRENT_USER\Software\9bis.com\KiTTY\Sessions\Ubuntu_12.04]:
+<br /></p>
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://2.bp.blogspot.com/-vzpWHCUkZgE/UOW45hSN1EI/AAAAAAAABJo/CSs9bqurgEg/s1600/col3.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="205" src="http://2.bp.blogspot.com/-vzpWHCUkZgE/UOW45hSN1EI/AAAAAAAABJo/CSs9bqurgEg/s320/col3.png" width="320" /></a>
+</div>
+
+
+<p><br />You can find exported registry file here: <a href="https://gist.github.com/4444949">Desert Color Scheme</a>
+<br />After applying this scheme I&rsquo;ve got something like this:
+<br /></p>
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://1.bp.blogspot.com/-iDIyxNIkbDk/UOW5T1F6c9I/AAAAAAAABJw/LbVNaRURZXI/s1600/col4.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="256" src="http://1.bp.blogspot.com/-iDIyxNIkbDk/UOW5T1F6c9I/AAAAAAAABJw/LbVNaRURZXI/s400/col4.png" width="400" /></a>
+</div>
+
+
+<p><br />
+<br />Links:
+<br /></p>
+
+<ul>
+    <li><a href="http://www.igvita.com/2008/04/14/custom-putty-color-themes/">Custom PuTTY Color Themes </a></li>
+    <li><a href="http://www.darkrune.org/blog/?p=213">PuTTY Colour Schemes</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Install Rails on Ubuntu 12.04 With RVM Support]]></title>
+    <link href="http://halyph.com/blog/2012/09/12/install-rails-on-ubuntu-1204-with-rvm/"/>
+    <updated>2012-09-12T22:51:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/09/12/install-rails-on-ubuntu-1204-with-rvm</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/-HNu7PnKaFw8/UE46vvlhPxI/AAAAAAAAApA/2PTpOPatjl4/s1600/RVM.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://3.bp.blogspot.com/-HNu7PnKaFw8/UE46vvlhPxI/AAAAAAAAApA/2PTpOPatjl4/s1600/RVM.png" /></a></div>
+
+
+<p>Nowadays, <a href="https://rvm.io/" target="_blank">RVM</a> is very popular in Ruby/Rails community on Linux/OS X. Even more, it&rsquo;s best practice to use <a href="https://rvm.io/" target="_blank">RVM</a> for Ruby environment management. Ubuntu is my major Linux distribution. Here I&rsquo;ve collected steps for installing Ruby, Rails via RVM on Ubuntu 12.04. I must admit that in many cases it&rsquo;s the re-post from different sources.<br /><br />So, let&rsquo;s start.<br /><br /><b>Install Ruby, Rails </b>(see the <a href="https://www.digitalocean.com/community/articles/how-to-install-ruby-on-rails-on-ubuntu-12-04-lts-precise-pangolin-with-rvm" target="_blank">source</a>):<br /><pre class="brush: bash;">sudo apt-get update<br />sudo apt-get install curl<br />curl -L get.rvm.io | bash -s stable<br />source ~/.rvm/scripts/rvm<br />rvm requirements<br />rvmsudo apt-get install build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion<br />rvm install 1.9.3<br />rvm use 1.9.3 &ndash;default<br />rvm rubygems current<br />gem install rails<br /></pre>Please check the <a href="https://www.digitalocean.com/community/articles/how-to-install-ruby-on-rails-on-ubuntu-12-04-lts-precise-pangolin-with-rvm">original</a> in case you have some issues during this process.<br /><br /><b>Fix Bundler issues:</b><br />If you create Rails project or any other Ruby project which supports Bundler and run install command, you will get the next error:<br /><pre class="brush: bash;">$ bundle install<br />&hellip;<br />ERRRO: Gem bundler is not installed, run <code>gem install bundler</code> first.<br /></pre><br />But <code>gem list</code> clearly shows us that bundler has been properly installed. To fix this problem We have to tweak <code>.bashrc</code> file a little (see the <a href="http://railsforum.com/viewtopic.php?pid=149944#p149944" target="_blank">original idea</a>): <br /><pre class="brush: bash;">echo &lsquo;[[ -s &ldquo;$HOME/.rvm/scripts/rvm&rdquo; ]] &amp;&amp; . &ldquo;$HOME/.rvm/scripts/rvm&rdquo; # Load RVM function&rsquo; &gt;&gt; ~/.bashrc<br />source ~/.bashrc<br /></pre><br /><b>Fix rails server throw could not find JavaScript runtime</b><br />Now you will get the next interesting error when you tried to run <code>rails server</code>:<br /><pre class="brush: bash;">username@ubuntu:~/<em>Projects/Rails/blog$ rails server<br />/home/username/.rvm/gems/ruby-1.9.3-p194/gems/execjs-1.4.0/lib/execjs/runtimes.rb:51:in <code>autodetect': Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes. (ExecJS::RuntimeUnavailable)&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/execjs-1.4.0/lib/execjs.rb:5:in</code>&lt;module:execjs>&lsquo;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/execjs-1.4.0/lib/execjs.rb:4:in <code>&lt;top required="required"&gt;'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/coffee-script-2.2.0/lib/coffee_script.rb:1:in</code>require&rsquo;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/coffee-script-2.2.0/lib/coffee_script.rb:1:in <code>&lt;top required="required"&gt;'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/coffee-script-2.2.0/lib/coffee-script.rb:1:in</code>require&#8217;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/coffee-script-2.2.0/lib/coffee-script.rb:1:in <code>&lt;top required="required"&gt;'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/coffee-rails-3.2.2/lib/coffee-rails.rb:1:in</code>require&#8217;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/coffee-rails-3.2.2/lib/coffee-rails.rb:1:in <code>&lt;top required="required"&gt;'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/bundler-1.2.0/lib/bundler/runtime.rb:68:in</code>require&#8217;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/bundler-1.2.0/lib/bundler/runtime.rb:68:in <code>block (2 levels) in require'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/bundler-1.2.0/lib/bundler/runtime.rb:66:in</code>each&#8217;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/bundler-1.2.0/lib/bundler/runtime.rb:66:in <code>block in require'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/bundler-1.2.0/lib/bundler/runtime.rb:55:in</code>each&#8217;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/bundler-1.2.0/lib/bundler/runtime.rb:55:in <code>require'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/bundler-1.2.0/lib/bundler.rb:128:in</code>require&#8217;<br /> from /home/username/</em>Projects/Rails/blog/config/application.rb:7:in <code>&lt;top required="required"&gt;'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/lib/rails/commands.rb:53:in</code>require&#8217;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/lib/rails/commands.rb:53:in <code>block in &lt;top required="required"&gt;'&lt;br /&gt; from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/lib/rails/commands.rb:50:in</code>tap&#8217;<br /> from /home/username/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/lib/rails/commands.rb:50:in <code>&lt;top required="required"&gt;'&lt;br /&gt; from script/rails:6:in</code>require&#8217;<br /> from script/rails:6:in `<main>&lsquo;<br /><br /></main></top></top></top></top></top></top></top>&lt;/module:execjs></pre>Install Node.js to fix this error: <br /><pre class="brush: bash;">$ sudo apt-get install nodejs<br /></pre>Check this wiki &ldquo;<a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager">Installing Node.js via package manager</a>&rdquo; If you have some troubles with installing node.js <br /><br /><br />Links:<br /><ul><li><a href="https://www.digitalocean.com/community/articles/how-to-install-ruby-on-rails-on-ubuntu-12-04-lts-precise-pangolin-with-rvm">How to Install Ruby on Rails on Ubuntu 12.04 with RVM</a></li><ul><li><a href="http://www.youtube.com/watch?v=RDuSrP3w06Y" target="_blank">YouTube video</a>&nbsp; </li></ul><li><a href="http://railsforum.com/viewtopic.php?pid=149944#p149944" target="_blank">railsforum.com - ERRRO: Gem bundler is not installed, but it seems to be&hellip;</a></li><li><a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager">Installing Node.js via package manager</a> </li><li><a href="http://stackoverflow.com/questions/6282307/execjs-and-could-not-find-a-javascript-runtime">ExecJS and could not find a JavaScript runtime</a></li></ul></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Install Rubymine 4.5.x on Ubuntu 12.04]]></title>
+    <link href="http://halyph.com/blog/2012/09/08/install-rubymine-45x-on-ubuntu-1204/"/>
+    <updated>2012-09-08T03:00:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/09/08/install-rubymine-45x-on-ubuntu-1204</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"></div>
+
+
+<div class="separator" style="clear: both; text-align: center;"><a href="http://2.bp.blogspot.com/-lwxR6JedPIM/UEqBIBx1CoI/AAAAAAAAAoY/CUK1k-bTeLY/s1600/Untitled.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="200" src="http://2.bp.blogspot.com/-lwxR6JedPIM/UEqBIBx1CoI/AAAAAAAAAoY/CUK1k-bTeLY/s200/Untitled.png" width="200" /></a></div>
+
+
+<p><br />As you probable know NetBeans has dropped Ruby support. And now, <a href="http://www.jetbrains.com/ruby/download/" target="_blank">RubyMine</a> is one of the best Ruby IDE. Here I&rsquo;d like to describe the steps for installing RubyMine on Ubuntu 12.04.<br /><br />Official requirement is &ldquo;<a href="http://www.jetbrains.com/ruby/download/" target="_blank">Sun JDK 1.6. (OpenJDK is not supported)</a>&rdquo;. I&rsquo;ve decided to install Oracle JDK v.1.7.<br /><br />I&rsquo;ve used the next advices from &ldquo;<a href="http://www.devsniper.com/ubuntu-12-04-install-sun-jdk-6-7/" target="_blank">Ubuntu 12.04 – install sun jdk 6-7</a>&rdquo; (see re-post below):<br /><br /><b>Install Sun JDK 7 on Ubuntu 12.04:</b><br />Download the sun jdk 7 tar file from <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk-7u4-downloads-1591156.html" target="_blank">here</a><br />Extract the tar file: <br /><pre class="brush: bash;">tar -xvzf jdk-7u4-linux-x64.tar.gz<br /></pre>Move extracted folder to this location: <br /><pre class="brush: bash;">sudo mv jdk1.7.0_04 /usr/lib/jvm/<br /></pre>Install Update Java package (see <a href="http://www.webupd8.org/2011/09/how-to-install-oracle-java-7-jdk-in.html" target="_blank">here</a>) <br /><pre class="brush: bash;">sudo add-apt-repository ppa:nilarimogard/webupd8<br />sudo apt-get update<br />sudo apt-get install update-java<br />sudo update-java<br /></pre><br />Install new java source in system: <br /><pre class="brush: bash;">sudo update-alternatives &ndash;install /usr/bin/javac javac /usr/lib/jvm/jdk1.7.0_04/bin/javac 1<br />sudo update-alternatives &ndash;install /usr/bin/java java /usr/lib/jvm/jdk1.7.0_04/bin/java 1<br />sudo update-alternatives &ndash;install /usr/bin/javaws javaws /usr/lib/jvm/jdk1.7.0_04/bin/javaws 1<br /></pre>Choose default java: <br /><pre class="brush: bash;">sudo update-alternatives &ndash;config javac<br />sudo update-alternatives &ndash;config java<br />sudo update-alternatives &ndash;config javaws<br /></pre>java version test: <br /><pre class="brush: bash;">java -version<br />javac -version</pre>Verify the symlinks all point to the new java location: <br /><pre class="brush: bash;">ls -la /etc/alternatives/java*<br /></pre><b>JAVA_HOME configuration</b><br />You can set JAVA_HOME in Ubuntu so simple: Edit the file .bashrc under your home directory and add the following lines: (if .bashrc is hidden click in Nautilus Menu View &gt; Show Hidden Files) <br /><pre class="brush: bash;">export JAVA_HOME=/path/your/jdk<br />export PATH=$JAVA_HOME/bin:$PATH<br /></pre><b>Install RubyMine (see official)</b><br />Unpack the rubymine-4.5.3.tar.gz file using the following command:<br /><pre class="brush: bash;">tar xfz rubymine-4.5.3.tar.gz<br /><br /></pre>Run <b><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">rubymine.sh</span></b> from the bin sub-directory  <br /><br />Links:<br /><ul><li><a href="http://www.devsniper.com/ubuntu-12-04-install-sun-jdk-6-7/" target="_blank">Ubuntu 12.04 – install sun jdk 6-7</a></li><li><a href="http://www.webupd8.org/2011/09/how-to-install-oracle-java-7-jdk-in.html" target="_blank">How To Install Oracle Java 7 (JDK) In Ubuntu</a></li></ul></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu Server 10.04.2 VM Basic Configuration]]></title>
+    <link href="http://halyph.com/blog/2011/07/19/ubuntu-server-10042-vm-basic/"/>
+    <updated>2011-07-19T01:45:00+03:00</updated>
+    <id>http://halyph.com/blog/2011/07/19/ubuntu-server-10042-vm-basic</id>
+    <content type="html"><![CDATA[<div style="text-align: center;"><img border="0" src="http://2.bp.blogspot.com/-qp-nTnpstbg/TiSxvkDbx0I/AAAAAAAAAdk/8jgWmGkr_5o/s1600/bg-logo.gif" /> <span style="font-size: x-large;"><b>&nbsp;+</b> </span><img border="0" height="48px" src="http://2.bp.blogspot.com/-aTuq4gG_ZoI/S8ehmbmqNAI/AAAAAAAAAV8/FAQFVMjoox8/s1600/1271369264_start-here-ubuntuoriginal.png" width="48px" /><span style="font-size: x-large;"> <b>+</b> </span><img border="0" src="http://2.bp.blogspot.com/-yj-eVJbdFPE/TiSweVkJDbI/AAAAAAAAAdg/Hei8Ko3FBBg/s1600/kitty.png" /></div>
+
+
+<p>Required tools:<br /><ul><li> VMware Worstation</li><li><a href="http://www.ubuntu.com/">Ubuntu </a>Server 10.04.2</li><li><a href="http://kitty.9bis.com/">Kitty </a>(Putty ssh client fork)</li></ul>I suppose that You know how to setup plain VM via VMware.<br />And here is my basic Ubuntu VM configuration:<br /><ol><li><a href="http://www.ubuntu.com/">Ubuntu </a>Server 10.04.2 doesn&rsquo;t include SSH server by default. That&rsquo;s why you have to install it:</li><pre class="brush: bash;">sudo apt-get install ssh<br /></pre><li>Check your Ubuntu VM IP:</li><pre class="brush: bash;">$ ifconfig<br />eth0      Link encap:Ethernet  HWaddr 00:0c:29:04:55:d6<br />          inet addr:192.168.11.134  Bcast:192.168.11.255  Mask:255.255.255.0<br />          inet6 addr: fe80::20c:29ff:fe04:55d6/64 Scope:Link<br />          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1<br />          RX packets:50 errors:0 dropped:0 overruns:0 frame:0<br />          TX packets:52 errors:0 dropped:0 overruns:0 carrier:0<br />          collisions:0 txqueuelen:1000<br />          RX bytes:6303 (6.3 KB)  TX bytes:7366 (7.3 KB)<br />          Interrupt:19 Base address:0x2000<br /></pre><li>Configure Kitty connection host name:&nbsp; </li><img border="0" height="320" src="http://4.bp.blogspot.com/-rZ_fYBE3CFE/TiS0rfsEN7I/AAAAAAAAAdo/Lv7-_Vl7Ijs/s320/Clipboard-1.png" width="244" /><li>Create two scripts for:</li><ul><li>startup VM in background (<b><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">start_vm.bat</span></b>)</li><pre class="brush: bash;">set MYVM=&ldquo;F:\VMs\ubuntu-10.04.2-server\Ubuntu Server 10.04.2.vmx&rdquo;<br />set VMRUN=&ldquo;E:\Program Files\VMware\VMware Workstation\vmrun&rdquo;<br /><br />%VMRUN% -T ws start %MYVM% nogui<br /></pre><li>shutdown VM (<b><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">stop_vm.ba</span></b>t)<br /></li><pre class="brush: bash;">set MYVM=&ldquo;F:\VMs\ubuntu-10.04.2-server\Ubuntu Server 10.04.2.vmx&rdquo;<br />set VMRUN=&ldquo;E:\Program Files\VMware\VMware Workstation\vmrun&rdquo;<br /><br />%VMRUN% stop %MYVM% soft<br /></pre></ul><li>Configure Kitty for auto-login:</li><img border="0" src="http://3.bp.blogspot.com/-pK4AnYImpbo/TiS2j12G8YI/AAAAAAAAAds/OGov-utOIOw/s1600/kitty_cfg.PNG" /><li>VM startup and Kitty run can be combined into one script</li></ol><br /></p>
+]]></content>
+  </entry>
+  
+</feed>

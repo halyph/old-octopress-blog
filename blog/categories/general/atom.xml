@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: General | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/general/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Concurrency vs. Parallelism Definitions]]></title>
+    <link href="http://halyph.com/blog/2013/07/02/concurrency-vs-parallelism-definitions/"/>
+    <updated>2013-07-02T10:00:00+03:00</updated>
+    <id>http://halyph.com/blog/2013/07/02/concurrency-vs-parallelism-definitions</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/-L2nMMCQ9lqI/UdHP5tMsweI/AAAAAAAABnM/QuFHi6zuPco/s401/Employee+engagement+definition.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="148" src="http://1.bp.blogspot.com/-L2nMMCQ9lqI/UdHP5tMsweI/AAAAAAAABnM/QuFHi6zuPco/s200/Employee+engagement+definition.jpg" width="200" /></a></div>
+
+
+<p>Recently I had long discussion in scope of&nbsp; &ldquo;concurrency&rdquo; and &ldquo;parallelism&rdquo; definitions. That&rsquo;s why I&rsquo;ve decided to pick the most trusted sources for these definitions in one place:<br /><br /><a href="http://doc.akka.io/docs/akka/2.1.4/general/terminology.html" target="_blank"><b>From Akka documentation:</b></a><br /><blockquote class="tr_bq"><i>Concurrency</i> and <i>parallelism</i> are related concepts, but there are small differences. <b><i>Concurrency</i></b> means that two or more tasks are making progress even though they might not be executing simultaneously. This can for example be realized with time slicing where parts of tasks are executed sequentially and mixed with parts of other tasks. <b><i>Parallelism</i></b> on the other hand arise when the execution can be truly simultaneous.</blockquote><br /><a href="http://docs.oracle.com/cd/E19455-01/806-5257/6je9h032b/index.html" target="_blank"><b>From Oracle &ldquo;Multithreaded Programming Guide&rdquo;:</b></a><br /><blockquote class="tr_bq"><i><b>Parallelism</b></i> - A condition that arises when at least two threads are executing simultaneously.<br /><b><i>Concurrency</i></b> - A condition that exists when at least two threads are making progress. A more generalized form of parallelism that can include time-slicing as a form of virtual parallelism. </blockquote><br /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Why You Should Join a User Group?]]></title>
+    <link href="http://halyph.com/blog/2012/03/27/why-you-should-join-user-group/"/>
+    <updated>2012-03-27T01:09:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/03/27/why-you-should-join-user-group</id>
+    <content type="html"><![CDATA[<p><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/-VEwmiZMVtfc/T3Dp5f52omI/AAAAAAAAAhw/t_woMeyxTHo/s1600/1332798208_users.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://1.bp.blogspot.com/-VEwmiZMVtfc/T3Dp5f52omI/AAAAAAAAAhw/t_woMeyxTHo/s1600/1332798208_users.png" /></a></div><br />Here I&rsquo;d like to highlight the most important benefits for me:<br /><ul><li><strong>Networking </strong>- ability to make social connections with developers from other companies</li><li><strong>Learning </strong>- it&rsquo;s the right place to learn something for free and improve you skills.</li><li><strong>Knowledge sharing</strong> - you shouldn&rsquo;t always take also you can give something to others. In our case it&rsquo;s your knowledge. Most people are very kind and really like to share own experience.</li><li><strong>Public Visibility</strong> - here you can promote yourself as passionate and well skilled developer</li><li><strong>Job Opportunities</strong> - you can find new contact which suggest a new job</li><li><strong>Find Expert</strong> - it&rsquo;s the right place to find the right people which might help you to solve some technical problems</li><li><strong>Become an Expert</strong> - it can happen </li><li><strong>Meet Nice People</strong> - just fact :)</li></ul><div>If you have other nice benefits please add in comments.</div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Decide Which Technology Hype Is Worth Personal Investments?]]></title>
+    <link href="http://halyph.com/blog/2011/12/25/how-to-decide-which-technology-hype-is/"/>
+    <updated>2011-12-25T21:16:00+02:00</updated>
+    <id>http://halyph.com/blog/2011/12/25/how-to-decide-which-technology-hype-is</id>
+    <content type="html"><![CDATA[<p>I think it&rsquo;s very important question. Because studding some new technology requires some time (and maybe money).<br /><br />So, I&rsquo;ve created for myself brief checklist which helps me to make this non-easy decision.<br /><ol><li>How long it will take for me to master the major approaches of selected technology?</li><li>Can I reuse the gained knowledge during my daily development work?</li><li>How long it will take to train/coach my team mates to use this technology?</li><li>How big is the market for the selected technology?</li><li>How big is the local community for the selected technology?</li><li>How easily can we hire new developers with appropriate knowledge in selected technology?</li><li>Will it be profitable to have the knowledge in that technology?</li></ol><br />I know&nbsp; that some items are very boring&nbsp; and mercantile, but it&rsquo;s life, real life. And we should align our priorities appropriately.</p>
+]]></content>
+  </entry>
+  
+</feed>

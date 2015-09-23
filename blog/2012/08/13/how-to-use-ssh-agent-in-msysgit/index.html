@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>How to Use SSH-Agent in Msysgit? - Knowledge Is Everything</title>
+  <meta name="author" content="Orest Ivasiv">
+
+  
+  <meta name="description" content="UPDATE 08/14/12: changed .bashrc fileI assume that You've generated and added SSH key as was described here: Generating SSH Keys.It means you've got &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://halyph.com/blog/2012/08/13/how-to-use-ssh-agent-in-msysgit">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Knowledge Is Everything" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-54626671-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <!-- <header role="banner"><hgroup>
+  <h1><a href="/">Knowledge Is Everything</a></h1>
+  
+</hgroup>
+
+</header> -->
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:halyph.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+    <li><a href="/">
+        <span class="blue_light">
+            Knowledge Is Everything
+        </span>
+       
+    </a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About me</a></li>
+  <li><a href="http://halyph.blogspot.com">Old Blog</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">How to Use SSH-Agent in Msysgit?</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-08-13T19:33:00+03:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>7:33 pm</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://halyph.com">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><b>UPDATE</b> 08/14/12: changed .bashrc file<br /><br />I assume that You've generated and added SSH key as was described here: <a href="https://help.github.com/articles/generating-ssh-keys#platform-windows">Generating SSH Keys</a>.<br />It means you've got something like this in Yours user folder:<br /><br /><pre class="brush: bash;">[C:\Users\&lt;user_name&gt;\.ssh]<br />$ dir /b<br />id_rsa<br />id_rsa.pub<br />known_hosts<br /></pre>But, when You communicate with GitHub remote (via calling push/pull/fetch) You are getting the next message every time:  <br /><pre class="brush: bash;">Enter passphrase for key '/c/Users/&lt;user_name&gt;/.ssh/id_rsa':</pre>There is a simple <a href="http://anterence.blogspot.com/2012/01/ssh-agent-in-msysgit.html">solution</a>:<br /><ol><li>Add a file called <b>.bashrc</b> to my home folder (C:\Users\&lt;user_name&gt;\)</li><li><strike>Add the next content to this file:</strike></li><pre><strike>#! /bin/bash<br />eval `ssh-agent -s`<br />ssh-add</strike><br /></pre><li>Approach used in case #2 it dangerous because it create <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">ssh-agent</span> instance every time you run msysgit shell.  I've <a href="https://help.github.com/articles/working-with-ssh-key-passphrases#platform-windows">tested the next (similar) solution from GitHub</a> again, very carefully and&nbsp; it DOES work. So, you have to create .bashrc (or .profile) file with the next content:</li><pre class="brush: bash;">#! /bin/bash<br />SSH_ENV="$HOME/.ssh/environment"<br /><br /># start the ssh-agent<br />function start_agent {<br />    echo "Initializing new SSH agent..."<br />    # spawn ssh-agent<br />    ssh-agent | sed 's/^echo/#echo/' &gt; "$SSH_ENV"<br />    echo succeeded<br />    chmod 600 "$SSH_ENV"<br />    . "$SSH_ENV" &gt; /dev/null<br />    ssh-add<br />}<br /><br /># test for identities<br />function test_identities {<br />    # test whether standard identities have been added to the agent already<br />    ssh-add -l | grep "The agent has no identities" &gt; /dev/null<br />    if [ $? -eq 0 ]; then<br />        ssh-add<br />        # $SSH_AUTH_SOCK broken so we start a new proper agent<br />        if [ $? -eq 2 ];then<br />            start_agent<br />        fi<br />    fi<br />}<br /><br /># check for running ssh-agent with proper $SSH_AGENT_PID<br />if [ -n "$SSH_AGENT_PID" ]; then<br />    ps -ef | grep "$SSH_AGENT_PID" | grep ssh-agent &gt; /dev/null<br />    if [ $? -eq 0 ]; then<br />  test_identities<br />    fi<br /># if $SSH_AGENT_PID is not properly set, we might be able to load one from<br /># $SSH_ENV<br />else<br />    if [ -f "$SSH_ENV" ]; then<br />  . "$SSH_ENV" &gt; /dev/null<br />    fi<br />    ps -ef | grep "$SSH_AGENT_PID" | grep ssh-agent &gt; /dev/null<br />    if [ $? -eq 0 ]; then<br />        test_identities<br />    else<br />        start_agent<br />    fi<br />fi<br /></pre></ol><br />From now on You have to enter passphrase only once when you start msysgit shell: <br /><pre class="brush: bash;">Welcome to Git (version 1.7.11-preview20120710)<br /><br /><br />Run 'git help git' to display the help index.<br />Run 'git help &lt;command&gt;' to display help for specific commands.<br />Initializing new SSH agent...<br />succeeded<br />Enter passphrase for /c/Users/&lt;user_name&gt;/.ssh/id_rsa:<br />Identity added: /c/Users/&lt;user_name&gt;/.ssh/id_rsa (/c/Users/&lt;user_name&gt;/.ssh/id_rsa)<br /></pre><br /><strike><b>Please note</b>: I've <a href="https://help.github.com/articles/working-with-ssh-key-passphrases#platform-windows">tested the next (similar) solution from GitHub</a> and it doesn't work.</strike> It works.<strike><br /></strike></div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Orest Ivasiv</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2012-08-13T19:33:00+03:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>7:33 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/msysgit/'>msysgit</a>, <a class='category' href='/blog/categories/ssh/'>ssh</a>, <a class='category' href='/blog/categories/ssh-agent/'>ssh-agent</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://halyph.com/blog/2012/08/13/how-to-use-ssh-agent-in-msysgit/" data-via="halyph" data-counturl="http://halyph.com/blog/2012/08/13/how-to-use-ssh-agent-in-msysgit/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/06/27/maven-build-number-plugin-sample-usage/" title="Previous Post: Maven Build Number Plugin - Sample Usage">&laquo; Maven Build Number Plugin - Sample Usage</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/09/04/how-to-prepare-to-pass-oracle-web/" title="Next Post: How to prepare to pass Oracle Web Component Developer Certified Expert Exam (1Z0-899)?">How to prepare to pass Oracle Web Component Developer Certified Expert Exam (1Z0-899)? &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p> <img class="left" src="/images/blog.jpeg">
+ Orest Ivasiv <br />Software Engineer</p>
+  <br />
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/07/20/grails-best-practices-collection/">Grails Best Practices Collection</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/29/devoxxpl/">DevoxxPL - Krakow, 2015 - Report</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/25/jeeconf-kiev/">JEEConf - Kiev, 2015 - Report</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/19/grails-2-dot-5-0-debug-in-intellij-idea/">Grails 2.5.0 Debug in IntelliJ IDEA</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/18/golang-presentation-tool/">Go Presentation Tool</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <span id="tag-cloud"><a href='/blog/categories/agile' style='font-size: 104.73684210526315%'>agile(3)</a> <a href='/blog/categories/annotation' style='font-size: 101.57894736842105%'>annotation(1)</a> <a href='/blog/categories/ant' style='font-size: 103.15789473684211%'>ant(2)</a> <a href='/blog/categories/architecture' style='font-size: 101.57894736842105%'>architecture(1)</a> <a href='/blog/categories/automation' style='font-size: 103.15789473684211%'>automation(2)</a> <a href='/blog/categories/barcode' style='font-size: 101.57894736842105%'>barcode(1)</a> <a href='/blog/categories/bash' style='font-size: 104.73684210526315%'>bash(3)</a> <a href='/blog/categories/blog' style='font-size: 101.57894736842105%'>blog(1)</a> <a href='/blog/categories/blogging' style='font-size: 103.15789473684211%'>blogging(2)</a> <a href='/blog/categories/books' style='font-size: 115.78947368421052%'>books(10)</a> <a href='/blog/categories/centos' style='font-size: 101.57894736842105%'>centos(1)</a> <a href='/blog/categories/certification' style='font-size: 101.57894736842105%'>certification(1)</a> <a href='/blog/categories/ci' style='font-size: 101.57894736842105%'>ci(1)</a> <a href='/blog/categories/clojure' style='font-size: 103.15789473684211%'>clojure(2)</a> <a href='/blog/categories/cmd-dot-exe' style='font-size: 101.57894736842105%'>cmd.exe(1)</a> <a href='/blog/categories/code-quality' style='font-size: 101.57894736842105%'>code quality(1)</a> <a href='/blog/categories/code-style' style='font-size: 101.57894736842105%'>code style(1)</a> <a href='/blog/categories/computation' style='font-size: 101.57894736842105%'>computation(1)</a> <a href='/blog/categories/conference' style='font-size: 117.36842105263158%'>conference(11)</a> <a href='/blog/categories/console' style='font-size: 101.57894736842105%'>console(1)</a> <a href='/blog/categories/craftsmanship' style='font-size: 103.15789473684211%'>craftsmanship(2)</a> <a href='/blog/categories/cxf' style='font-size: 104.73684210526315%'>cxf(3)</a> <a href='/blog/categories/cygwin' style='font-size: 101.57894736842105%'>cygwin(1)</a> <a href='/blog/categories/db' style='font-size: 101.57894736842105%'>db(1)</a> <a href='/blog/categories/devoxx' style='font-size: 101.57894736842105%'>devoxx(1)</a> <a href='/blog/categories/diff' style='font-size: 101.57894736842105%'>diff(1)</a> <a href='/blog/categories/eclipse' style='font-size: 103.15789473684211%'>eclipse(2)</a> <a href='/blog/categories/evernote' style='font-size: 103.15789473684211%'>evernote(2)</a> <a href='/blog/categories/general' style='font-size: 104.73684210526315%'>general(3)</a> <a href='/blog/categories/gerrit' style='font-size: 101.57894736842105%'>gerrit(1)</a> <a href='/blog/categories/gist' style='font-size: 101.57894736842105%'>gist(1)</a> <a href='/blog/categories/git' style='font-size: 115.78947368421052%'>git(10)</a> <a href='/blog/categories/github' style='font-size: 101.57894736842105%'>github(1)</a> <a href='/blog/categories/gnustep' style='font-size: 101.57894736842105%'>gnustep(1)</a> <a href='/blog/categories/golang' style='font-size: 101.57894736842105%'>golang(1)</a> <a href='/blog/categories/gradle' style='font-size: 101.57894736842105%'>gradle(1)</a> <a href='/blog/categories/grails' style='font-size: 103.15789473684211%'>grails(2)</a> <a href='/blog/categories/groovy' style='font-size: 118.94736842105263%'>groovy(12)</a> <a href='/blog/categories/h2' style='font-size: 101.57894736842105%'>h2(1)</a> <a href='/blog/categories/hibernate' style='font-size: 101.57894736842105%'>hibernate(1)</a> <a href='/blog/categories/i18n' style='font-size: 101.57894736842105%'>i18n(1)</a> <a href='/blog/categories/intellij-idea' style='font-size: 101.57894736842105%'>intellij idea(1)</a> <a href='/blog/categories/itbooze' style='font-size: 103.15789473684211%'>itbooze(2)</a> <a href='/blog/categories/itext' style='font-size: 101.57894736842105%'>itext(1)</a> <a href='/blog/categories/ivy' style='font-size: 101.57894736842105%'>ivy(1)</a> <a href='/blog/categories/java' style='font-size: 160.0%'>java(38)</a> <a href='/blog/categories/java-se' style='font-size: 103.15789473684211%'>java se(2)</a> <a href='/blog/categories/javascript' style='font-size: 101.57894736842105%'>javascript(1)</a> <a href='/blog/categories/jax-rs' style='font-size: 104.73684210526315%'>jax-rs(3)</a> <a href='/blog/categories/jdbc' style='font-size: 101.57894736842105%'>jdbc(1)</a> <a href='/blog/categories/jdk' style='font-size: 101.57894736842105%'>jdk(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 107.89473684210526%'>jeeconf(5)</a> <a href='/blog/categories/jenkins' style='font-size: 106.3157894736842%'>jenkins(4)</a> <a href='/blog/categories/jetty' style='font-size: 101.57894736842105%'>jetty(1)</a> <a href='/blog/categories/jsp' style='font-size: 101.57894736842105%'>jsp(1)</a> <a href='/blog/categories/kanban' style='font-size: 101.57894736842105%'>kanban(1)</a> <a href='/blog/categories/l10n' style='font-size: 101.57894736842105%'>l10n(1)</a> <a href='/blog/categories/languages' style='font-size: 109.47368421052632%'>languages(6)</a> <a href='/blog/categories/learning' style='font-size: 106.3157894736842%'>learning(4)</a> <a href='/blog/categories/library' style='font-size: 104.73684210526315%'>library(3)</a> <a href='/blog/categories/linux' style='font-size: 115.78947368421052%'>linux(10)</a> <a href='/blog/categories/lisp' style='font-size: 106.3157894736842%'>lisp(4)</a> <a href='/blog/categories/maven' style='font-size: 109.47368421052632%'>maven(6)</a> <a href='/blog/categories/merge' style='font-size: 101.57894736842105%'>merge(1)</a> <a href='/blog/categories/mingw' style='font-size: 101.57894736842105%'>mingw(1)</a> <a href='/blog/categories/msysgit' style='font-size: 101.57894736842105%'>msysgit(1)</a> <a href='/blog/categories/objective-c' style='font-size: 101.57894736842105%'>objective-c(1)</a> <a href='/blog/categories/ocpjp' style='font-size: 101.57894736842105%'>ocpjp(1)</a> <a href='/blog/categories/octopress' style='font-size: 103.15789473684211%'>octopress(2)</a> <a href='/blog/categories/os-x' style='font-size: 107.89473684210526%'>os x(5)</a> <a href='/blog/categories/pdf' style='font-size: 104.73684210526315%'>pdf(3)</a> <a href='/blog/categories/plugin' style='font-size: 103.15789473684211%'>plugin(2)</a> <a href='/blog/categories/pomodoro' style='font-size: 103.15789473684211%'>pomodoro(2)</a> <a href='/blog/categories/productivity' style='font-size: 103.15789473684211%'>productivity(2)</a> <a href='/blog/categories/prompt' style='font-size: 103.15789473684211%'>prompt(2)</a> <a href='/blog/categories/prototyping' style='font-size: 103.15789473684211%'>prototyping(2)</a> <a href='/blog/categories/python' style='font-size: 101.57894736842105%'>python(1)</a> <a href='/blog/categories/rails' style='font-size: 109.47368421052632%'>rails(6)</a> <a href='/blog/categories/reflection' style='font-size: 101.57894736842105%'>reflection(1)</a> <a href='/blog/categories/rest' style='font-size: 104.73684210526315%'>rest(3)</a> <a href='/blog/categories/review' style='font-size: 112.63157894736842%'>review(8)</a> <a href='/blog/categories/ruby' style='font-size: 128.42105263157896%'>ruby(18)</a> <a href='/blog/categories/rvm' style='font-size: 101.57894736842105%'>rvm(1)</a> <a href='/blog/categories/scala' style='font-size: 106.3157894736842%'>scala(4)</a> <a href='/blog/categories/scjp' style='font-size: 101.57894736842105%'>scjp(1)</a> <a href='/blog/categories/screencast' style='font-size: 104.73684210526315%'>screencast(3)</a> <a href='/blog/categories/scripting' style='font-size: 103.15789473684211%'>scripting(2)</a> <a href='/blog/categories/scrum' style='font-size: 101.57894736842105%'>scrum(1)</a> <a href='/blog/categories/servlet' style='font-size: 101.57894736842105%'>servlet(1)</a> <a href='/blog/categories/shell' style='font-size: 103.15789473684211%'>shell(2)</a> <a href='/blog/categories/sketching' style='font-size: 101.57894736842105%'>sketching(1)</a> <a href='/blog/categories/spring' style='font-size: 106.3157894736842%'>spring(4)</a> <a href='/blog/categories/ssh' style='font-size: 103.15789473684211%'>ssh(2)</a> <a href='/blog/categories/ssh-agent' style='font-size: 101.57894736842105%'>ssh-agent(1)</a> <a href='/blog/categories/static-analysis' style='font-size: 101.57894736842105%'>static analysis(1)</a> <a href='/blog/categories/svn' style='font-size: 101.57894736842105%'>svn(1)</a> <a href='/blog/categories/terminal' style='font-size: 103.15789473684211%'>terminal(2)</a> <a href='/blog/categories/textmate' style='font-size: 103.15789473684211%'>textmate(2)</a> <a href='/blog/categories/time-management' style='font-size: 103.15789473684211%'>time management(2)</a> <a href='/blog/categories/tomcat' style='font-size: 101.57894736842105%'>tomcat(1)</a> <a href='/blog/categories/tool' style='font-size: 101.57894736842105%'>tool(1)</a> <a href='/blog/categories/tools' style='font-size: 109.47368421052632%'>tools(6)</a> <a href='/blog/categories/top' style='font-size: 101.57894736842105%'>top(1)</a> <a href='/blog/categories/tutorial' style='font-size: 101.57894736842105%'>tutorial(1)</a> <a href='/blog/categories/tutorials' style='font-size: 101.57894736842105%'>tutorials(1)</a> <a href='/blog/categories/ui' style='font-size: 101.57894736842105%'>ui(1)</a> <a href='/blog/categories/uml' style='font-size: 101.57894736842105%'>uml(1)</a> <a href='/blog/categories/video' style='font-size: 101.57894736842105%'>video(1)</a> <a href='/blog/categories/vim' style='font-size: 103.15789473684211%'>vim(2)</a> <a href='/blog/categories/vs' style='font-size: 104.73684210526315%'>vs(3)</a> <a href='/blog/categories/windows' style='font-size: 101.57894736842105%'>windows(1)</a> <a href='/blog/categories/xp' style='font-size: 101.57894736842105%'>xp(1)</a> </span>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Orest Ivasiv -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'kie-by-halyph';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

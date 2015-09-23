@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ssh | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/ssh/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Custom Putty/Kitty Color Scheme]]></title>
+    <link href="http://halyph.com/blog/2013/01/03/custom-puttykitty-color-scheme/"/>
+    <updated>2013-01-03T19:09:00+02:00</updated>
+    <id>http://halyph.com/blog/2013/01/03/custom-puttykitty-color-scheme</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://4.bp.blogspot.com/-ULddOXbgKU4/UOW2RTrNQkI/AAAAAAAABI4/3RpLOAl4vzk/s1600/terminal_icon.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="200" src="http://4.bp.blogspot.com/-ULddOXbgKU4/UOW2RTrNQkI/AAAAAAAABI4/3RpLOAl4vzk/s200/terminal_icon.png" width="200" /></a>
+</div>
+
+
+<p><br />I&rsquo;ve been using Putty (or Kitty) as SSH client on Windows machine. And you&rsquo;ve probably noticed those ugly color default Scheme:
+<br /></p>
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://4.bp.blogspot.com/-bCkNoQKdajg/UOW25npYn5I/AAAAAAAABJA/i5GtEbBJVOE/s1600/col1.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="267" src="http://4.bp.blogspot.com/-bCkNoQKdajg/UOW25npYn5I/AAAAAAAABJA/i5GtEbBJVOE/s400/col1.png" width="400" /></a>
+</div>
+
+
+<p><br />It&rsquo;s very ugly. There is very simple steps to define you own color scheme: Configuration-&gt;Session-&gt;Windows-&gt;Colours:
+<br /></p>
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://2.bp.blogspot.com/-OhuMFoRQkf4/UOW3wWcEMjI/AAAAAAAABJM/KvGHEf_zMpQ/s1600/col2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="400" src="http://2.bp.blogspot.com/-OhuMFoRQkf4/UOW3wWcEMjI/AAAAAAAABJM/KvGHEf_zMpQ/s400/col2.png" width="308" /></a>
+</div>
+
+
+<p><br />Now you should manually (or via importing reg file) define new colors. Here is sample from <a href="http://www.darkrune.org/blog/?p=213">PuTTY Colour Schemes</a>
+<br /></p>
+
+<ul>
+    <li>Default Foreground: 255/255/255</li>
+    <li>Default Background: 51/51/51</li>
+    <li>ANSI Black: 77/77/77</li>
+    <li>ANSI Green: 152/251/152</li>
+    <li>ANSI Yellow: 240/230/140</li>
+    <li>ANSI Blue: 205/133/63</li>
+    <li>ANSI Blue Bold 135/206/235</li>
+    <li>ANSI Magenta: 255/222/173 or 205/92/92</li>
+    <li>ANSI Cyan: 255/160/160</li>
+    <li>ANSI Cyan Bold: 255/215/0</li>
+    <li>ANSI White: 245/222/179</li>
+</ul>
+
+
+<p>Also, here is screenshot from windows registry
+<br />[HKEY_CURRENT_USER\Software\9bis.com\KiTTY\Sessions\Ubuntu_12.04]:
+<br /></p>
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://2.bp.blogspot.com/-vzpWHCUkZgE/UOW45hSN1EI/AAAAAAAABJo/CSs9bqurgEg/s1600/col3.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="205" src="http://2.bp.blogspot.com/-vzpWHCUkZgE/UOW45hSN1EI/AAAAAAAABJo/CSs9bqurgEg/s320/col3.png" width="320" /></a>
+</div>
+
+
+<p><br />You can find exported registry file here: <a href="https://gist.github.com/4444949">Desert Color Scheme</a>
+<br />After applying this scheme I&rsquo;ve got something like this:
+<br /></p>
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://1.bp.blogspot.com/-iDIyxNIkbDk/UOW5T1F6c9I/AAAAAAAABJw/LbVNaRURZXI/s1600/col4.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="256" src="http://1.bp.blogspot.com/-iDIyxNIkbDk/UOW5T1F6c9I/AAAAAAAABJw/LbVNaRURZXI/s400/col4.png" width="400" /></a>
+</div>
+
+
+<p><br />
+<br />Links:
+<br /></p>
+
+<ul>
+    <li><a href="http://www.igvita.com/2008/04/14/custom-putty-color-themes/">Custom PuTTY Color Themes </a></li>
+    <li><a href="http://www.darkrune.org/blog/?p=213">PuTTY Colour Schemes</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Use SSH-Agent in Msysgit?]]></title>
+    <link href="http://halyph.com/blog/2012/08/13/how-to-use-ssh-agent-in-msysgit/"/>
+    <updated>2012-08-13T19:33:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/08/13/how-to-use-ssh-agent-in-msysgit</id>
+    <content type="html"><![CDATA[<p><b>UPDATE</b> 08/14/12: changed .bashrc file<br /><br />I assume that You&rsquo;ve generated and added SSH key as was described here: <a href="https://help.github.com/articles/generating-ssh-keys#platform-windows">Generating SSH Keys</a>.<br />It means you&rsquo;ve got something like this in Yours user folder:<br /><br /><pre class="brush: bash;">[C:\Users&amp;lt;user_name&gt;.ssh]<br />$ dir /b<br />id_rsa<br />id_rsa.pub<br />known_hosts<br /></pre>But, when You communicate with GitHub remote (via calling push/pull/fetch) You are getting the next message every time:  <br /><pre class="brush: bash;">Enter passphrase for key &lsquo;/c/Users/&lt;user_name&gt;/.ssh/id_rsa&rsquo;:</pre>There is a simple <a href="http://anterence.blogspot.com/2012/01/ssh-agent-in-msysgit.html">solution</a>:<br /><ol><li>Add a file called <b>.bashrc</b> to my home folder (C:\Users&amp;lt;user_name&gt;)</li><li><strike>Add the next content to this file:</strike></li><pre><strike>#! /bin/bash<br />eval <code>ssh-agent -s</code><br />ssh-add</strike><br /></pre><li>Approach used in case #2 it dangerous because it create <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">ssh-agent</span> instance every time you run msysgit shell.  I&rsquo;ve <a href="https://help.github.com/articles/working-with-ssh-key-passphrases#platform-windows">tested the next (similar) solution from GitHub</a> again, very carefully and&nbsp; it DOES work. So, you have to create .bashrc (or .profile) file with the next content:</li><pre class="brush: bash;">#! /bin/bash<br />SSH_ENV=&ldquo;$HOME/.ssh/environment&rdquo;<br /><br /># start the ssh-agent<br />function start_agent {<br />    echo &ldquo;Initializing new SSH agent&hellip;&rdquo;<br />    # spawn ssh-agent<br />    ssh-agent | sed &rsquo;s/^echo/#echo/&lsquo; &gt; &ldquo;$SSH_ENV&rdquo;<br />    echo succeeded<br />    chmod 600 &ldquo;$SSH_ENV&rdquo;<br />    . &ldquo;$SSH_ENV&rdquo; &gt; /dev/null<br />    ssh-add<br />}<br /><br /># test for identities<br />function test_identities {<br />    # test whether standard identities have been added to the agent already<br />    ssh-add -l | grep &ldquo;The agent has no identities&rdquo; &gt; /dev/null<br />    if [ $? -eq 0 ]; then<br />        ssh-add<br />        # $SSH_AUTH_SOCK broken so we start a new proper agent<br />        if [ $? -eq 2 ];then<br />            start_agent<br />        fi<br />    fi<br />}<br /><br /># check for running ssh-agent with proper $SSH_AGENT_PID<br />if [ -n &ldquo;$SSH_AGENT_PID&rdquo; ]; then<br />    ps -ef | grep &ldquo;$SSH_AGENT_PID&rdquo; | grep ssh-agent &gt; /dev/null<br />    if [ $? -eq 0 ]; then<br />  test_identities<br />    fi<br /># if $SSH_AGENT_PID is not properly set, we might be able to load one from<br /># $SSH_ENV<br />else<br />    if [ -f &ldquo;$SSH_ENV&rdquo; ]; then<br />  . &ldquo;$SSH_ENV&rdquo; &gt; /dev/null<br />    fi<br />    ps -ef | grep &ldquo;$SSH_AGENT_PID&rdquo; | grep ssh-agent &gt; /dev/null<br />    if [ $? -eq 0 ]; then<br />        test_identities<br />    else<br />        start_agent<br />    fi<br />fi<br /></pre></ol><br />From now on You have to enter passphrase only once when you start msysgit shell: <br /><pre class="brush: bash;">Welcome to Git (version 1.7.11-preview20120710)<br /><br /><br />Run 'git help git&rsquo; to display the help index.<br />Run &lsquo;git help &lt;command&gt;&rsquo; to display help for specific commands.<br />Initializing new SSH agent&hellip;<br />succeeded<br />Enter passphrase for /c/Users/&lt;user_name&gt;/.ssh/id_rsa:<br />Identity added: /c/Users/&lt;user_name&gt;/.ssh/id_rsa (/c/Users/&lt;user_name&gt;/.ssh/id_rsa)<br /></pre><br /><strike><b>Please note</b>: I&rsquo;ve <a href="https://help.github.com/articles/working-with-ssh-key-passphrases#platform-windows">tested the next (similar) solution from GitHub</a> and it doesn&rsquo;t work.</strike> It works.<strike><br /></strike></p>
+]]></content>
+  </entry>
+  
+</feed>

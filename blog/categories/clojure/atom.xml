@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Clojure | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/clojure/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[IT Booze Meetup #2: Scala, Clojure, Groovy]]></title>
+    <link href="http://halyph.com/blog/2011/07/30/it-booze-meetup-2-scala-clojure-groovy/"/>
+    <updated>2011-07-30T16:11:00+03:00</updated>
+    <id>http://halyph.com/blog/2011/07/30/it-booze-meetup-2-scala-clojure-groovy</id>
+    <content type="html"><![CDATA[<p><br />Today, I had a chance to attend local user group <a href="https://sites.google.com/site/itboozeinif/home">IT Booze</a>. It was the second meetup and it was very interesting, because of topics which were under discussion: Scala, Clojure And Groovy. I love such events especially in my town. :-)
+<br />
+<br />I&rsquo;d like to share my <i>reflections </i>regarding these cool languages.
+<br />
+<br />As you know these languages are very popular on JVM (of cause not so popular as Java :-). And I&rsquo;m sure every passionate Java/JVM developer has been thinking &ldquo;what&rsquo;s the <b>Next</b> <b>Big Language</b>&rdquo;. It&rsquo;s really hard to choose the next one.
+<br />
+<br />So, here is a short &ldquo;brain snapshot&rdquo;:
+<br /></p>
+
+<ol>
+    <li>Scala and Clojure are great languages with huge amount of interesting features, but to master them we need to use Scala (or Clojure) on daily basis.</li>
+    <li>Scala appeared as complex language. I think it requires a <span class="st">steeper learning curve then Clojure or Groovy. It means we must invest much, much more.</span></li>
+    <li><span class="st">Clojure has lisp syntax, but innovative concurrency concept is worth to look into. I say <b>lisp</b>, because it might be a stopper for someone to evaluate it as a next big language.</span></li>
+    <li><span class="st">Clojure and functional programming require to &#8220;patch&#8221; our way of thinking. And it can be difficult.</span></li>
+    <li><span class="st">Groovy is agile language. We (Java developers) can start using it right away. I think we should invest more in Groovy just to boost our productivity in: scripting, testing, automation routine work, etc. It doesn&#8217;t require big investments and we can learn as we go.</span></li>
+</ol>
+
+
+<p><span class="st"> So, here is outcome from this meetup:</span>
+<br /></p>
+
+<ul>
+    <li><span class="st">start using Groovy</span></li>
+    <li><span class="st">look into Clojure concepts</span></li>
+    <li><span class="st">postpone Scala for now</span></li>
+</ul>
+
+
+<p><span class="st">Could you please share your thoughts regarding this?</span></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Choose Between Scala and Clojure?]]></title>
+    <link href="http://halyph.com/blog/2011/06/01/how-to-choose-between-scala-and-clojure/"/>
+    <updated>2011-06-01T01:55:00+03:00</updated>
+    <id>http://halyph.com/blog/2011/06/01/how-to-choose-between-scala-and-clojure</id>
+    <content type="html"><![CDATA[<div style="text-align: center;"><img border="0" src="http://3.bp.blogspot.com/-TSZUHnPf1Vo/TeVzTeSMD4I/AAAAAAAAAbg/Zy19YqzOfTo/s1600/scala-icon.png" /><span style="font-size: x-large;"> vs. </span>
+    <a href="http://4.bp.blogspot.com/-Z2uFWB3np-Q/TeVzZOmDHTI/AAAAAAAAAbk/sOJtanqor7U/s1600/clojure-icon.gif" imageanchor="1"><img border="0" src="http://4.bp.blogspot.com/-Z2uFWB3np-Q/TeVzZOmDHTI/AAAAAAAAAbk/sOJtanqor7U/s1600/clojure-icon.gif" /></a>
+</div>
+
+
+<p><br />I think it&rsquo;s very popular question nowadays. The Java-haters produce so many buzz around this. So, want you or not, but You passively have been trying to choose the <i>Java.next()</i>.
+<br />
+<br />I&rsquo;ve found several interesting posts which cover pretty much about this subject:
+<br /><br /><strong>by Stephan Schmidt</strong>
+<br /></p>
+
+<ul>
+    <li><a href="http://codemonkeyism.com/scala-vs-clojure/%20"><span id="goog_1314162347"></span>Scala vs. Clojure<span id="goog_1314162348"></span></a></li>
+    <li><a href="http://codemonkeyism.com/clojure-scala-part-2/"><span id="goog_1314162354"></span>Clojure vs Scala, Part 2<span id="goog_1314162355"></span></a></li>
+    <li><a href="http://codemonkeyism.com/scala-vsclojure-part-3-similarities">Scala vs.Clojure, part 3 – the similarities</a></li>
+    <li><a href="http://codemonkeyism.com/scala-vs-clojure-flawed-loc-comparison/">Anatomy of a Flawed Clojure vs. Scala LOC Comparison</a></li>
+</ul>
+
+
+<p><strong>by Lau B. Jensen </strong>
+<br /></p>
+
+<ul>
+    <li><a href="http://www.bestinclass.dk/index.clj/2010/04/clojure-scala-similarities-twins-separated-at-birth.html">Clojure &amp; Scala Similarities - Twins separated at birth?</a></li>
+    <li><a href="http://www.bestinclass.dk/index.clj/2009/09/scala-vs-clojure-lets-get-down-to-business.html">Scala Vs Clojure - Lets get down to business</a></li>
+    <li><a href="http://www.bestinclass.dk/index.clj/2009/09/scala-vs-clojure-round-2-concurrency.html">Scala vs Clojure - Round 2: Concurrency!</a></li>
+</ul>
+
+
+<p><strong>Others</strong>
+<br /></p>
+
+<ul>
+    <li><a href="http://gregosuri.com/on-scala-vs-clojure-what-the-market-thinks">On &#8220;Scala Vs Clojure&#8221;, What the market thinks. </a></li>
+    <li><a href="http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure">LOTY Time Again: Scala or Clojure?!?! </a></li>
+</ul>
+
+
+<p><i>Hint</i>: Try to read comments to these posts, there are very interesting discussions. Some of them are even more useful than the actual post(s)/article(s).
+<br />
+<br />These articles don&rsquo;t give you any advices or strong opinions which language is the best. But, it&rsquo;s a good start point, for sure.</p>
+]]></content>
+  </entry>
+  
+</feed>

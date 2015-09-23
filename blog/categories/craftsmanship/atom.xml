@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Craftsmanship | Knowledge Is Everything]]></title>
+  <link href="http://halyph.com/blog/categories/craftsmanship/atom.xml" rel="self"/>
+  <link href="http://halyph.com/"/>
+  <updated>2015-09-23T06:22:09+03:00</updated>
+  <id>http://halyph.com/</id>
+  <author>
+    <name><![CDATA[Orest Ivasiv]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Review: Practices of an Agile Developer: Working in the Real World]]></title>
+    <link href="http://halyph.com/blog/2012/10/08/review-practices-of-agile-developer/"/>
+    <updated>2012-10-08T23:41:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/10/08/review-practices-of-agile-developer</id>
+    <content type="html"><![CDATA[<div style="text-align: center;"><a href="http://www.amazon.com/gp/product/097451408X/ref=as_li_ss_il?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=097451408X&amp;linkCode=as2&amp;tag=knowisever-20"><img border="0" src="http://ws.assoc-amazon.com/widgets/q?_encoding=UTF8&amp;ASIN=097451408X&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=US&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=knowisever-20" /></a></div>
+
+
+<p>I&rsquo;ve read this book the third time. Authors (Venkat Subramaniam and Andy Hunt) shared their ideas and better practices regarding &ldquo;how to become a real agile developer&rdquo;.<br />Each chapter has predefined structure:<br /><ol><li>General idea</li><li>Why something went wrong </li><li>Applying the practice</li><li>What might go wrong if we try to follow the practice without common sense</li><li>Summary</li></ol>I can suggest this book for any developer who has been diving in the world of &ldquo;agile&rdquo;. Even more, any junior developer must read this book. After the reading and applying some of the recipes you&rsquo;ve got real improvements in your daily work. Do not hesitate and start reading right away.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Review: The Clean Coder: A Code of Conduct for Professional Programmers]]></title>
+    <link href="http://halyph.com/blog/2012/09/28/review-clean-coder-code-of-conduct-for/"/>
+    <updated>2012-09-28T00:59:00+03:00</updated>
+    <id>http://halyph.com/blog/2012/09/28/review-clean-coder-code-of-conduct-for</id>
+    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://www.amazon.com/gp/product/0137081073/ref=as_li_ss_il?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0137081073&amp;linkCode=as2&amp;tag=knowisever-20" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://ws.assoc-amazon.com/widgets/q?_encoding=UTF8&amp;ASIN=0137081073&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=US&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=knowisever-20" /></a>
+</div>
+
+
+<p><br />This book has <i>wow </i>effect for me. The author is famous <a href="https://twitter.com/unclebobmartin" target="_blank">@unclebobmartin</a>. I called books of such type as <b><i>&ldquo;craftsmanship</i></b>&rdquo; books (term borrowed from <a href="https://twitter.com/unclebobmartin" target="_blank">@unclebobmartin</a>). This book is like a companion book for <a href="http://www.amazon.com/The-Pragmatic-Programmer-Journeyman-Master/dp/020161622X/ref=pd_sim_b_3">The Pragmatic Programmer</a>, but it has a little bit another &ldquo;inflection&rdquo;:
+<br /></p>
+
+<ol>
+    <li>Book has close relation to software engineering as a profession and style is narrative. It very easy to read and follow the general idea.</li>
+    <li>Uncle Bob did very important thing (as for me), he told us about his own failures and their consequences. It is looks very honest which brings together author and reader.</li>
+    <li>He isn&#8217;t cardinal in his statements. Be pragmatic, borrow his experience and just don&#8217;t do the same mistakes.</li>
+    <li>You won&#8217;t find any technological advices in this book. There is ONLY life concepts :)</li>
+    <li>It&#8217;s like a craftsmanship Zen for software engineers.</li>
+    <li>Uncle Bob gives us bootstrap cookbook for non-technological skills.</li>
+</ol>
+
+
+<p>&nbsp;Read it. Re-think the ideas. And improve your skills.
+<br /></p>
+
+<ol></ol>
+
+]]></content>
+  </entry>
+  
+</feed>
