@@ -1,0 +1,40 @@
+---
+layout: post
+title: How to configure Mac OS X terminal to support git completion and  context based
+  prompt?
+date: '2012-10-17T22:48:00.002+03:00'
+author: Orest Ivasiv
+categories:
+- OS X
+- git
+- prompt
+- terminal
+modified_time: '2012-10-24T11:54:25.060+03:00'
+thumbnail: http://1.bp.blogspot.com/-TQLoXCK0UjM/UH8CEqejzkI/AAAAAAAAArU/vx6ohZLn3K0/s72-c/git-logo.png
+blogger_id: tag:blogger.com,1999:blog-7372777165432727866.post-1767471356526923191
+blogger_orig_url: http://www.halyph.com/2012/10/how-to-configure-mac-os-x-terminal-to.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://1.bp.blogspot.com/-TQLoXCK0UjM/UH8CEqejzkI/AAAAAAAAArU/vx6ohZLn3K0/s1600/git-logo.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="200" src="http://1.bp.blogspot.com/-TQLoXCK0UjM/UH8CEqejzkI/AAAAAAAAArU/vx6ohZLn3K0/s200/git-logo.png" width="200" /></a>
+</div><br /	>Msysgit on Windows has several nice features:
+<br />
+<ul>
+    <li>git commands completion upon press &lt;tab&gt;</li>
+    <li>current git branch name in terminal command prompt</li>
+</ul>By default git on Mac OS X doesn't have these nice features. Let's configure OS X terminal to support them:
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://2.bp.blogspot.com/-S5Ihp1jIZJk/UH8Fyp1-ElI/AAAAAAAAArs/GqzG6j6_tFo/s1600/terminal_osx.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="82" src="http://2.bp.blogspot.com/-S5Ihp1jIZJk/UH8Fyp1-ElI/AAAAAAAAArs/GqzG6j6_tFo/s400/terminal_osx.png" width="400" /></a>
+</div>
+<ol>
+    <li>Download two scripts (in <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">$HOME/bin</span> folder) from git<span style="font-family: &quot;Courier New&quot;,Courier,monospace;"> contrib</span> which support these features (<a href="https://github.com/git/git/tree/master/contrib/completion">https://github.com/git/git/tree/master/contrib/completion</a>):</li><pre class="brush: bash;"> <br />cd ~<br />mkdir bin<br />wget https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh<br />wget https://raw.github.com/git/git/master/contrib/completion/git-completion.bash<br /> </pre>
+    <li>Now we should update <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">.bash_profile</span> file: </li><pre class="brush: bash;">export PATH="$HOME/bin:$PATH"<br />source ~/bin/git-completion.bash<br />source ~/bin/git-prompt.sh<br /><br />export PS1='[\w$(__git_ps1 " (%s)")]\n\$ '<br /></pre></ol>
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://2.bp.blogspot.com/-6t75Jibj6IE/UH8IVreu0oI/AAAAAAAAAsE/AvH1p4UKa18/s1600/terminal_osx_improved.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="83" src="http://2.bp.blogspot.com/-6t75Jibj6IE/UH8IVreu0oI/AAAAAAAAAsE/AvH1p4UKa18/s400/terminal_osx_improved.png" width="400" /></a>
+</div><br />So, here we have:
+<br />
+<ul>
+    <li><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">git-completion.bash</span> does all &lt;tab&gt; completion "magic"</li>
+    <li><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">git-prompt.sh</span> is responsible for adding git current branch info, see <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">__git_ps1</span> function call when defining PS1 variable</li>
+</ul>

@@ -1,0 +1,31 @@
+---
+layout: post
+title: How to improve cmd.exe prompt
+date: '2012-06-12T20:38:00.001+03:00'
+author: Orest Ivasiv
+categories:
+- cmd.exe
+- console
+modified_time: '2012-06-12T20:43:08.700+03:00'
+thumbnail: http://2.bp.blogspot.com/-oZ79-qCc15o/T9d6epWhOSI/AAAAAAAAAnU/qnahfAD-xlw/s72-c/Clipboard-1.png
+blogger_id: tag:blogger.com,1999:blog-7372777165432727866.post-7989723756897266082
+blogger_orig_url: http://www.halyph.com/2012/06/how-to-improve-cmdexe-prompt.html
+---
+
+I'm sure that you have some trouble with <i>"too long command prompt in windows cmd.exe"</i> and it is annoying:
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://2.bp.blogspot.com/-oZ79-qCc15o/T9d6epWhOSI/AAAAAAAAAnU/qnahfAD-xlw/s1600/Clipboard-1.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="203" src="http://2.bp.blogspot.com/-oZ79-qCc15o/T9d6epWhOSI/AAAAAAAAAnU/qnahfAD-xlw/s400/Clipboard-1.png" width="400" /></a>
+</div>
+<br />Fortunately, it can be easily fixed with PROMPT command (see official help):
+<br /><span style="font-size: x-small;"></span>
+<br /><pre><span style="font-size: x-small;">&gt; prompt /?</span></pre><span style="font-size: x-small;"></span>
+<br /><pre><span style="font-size: x-small;">PROMPT [text]<br /><br />  text    Specifies a new command prompt.<br /><br />Prompt can be made up of normal characters <br />and the following special codes:<br /><br />  $A   &amp; (Ampersand)<br />  $B   | (pipe)<br />  $C   ( (Left parenthesis)<br />  $D   Current date<br />  $E   Escape code (ASCII code 27)<br />  $F   ) (Right parenthesis)<br />  $G   &gt; (greater-than sign)<br />  $H   Backspace (erases previous character)<br />  $L   &lt; (less-than sign)<br />  $N   Current drive<br />  $P   Current drive and path<br />  $Q   = (equal sign)<br />  $S     (space)<br />  $T   Current time<br />  $V   Windows version number<br />  $_   Carriage return and linefeed<br />  $$   $ (dollar sign)<br /><br /></span></pre>I've configured <b>PROMPT </b>User variable to apply my custom PROMPT setting: <b>[$P]$_$$$S</b>
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://1.bp.blogspot.com/-9b7vGaR8oZA/T9d8FiBA8xI/AAAAAAAAAnc/h9iYZuktlDk/s1600/Clipboard-2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="400" src="http://1.bp.blogspot.com/-9b7vGaR8oZA/T9d8FiBA8xI/AAAAAAAAAnc/h9iYZuktlDk/s400/Clipboard-2.png" width="360" /></a>
+</div><br />Now the previous console screen looks like this:
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://4.bp.blogspot.com/-ij3wgO5xIz8/T9d9uF0B0eI/AAAAAAAAAnk/vgGYjjB6SdQ/s1600/Clipboard-3.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="198" src="http://4.bp.blogspot.com/-ij3wgO5xIz8/T9d9uF0B0eI/AAAAAAAAAnk/vgGYjjB6SdQ/s400/Clipboard-3.png" width="400" /></a>
+</div><br />As you can see the full current path is shown one line before the input line. Now, we have a plenty of place for typing what ever we need ;-)

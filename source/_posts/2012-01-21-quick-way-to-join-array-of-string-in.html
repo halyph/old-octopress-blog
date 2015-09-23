@@ -1,0 +1,13 @@
+---
+layout: post
+title: Quick way to join array of String in Java without third party libraries
+date: '2012-01-21T16:31:00.000+02:00'
+author: Orest Ivasiv
+categories:
+- java
+modified_time: '2012-01-21T16:33:21.070+02:00'
+blogger_id: tag:blogger.com,1999:blog-7372777165432727866.post-168582308918844175
+blogger_orig_url: http://www.halyph.com/2012/01/quick-way-to-join-array-of-string-in.html
+---
+
+As you probably know Java SE doesn't include such useful method as String join. Even old good JavaScript has this nice method: <blockquote> <b>JavaScript join() Method</b><br/><i>Definition and Usage</i><br/>The join() method joins all elements of an array into a string, and returns the string.  The elements will be separated by a specified separator. The default separator is comma (,). </blockquote> How to implement the similar stuff in Java SE? The easiest what came to my head is:  <pre class="brush: java;"><br /> /**<br />  * Join String arguments into one String separated by comma (",")<br />  * @param args input Strings<br />  * @return joined String<br />  */<br /> public static String join(String... args) {<br />  if(args.length <1) throw new IllegalArgumentException();<br />  <br />  String joined = Arrays.toString(args);<br />  String result = joined.substring(1, joined.length()-1);<br />  return result;<br /> }<br /></pre> Usage is pretty trivial: <pre class="brush: java;"><br />import static com.blogspot.HalypHUtils.join;<br /><br />...<br /><br />String joinedString = join("Banana", "Orange", "Apple", "Mango");<br /></pre> And as you've already noticed this join uses comma (",") separator only.

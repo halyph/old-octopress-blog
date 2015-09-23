@@ -1,0 +1,54 @@
+---
+layout: post
+title: Jenkins enhancements without plugins
+date: '2012-12-31T01:50:00.002+02:00'
+author: Orest Ivasiv
+categories:
+- plugin
+- jenkins
+- automation
+- groovy
+modified_time: '2012-12-31T01:53:37.147+02:00'
+thumbnail: http://3.bp.blogspot.com/-G0y3vRvF8Gk/UODT7t-pUCI/AAAAAAAABF4/JxoydHYGUvQ/s72-c/logo.png
+blogger_id: tag:blogger.com,1999:blog-7372777165432727866.post-615323747102656755
+blogger_orig_url: http://www.halyph.com/2012/12/jenkins-enhancements-without-plugins.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://3.bp.blogspot.com/-G0y3vRvF8Gk/UODT7t-pUCI/AAAAAAAABF4/JxoydHYGUvQ/s1600/logo.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="200" src="http://3.bp.blogspot.com/-G0y3vRvF8Gk/UODT7t-pUCI/AAAAAAAABF4/JxoydHYGUvQ/s200/logo.png" width="144" /></a>
+</div><a href="http://jenkins-ci.org/">Jenkins</a> is a popular open source continuous integration server. I use it heavily. Jenkins is super extensible CI server with huge plugins repository.
+<br />But I must admit that there are a lot of cases when all these Jenkins plugin's "zoo" doesn't help. What does it mean?:
+<br />
+<ul>
+    <li>we need a tons of plugin to solve some non-trivial problem,</li>
+    <li>too many plugins dependencies which must be properly managed</li>
+    <li>some available plugins partially provide required functionality</li>
+    <li>some plugins provide required functionality but contain bugs</li>
+    <li>or it might be impossible to find necessary plugin, and task have to be done ASAP</li>
+</ul>Based on these cases mentioned above we have at least two solutions:
+<br />
+<ol>
+    <li>Implement own plugin which will provide all required functionality. It will take some time and slowdown the overall progress for this particular business task</li>
+    <li>Use some Jenkins extra facilities which gives us a chance for Jenkins automation without plugin writing</li>
+</ol>I'm a real fun od 2d solution (at least as a prototyping phase or quick-and-dirty solution right-now-right-away).
+<br />
+<br />So, what's the magic? Jenkins has two nice plugins (of cause there are much more similar plugin, but these two are the best for quick start) which give us a possibility to write Groovy scripts for <i><b>build</b></i> and <i><b>post-build</b></i> phases:
+<br />
+<ul>
+    <li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Groovy+plugin">Groovy plugin</a> for Build phase</li>
+    <li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Groovy+Postbuild+Plugin">Groovy Postbuild Plugin</a> for Post-build phase</li>
+</ul><strong>Pros</strong>:
+<br />
+<ul>
+    <li>Groovy scripts have access to whole Jenkins infrastructure (Jenkins packages) and can invoke functionality of third-party plugins installed in this Jenkins instance</li>
+    <li>It's very easy to prototype your ideas and validate automation approaches</li>
+    <li>It gives us very quick business results</li>
+    <li>Groovy scripts can automate really amazing and non-trivial tasks</li>
+</ul><strong>Cons:</strong>
+<br />
+<ul>
+    <li>at the end these Groovy scripts are not easy for automated testing</li>
+    <li>version managements for these scripts involve additional work (implement simple import/export tool for job configuration)</li>
+    <li>these Groovy scripts can have dependency on some third-party plugins and these dependency must me somehow managed as well</li>
+    <li>testing and debugging are really painful activities, because it involve too many interactions with Jenkins UI, etc. (yes, it can be somehow improved via extending both Groovy plugins, but it's extra work)</li>
+</ul>

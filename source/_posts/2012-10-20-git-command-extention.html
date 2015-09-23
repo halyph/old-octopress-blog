@@ -1,0 +1,25 @@
+---
+layout: post
+title: Git command extention
+date: '2012-10-20T22:56:00.000+03:00'
+author: Orest Ivasiv
+categories:
+- git
+modified_time: '2012-10-20T22:56:00.233+03:00'
+thumbnail: http://4.bp.blogspot.com/-PpkCLrGAdmE/UH8NW3zQGSI/AAAAAAAAAsc/zYChVLpt1iY/s72-c/Git-Logo-1788C.png
+blogger_id: tag:blogger.com,1999:blog-7372777165432727866.post-3639962801960152411
+blogger_orig_url: http://www.halyph.com/2012/10/git-command-extention.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://4.bp.blogspot.com/-PpkCLrGAdmE/UH8NW3zQGSI/AAAAAAAAAsc/zYChVLpt1iY/s1600/Git-Logo-1788C.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://4.bp.blogspot.com/-PpkCLrGAdmE/UH8NW3zQGSI/AAAAAAAAAsc/zYChVLpt1iY/s1600/Git-Logo-1788C.png" /></a>
+</div><br />You probably know about "git config alias.*" command. See quote from <a href="http://git-scm.com/docs/git-config">documentation</a>:
+<br />
+<blockquote class="tr_bq"><b>alias.* </b>
+    <br />...
+    <br />If the alias expansion is prefixed with an exclamation point, it will be treated as a shell command. <span style="background-color: #3d85c6;">For example, defining "alias.new = !gitk --all --not ORIG_HEAD", the invocation "git new" is equivalent to running the shell command "gitk --all --not ORIG_HEAD"</span>. Note that shell commands will be executed from the top-level directory of a repository, which may not necessarily be the current directory. </blockquote>Base on this we can define some "new" command via aliases. But, there is another way for extending git. Let's have a quick view into <a href="https://github.com/git/git/blob/master/git.c#L553">git.c source</a>:
+<br /><pre class="brush: java;">int main(int argc, const char **argv)<br />{<br />const char *cmd;<br /><br />startup_info = &amp;git_startup_info;<br /><br />cmd = git_extract_argv0_path(argv[0]);<br />if (!cmd)<br />cmd = "git-help";<br /><br />git_setup_gettext();<br /><br />/*<br />* "git-xxxx" is the same as "git xxxx", but we obviously:<br />*<br />* - cannot take flags in between the "git" and the "xxxx".<br />* - cannot execute it externally (since it would just do<br />* the same thing over again)<br />*<br />* So we just directly call the internal command handler, and<br />* die if that one cannot handle it.<br />*/<br />if (!prefixcmp(cmd, "git-")) {<br />cmd += 4;<br />argv[0] = cmd;<br />handle_internal_command(argc, argv);<br />die("cannot handle %s internally", cmd);<br />} </pre>
+<br />It means we can define some executable peace of code (shell script, ruby script, etc.) which has prefix "git-". Put this script on system path (add to <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">$PATH</span> variable) and it will be treated as git command.
+<br />
+<br />Let's clarify all this via sample code:
+<br /><pre class="brush: java;">$ cd ~<br />$ mkdir bin<br /><br />$ #create git-foobar file <br />$ cat &gt; git-foobar<br />#!/bin/sh<br />echo "[foobar] commad"<br />^D<br />$ chmod +x git-foobar<br /><br />$ git-foobar<br />[foobar] commad<br />$ cd ~<br /><br />$ #check if ~./bin folder is in $PATH variable<br />$ cat .bash_profile<br />export PATH="$HOME/bin:$PATH"<br /><br />$ #now check git <command><br />$ git foobar<br />[foobar] commad<br /></command></pre>
