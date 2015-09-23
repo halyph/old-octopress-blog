@@ -1,0 +1,50 @@
+---
+layout: post
+title: How to setup Ruby/Rails development environment, Part 1 - Ubuntu VM
+date: '2010-04-16T00:55:00.040+03:00'
+author: Orest Ivasiv
+tags:
+- ruby
+- rails
+- Linux
+modified_time: '2010-09-07T21:45:36.008+03:00'
+thumbnail: http://3.bp.blogspot.com/_vLotBlgiVfE/S8ehubzEY5I/AAAAAAAAAWE/mrBSd1rWhg8/s72-c/RubyOnRails_128.png
+blogger_id: tag:blogger.com,1999:blog-7372777165432727866.post-4593647395566426445
+blogger_orig_url: http://www.halyph.com/2010/04/how-to-setup-rubyrails-development.html
+---
+<div xmlns="http://www.w3.org/1999/xhtml">
+    <div class="separator" style="clear: both; text-align: center;"></div>
+   
+        <a href="http://3.bp.blogspot.com/_vLotBlgiVfE/S8ehubzEY5I/AAAAAAAAAWE/mrBSd1rWhg8/s1600/RubyOnRails_128.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="http://3.bp.blogspot.com/_vLotBlgiVfE/S8ehubzEY5I/AAAAAAAAAWE/mrBSd1rWhg8/s320/RubyOnRails_128.png" /></a>
+        <a href="http://1.bp.blogspot.com/_vLotBlgiVfE/S8ehmbmqNAI/AAAAAAAAAV8/Ifs1dW4hrR8/s1600/1271369264_start-here-ubuntuoriginal.png" imageanchor="1" style="float: left; margin-bottom: 1em; margin-right: 2em;"><img border="0" src="http://1.bp.blogspot.com/_vLotBlgiVfE/S8ehmbmqNAI/AAAAAAAAAV8/Ifs1dW4hrR8/s320/1271369264_start-here-ubuntuoriginal.png" /></a>
+    The most popular Ruby/Rails development platform isn't Windows. There are a lot of plug-ins, tutorials and blogs about Ruby/Rails on *nix like system. But, I'm Windows user (yes I know, Linux - rules!), so how can I use all community knowledge and easily apply it?
+    <br />I've decided setup VMWare VM with <a href="http://www.ubuntu.com/" target="_blank">Ubuntu Server v.9.10</a>. And perform all Ruby/Rails development there via Putty (SSH).
+    <br />I assume that You have installed Ubuntu VM.
+    <br />
+    <br />This post is base on the next articles:
+    <br />
+    <ul>
+        <li><a href="http://www.hackido.com/2009/11/install-ruby-on-rails-on-ubuntu-karmic.html" target="_blank">Install Ruby on Rails on Ubuntu Karmic Koala 9.10</a> </li>
+        <li><a href="http://wiki.rubyonrails.org/getting-started/installation/linux" target="_blank">Installing Ruby on Rails on Debian/Ubuntu</a> </li>
+        <li><a href="https://help.ubuntu.com/community/RubyOnRails" target="_blank">Ubuntu Community documentation - RubyOnRails</a>
+            <br />
+        </li>
+        <li><a href="http://blog.michaelgreenly.com/2009/03/rails-development-on-ubuntu.html" target="_blank">Rails Development On Ubuntu</a> </li>
+        <li><a href="http://www.cyberciti.biz/tips/how-do-i-enable-remote-access-to-mysql-database-server.html" target="_blank">How Do I Enable Remote Access To MySQL Database Server?</a> </li>
+    </ul>
+    <br /><b>Step 1:</b> Install Ubuntu VM - done<b>&nbsp;</b>
+    <br /><b>Step 2:</b> Install <a href="http://www.putty.org/" target="_blank">Putty</a> on Windows<b>&nbsp;</b>
+    <br /><b>Step 3</b>: Configure Putty - Ubuntu VM connection
+    <br />Check Ubuntu VM IP: <b>ifconfig</b>. Apply this VM IP in Putty setting. All next steps will be performed via Putty console<b>&nbsp;</b>
+    <br /><b>Step 4:</b> Update Ubuntu installation
+    <br /><pre class="brush: bash;">sudo apt-get update<br />sudo apt-get dist-upgrade<br /></pre>
+    <br /><b>Step 5</b>: Install all necessary libs
+    <br /><pre class="brush: bash;">sudo apt-get install build-essential<br />sudo apt-get install ruby ri rdoc mysql-server libmysql-ruby ruby1.8-dev irb1.8 libdbd-mysql-perl libdbi-perl libmysql-ruby1.8 libmysqlclient15off libnet-daemon-perl libplrpc-perl libreadline-ruby1.8 libruby1.8 mysql-client-5.1 mysql-common mysql-server-5.1 rdoc1.8 ri1.8 ruby1.8 irb libopenssl-ruby libopenssl-ruby1.8 libhtml-template-perl mysql-server-core-5.1 libmysqlclient16 libreadline5 psmisc</pre><b>Step 6:</b> During installation MySQL will ask to setup credentials:
+    <br /><pre class="brush: bash;">user = "root"<br />password = "root"</pre>Check Ruby version
+    <br /><pre class="brush: bash;">$ ruby -v<br />ruby 1.8.7 (2009-06-12 patchlevel 174) [i486-linux]</pre><b>Step 7</b>: Install RubyGems
+    <br /><pre class="brush: bash;">wget http://production.cf.rubygems.org/rubygems/rubygems-1.3.6.tgz<br />tar xvzf rubygems-1.3.6.tgz<br />cd rubygems-1.3.6<br />sudo ruby setup.rb<br /><br />sudo ln -s /usr/bin/gem1.8 /usr/bin/gem</pre>
+    <br /><b>Step 8</b>: Install Rails
+    <br /><pre class="brush: bash;">sudo gem install rails </pre><b>Step 9</b>: Install SQLlite
+    <br /><pre class="brush: bash;">sudo apt-get install sqlite3 libsqlite3-dev<br />sudo gem install sqlite3-ruby    </pre><b>Step 10</b>: Install MySQL client
+    <br /><pre class="brush: bash;">sudo apt-get install libmysqlclient-dev<br />sudo gem install mysql</pre><b>Step 11</b>: Test your Rails instalation
+    <br /><pre class="brush: bash;">$ rails myrailsapp</pre></div>

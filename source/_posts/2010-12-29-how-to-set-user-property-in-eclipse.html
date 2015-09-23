@@ -1,0 +1,14 @@
+---
+layout: post
+title: How to set ${user} property in Eclipse?
+date: '2010-12-29T00:47:00.000+02:00'
+author: Orest Ivasiv
+tags:
+- Eclipse
+modified_time: '2010-12-29T00:47:14.687+02:00'
+thumbnail: http://4.bp.blogspot.com/_vLotBlgiVfE/TRpkZDenFyI/AAAAAAAAAag/Ei5FLfFyP34/s72-c/Clipboard-1.png
+blogger_id: tag:blogger.com,1999:blog-7372777165432727866.post-8787899460455501682
+blogger_orig_url: http://www.halyph.com/2010/12/how-to-set-user-property-in-eclipse.html
+---
+
+Select <b>Preferences -&gt; Java -&gt; Code Style -&gt; Code Template -&gt; Section Comment -&gt; Type</b><br />You can replace the <i><b>author tag</b></i> by whatever value you need and it will have an effect on new generated classes.<br /><div class="separator" style="clear: both; text-align: center;"><a href="http://4.bp.blogspot.com/_vLotBlgiVfE/TRpkZDenFyI/AAAAAAAAAag/Ei5FLfFyP34/s1600/Clipboard-1.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="325" src="http://4.bp.blogspot.com/_vLotBlgiVfE/TRpkZDenFyI/AAAAAAAAAag/Ei5FLfFyP34/s400/Clipboard-1.png" width="400" /></a></div><br />${user} uses the value of the user.name environment variable. You can check it via <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">System.getProperty("user.name")</span>.<br /><br /><br />There are several solutions:<br /><ul><li>define it via command line: <br /><pre class="brush: bash;">C:/eclipse/eclipse.exe -vmargs -Duser.name="someUserName"<br /></pre></li><li>define it via eclipse.ini:<br /><pre class="brush: bash;">-showsplash<br />org.eclipse.platform<br />--launcher.XXMaxPermSize<br />256M<br />-vmargs<br />-Dosgi.requiredJavaVersion=1.5<br />-Duser.name="someUserName"<br />-Xms40m<br />-Xmx512m<br /></pre></li></ul>

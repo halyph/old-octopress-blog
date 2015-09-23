@@ -1,0 +1,14 @@
+---
+layout: post
+title: How to change the default editor in Ubuntu?
+date: '2010-04-26T00:13:00.005+03:00'
+author: Orest Ivasiv
+tags:
+- vim
+- Linux
+modified_time: '2010-09-07T21:44:10.454+03:00'
+blogger_id: tag:blogger.com,1999:blog-7372777165432727866.post-2933564311745922639
+blogger_orig_url: http://www.halyph.com/2010/04/how-to-change-default-editor-in-ubuntu.html
+---
+
+The default editor in Ubuntu is <code>nano</code>. But I like <code>Vim</code>.<br /><br /><pre class="brush: bash;">$ sudo update-alternatives --config editor<br /></pre><br />And You will get the next:<br /><br /><pre class="brush: bash;">There are 6 choices for the alternative editor (providing /usr/bin/editor).<br /><br />  Selection    Path                    Priority   Status<br />------------------------------------------------------------<br />* 0            /bin/nano                40        auto mode<br />  1            /bin/ed                 -100       manual mode<br />  2            /bin/nano                40        manual mode<br />  3            /usr/bin/mcedit-debian   25        manual mode<br />  4            /usr/bin/vim.basic       30        manual mode<br />  5            /usr/bin/vim.nox         40        manual mode<br />  6            /usr/bin/vim.tiny        10        manual mode<br /><br />Press enter to keep the current choice[*], or type selection number: 4<br />update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/editor (editor) in manual mode. <br /></pre>Select 4, in this case and that's it.
