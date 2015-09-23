@@ -1,0 +1,16 @@
+---
+layout: post
+title: Java Barcode Generation and Scanning Library
+date: '2013-06-14T22:33:00.002+03:00'
+author: Orest Ivasiv
+categories:
+- java
+- library
+- barcode
+modified_time: '2014-06-25T10:33:27.190+03:00'
+thumbnail: http://3.bp.blogspot.com/-HFNJgRP8_3Y/UbtqRVlBYPI/AAAAAAAABlo/h3JIbw0WQs4/s72-c/chart.png
+blogger_id: tag:blogger.com,1999:blog-7372777165432727866.post-3121700400589816581
+blogger_orig_url: http://www.halyph.com/2013/06/java-barcode-generation-and-scanning.html
+---
+
+<div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/-HFNJgRP8_3Y/UbtqRVlBYPI/AAAAAAAABlo/h3JIbw0WQs4/s1600/chart.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://3.bp.blogspot.com/-HFNJgRP8_3Y/UbtqRVlBYPI/AAAAAAAABlo/h3JIbw0WQs4/s1600/chart.png" /></a></div>Recently I had to pick library which can generate and scan different 2D barcodes. Actually I was interested in <a href="http://en.wikipedia.org/wiki/QR_code" target="_blank">QR Code</a> and <a href="http://en.wikipedia.org/wiki/Data_Matrix" target="_blank">Data Matrix</a>. There is only ONE open source Java library which generates and scans barcode, it's <a href="http://code.google.com/p/zxing/" target="_blank">Zxing</a>. You might say there are others, but they cost money.<br /><br />I've been following Zxing some time and must admit that this library has very vibrant community, code base is clean, plenty of unit tests. Also, API is very clean. Here is a simple code snippet for scanning Data Matrix barcode:<br /><br /><pre class="brush: java;">String filename = "file.png";<br />    <br />Map&lt;DecodeHintType,Object&gt; hints = new EnumMap&lt;DecodeHintType,Object&gt;(DecodeHintType.class);<br />hints.put(DecodeHintType.POSSIBLE_FORMATS, Arrays.asList(BarcodeFormat.DATA_MATRIX));<br />hints.put(DecodeHintType.TRY_HARDER, Boolean.TRUE);<br />BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(<br />        new BufferedImageLuminanceSource(<br />            ImageIO.read(new FileInputStream(filename)))));<br /><br />Result result = new MultiFormatReader().decode(binaryBitmap, hints);<br />System.out.println(result.getText());<br /></pre><br />I've tested Zxing v.2.2 QR Code/Data Matrix scanning. And Zxing implementation for QR Code scanning is more robust and well implemented in comparison to Data Matrix. I.e. if you have freedom and can choose any of these two barcodes, than select QR Code.<br /><br />Note, there are several open source barcode generation libraries and only a few barcode scanners (actually one Zxing for Java)

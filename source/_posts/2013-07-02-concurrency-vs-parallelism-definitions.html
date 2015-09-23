@@ -1,0 +1,14 @@
+---
+layout: post
+title: Concurrency vs. Parallelism Definitions
+date: '2013-07-02T10:00:00.000+03:00'
+author: Orest Ivasiv
+categories:
+- general
+modified_time: '2013-07-02T10:46:59.555+03:00'
+thumbnail: http://1.bp.blogspot.com/-L2nMMCQ9lqI/UdHP5tMsweI/AAAAAAAABnM/QuFHi6zuPco/s72-c/Employee+engagement+definition.jpg
+blogger_id: tag:blogger.com,1999:blog-7372777165432727866.post-3206137309703204663
+blogger_orig_url: http://www.halyph.com/2013/07/concurrency-vs-parallelism-definitions.html
+---
+
+<div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/-L2nMMCQ9lqI/UdHP5tMsweI/AAAAAAAABnM/QuFHi6zuPco/s401/Employee+engagement+definition.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="148" src="http://1.bp.blogspot.com/-L2nMMCQ9lqI/UdHP5tMsweI/AAAAAAAABnM/QuFHi6zuPco/s200/Employee+engagement+definition.jpg" width="200" /></a></div>Recently I had long discussion in scope of&nbsp; "concurrency" and "parallelism" definitions. That's why I've decided to pick the most trusted sources for these definitions in one place:<br /><br /><a href="http://doc.akka.io/docs/akka/2.1.4/general/terminology.html" target="_blank"><b>From Akka documentation:</b></a><br /><blockquote class="tr_bq"><i>Concurrency</i> and <i>parallelism</i> are related concepts, but there are small differences. <b><i>Concurrency</i></b> means that two or more tasks are making progress even though they might not be executing simultaneously. This can for example be realized with time slicing where parts of tasks are executed sequentially and mixed with parts of other tasks. <b><i>Parallelism</i></b> on the other hand arise when the execution can be truly simultaneous.</blockquote><br /><a href="http://docs.oracle.com/cd/E19455-01/806-5257/6je9h032b/index.html" target="_blank"><b>From Oracle "Multithreaded Programming Guide":</b></a><br /><blockquote class="tr_bq"><i><b>Parallelism</b></i> - A condition that arises when at least two threads are executing simultaneously.<br /><b><i>Concurrency</i></b> - A condition that exists when at least two threads are making progress. A more generalized form of parallelism that can include time-slicing as a form of virtual parallelism. </blockquote><br />

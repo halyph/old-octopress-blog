@@ -1,0 +1,57 @@
+---
+layout: post
+title: Custom Putty/Kitty Color Scheme
+date: '2013-01-03T19:09:00.001+02:00'
+author: Orest Ivasiv
+categories:
+- tools
+- Linux
+- ssh
+modified_time: '2013-01-03T19:11:01.200+02:00'
+thumbnail: http://4.bp.blogspot.com/-ULddOXbgKU4/UOW2RTrNQkI/AAAAAAAABI4/3RpLOAl4vzk/s72-c/terminal_icon.png
+blogger_id: tag:blogger.com,1999:blog-7372777165432727866.post-3001105635017864499
+blogger_orig_url: http://www.halyph.com/2013/01/custom-puttykitty-color-scheme.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://4.bp.blogspot.com/-ULddOXbgKU4/UOW2RTrNQkI/AAAAAAAABI4/3RpLOAl4vzk/s1600/terminal_icon.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="200" src="http://4.bp.blogspot.com/-ULddOXbgKU4/UOW2RTrNQkI/AAAAAAAABI4/3RpLOAl4vzk/s200/terminal_icon.png" width="200" /></a>
+</div><br />I've been using Putty (or Kitty) as SSH client on Windows machine. And you've probably noticed those ugly color default Scheme:
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://4.bp.blogspot.com/-bCkNoQKdajg/UOW25npYn5I/AAAAAAAABJA/i5GtEbBJVOE/s1600/col1.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="267" src="http://4.bp.blogspot.com/-bCkNoQKdajg/UOW25npYn5I/AAAAAAAABJA/i5GtEbBJVOE/s400/col1.png" width="400" /></a>
+</div><br />It's very ugly. There is very simple steps to define you own color scheme: Configuration-&gt;Session-&gt;Windows-&gt;Colours:
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://2.bp.blogspot.com/-OhuMFoRQkf4/UOW3wWcEMjI/AAAAAAAABJM/KvGHEf_zMpQ/s1600/col2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="400" src="http://2.bp.blogspot.com/-OhuMFoRQkf4/UOW3wWcEMjI/AAAAAAAABJM/KvGHEf_zMpQ/s400/col2.png" width="308" /></a>
+</div><br />Now you should manually (or via importing reg file) define new colors. Here is sample from <a href="http://www.darkrune.org/blog/?p=213">PuTTY Colour Schemes</a>
+<br />
+<ul>
+    <li>Default Foreground: 255/255/255</li>
+    <li>Default Background: 51/51/51</li>
+    <li>ANSI Black: 77/77/77</li>
+    <li>ANSI Green: 152/251/152</li>
+    <li>ANSI Yellow: 240/230/140</li>
+    <li>ANSI Blue: 205/133/63</li>
+    <li>ANSI Blue Bold 135/206/235</li>
+    <li>ANSI Magenta: 255/222/173 or 205/92/92</li>
+    <li>ANSI Cyan: 255/160/160</li>
+    <li>ANSI Cyan Bold: 255/215/0</li>
+    <li>ANSI White: 245/222/179</li>
+</ul>Also, here is screenshot from windows registry
+<br />[HKEY_CURRENT_USER\Software\9bis.com\KiTTY\Sessions\Ubuntu_12.04]:
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://2.bp.blogspot.com/-vzpWHCUkZgE/UOW45hSN1EI/AAAAAAAABJo/CSs9bqurgEg/s1600/col3.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="205" src="http://2.bp.blogspot.com/-vzpWHCUkZgE/UOW45hSN1EI/AAAAAAAABJo/CSs9bqurgEg/s320/col3.png" width="320" /></a>
+</div><br />You can find exported registry file here: <a href="https://gist.github.com/4444949">Desert Color Scheme</a>
+<br />After applying this scheme I've got something like this:
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://1.bp.blogspot.com/-iDIyxNIkbDk/UOW5T1F6c9I/AAAAAAAABJw/LbVNaRURZXI/s1600/col4.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="256" src="http://1.bp.blogspot.com/-iDIyxNIkbDk/UOW5T1F6c9I/AAAAAAAABJw/LbVNaRURZXI/s400/col4.png" width="400" /></a>
+</div>
+<br />
+<br />Links:
+<br />
+<ul>
+    <li><a href="http://www.igvita.com/2008/04/14/custom-putty-color-themes/">Custom PuTTY Color Themes </a></li>
+    <li><a href="http://www.darkrune.org/blog/?p=213">PuTTY Colour Schemes</a></li>
+</ul>

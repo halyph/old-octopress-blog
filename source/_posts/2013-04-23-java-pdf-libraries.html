@@ -1,0 +1,80 @@
+---
+layout: post
+title: Java PDF Libraries
+date: '2013-04-23T22:57:00.000+03:00'
+author: Orest Ivasiv
+categories:
+- java
+- library
+- pdf
+modified_time: '2013-04-23T23:02:48.392+03:00'
+thumbnail: http://1.bp.blogspot.com/-Bz0z-763Xn4/UXbWZ-2NNpI/AAAAAAAABOA/rHVXPF3UMF8/s72-c/1366760659_pdf.png
+blogger_id: tag:blogger.com,1999:blog-7372777165432727866.post-3851349505489492798
+blogger_orig_url: http://www.halyph.com/2013/04/java-pdf-libraries.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="http://1.bp.blogspot.com/-Bz0z-763Xn4/UXbWZ-2NNpI/AAAAAAAABOA/rHVXPF3UMF8/s1600/1366760659_pdf.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://1.bp.blogspot.com/-Bz0z-763Xn4/UXbWZ-2NNpI/AAAAAAAABOA/rHVXPF3UMF8/s1600/1366760659_pdf.png" /></a>
+</div>Recently I had a task to select some Java PDF libraries for PDF generation. But it wasn't a simple task.
+<br />The first thing which came into my mind was iText. It's well know Java library with good reputation. But... there is some stopper. iText version 5+ is released under the AGPL license. I.e. we have to pay money if we want to use iText in commercial product.
+<br />
+<br />I've created the next small checklist which covers project needs:
+<br />
+<ol>
+    <li>liberal license</li>
+    <li>support maximum amount of project features (e.g. absolute element positioning)</li>
+    <li>good documentation</li>
+    <li>huge amount of samples</li>
+    <li>possibility to render HTML to PDF </li>
+</ol>I've reviewed the next libraries:
+<br />
+<ul id="ext-gen1074">
+    <li id="ext-gen1094"><a href="http://itextpdf.com/" id="ext-gen1072" rel="nofollow">iText 5.0+</a> AGPL license</li>
+    <li id="ext-gen1088"><a href="https://github.com/ymasory/iText-4.2.0" id="ext-gen1108">iText 4.2</a> MPL/LGPL licenses</li>
+    <li id="ext-gen1075"><a href="http://pdfbox.apache.org/" id="ext-gen1073" rel="nofollow">PDF Box</a> Apache License, Version 2.0</li>
+    <li id="ext-gen1076"><a href="http://sourceforge.net/projects/jpedal/" rel="nofollow">JPedal</a> JPedal has a LGPL release to provide a full java PDF viewer under a LGPL license</li>
+    <li id="ext-gen1087"><a href="http://xml.apache.org/fop/" id="ext-gen1077" rel="nofollow">FOP</a> Apache License, Version 2.0</li>
+    <li id="ext-gen1052"><a href="http://gnujpdf.sourceforge.net/" rel="nofollow">gnujpdf</a> LGPL License</li>
+    <li id="ext-gen1078"><a href="http://sourceforge.net/projects/pjx/" rel="nofollow">PJX</a> GPLv2 License</li>
+    <li id="ext-gen1053"><a href="http://pdfjet.com/os/edition.html" rel="nofollow">PDFjet</a> Strange Open Source license model</li>
+    <li id="ext-gen1079"><a href="http://sourceforge.net/projects/jpodlib/" id="ext-gen1118" rel="nofollow">jPod </a>BSD License</li>
+    <li id="ext-gen1086"><a href="http://java.net/projects/pdf-renderer" id="ext-gen1113">PDF Renderer</a> Maintaining is not active</li>
+</ul>
+<h3><b>iText review</b></h3>
+<ul>
+    <li>iText 2.1.7: the latest official release under the MPL &amp; LGPL license;</li>
+    <li>iText 4.2.0: the latest unofficial release under the MPL &amp; LGPL license;</li>
+    <li>iText 5.0.0 and higher: released under the AGPL license.<b> </b></li>
+</ul><a href="https://github.com/ymasory/iText-4.2.0#background" target="_blank">Notes about iText 5.0+ vs iText 4.2</a>
+<br />
+<blockquote class="tr_bq"><i>Beginning with iText version 5.0 the developers have moved to the AGPL to improve their ability to sell commercial licenses. .. To assist those desiring to stick with the old license was made the final MPL/LGPL version more easily available and forked on github.</i></blockquote>
+<h3 id="ext-gen1083">&nbsp;</h3>
+<h3 id="ext-gen1083">Apache™ FOP</h3>
+<div id="ext-gen1082">Apache™ FOP (Formatting Objects Processor) is a print formatter driven by XSL formatting objects (XSL-FO) and an output independent formatter. It is a Java application that reads a formatting object (FO) tree and renders the resulting pages to a specified output. This lib doesn't have enough flexibility for absolute page element positioning. But, it might be really valuable as content convertor.</div>
+<h3>&nbsp;</h3>
+<h3>Apache PDFBox</h3>Very interesting project. It has very impressive amount of features. And most important it's in active development.
+<br />
+<h3>&nbsp;</h3>
+<h3>Summary</h3>I've selected <b>iText</b> v.4.2 which has acceptable license and huge community. But the most important feature it's a very good documentation (actually it's a book <a href="http://itextpdf.com/book/" target="_blank">iText in Action — 2nd Edition</a>), tons of samples. Almost all samples for iText v.5 can be easily applied to iText v.4.2.
+<br />Other libraries have not so much samples/demos. And for quick start it's very important.
+<br />
+<br />Here is maven dependency info:
+<br />
+
+<pre class="brush: xml;">&lt;dependency&gt;
+    &lt;groupid&gt;com.lowagie&lt;/groupid&gt;
+    &lt;artifactid&gt;itext&lt;/artifactid&gt;
+    &lt;version&gt;4.2.0&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+
+<b>PDFBox</b> is selected as backup library. I.e. I will use it when iText has some limitations.
+<br />
+<br />
+<br /><b>References</b>:
+<br />
+<ul>
+    <li><a href="http://stackoverflow.com/questions/14213195/itext-latest-maven-dependency">http://stackoverflow.com/questions/14213195/itext-latest-maven-dependency</a></li>
+    <li><a href="http://java-source.net/open-source/pdf-libraries">http://java-source.net/open-source/pdf-libraries</a></li>
+    <li><a href="http://javatoolbox.com/categories/pdf" target="_blank">http://javatoolbox.com/categories/pdf </a></li>
+</ul>

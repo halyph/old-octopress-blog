@@ -1,0 +1,14 @@
+---
+layout: post
+title: Auto install required Ruby gems via script
+date: '2013-01-21T15:08:00.001+02:00'
+author: Orest Ivasiv
+categories:
+- ruby
+modified_time: '2013-01-21T15:08:40.689+02:00'
+thumbnail: http://2.bp.blogspot.com/-qEN0mepVM7A/UP06D1l3kcI/AAAAAAAABKM/HZbbHByHTx0/s72-c/rubygems.png
+blogger_id: tag:blogger.com,1999:blog-7372777165432727866.post-8506891747322785170
+blogger_orig_url: http://www.halyph.com/2013/01/auto-install-required-ruby-gems-via.html
+---
+
+<div class="separator" style="clear: both; text-align: center;"><a href="http://2.bp.blogspot.com/-qEN0mepVM7A/UP06D1l3kcI/AAAAAAAABKM/HZbbHByHTx0/s1600/rubygems.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="200" src="http://2.bp.blogspot.com/-qEN0mepVM7A/UP06D1l3kcI/AAAAAAAABKM/HZbbHByHTx0/s200/rubygems.png" width="200" /></a></div><br />When you are writing Ruby scripts for yourself it's cool until you need to distribute it. It might happen (as usual it is) that your scripts requires one or more gems. It means that the consumer of your script should additionally setup all required gems. But it looks ugly. There is a nice simple solution which provide simple way for automatic gem install.<br />Let's imagine that we are using some gem in our script, to be concrete, I've picked <b>artii</b> gem as a sample:<br /><pre class="brush: ruby;">begin<br />  gem "artii"<br />rescue LoadError<br />  system("gem install artii")<br />  Gem.clear_paths<br />end<br /><br />require 'artii'<br /><br />a = Artii::Base.new<br />puts a.asciify('Blog!')<br /></pre>Let's run it:<br /><pre class="brush: bash;">$ jruby text.rb<br />Successfully installed artii-2.0.3<br />1 gem installed<br />  ____  _             _<br /> |  _ \| |           | |<br /> | |_) | | ___   __ _| |<br /> |  _ &lt;| |/ _ \ / _` | |<br /> | |_) | | (_) | (_| |_|<br /> |____/|_|\___/ \__, (_)<br />                 __/ |<br />                |___/<br /><br />[D:\MyProjects\temp]<br />$ jruby text.rb<br />  ____  _             _<br /> |  _ \| |           | |<br /> | |_) | | ___   __ _| |<br /> |  _ &lt;| |/ _ \ / _` | |<br /> | |_) | | (_) | (_| |_|<br /> |____/|_|\___/ \__, (_)<br />                 __/ |<br />                |___/<br /></pre>As you can see, when we run script 1st time it installs <b>artii </b>gem, but when we run this script 2d time it identified that gem has been installed already.<br /><br />Links:<br /><ul><li><a href="http://stackoverflow.com/questions/9384756/after-installing-a-gem-within-a-script-how-do-i-load-the-gem">http://stackoverflow.com/questions/9384756/after-installing-a-gem-within-a-script-how-do-i-load-the-gem</a></li></ul>

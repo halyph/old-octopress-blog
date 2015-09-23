@@ -1,0 +1,14 @@
+---
+layout: post
+title: How to remove .svn folders recursively?
+date: '2013-08-27T16:28:00.000+03:00'
+author: Orest Ivasiv
+categories:
+- bash
+modified_time: '2013-08-27T16:28:15.017+03:00'
+thumbnail: http://4.bp.blogspot.com/-ULddOXbgKU4/UOW2RTrNQkI/AAAAAAAABI4/3RpLOAl4vzk/s72-c/terminal_icon.png
+blogger_id: tag:blogger.com,1999:blog-7372777165432727866.post-4849406369582969530
+blogger_orig_url: http://www.halyph.com/2013/08/how-to-remove-svn-folders-recursively.html
+---
+
+<div class="separator" style="clear: both; text-align: center;"><a href="http://4.bp.blogspot.com/-ULddOXbgKU4/UOW2RTrNQkI/AAAAAAAABI4/3RpLOAl4vzk/s1600/terminal_icon.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="200" src="http://4.bp.blogspot.com/-ULddOXbgKU4/UOW2RTrNQkI/AAAAAAAABI4/3RpLOAl4vzk/s200/terminal_icon.png" width="200" /></a></div><br />Validate the list of folders which will be removed: <br /><pre class="brush: bash;">$ find . -name .svn -exec ls {} \;<br /></pre><br />Run recursive remove: <br /><pre class="brush: bash;">$ find . -name .svn -exec rm -rf {} \;<br /></pre>This script is run from the current folder.&nbsp; Be sure you've specified <b><i>find -name</i></b> properly.<b><br /></b><br /><br /><b>References:</b><br /><ul><li><a href="http://stackoverflow.com/questions/1294590/how-to-remove-all-svn-directories-from-my-application-directories">How to remove all .svn directories from my application directories</a>&nbsp;</li></ul>
