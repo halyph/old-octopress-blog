@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Haskell | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/haskell/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-09-28T03:13:38+03:00</updated>
+  <updated>2015-09-28T03:17:06+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -94,7 +94,7 @@ I&rsquo;ve picked <code>JRuby</code> and packed/distribute the application as a 
 </ul>
 
 
-<p>Based on the list above, <strong>Python</strong> has many alternative to accomplish single distribution artifact task. I.e. it&rsquo;s better to pick Python than other alternatives. Also, it looks like <strong>Ruby</strong> has limited and pure choices, i.e. it&rsquo;s not suitable for this kind of task.</p>
+<p>Based on the list above, <strong>Python</strong> has many alternative to accomplish single distribution artifact task. I.e. it&rsquo;s better to pick Python than other alternatives. Also, it looks like <strong>Ruby</strong> has limited and poor choices, i.e. it&rsquo;s not suitable for this kind of task.</p>
 
 <a name="Summary"></a>
 <h2>Summary</h2>
