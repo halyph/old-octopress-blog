@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-09-23T06:22:09+03:00</updated>
+  <updated>2015-09-28T03:13:38+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -12,6 +12,96 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Distribute Application as Native Single Binary]]></title>
+    <link href="http://halyph.com/blog/2015/09/25/programming-languages-to-native-code/"/>
+    <updated>2015-09-25T01:51:25+03:00</updated>
+    <id>http://halyph.com/blog/2015/09/25/programming-languages-to-native-code</id>
+    <content type="html"><![CDATA[<div align="center"><span style="align: center; font-size: 64pt">~</span></div>
+
+
+<p>Some time ago I had a pleasure to implement Ruby-based tool which theoretically must be easy to install and have no or limited dependencies.
+I&rsquo;ve picked <code>JRuby</code> and packed/distribute the application as a <code>jar</code>. I.e. JRE was the single dependency I had. In general it was very nice distribution model despite the fact that non-Java users must install JRE (Java SE Runtime Environment) to run the application.</p>
+
+<p>All other approaches like Ruby, Python, Perl, etc. were not acceptable as they requires additional user&rsquo;s efforts for tool installation and/or package distribution.</p>
+
+<p>The idea was/is to have single native binary for all major platforms which requires no dependencies. Simply copy and run.</p>
+
+<p>Now, the question: did I have other alternatives to implement this tool? Could it be implemented as native static binary? - Answer - YES. But, at that time there were only two mature solutions (acceptable for me): C and C++. And neither of them were very good for tool implementation and prototyping at the same time. Also, as far as I know, it&rsquo;s not a simple task to implement really cross-platform app, at least for Windows/Linux/OSX in C/C++. It adds additional maintenance efforts which I tried to avoid.</p>
+
+<p>Looking now at this task I can say that this king of application is nice to implement in <a href="https://golang.org">Go</a>. Go has everything I need for really cross-platform application development and single static binary output which is awesome for tools/utilities writers.</p>
+
+<p>I decided to look around and understand which other popular languages support compilation/packaging to native (semi-)single static binary. The term <em>&ldquo;semi-single&rdquo;</em> static binary will be explained later.</p>
+
+<a name="Compilers"></a>
+<h2>Compilers</h2>
+
+<p>Quick googling give us the next languages:</p>
+
+<ul>
+<li><a href="https://www.rust-lang.org">Rust</a></li>
+<li><a href="https://www.haskell.org">Haskell</a></li>
+<li><a href="https://ocaml.org/">OCaml</a></li>
+<li><a href="http://www.cliki.net/creating%20executables">Lisp</a>
+
+<ul>
+<li><a href="http://www.sbcl.org/">SBCL</a></li>
+<li><a href="http://ccl.clozure.com/">Clozure CL</a></li>
+</ul>
+</li>
+<li><a href="http://dlang.org/">D</a></li>
+</ul>
+
+
+<p><strong>Haskell</strong>, <strong>OCaml</strong> and <strong>Lisp</strong> are not widely used. And these langs should be picked carefully due to language specific learning curve.</p>
+
+<p><strong>D</strong> language is not young and has small community. But it&rsquo;s much simpler and clean compared to C++, IMHO.</p>
+
+<p><strong>Rust</strong> is the new hype along with <strong>Go</strong>. I guess it will be good alternative to C/C++. Also, the language is much more powerful compared to <strong>Go</strong>, it might be additional selling point.</p>
+
+<a name="Dynamic.Languages"></a>
+<h2>Dynamic Languages</h2>
+
+<p>There is no direct compilation from interpret/dynamic language to native static binary. But, it&rsquo;s possible to pack application with language runtime into &ldquo;archive&rdquo;/executable to behave like static native binary.</p>
+
+<ul>
+<li>Python <a href="http://docs.python-guide.org/en/latest/shipping/freezing/">freezing</a> (To <em>&ldquo;Freeze&rdquo;</em> your code is to distribute to end-users as an executable which includes a bundled Python interpreter)
+
+<ul>
+<li>bbFreeze</li>
+<li>py2exe</li>
+<li>pyInstaller</li>
+<li>cx_Freeze</li>
+<li>py2app</li>
+</ul>
+</li>
+<li>Perl
+
+<ul>
+<li><a href="http://search.cpan.org/~rschupp/PAR-Packer-1.026/lib/pp.pm">PAR Packager</a></li>
+<li><a href="http://www.indigostar.com/perl2exe.php">Perl2Exe</a></li>
+</ul>
+</li>
+<li>Node.js, Here is <a href="https://github.com/nwjs/nw.js/wiki/how-to-package-and-distribute-your-apps">sample approaches</a></li>
+<li>Ruby:
+
+<ul>
+<li><a href="http://www.erikveen.dds.nl/rubyscript2exe/">RubyScript2Exe</a></li>
+<li><a href="http://ocra.rubyforge.org/">OCRA</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p>Based on the list above, <strong>Python</strong> has many alternative to accomplish single distribution artifact task. I.e. it&rsquo;s better to pick Python than other alternatives. Also, it looks like <strong>Ruby</strong> has limited and pure choices, i.e. it&rsquo;s not suitable for this kind of task.</p>
+
+<a name="Summary"></a>
+<h2>Summary</h2>
+
+<p>IMHO, <strong>Go</strong> has the most appealing tool chain for accomplish this task.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rails Architecture and Scalability]]></title>
@@ -543,18 +633,6 @@ usage also.</p>
 
 
 <p>This books is unique, because the author (Joe Kutner) did really great work collecting several JRuby on Rails deploying approaches in one book. It&rsquo;s very convenience if you need some sort of review in scope of this subject.<br /><br />I believe that any Rails developer which think that Java/JVM is enemy camp should read it. The tools which are highlighted in this book are very interesting and provide for Ruby/Rails developers broader space.<br /><br />As for Java developers it&rsquo;s a good start point for integration Rails in corporate Java environment. The reader get all required info to get started.<br /><br />Here is a list of tools:<br /><ul><li>Warbler (<a href="https://github.com/jruby/warbler"><a href="https://github.com/jruby/warbler">https://github.com/jruby/warbler</a></a>) - Warbler provides a minimal, flexible, Ruby-like way to bundle up all of your application files for deployment to a Java environment</li><li>Trinidad (<a href="https://github.com/trinidad/trinidad"><a href="https://github.com/trinidad/trinidad">https://github.com/trinidad/trinidad</a></a>) - Trinidad allows you to run Rails or Rack applications within an embedded  Apache Tomcat container. </li><li>Kirk (<a href="https://github.com/strobecorp/kirk"><a href="https://github.com/strobecorp/kirk">https://github.com/strobecorp/kirk</a></a>) - Kirk is a wrapper around Jetty that hides all of the insanity and wraps your Rack application in a loving embrace</li><li>Torquebox (<a href="http://torquebox.org/"><a href="http://torquebox.org">http://torquebox.org</a></a>) - TorqueBox is a new kind of <a href="http://www.ruby-lang.org/en/">Ruby</a> application                   platform that supports popular                   technologies such as <a href="http://rubyonrails.org/">Ruby on Rails</a> and                   <a href="http://www.sinatrarb.com/">Sinatra</a>, while extending                   the footprint of Ruby                   applications to include built-in support for services such as messaging,                   scheduling, caching, and daemons.</li><li>jetpack (<a href="https://github.com/square/jetpack"><a href="https://github.com/square/jetpack">https://github.com/square/jetpack</a></a>), it wasn&rsquo;t mentioned in book. It packages your JRuby webapp for Jetty.</li></ul>I must admit that the most impressive is Torquebox. It&rsquo;s very powerful and it uses all power of JBoss App Server:<br /><blockquote class="tr_bq">TorqueBox provides an all-in-one environment, built upon the latest                   <a href="http://www.jboss.org/jbossas/">JBoss AS</a> Java application server and                   <a href="http://jruby.org/">JRuby</a>.&nbsp; </blockquote>Such features as messaging, long running jobs, scheduled jobs are provided out of the box, have nice API which easy to use. Have a try.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Auto Install Required Ruby Gems via Script]]></title>
-    <link href="http://halyph.com/blog/2013/01/21/auto-install-required-ruby-gems-via/"/>
-    <updated>2013-01-21T15:08:00+02:00</updated>
-    <id>http://halyph.com/blog/2013/01/21/auto-install-required-ruby-gems-via</id>
-    <content type="html"><![CDATA[<div class="separator" style="clear: both; text-align: center;"><a href="http://2.bp.blogspot.com/-qEN0mepVM7A/UP06D1l3kcI/AAAAAAAABKM/HZbbHByHTx0/s1600/rubygems.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="200" src="http://2.bp.blogspot.com/-qEN0mepVM7A/UP06D1l3kcI/AAAAAAAABKM/HZbbHByHTx0/s200/rubygems.png" width="200" /></a></div>
-
-
-<p><br />When you are writing Ruby scripts for yourself it&rsquo;s cool until you need to distribute it. It might happen (as usual it is) that your scripts requires one or more gems. It means that the consumer of your script should additionally setup all required gems. But it looks ugly. There is a nice simple solution which provide simple way for automatic gem install.<br />Let&rsquo;s imagine that we are using some gem in our script, to be concrete, I&rsquo;ve picked <b>artii</b> gem as a sample:<br /><pre class="brush: ruby;">begin<br />  gem &ldquo;artii&rdquo;<br />rescue LoadError<br />  system(&ldquo;gem install artii&rdquo;)<br />  Gem.clear_paths<br />end<br /><br />require &lsquo;artii&rsquo;<br /><br />a = Artii::Base.new<br />puts a.asciify(&lsquo;Blog!&rsquo;)<br /></pre>Let&rsquo;s run it:<br /><pre class="brush: bash;">$ jruby text.rb<br />Successfully installed artii-2.0.3<br />1 gem installed<br />  <strong><em><em>  _             </em><br /> |  _ | |           | |<br /> | |</em>) | | </strong><em>   __ </em>| |<br /> |  _ &lt;| |/ _ \ / <em><code>| |&lt;br /&gt; | |_) | | (_) | (_| |_|&lt;br /&gt; |____/|_|\___/ \__, (_)&lt;br /&gt;                 __/ |&lt;br /&gt;                |___/&lt;br /&gt;&lt;br /&gt;[D:\MyProjects\temp]&lt;br /&gt;$ jruby text.rb&lt;br /&gt;  ____  _             _&lt;br /&gt; |  _ \| |           | |&lt;br /&gt; | |_) | | ___   __ _| |&lt;br /&gt; |  _ &amp;lt;| |/ _ \ / _</code> | |<br /> | |</em>) | | (<em>) | (</em>| |<em>|<br /> |</em><strong><em>/|</em>|_</strong>/ _<em>, (</em>)<br />                 <strong>/ |<br />                |</strong>_/<br /></pre>As you can see, when we run script 1st time it installs <b>artii </b>gem, but when we run this script 2d time it identified that gem has been installed already.<br /><br />Links:<br /><ul><li><a href="http://stackoverflow.com/questions/9384756/after-installing-a-gem-within-a-script-how-do-i-load-the-gem"><a href="http://stackoverflow.com/questions/9384756/after-installing-a-gem-within-a-script-how-do-i-load-the-gem">http://stackoverflow.com/questions/9384756/after-installing-a-gem-within-a-script-how-do-i-load-the-gem</a></a></li></ul></p>
 ]]></content>
   </entry>
   

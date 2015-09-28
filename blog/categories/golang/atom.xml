@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Golang | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/golang/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-09-23T06:22:09+03:00</updated>
+  <updated>2015-09-28T03:13:38+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -12,6 +12,96 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Distribute Application as Native Single Binary]]></title>
+    <link href="http://halyph.com/blog/2015/09/25/programming-languages-to-native-code/"/>
+    <updated>2015-09-25T01:51:25+03:00</updated>
+    <id>http://halyph.com/blog/2015/09/25/programming-languages-to-native-code</id>
+    <content type="html"><![CDATA[<div align="center"><span style="align: center; font-size: 64pt">~</span></div>
+
+
+<p>Some time ago I had a pleasure to implement Ruby-based tool which theoretically must be easy to install and have no or limited dependencies.
+I&rsquo;ve picked <code>JRuby</code> and packed/distribute the application as a <code>jar</code>. I.e. JRE was the single dependency I had. In general it was very nice distribution model despite the fact that non-Java users must install JRE (Java SE Runtime Environment) to run the application.</p>
+
+<p>All other approaches like Ruby, Python, Perl, etc. were not acceptable as they requires additional user&rsquo;s efforts for tool installation and/or package distribution.</p>
+
+<p>The idea was/is to have single native binary for all major platforms which requires no dependencies. Simply copy and run.</p>
+
+<p>Now, the question: did I have other alternatives to implement this tool? Could it be implemented as native static binary? - Answer - YES. But, at that time there were only two mature solutions (acceptable for me): C and C++. And neither of them were very good for tool implementation and prototyping at the same time. Also, as far as I know, it&rsquo;s not a simple task to implement really cross-platform app, at least for Windows/Linux/OSX in C/C++. It adds additional maintenance efforts which I tried to avoid.</p>
+
+<p>Looking now at this task I can say that this king of application is nice to implement in <a href="https://golang.org">Go</a>. Go has everything I need for really cross-platform application development and single static binary output which is awesome for tools/utilities writers.</p>
+
+<p>I decided to look around and understand which other popular languages support compilation/packaging to native (semi-)single static binary. The term <em>&ldquo;semi-single&rdquo;</em> static binary will be explained later.</p>
+
+<a name="Compilers"></a>
+<h2>Compilers</h2>
+
+<p>Quick googling give us the next languages:</p>
+
+<ul>
+<li><a href="https://www.rust-lang.org">Rust</a></li>
+<li><a href="https://www.haskell.org">Haskell</a></li>
+<li><a href="https://ocaml.org/">OCaml</a></li>
+<li><a href="http://www.cliki.net/creating%20executables">Lisp</a>
+
+<ul>
+<li><a href="http://www.sbcl.org/">SBCL</a></li>
+<li><a href="http://ccl.clozure.com/">Clozure CL</a></li>
+</ul>
+</li>
+<li><a href="http://dlang.org/">D</a></li>
+</ul>
+
+
+<p><strong>Haskell</strong>, <strong>OCaml</strong> and <strong>Lisp</strong> are not widely used. And these langs should be picked carefully due to language specific learning curve.</p>
+
+<p><strong>D</strong> language is not young and has small community. But it&rsquo;s much simpler and clean compared to C++, IMHO.</p>
+
+<p><strong>Rust</strong> is the new hype along with <strong>Go</strong>. I guess it will be good alternative to C/C++. Also, the language is much more powerful compared to <strong>Go</strong>, it might be additional selling point.</p>
+
+<a name="Dynamic.Languages"></a>
+<h2>Dynamic Languages</h2>
+
+<p>There is no direct compilation from interpret/dynamic language to native static binary. But, it&rsquo;s possible to pack application with language runtime into &ldquo;archive&rdquo;/executable to behave like static native binary.</p>
+
+<ul>
+<li>Python <a href="http://docs.python-guide.org/en/latest/shipping/freezing/">freezing</a> (To <em>&ldquo;Freeze&rdquo;</em> your code is to distribute to end-users as an executable which includes a bundled Python interpreter)
+
+<ul>
+<li>bbFreeze</li>
+<li>py2exe</li>
+<li>pyInstaller</li>
+<li>cx_Freeze</li>
+<li>py2app</li>
+</ul>
+</li>
+<li>Perl
+
+<ul>
+<li><a href="http://search.cpan.org/~rschupp/PAR-Packer-1.026/lib/pp.pm">PAR Packager</a></li>
+<li><a href="http://www.indigostar.com/perl2exe.php">Perl2Exe</a></li>
+</ul>
+</li>
+<li>Node.js, Here is <a href="https://github.com/nwjs/nw.js/wiki/how-to-package-and-distribute-your-apps">sample approaches</a></li>
+<li>Ruby:
+
+<ul>
+<li><a href="http://www.erikveen.dds.nl/rubyscript2exe/">RubyScript2Exe</a></li>
+<li><a href="http://ocra.rubyforge.org/">OCRA</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p>Based on the list above, <strong>Python</strong> has many alternative to accomplish single distribution artifact task. I.e. it&rsquo;s better to pick Python than other alternatives. Also, it looks like <strong>Ruby</strong> has limited and pure choices, i.e. it&rsquo;s not suitable for this kind of task.</p>
+
+<a name="Summary"></a>
+<h2>Summary</h2>
+
+<p>IMHO, <strong>Go</strong> has the most appealing tool chain for accomplish this task.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Go Presentation Tool]]></title>
@@ -101,7 +191,7 @@ Tags: foo, bar, baz</p>
 
 <p>Author Name
 Job title, Company
-<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#58;&#x6a;&#111;&#x65;&#x40;&#101;&#120;&#x61;&#109;&#112;&#108;&#101;&#x2e;&#x63;&#x6f;&#109;">&#106;&#x6f;&#101;&#64;&#x65;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#x6d;</a>
+<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#58;&#106;&#111;&#x65;&#64;&#101;&#x78;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#109;">&#x6a;&#111;&#x65;&#64;&#101;&#x78;&#x61;&#109;&#x70;&#108;&#101;&#46;&#x63;&#x6f;&#x6d;</a>
 <a href="http://url/">http://url/</a>
 @twitter_name
 Some Text</p>

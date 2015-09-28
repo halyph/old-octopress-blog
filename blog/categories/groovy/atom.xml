@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Groovy | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/groovy/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-09-23T06:22:09+03:00</updated>
+  <updated>2015-09-28T03:13:38+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -14,15 +14,15 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Grails Best Practices Collection]]></title>
+    <title type="html"><![CDATA[Grails 2.x Best Practices Collection]]></title>
     <link href="http://halyph.com/blog/2015/07/20/grails-best-practices-collection/"/>
     <updated>2015-07-20T23:52:19+03:00</updated>
     <id>http://halyph.com/blog/2015/07/20/grails-best-practices-collection</id>
     <content type="html"><![CDATA[<p><img class="right" src="/images/blog/grails.jpg"></p>
 
-<p>Recently, I had a pleasure to look into several Grails v.2.3+ projects. Despite the fact that I&rsquo;m not a Grails developer I discovered some unti-patterns.
+<p>Recently, I had a pleasure to look into several Grails v.2.3+ projects. Despite the fact that I&rsquo;m not a Grails developer I discovered some anti-patterns.
 Then I started looking around to find some <em>Grails projects best practices</em>. And  they are well known and people still doing mistakes.
-However, I found several nice resources and I&rsquo;m quoting them here. I keep references back to original source, but use &ldquo;copy-paste&rdquo; post to have aggregated practices in single place.</p>
+However, I&rsquo;ve found several nice resources and I&rsquo;m (<em>going to quate</em>) quoting them here. I keep references back to original source and use &ldquo;copy-paste&rdquo; approach to have aggregated post in single place.</p>
 
 <a name="References"></a>
 <h2>References</h2>
@@ -59,7 +59,7 @@ However, I found several nice resources and I&rsquo;m quoting them here. I keep 
 </ul>
 
 
-<p>  Interesting Grails people
+<p>Interesting Grails people
 <a href="http://www.anyware.co.uk/2005/2011/09/12/optimising-your-application-with-grails-resources-plugin/">http://www.anyware.co.uk/2005/2011/09/12/optimising-your-application-with-grails-resources-plugin/</a>
 <a href="http://www.bobbywarner.com/">http://www.bobbywarner.com/</a></p>
 ]]></content>

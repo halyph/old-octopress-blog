@@ -9,7 +9,8 @@
   <meta name="author" content="Orest Ivasiv">
 
   
-  <meta name="description" content="Here I&#8217;m going to collect the most important resources which helps quickly use Maven in the &#8220;right&#8221; way. Intro Tutorials Java &hellip;">
+  <meta name="description" content="Using Maven profiles and resource filtering How do I add resources to my JAR?
+I assume that reader has a basic understanding of Maven resources. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -88,6 +89,278 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/06/11/maven-resource-filtering/">Maven Resource Filtering</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-06-11T16:08:00+03:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>4:08 pm</span></time>
+        
+           | <a href="/blog/2012/06/11/maven-resource-filtering/#disqus_thread"
+             data-disqus-identifier="http://halyph.com/blog/2012/06/11/maven-resource-filtering/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><br />
+<ul>
+    <li> <a href="http://www.manydesigns.com/en/portofino/documentation/tutorials/using-maven-profiles-and-resource-filtering">Using Maven profiles and resource filtering</a></li>
+    <li><a href="http://maven.apache.org/guides/getting-started/index.html#How_do_I_add_resources_to_my_JAR">How do I add resources to my JAR?</a></li>
+</ul>I assume that reader has a basic understanding of Maven resources.
+<br />
+<br />
+<h3>                Simple resource filtering </h3>Let&#8217;s generate the project:
+<br /><pre class="brush: bash;">$ mvn archetype:generate -DgroupId=org.halyph -DartifactId=proptest -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false<br /></pre>
+<br />
+
+
+<pre class="brush: xml;">
+&lt;project xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xsi:schemalocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+    &lt;modelversion&gt;4.0.0&lt;/modelversion&gt;
+    &lt;groupid&gt;org.halyph&lt;/groupid&gt;
+    &lt;artifactid&gt;proptest&lt;/artifactid&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;proptest&lt;/name&gt;
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupid&gt;junit&lt;/groupid&gt;
+            &lt;artifactid&gt;junit&lt;/artifactid&gt;
+            &lt;version&gt;3.8.1&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</pre>
+
+
+
+Now, we have an application property file with bunch of properties which must be filtered <i>\proptest\src\main\resources\application.properties</i>:
+<br /><pre class="brush: bash;">application.username=${jdbc.username}<br />application.password=${jdbc.password}<br />application.databaseName=${jdbc.databaseName}<br /></pre>We have to add <i>build/resources</i> and <i>properties</i> section into pom.xml:
+<br />
+
+
+
+
+<pre class="brush: xml;">&lt;project xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xsi:schemalocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+    &lt;modelversion&gt;4.0.0&lt;/modelversion&gt;
+    &lt;groupid&gt;org.halyph&lt;/groupid&gt;
+    &lt;artifactid&gt;proptest&lt;/artifactid&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;proptest&lt;/name&gt;
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupid&gt;junit&lt;/groupid&gt;
+            &lt;artifactid&gt;junit&lt;/artifactid&gt;
+            &lt;version&gt;3.8.1&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+        &lt;resources&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/resources&lt;/directory&gt;
+                &lt;filtering&gt;true&lt;/filtering&gt;
+            &lt;/resource&gt;
+        &lt;/resources&gt;
+    &lt;/build&gt;
+    &lt;properties&gt;
+        &lt;jdbc .username=&quot;&quot;&gt;default_username&lt;/jdbc&gt;
+        &lt;jdbc .password=&quot;&quot;&gt;default_password&lt;/jdbc&gt;
+        &lt;jdbc .databasename=&quot;&quot;&gt;default_databaseName&lt;/jdbc&gt;
+    &lt;/properties&gt;
+&lt;/project&gt;</pre>
+
+
+
+Lets run maven resource filtering and check the resulted <i>\proptest\target/classes/application.properties</i> file:
+<br />
+<br /><pre class="brush: bash;">$ mvn process-resources<br />$ cat target/classes/application.properties<br /><br />application.username=default_username<br />application.password=default_password<br />application.databaseName=default_databaseName<br /></pre>As you can see property values were successfully substituted.
+<br />
+<h3>      &nbsp;</h3>
+<h3>      Resource filtering with external properties file</h3>We can extract Maven properties in external property file <i>\proptest_extfile\src\main\filters\mysql_filters.properties:</i>
+<br /><pre class="brush: bash;">jdbc.username=mysql_username<br />jdbc.password=mysql_password<br />jdbc.databaseName=mysql_databaseName<br /></pre>also, we have to adjust pom.xml to work properly with external filters (added <i>build/filters</i> and removed <i>properties</i>):
+<br />
+
+
+
+<pre class="brush: bash;">&lt;project xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xsi:schemalocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+    &lt;modelversion&gt;4.0.0&lt;/modelversion&gt;
+    &lt;groupid&gt;org.halyph&lt;/groupid&gt;
+    &lt;artifactid&gt;proptest&lt;/artifactid&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;proptest&lt;/name&gt;
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupid&gt;junit&lt;/groupid&gt;
+            &lt;artifactid&gt;junit&lt;/artifactid&gt;
+            &lt;version&gt;3.8.1&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+        &lt;filters&gt;
+            &lt;filter&gt;src/main/filters/mysql_filters.properties&lt;/filter&gt;
+        &lt;/filters&gt;
+        &lt;resources&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/resources&lt;/directory&gt;
+                &lt;filtering&gt;true&lt;/filtering&gt;
+            &lt;/resource&gt;
+        &lt;/resources&gt;
+    &lt;/build&gt;
+&lt;/project&gt;</pre>
+
+
+
+
+
+
+Let&#8217;s check the resulted <i>\proptest\target\classes\application.properties</i> file:
+<br /><pre class="brush: bash;">$ mvn process-resources<br />$ cat target/classes/application.properties<br /><br />application.username=mysql_username<br />application.password=mysql_password<br />application.databaseName=mysql_databaseName<br /></pre>
+<h3>      &nbsp;</h3>
+<h3>      Mixed resource filtering with external/internal properties&nbsp;</h3>What happen if we have overlapped properties in pom.xml with external property file.
+<br />Modified pom.xml:
+<br />
+
+
+
+
+<pre class="brush: xml;">
+&lt;project xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xsi:schemalocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+    &lt;modelversion&gt;4.0.0&lt;/modelversion&gt;
+    &lt;groupid&gt;org.halyph&lt;/groupid&gt;
+    &lt;artifactid&gt;proptest&lt;/artifactid&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;proptest&lt;/name&gt;
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupid&gt;junit&lt;/groupid&gt;
+            &lt;artifactid&gt;junit&lt;/artifactid&gt;
+            &lt;version&gt;3.8.1&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+        &lt;filters&gt;
+            &lt;filter&gt;src/main/filters/mysql_filters.properties&lt;/filter&gt;
+        &lt;/filters&gt;
+        &lt;resources&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/resources&lt;/directory&gt;
+                &lt;filtering&gt;true&lt;/filtering&gt;
+            &lt;/resource&gt;
+        &lt;/resources&gt;
+    &lt;/build&gt;
+    &lt;properties&gt;
+        &lt;jdbc .databasename=&quot;&quot;&gt;default_databaseName&lt;/jdbc&gt;
+    &lt;/properties&gt;
+&lt;/project&gt;
+</pre>
+
+
+
+
+
+Now, check the resulted <i>\proptest\target\classes\application.properties</i> file:
+<br /><pre class="brush: bash;">$ mvn process-resources<br />$ cat target/classes/application.properties<br /><br />application.username=mysql_username<br />application.password=mysql_password<br />application.databaseName=default_databaseName<br /></pre>In this case Maven uses <i>application.databaseName</i> property from pom.xml
+<br />
+<br />
+<h3>     Managing properties with <a href="http://mojo.codehaus.org/properties-maven-plugin/">properties-maven-plugin</a>&nbsp;</h3>Please check the plugin home page for more details <a href="http://mojo.codehaus.org/properties-maven-plugin">http://mojo.codehaus.org/properties-maven-plugin</a>
+<br />
+<br />This plugin read external property and they behave like were declared in pom.xml.
+<br />Modified pom.xml:
+<br />
+
+
+<pre class="brush: xml;">
+&lt;project xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xsi:schemalocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+    &lt;modelversion&gt;4.0.0&lt;/modelversion&gt;
+    &lt;groupid&gt;org.halyph&lt;/groupid&gt;
+    &lt;artifactid&gt;proptest&lt;/artifactid&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;proptest&lt;/name&gt;
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupid&gt;junit&lt;/groupid&gt;
+            &lt;artifactid&gt;junit&lt;/artifactid&gt;
+            &lt;version&gt;3.8.1&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupid&gt;org.codehaus.mojo&lt;/groupid&gt;
+                &lt;artifactid&gt;properties-maven-plugin&lt;/artifactid&gt;
+                &lt;version&gt;1.0-alpha-2&lt;/version&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;phase&gt;initialize&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;read-project-properties&lt;/goal&gt;
+                        &lt;/goals&gt;
+                        &lt;configuration&gt;
+                            &lt;files&gt;
+                                &lt;file&gt;src/main/filters/cust_mysql_filters.properties&lt;/file&gt;
+                            &lt;/files&gt;
+                        &lt;/configuration&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+        &lt;filters&gt;
+            &lt;filter&gt;src/main/filters/mysql_filters.properties&lt;/filter&gt;
+        &lt;/filters&gt;
+        &lt;resources&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/resources&lt;/directory&gt;
+                &lt;filtering&gt;true&lt;/filtering&gt;
+            &lt;/resource&gt;
+        &lt;/resources&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</pre>
+
+
+
+
+Also, we have to add new external property file just to verify the property overlapping issue:
+<br /><i>\proptest_extfile\src\main\filters\cust_mysql_filters.properties:</i>
+<br /><pre class="brush: bash;">jdbc.username=cust_mysql_username<br />jdbc.password=cust_mysql_password<br />jdbc.databaseName=cust_mysql_databaseName<br /></pre>Now, it&#8217;s time to check the resulted file <i>\proptest\target\classes\application.properties</i> file:
+<br /><pre class="brush: bash;">$ mvn process-resources<br />$ cat target/classes/application.properties<br /><br />application.username=cust_mysql_username<br />application.password=cust_mysql_password<br />application.databaseName=cust_mysql_databaseName<br /></pre>
+<br /><b>Have you noticed that we&#8217;ve got properties values from <i>cust_mysql_filters.properties</i> and Maven hasn&#8217;t applied properties from <i>mysql_filters.properties </i>file<i>?</i></b>
+<br />
+<br />So, as you can see we have several ways for managing/filtering properties with Maven. And, it&#8217;s very convenient.
+<br />
+<br />You can checkout code snippets from <a href="https://github.com/halyph/blog-sandbox/tree/master/Maven/blogpost_061112">github</a>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/06/11/first-steps-in-maven/">First Steps in Maven</a></h1>
     
     
@@ -147,69 +420,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/20/this-year-we-had-second-jeeconf/">JEEConf - Kiev, 2012 - Report</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2012-05-20T16:15:00+03:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>4:15 pm</span></time>
-        
-           | <a href="/blog/2012/05/20/this-year-we-had-second-jeeconf/#disqus_thread"
-             data-disqus-identifier="http://halyph.com/blog/2012/05/20/this-year-we-had-second-jeeconf/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class="separator" style="clear: both; text-align: center;">
-    <a href="http://1.bp.blogspot.com/-aFtjgaEje38/T7ja9v9eZ6I/AAAAAAAAAkc/dHwWudU4x74/s1600/logo_transp2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://1.bp.blogspot.com/-aFtjgaEje38/T7ja9v9eZ6I/AAAAAAAAAkc/dHwWudU4x74/s1600/logo_transp2.png" /></a>
-</div>This year we had the second <a href="http://jeeconf.com/" target="_blank">JEEConf</a>. The amount of stages was increased from three to <strong>four </strong>stages.
-<br />I was really impressed about conference program &#8220;notebooks&#8221; :-) it was well done. The amount of people was really huge more then 600. I think it&#8217;s impressive number for the second conference.
-<br />
-<br />As usual I&#8217;ve selected the most interest topics to watch/visit to:
-<br />
-<br /><strong>1. Play with Play! by Anton Naumov</strong>
-<br />The presenter briefly has shown the Play Framework v.1.2.x features and discussed the pros&amp;cons. The most notably was that he stated the &#8220;fails&#8221; caused by this framework and how we can avoid similar stuff. The most loud message was &#8220;use Spring/MVC, Hibernate and Maven&#8221; if you are experienced with them :-). And try to use Play for prototype projects.
-<br />
-<br /><strong>2. Hibernate performance tuning by Sander Mak</strong>
-<br />It&#8217;s very interesting and pragmatic topic. Even more I can say this presentation was a bunch of receipts for Hibernate performance improvement. There were depicted very interesting nuances which will be definitely valuable in real life codding.I&#8217;m looking forward for slides.
-<br />
-<br /><strong>3.&nbsp; Methodology of performance optimization by Alexey Shipilyov and Sergey Kuksenko</strong>
-<br />It was the most low-level topic on this conference. Guys shown the different ways to perform the subject. They review and in pair-speech way very complicated issues in performance optimization from conceptual point of view. I can&#8217;t say that I will be able to reuse everything from this speech, but it&#8217;s great start point for me. They are very proficient presenters.
-<br />
-<br /><strong>4. Becoming a Professional Java Developer by Yakov Fain</strong>
-<br />I must say &#8220;Thank you&#8221; for this speech. It was cool. Yakov has highlighted the non-technical aspect of Professional (Java) Developer. Of course his advices and <span class="short_text" id="result_box" lang="en"><span class="hps">observation are based on own experience and might be biased for somebody. But it&#8217;s honest and reasonable speech might open &#8220;some&#8221; boring minds. Also, Yakov recommended to read his free e-book &#8220;Enterprise Software without the BS&#8221;. I&#8217;ve already downloaded it and I&#8217;m planning to read it in nearest weeks.&nbsp;</span></span>
-<br />
-<br /><strong><span class="short_text" id="result_box" lang="en"><span class="hps">5. Inject Injection by Yuriy Litvinenko</span></span></strong>
-<br /><span class="short_text" id="result_box" lang="en"><span class="hps">It was like a case study report about involving DI Framework (in this case Google Guice) in legacy project. It was very interesting, because I believe it&#8217;s challenging task. The presenter has highlighted the issues which his team faced </span></span><span class="short_text" id="result_box" lang="en"><span class="hps">with</span></span><span class="short_text" id="result_box" lang="en"><span class="hps">. I can say this experience might be valuable when somebody needs to decide the benefits and evaluate the risks of involving DI </span></span><span class="short_text" id="result_box" lang="en"><span class="hps">Framework in something &#8220;really old</span></span><span class="short_text" id="result_box" lang="en"><span class="hps"></span></span>&#8221;. Well done.
-<br />
-<br /><strong>6. Cloud Java platforms: what&#8217;s inside and what&#8217;s the difference by Ruslan Synytskyy</strong>
-<br />It was a pleasure to see ukrainian who is one of the founders of <a href="http://jelastic.com/">Jelastic</a>. Ruslan has reviewed&nbsp; different types of&nbsp; &#8220;* as a Service&#8221;: SaaS, PaaS and IaaS. The comparison criteria of PaaS&#8217;s are very useful for further evaluation.
-<br />
-<br /><strong>7. Why do I hate the Hibernate? by Mikalai Alimenkou</strong>
-<br />It was pragmatic, based on real experience presentation with tons of Hibernate issues. It&#8217;s very useful for anyone who&#8217;s developing application with Hibernate. We must know the weaknesses of our tools. Mikalai has used very interesting approach to blame something/someone: &#8220;nasty granny&#8221;. You should review the slides to this presentation to understand what does it mean.
-<br />
-<br />I&#8217;d like to say <i>&#8220;Thank you&#8221;</i> JEEConf organizers team. You are doing very important work for Ukrainian Java Community.
-<br />
-<br />
-<br />See: <a href="http://halyph.com/2011/05/jeeconf-kiev-2011-report.html" target="_blank">JEEConf - Kiev, 2011 - Report</a>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/40">&larr; Older</a>
@@ -233,7 +443,11 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/07/20/grails-best-practices-collection/">Grails Best Practices Collection</a>
+        <a href="/blog/2015/09/25/programming-languages-to-native-code/">Distribute Application as Native Single Binary</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/20/grails-best-practices-collection/">Grails 2.x Best Practices Collection</a>
       </li>
     
       <li class="post">
@@ -248,15 +462,11 @@
         <a href="/blog/2015/05/19/grails-2-dot-5-0-debug-in-intellij-idea/">Grails 2.5.0 Debug in IntelliJ IDEA</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/05/18/golang-presentation-tool/">Go Presentation Tool</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <span id="tag-cloud"><a href='/blog/categories/agile' style='font-size: 104.73684210526315%'>agile(3)</a> <a href='/blog/categories/annotation' style='font-size: 101.57894736842105%'>annotation(1)</a> <a href='/blog/categories/ant' style='font-size: 103.15789473684211%'>ant(2)</a> <a href='/blog/categories/architecture' style='font-size: 101.57894736842105%'>architecture(1)</a> <a href='/blog/categories/automation' style='font-size: 103.15789473684211%'>automation(2)</a> <a href='/blog/categories/barcode' style='font-size: 101.57894736842105%'>barcode(1)</a> <a href='/blog/categories/bash' style='font-size: 104.73684210526315%'>bash(3)</a> <a href='/blog/categories/blog' style='font-size: 101.57894736842105%'>blog(1)</a> <a href='/blog/categories/blogging' style='font-size: 103.15789473684211%'>blogging(2)</a> <a href='/blog/categories/books' style='font-size: 115.78947368421052%'>books(10)</a> <a href='/blog/categories/centos' style='font-size: 101.57894736842105%'>centos(1)</a> <a href='/blog/categories/certification' style='font-size: 101.57894736842105%'>certification(1)</a> <a href='/blog/categories/ci' style='font-size: 101.57894736842105%'>ci(1)</a> <a href='/blog/categories/clojure' style='font-size: 103.15789473684211%'>clojure(2)</a> <a href='/blog/categories/cmd-dot-exe' style='font-size: 101.57894736842105%'>cmd.exe(1)</a> <a href='/blog/categories/code-quality' style='font-size: 101.57894736842105%'>code quality(1)</a> <a href='/blog/categories/code-style' style='font-size: 101.57894736842105%'>code style(1)</a> <a href='/blog/categories/computation' style='font-size: 101.57894736842105%'>computation(1)</a> <a href='/blog/categories/conference' style='font-size: 117.36842105263158%'>conference(11)</a> <a href='/blog/categories/console' style='font-size: 101.57894736842105%'>console(1)</a> <a href='/blog/categories/craftsmanship' style='font-size: 103.15789473684211%'>craftsmanship(2)</a> <a href='/blog/categories/cxf' style='font-size: 104.73684210526315%'>cxf(3)</a> <a href='/blog/categories/cygwin' style='font-size: 101.57894736842105%'>cygwin(1)</a> <a href='/blog/categories/db' style='font-size: 101.57894736842105%'>db(1)</a> <a href='/blog/categories/devoxx' style='font-size: 101.57894736842105%'>devoxx(1)</a> <a href='/blog/categories/diff' style='font-size: 101.57894736842105%'>diff(1)</a> <a href='/blog/categories/eclipse' style='font-size: 103.15789473684211%'>eclipse(2)</a> <a href='/blog/categories/evernote' style='font-size: 103.15789473684211%'>evernote(2)</a> <a href='/blog/categories/general' style='font-size: 104.73684210526315%'>general(3)</a> <a href='/blog/categories/gerrit' style='font-size: 101.57894736842105%'>gerrit(1)</a> <a href='/blog/categories/gist' style='font-size: 101.57894736842105%'>gist(1)</a> <a href='/blog/categories/git' style='font-size: 115.78947368421052%'>git(10)</a> <a href='/blog/categories/github' style='font-size: 101.57894736842105%'>github(1)</a> <a href='/blog/categories/gnustep' style='font-size: 101.57894736842105%'>gnustep(1)</a> <a href='/blog/categories/golang' style='font-size: 101.57894736842105%'>golang(1)</a> <a href='/blog/categories/gradle' style='font-size: 101.57894736842105%'>gradle(1)</a> <a href='/blog/categories/grails' style='font-size: 103.15789473684211%'>grails(2)</a> <a href='/blog/categories/groovy' style='font-size: 118.94736842105263%'>groovy(12)</a> <a href='/blog/categories/h2' style='font-size: 101.57894736842105%'>h2(1)</a> <a href='/blog/categories/hibernate' style='font-size: 101.57894736842105%'>hibernate(1)</a> <a href='/blog/categories/i18n' style='font-size: 101.57894736842105%'>i18n(1)</a> <a href='/blog/categories/intellij-idea' style='font-size: 101.57894736842105%'>intellij idea(1)</a> <a href='/blog/categories/itbooze' style='font-size: 103.15789473684211%'>itbooze(2)</a> <a href='/blog/categories/itext' style='font-size: 101.57894736842105%'>itext(1)</a> <a href='/blog/categories/ivy' style='font-size: 101.57894736842105%'>ivy(1)</a> <a href='/blog/categories/java' style='font-size: 160.0%'>java(38)</a> <a href='/blog/categories/java-se' style='font-size: 103.15789473684211%'>java se(2)</a> <a href='/blog/categories/javascript' style='font-size: 101.57894736842105%'>javascript(1)</a> <a href='/blog/categories/jax-rs' style='font-size: 104.73684210526315%'>jax-rs(3)</a> <a href='/blog/categories/jdbc' style='font-size: 101.57894736842105%'>jdbc(1)</a> <a href='/blog/categories/jdk' style='font-size: 101.57894736842105%'>jdk(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 107.89473684210526%'>jeeconf(5)</a> <a href='/blog/categories/jenkins' style='font-size: 106.3157894736842%'>jenkins(4)</a> <a href='/blog/categories/jetty' style='font-size: 101.57894736842105%'>jetty(1)</a> <a href='/blog/categories/jsp' style='font-size: 101.57894736842105%'>jsp(1)</a> <a href='/blog/categories/kanban' style='font-size: 101.57894736842105%'>kanban(1)</a> <a href='/blog/categories/l10n' style='font-size: 101.57894736842105%'>l10n(1)</a> <a href='/blog/categories/languages' style='font-size: 109.47368421052632%'>languages(6)</a> <a href='/blog/categories/learning' style='font-size: 106.3157894736842%'>learning(4)</a> <a href='/blog/categories/library' style='font-size: 104.73684210526315%'>library(3)</a> <a href='/blog/categories/linux' style='font-size: 115.78947368421052%'>linux(10)</a> <a href='/blog/categories/lisp' style='font-size: 106.3157894736842%'>lisp(4)</a> <a href='/blog/categories/maven' style='font-size: 109.47368421052632%'>maven(6)</a> <a href='/blog/categories/merge' style='font-size: 101.57894736842105%'>merge(1)</a> <a href='/blog/categories/mingw' style='font-size: 101.57894736842105%'>mingw(1)</a> <a href='/blog/categories/msysgit' style='font-size: 101.57894736842105%'>msysgit(1)</a> <a href='/blog/categories/objective-c' style='font-size: 101.57894736842105%'>objective-c(1)</a> <a href='/blog/categories/ocpjp' style='font-size: 101.57894736842105%'>ocpjp(1)</a> <a href='/blog/categories/octopress' style='font-size: 103.15789473684211%'>octopress(2)</a> <a href='/blog/categories/os-x' style='font-size: 107.89473684210526%'>os x(5)</a> <a href='/blog/categories/pdf' style='font-size: 104.73684210526315%'>pdf(3)</a> <a href='/blog/categories/plugin' style='font-size: 103.15789473684211%'>plugin(2)</a> <a href='/blog/categories/pomodoro' style='font-size: 103.15789473684211%'>pomodoro(2)</a> <a href='/blog/categories/productivity' style='font-size: 103.15789473684211%'>productivity(2)</a> <a href='/blog/categories/prompt' style='font-size: 103.15789473684211%'>prompt(2)</a> <a href='/blog/categories/prototyping' style='font-size: 103.15789473684211%'>prototyping(2)</a> <a href='/blog/categories/python' style='font-size: 101.57894736842105%'>python(1)</a> <a href='/blog/categories/rails' style='font-size: 109.47368421052632%'>rails(6)</a> <a href='/blog/categories/reflection' style='font-size: 101.57894736842105%'>reflection(1)</a> <a href='/blog/categories/rest' style='font-size: 104.73684210526315%'>rest(3)</a> <a href='/blog/categories/review' style='font-size: 112.63157894736842%'>review(8)</a> <a href='/blog/categories/ruby' style='font-size: 128.42105263157896%'>ruby(18)</a> <a href='/blog/categories/rvm' style='font-size: 101.57894736842105%'>rvm(1)</a> <a href='/blog/categories/scala' style='font-size: 106.3157894736842%'>scala(4)</a> <a href='/blog/categories/scjp' style='font-size: 101.57894736842105%'>scjp(1)</a> <a href='/blog/categories/screencast' style='font-size: 104.73684210526315%'>screencast(3)</a> <a href='/blog/categories/scripting' style='font-size: 103.15789473684211%'>scripting(2)</a> <a href='/blog/categories/scrum' style='font-size: 101.57894736842105%'>scrum(1)</a> <a href='/blog/categories/servlet' style='font-size: 101.57894736842105%'>servlet(1)</a> <a href='/blog/categories/shell' style='font-size: 103.15789473684211%'>shell(2)</a> <a href='/blog/categories/sketching' style='font-size: 101.57894736842105%'>sketching(1)</a> <a href='/blog/categories/spring' style='font-size: 106.3157894736842%'>spring(4)</a> <a href='/blog/categories/ssh' style='font-size: 103.15789473684211%'>ssh(2)</a> <a href='/blog/categories/ssh-agent' style='font-size: 101.57894736842105%'>ssh-agent(1)</a> <a href='/blog/categories/static-analysis' style='font-size: 101.57894736842105%'>static analysis(1)</a> <a href='/blog/categories/svn' style='font-size: 101.57894736842105%'>svn(1)</a> <a href='/blog/categories/terminal' style='font-size: 103.15789473684211%'>terminal(2)</a> <a href='/blog/categories/textmate' style='font-size: 103.15789473684211%'>textmate(2)</a> <a href='/blog/categories/time-management' style='font-size: 103.15789473684211%'>time management(2)</a> <a href='/blog/categories/tomcat' style='font-size: 101.57894736842105%'>tomcat(1)</a> <a href='/blog/categories/tool' style='font-size: 101.57894736842105%'>tool(1)</a> <a href='/blog/categories/tools' style='font-size: 109.47368421052632%'>tools(6)</a> <a href='/blog/categories/top' style='font-size: 101.57894736842105%'>top(1)</a> <a href='/blog/categories/tutorial' style='font-size: 101.57894736842105%'>tutorial(1)</a> <a href='/blog/categories/tutorials' style='font-size: 101.57894736842105%'>tutorials(1)</a> <a href='/blog/categories/ui' style='font-size: 101.57894736842105%'>ui(1)</a> <a href='/blog/categories/uml' style='font-size: 101.57894736842105%'>uml(1)</a> <a href='/blog/categories/video' style='font-size: 101.57894736842105%'>video(1)</a> <a href='/blog/categories/vim' style='font-size: 103.15789473684211%'>vim(2)</a> <a href='/blog/categories/vs' style='font-size: 104.73684210526315%'>vs(3)</a> <a href='/blog/categories/windows' style='font-size: 101.57894736842105%'>windows(1)</a> <a href='/blog/categories/xp' style='font-size: 101.57894736842105%'>xp(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/agile' style='font-size: 104.73684210526315%'>agile(3)</a> <a href='/blog/categories/annotation' style='font-size: 101.57894736842105%'>annotation(1)</a> <a href='/blog/categories/ant' style='font-size: 103.15789473684211%'>ant(2)</a> <a href='/blog/categories/architecture' style='font-size: 101.57894736842105%'>architecture(1)</a> <a href='/blog/categories/automation' style='font-size: 103.15789473684211%'>automation(2)</a> <a href='/blog/categories/barcode' style='font-size: 101.57894736842105%'>barcode(1)</a> <a href='/blog/categories/bash' style='font-size: 104.73684210526315%'>bash(3)</a> <a href='/blog/categories/blog' style='font-size: 101.57894736842105%'>blog(1)</a> <a href='/blog/categories/blogging' style='font-size: 103.15789473684211%'>blogging(2)</a> <a href='/blog/categories/books' style='font-size: 115.78947368421052%'>books(10)</a> <a href='/blog/categories/centos' style='font-size: 101.57894736842105%'>centos(1)</a> <a href='/blog/categories/certification' style='font-size: 101.57894736842105%'>certification(1)</a> <a href='/blog/categories/ci' style='font-size: 101.57894736842105%'>ci(1)</a> <a href='/blog/categories/clojure' style='font-size: 103.15789473684211%'>clojure(2)</a> <a href='/blog/categories/cmd-dot-exe' style='font-size: 101.57894736842105%'>cmd.exe(1)</a> <a href='/blog/categories/code-quality' style='font-size: 101.57894736842105%'>code quality(1)</a> <a href='/blog/categories/code-style' style='font-size: 101.57894736842105%'>code style(1)</a> <a href='/blog/categories/computation' style='font-size: 101.57894736842105%'>computation(1)</a> <a href='/blog/categories/conference' style='font-size: 117.36842105263158%'>conference(11)</a> <a href='/blog/categories/console' style='font-size: 101.57894736842105%'>console(1)</a> <a href='/blog/categories/craftsmanship' style='font-size: 103.15789473684211%'>craftsmanship(2)</a> <a href='/blog/categories/cxf' style='font-size: 104.73684210526315%'>cxf(3)</a> <a href='/blog/categories/cygwin' style='font-size: 101.57894736842105%'>cygwin(1)</a> <a href='/blog/categories/db' style='font-size: 101.57894736842105%'>db(1)</a> <a href='/blog/categories/devoxx' style='font-size: 101.57894736842105%'>devoxx(1)</a> <a href='/blog/categories/diff' style='font-size: 101.57894736842105%'>diff(1)</a> <a href='/blog/categories/eclipse' style='font-size: 103.15789473684211%'>eclipse(2)</a> <a href='/blog/categories/evernote' style='font-size: 103.15789473684211%'>evernote(2)</a> <a href='/blog/categories/general' style='font-size: 104.73684210526315%'>general(3)</a> <a href='/blog/categories/gerrit' style='font-size: 101.57894736842105%'>gerrit(1)</a> <a href='/blog/categories/gist' style='font-size: 101.57894736842105%'>gist(1)</a> <a href='/blog/categories/git' style='font-size: 115.78947368421052%'>git(10)</a> <a href='/blog/categories/github' style='font-size: 101.57894736842105%'>github(1)</a> <a href='/blog/categories/gnustep' style='font-size: 101.57894736842105%'>gnustep(1)</a> <a href='/blog/categories/golang' style='font-size: 103.15789473684211%'>golang(2)</a> <a href='/blog/categories/gradle' style='font-size: 101.57894736842105%'>gradle(1)</a> <a href='/blog/categories/grails' style='font-size: 103.15789473684211%'>grails(2)</a> <a href='/blog/categories/groovy' style='font-size: 118.94736842105263%'>groovy(12)</a> <a href='/blog/categories/h2' style='font-size: 101.57894736842105%'>h2(1)</a> <a href='/blog/categories/haskell' style='font-size: 101.57894736842105%'>haskell(1)</a> <a href='/blog/categories/hibernate' style='font-size: 101.57894736842105%'>hibernate(1)</a> <a href='/blog/categories/i18n' style='font-size: 101.57894736842105%'>i18n(1)</a> <a href='/blog/categories/intellij-idea' style='font-size: 101.57894736842105%'>intellij idea(1)</a> <a href='/blog/categories/itbooze' style='font-size: 103.15789473684211%'>itbooze(2)</a> <a href='/blog/categories/itext' style='font-size: 101.57894736842105%'>itext(1)</a> <a href='/blog/categories/ivy' style='font-size: 101.57894736842105%'>ivy(1)</a> <a href='/blog/categories/java' style='font-size: 160.0%'>java(38)</a> <a href='/blog/categories/java-se' style='font-size: 103.15789473684211%'>java se(2)</a> <a href='/blog/categories/javascript' style='font-size: 101.57894736842105%'>javascript(1)</a> <a href='/blog/categories/jax-rs' style='font-size: 104.73684210526315%'>jax-rs(3)</a> <a href='/blog/categories/jdbc' style='font-size: 101.57894736842105%'>jdbc(1)</a> <a href='/blog/categories/jdk' style='font-size: 101.57894736842105%'>jdk(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 107.89473684210526%'>jeeconf(5)</a> <a href='/blog/categories/jenkins' style='font-size: 106.3157894736842%'>jenkins(4)</a> <a href='/blog/categories/jetty' style='font-size: 101.57894736842105%'>jetty(1)</a> <a href='/blog/categories/jsp' style='font-size: 101.57894736842105%'>jsp(1)</a> <a href='/blog/categories/kanban' style='font-size: 101.57894736842105%'>kanban(1)</a> <a href='/blog/categories/l10n' style='font-size: 101.57894736842105%'>l10n(1)</a> <a href='/blog/categories/languages' style='font-size: 109.47368421052632%'>languages(6)</a> <a href='/blog/categories/learning' style='font-size: 106.3157894736842%'>learning(4)</a> <a href='/blog/categories/library' style='font-size: 104.73684210526315%'>library(3)</a> <a href='/blog/categories/linux' style='font-size: 115.78947368421052%'>linux(10)</a> <a href='/blog/categories/lisp' style='font-size: 107.89473684210526%'>lisp(5)</a> <a href='/blog/categories/maven' style='font-size: 109.47368421052632%'>maven(6)</a> <a href='/blog/categories/merge' style='font-size: 101.57894736842105%'>merge(1)</a> <a href='/blog/categories/mingw' style='font-size: 101.57894736842105%'>mingw(1)</a> <a href='/blog/categories/msysgit' style='font-size: 101.57894736842105%'>msysgit(1)</a> <a href='/blog/categories/objective-c' style='font-size: 101.57894736842105%'>objective-c(1)</a> <a href='/blog/categories/ocaml' style='font-size: 101.57894736842105%'>ocaml(1)</a> <a href='/blog/categories/ocpjp' style='font-size: 101.57894736842105%'>ocpjp(1)</a> <a href='/blog/categories/octopress' style='font-size: 103.15789473684211%'>octopress(2)</a> <a href='/blog/categories/os-x' style='font-size: 107.89473684210526%'>os x(5)</a> <a href='/blog/categories/pdf' style='font-size: 104.73684210526315%'>pdf(3)</a> <a href='/blog/categories/plugin' style='font-size: 103.15789473684211%'>plugin(2)</a> <a href='/blog/categories/pomodoro' style='font-size: 103.15789473684211%'>pomodoro(2)</a> <a href='/blog/categories/productivity' style='font-size: 103.15789473684211%'>productivity(2)</a> <a href='/blog/categories/prompt' style='font-size: 103.15789473684211%'>prompt(2)</a> <a href='/blog/categories/prototyping' style='font-size: 103.15789473684211%'>prototyping(2)</a> <a href='/blog/categories/python' style='font-size: 103.15789473684211%'>python(2)</a> <a href='/blog/categories/rails' style='font-size: 109.47368421052632%'>rails(6)</a> <a href='/blog/categories/reflection' style='font-size: 101.57894736842105%'>reflection(1)</a> <a href='/blog/categories/rest' style='font-size: 104.73684210526315%'>rest(3)</a> <a href='/blog/categories/review' style='font-size: 112.63157894736842%'>review(8)</a> <a href='/blog/categories/ruby' style='font-size: 130.0%'>ruby(19)</a> <a href='/blog/categories/rust' style='font-size: 101.57894736842105%'>rust(1)</a> <a href='/blog/categories/rvm' style='font-size: 101.57894736842105%'>rvm(1)</a> <a href='/blog/categories/scala' style='font-size: 106.3157894736842%'>scala(4)</a> <a href='/blog/categories/scjp' style='font-size: 101.57894736842105%'>scjp(1)</a> <a href='/blog/categories/screencast' style='font-size: 104.73684210526315%'>screencast(3)</a> <a href='/blog/categories/scripting' style='font-size: 103.15789473684211%'>scripting(2)</a> <a href='/blog/categories/scrum' style='font-size: 101.57894736842105%'>scrum(1)</a> <a href='/blog/categories/servlet' style='font-size: 101.57894736842105%'>servlet(1)</a> <a href='/blog/categories/shell' style='font-size: 103.15789473684211%'>shell(2)</a> <a href='/blog/categories/sketching' style='font-size: 101.57894736842105%'>sketching(1)</a> <a href='/blog/categories/spring' style='font-size: 106.3157894736842%'>spring(4)</a> <a href='/blog/categories/ssh' style='font-size: 103.15789473684211%'>ssh(2)</a> <a href='/blog/categories/ssh-agent' style='font-size: 101.57894736842105%'>ssh-agent(1)</a> <a href='/blog/categories/static-analysis' style='font-size: 101.57894736842105%'>static analysis(1)</a> <a href='/blog/categories/svn' style='font-size: 101.57894736842105%'>svn(1)</a> <a href='/blog/categories/terminal' style='font-size: 103.15789473684211%'>terminal(2)</a> <a href='/blog/categories/textmate' style='font-size: 103.15789473684211%'>textmate(2)</a> <a href='/blog/categories/time-management' style='font-size: 103.15789473684211%'>time management(2)</a> <a href='/blog/categories/tomcat' style='font-size: 101.57894736842105%'>tomcat(1)</a> <a href='/blog/categories/tool' style='font-size: 101.57894736842105%'>tool(1)</a> <a href='/blog/categories/tools' style='font-size: 109.47368421052632%'>tools(6)</a> <a href='/blog/categories/top' style='font-size: 101.57894736842105%'>top(1)</a> <a href='/blog/categories/tutorial' style='font-size: 101.57894736842105%'>tutorial(1)</a> <a href='/blog/categories/tutorials' style='font-size: 101.57894736842105%'>tutorials(1)</a> <a href='/blog/categories/ui' style='font-size: 101.57894736842105%'>ui(1)</a> <a href='/blog/categories/uml' style='font-size: 101.57894736842105%'>uml(1)</a> <a href='/blog/categories/video' style='font-size: 101.57894736842105%'>video(1)</a> <a href='/blog/categories/vim' style='font-size: 103.15789473684211%'>vim(2)</a> <a href='/blog/categories/vs' style='font-size: 104.73684210526315%'>vs(3)</a> <a href='/blog/categories/windows' style='font-size: 101.57894736842105%'>windows(1)</a> <a href='/blog/categories/xp' style='font-size: 101.57894736842105%'>xp(1)</a> </span>
 </section>
 
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Knowledge Is Everything]]></title>
   <link href="http://halyph.com/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-09-23T06:22:09+03:00</updated>
+  <updated>2015-09-28T03:13:38+03:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -14,15 +14,105 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Grails Best Practices Collection]]></title>
+    <title type="html"><![CDATA[Distribute Application as Native Single Binary]]></title>
+    <link href="http://halyph.com/blog/2015/09/25/programming-languages-to-native-code/"/>
+    <updated>2015-09-25T01:51:25+03:00</updated>
+    <id>http://halyph.com/blog/2015/09/25/programming-languages-to-native-code</id>
+    <content type="html"><![CDATA[<div align="center"><span style="align: center; font-size: 64pt">~</span></div>
+
+
+<p>Some time ago I had a pleasure to implement Ruby-based tool which theoretically must be easy to install and have no or limited dependencies.
+I&rsquo;ve picked <code>JRuby</code> and packed/distribute the application as a <code>jar</code>. I.e. JRE was the single dependency I had. In general it was very nice distribution model despite the fact that non-Java users must install JRE (Java SE Runtime Environment) to run the application.</p>
+
+<p>All other approaches like Ruby, Python, Perl, etc. were not acceptable as they requires additional user&rsquo;s efforts for tool installation and/or package distribution.</p>
+
+<p>The idea was/is to have single native binary for all major platforms which requires no dependencies. Simply copy and run.</p>
+
+<p>Now, the question: did I have other alternatives to implement this tool? Could it be implemented as native static binary? - Answer - YES. But, at that time there were only two mature solutions (acceptable for me): C and C++. And neither of them were very good for tool implementation and prototyping at the same time. Also, as far as I know, it&rsquo;s not a simple task to implement really cross-platform app, at least for Windows/Linux/OSX in C/C++. It adds additional maintenance efforts which I tried to avoid.</p>
+
+<p>Looking now at this task I can say that this king of application is nice to implement in <a href="https://golang.org">Go</a>. Go has everything I need for really cross-platform application development and single static binary output which is awesome for tools/utilities writers.</p>
+
+<p>I decided to look around and understand which other popular languages support compilation/packaging to native (semi-)single static binary. The term <em>&ldquo;semi-single&rdquo;</em> static binary will be explained later.</p>
+
+<a name="Compilers"></a>
+<h2>Compilers</h2>
+
+<p>Quick googling give us the next languages:</p>
+
+<ul>
+<li><a href="https://www.rust-lang.org">Rust</a></li>
+<li><a href="https://www.haskell.org">Haskell</a></li>
+<li><a href="https://ocaml.org/">OCaml</a></li>
+<li><a href="http://www.cliki.net/creating%20executables">Lisp</a>
+
+<ul>
+<li><a href="http://www.sbcl.org/">SBCL</a></li>
+<li><a href="http://ccl.clozure.com/">Clozure CL</a></li>
+</ul>
+</li>
+<li><a href="http://dlang.org/">D</a></li>
+</ul>
+
+
+<p><strong>Haskell</strong>, <strong>OCaml</strong> and <strong>Lisp</strong> are not widely used. And these langs should be picked carefully due to language specific learning curve.</p>
+
+<p><strong>D</strong> language is not young and has small community. But it&rsquo;s much simpler and clean compared to C++, IMHO.</p>
+
+<p><strong>Rust</strong> is the new hype along with <strong>Go</strong>. I guess it will be good alternative to C/C++. Also, the language is much more powerful compared to <strong>Go</strong>, it might be additional selling point.</p>
+
+<a name="Dynamic.Languages"></a>
+<h2>Dynamic Languages</h2>
+
+<p>There is no direct compilation from interpret/dynamic language to native static binary. But, it&rsquo;s possible to pack application with language runtime into &ldquo;archive&rdquo;/executable to behave like static native binary.</p>
+
+<ul>
+<li>Python <a href="http://docs.python-guide.org/en/latest/shipping/freezing/">freezing</a> (To <em>&ldquo;Freeze&rdquo;</em> your code is to distribute to end-users as an executable which includes a bundled Python interpreter)
+
+<ul>
+<li>bbFreeze</li>
+<li>py2exe</li>
+<li>pyInstaller</li>
+<li>cx_Freeze</li>
+<li>py2app</li>
+</ul>
+</li>
+<li>Perl
+
+<ul>
+<li><a href="http://search.cpan.org/~rschupp/PAR-Packer-1.026/lib/pp.pm">PAR Packager</a></li>
+<li><a href="http://www.indigostar.com/perl2exe.php">Perl2Exe</a></li>
+</ul>
+</li>
+<li>Node.js, Here is <a href="https://github.com/nwjs/nw.js/wiki/how-to-package-and-distribute-your-apps">sample approaches</a></li>
+<li>Ruby:
+
+<ul>
+<li><a href="http://www.erikveen.dds.nl/rubyscript2exe/">RubyScript2Exe</a></li>
+<li><a href="http://ocra.rubyforge.org/">OCRA</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p>Based on the list above, <strong>Python</strong> has many alternative to accomplish single distribution artifact task. I.e. it&rsquo;s better to pick Python than other alternatives. Also, it looks like <strong>Ruby</strong> has limited and pure choices, i.e. it&rsquo;s not suitable for this kind of task.</p>
+
+<a name="Summary"></a>
+<h2>Summary</h2>
+
+<p>IMHO, <strong>Go</strong> has the most appealing tool chain for accomplish this task.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Grails 2.x Best Practices Collection]]></title>
     <link href="http://halyph.com/blog/2015/07/20/grails-best-practices-collection/"/>
     <updated>2015-07-20T23:52:19+03:00</updated>
     <id>http://halyph.com/blog/2015/07/20/grails-best-practices-collection</id>
     <content type="html"><![CDATA[<p><img class="right" src="http://halyph.com/images/blog/grails.jpg"></p>
 
-<p>Recently, I had a pleasure to look into several Grails v.2.3+ projects. Despite the fact that I&rsquo;m not a Grails developer I discovered some unti-patterns.
+<p>Recently, I had a pleasure to look into several Grails v.2.3+ projects. Despite the fact that I&rsquo;m not a Grails developer I discovered some anti-patterns.
 Then I started looking around to find some <em>Grails projects best practices</em>. And  they are well known and people still doing mistakes.
-However, I found several nice resources and I&rsquo;m quoting them here. I keep references back to original source, but use &ldquo;copy-paste&rdquo; post to have aggregated practices in single place.</p>
+However, I&rsquo;ve found several nice resources and I&rsquo;m (<em>going to quate</em>) quoting them here. I keep references back to original source and use &ldquo;copy-paste&rdquo; approach to have aggregated post in single place.</p>
 
 <a name="References"></a>
 <h2>References</h2>
@@ -59,7 +149,7 @@ However, I found several nice resources and I&rsquo;m quoting them here. I keep 
 </ul>
 
 
-<p>  Interesting Grails people
+<p>Interesting Grails people
 <a href="http://www.anyware.co.uk/2005/2011/09/12/optimising-your-application-with-grails-resources-plugin/">http://www.anyware.co.uk/2005/2011/09/12/optimising-your-application-with-grails-resources-plugin/</a>
 <a href="http://www.bobbywarner.com/">http://www.bobbywarner.com/</a></p>
 ]]></content>
@@ -3695,62 +3785,6 @@ JSON pretty print it&rsquo;s common task while working with JSON from command li
 </span><span class='line'><span class="n">$</span> <span class="n">echo</span> <span class="s1">&#39;{&quot;foo: &quot;lorem&quot;, &#39;</span> <span class="o">|</span> <span class="n">groovy</span> <span class="n">prettyJson</span><span class="o">.</span><span class="na">groovy</span>
 </span><span class='line'><span class="nl">ERROR:</span> <span class="n">Not</span> <span class="n">valid</span> <span class="n">JSON</span>
 </span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to Disable Tomcat Session Serialization]]></title>
-    <link href="http://halyph.com/2014/08/how-to-disable-tomcat-session.html"/>
-    <updated>2014-08-12T12:57:00+03:00</updated>
-    <id>http://halyph.com/2014/08/how-to-disable-tomcat-session</id>
-    <content type="html"><![CDATA[<p><img class="center" src="http://halyph.com/images/blog/java.png">
-Suppose you have the next error while restart/stop Tomcat (in my case Tomcat 7.x):</p>
-
-<pre class="brush: java;">WARNING: Cannot serialize session attribute SPRING_SECURITY_CONTEXT for session 54DBA076EDC9B7A24C1AF76824DFD1EF
-java.io.NotSerializableException: com.MyClass
- at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1180)
- at java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1528)
- at java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1493)
- at java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1416)
- at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1174)
- at java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:346)
- at java.util.ArrayList.writeObject(ArrayList.java:710)
- at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
- at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
- at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
- at java.lang.reflect.Method.invoke(Method.java:601)
- at java.io.ObjectStreamClass.invokeWriteObject(ObjectStreamClass.java:975)
-...
-</pre>
-
-
-<p>It means that Tomcat is trying to persist non-serializable objects which were added into the session. Tomcat uses Manager component which is used to create and maintain HTTP sessions for web application.</p>
-
-<p>By default manager implementation configured to perform session persistence across restarts and we want to disable this functionality.</p>
-
-<p>To disable this persistence feature, create a Context configuration file (<em>context.xml</em>) for your web application and add the following element there:</p>
-
-<pre class="brush: xml;">&lt;Manager pathname="" /&gt;
-</pre>
-
-
-<p>You can add this context.xml file to:</p>
-
-<ul>
-<li>App.war:/META-INF/context.xml</li>
-<li>TOMCAT_HOME/conf/Catalina/localhost/App.xml file</li>
-<li>TOMCAT_HOME/cont/context.xml</li>
-</ul>
-
-
-<a name="References"></a>
-<h2>References</h2>
-
-<ul>
-<li><a href="http://tomcat.apache.org/tomcat-7.0-doc/config/manager.html#Disable_Session_Persistence">Disable Session Persistence </a></li>
-<li><a href="http://tomcat.apache.org/tomcat-7.0-doc/cluster-howto.html">Clustering/Session Replication HOW-TO</a></li>
-</ul>
 
 ]]></content>
   </entry>
