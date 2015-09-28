@@ -9,17 +9,17 @@ categories: [golang, python, rust, haskell, ocaml, ruby, lisp]
 <div align="center"><span style="align: center; font-size: 64pt">~</span></div>
 
 Some time ago I had a pleasure to implement Ruby-based tool which theoretically must be easy to install and have no or limited dependencies.
-I've pick `JRuby` and packed/distribute the application as a `jar`. I.e. JRE was the single dependency I had. In general it was very nice distribution model despite the fact that non-Java users must install JRE (Java SE Runtime Environment) to run the application.
+I've picked `JRuby` and packed/distribute the application as a `jar`. I.e. JRE was the single dependency I had. In general it was very nice distribution model despite the fact that non-Java users must install JRE (Java SE Runtime Environment) to run the application.
 
-All other approaches like Ruby, Python, Perl, etc. were not acceptable as they requires additional users efforts for tool installation and/or package distribution. 
+All other approaches like Ruby, Python, Perl, etc. were not acceptable as they requires additional user's efforts for tool installation and/or package distribution. 
 
 The idea was/is to have single native binary for all major platforms which requires no dependencies. Simply copy and run.
 
-Now, the question: did I have other alternatives to implement this tool? Could it be implemented as native static binary? - Answer - YES. But, at that time there were only two mature solutions (acceptable for me): C and C++. And neither of them were very good for tool implementation and prototyping at the same time. Also, as far as I know, it's not a simple task to implement really cross-platform app, at least for Windows/Linux/OSX in C/C++. It adds additional maintenance efforts which nice to omit.
+Now, the question: did I have other alternatives to implement this tool? Could it be implemented as native static binary? - Answer - YES. But, at that time there were only two mature solutions (acceptable for me): C and C++. And neither of them were very good for tool implementation and prototyping at the same time. Also, as far as I know, it's not a simple task to implement really cross-platform app, at least for Windows/Linux/OSX in C/C++. It adds additional maintenance efforts which I tried to avoid.
 
-Looking at this task I can imaging that this king of application nice to implement in [Go](https://golang.org). Go has everything I need for really cross-platform application development and single static binary which is awesome for tools/utilities writers.
+Looking now at this task I can say that this king of application is nice to implement in [Go](https://golang.org). Go has everything I need for really cross-platform application development and single static binary output which is awesome for tools/utilities writers.
 
-So, I decided to look around and understand which other popular languages support compilation/packaging to native (semi-)single static binary. The term _"semi-single"_ static binary will be explained later.
+I decided to look around and understand which other popular languages support compilation/packaging to native (semi-)single static binary. The term _"semi-single"_ static binary will be explained later.
 
 ## Compilers 
 
@@ -43,7 +43,7 @@ Quick googling give us the next languages:
 
 There is no direct compilation from interpret/dynamic language to native static binary. But, it's possible to pack application with language runtime into "archive"/executable to behave like static native binary.
 
-- Python [freezing](http://docs.python-guide.org/en/latest/shipping/freezing/) (_"Freez"_ your code is to distribute to end-users as an executable which includes a bundled Python interpreter)
+- Python [freezing](http://docs.python-guide.org/en/latest/shipping/freezing/) (To _"Freeze"_ your code is to distribute to end-users as an executable which includes a bundled Python interpreter)
     - bbFreeze
     - py2exe
     - pyInstaller
@@ -52,12 +52,12 @@ There is no direct compilation from interpret/dynamic language to native static 
 - Perl
     - [PAR Packager](http://search.cpan.org/~rschupp/PAR-Packer-1.026/lib/pp.pm)
     - [Perl2Exe](http://www.indigostar.com/perl2exe.php)
-- Node.js, Here is same [sample approaches](https://github.com/nwjs/nw.js/wiki/how-to-package-and-distribute-your-apps)
+- Node.js, Here is [sample approaches](https://github.com/nwjs/nw.js/wiki/how-to-package-and-distribute-your-apps)
 - Ruby:
     - [RubyScript2Exe](http://www.erikveen.dds.nl/rubyscript2exe/)
     - [OCRA](http://ocra.rubyforge.org/)
 
-Based on the list above, Python has many alternative to accomplish single distribution artifact task.
+Based on the list above, **Python** has many alternative to accomplish single distribution artifact task. I.e. it's better to pick Python than other alternatives. Also, it looks like **Ruby** has limited and poor choices, i.e. it's not suitable for this kind of task.
 
 ## Summary
-IMHO, **Go** has the most appealing tool chain for such type of tasks.
+IMHO, **Go** has the most appealing tool chain for accomplish this task.
