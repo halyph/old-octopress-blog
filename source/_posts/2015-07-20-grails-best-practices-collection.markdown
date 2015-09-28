@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Grails best practices collection"
+title: "Grails 2.x best practices collection"
 date: 2015-07-20 23:52:19 +0300
 comments: true
 categories: [groovy, grails]
@@ -8,9 +8,9 @@ categories: [groovy, grails]
 
 {% img right /images/blog/grails.jpg %}
 
-Recently, I had a pleasure to look into several Grails v.2.3+ projects. Despite the fact that I'm not a Grails developer I discovered some unti-patterns. 
+Recently, I had a pleasure to look into several Grails v.2.3+ projects. Despite the fact that I'm not a Grails developer I discovered some anti-patterns. 
 Then I started looking around to find some *Grails projects best practices*. And  they are well known and people still doing mistakes.
-However, I found several nice resources and I'm quoting them here. I keep references back to original source, but use "copy-paste" post to have aggregated practices in single place.
+However, I've found several nice resources and I'm (_going to quate_) quoting them here. I keep references back to original source and use "copy-paste" approach to have aggregated post in single place.
 
 
 ## References
@@ -37,6 +37,6 @@ However, I found several nice resources and I'm quoting them here. I keep refere
   - [Application architectures with Grails](https://www.youtube.com/watch?v=4wuRuC4_G7w)
 
 
-  Interesting Grails people
+Interesting Grails people
 http://www.anyware.co.uk/2005/2011/09/12/optimising-your-application-with-grails-resources-plugin/ 
 http://www.bobbywarner.com/ 
