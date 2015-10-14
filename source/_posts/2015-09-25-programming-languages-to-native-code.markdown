@@ -28,7 +28,7 @@ Quick googling give us the next languages:
 * [Rust](https://www.rust-lang.org)
 * [Haskell](https://www.haskell.org)
 * [OCaml](https://ocaml.org/)
-* [Lisp](http://www.cliki.net/creating%20executables)  
+* [Lisp](http://www.cliki.net/creating%20executables)
     * [SBCL](http://www.sbcl.org/) 
     * [Clozure CL](http://ccl.clozure.com/)
 * [D](http://dlang.org/)
@@ -44,11 +44,11 @@ Quick googling give us the next languages:
 There is no direct compilation from interpret/dynamic language to native static binary. But, it's possible to pack application with language runtime into "archive"/executable to behave like static native binary.
 
 - Python [freezing](http://docs.python-guide.org/en/latest/shipping/freezing/) (To _"Freeze"_ your code is to distribute to end-users as an executable which includes a bundled Python interpreter)
-    - bbFreeze
-    - py2exe
-    - pyInstaller
-    - cx_Freeze 
-    - py2app
+    - [bbFreeze](https://pypi.python.org/pypi/bbfreeze)
+    - [py2exe](http://www.py2exe.org)
+    - [pyInstaller](http://www.pyinstaller.org)
+    - [cx_Freeze](http://cx-freeze.sourceforge.net)
+    - [py2app](https://pythonhosted.org/py2app/)
 - Perl
     - [PAR Packager](http://search.cpan.org/~rschupp/PAR-Packer-1.026/lib/pp.pm)
     - [Perl2Exe](http://www.indigostar.com/perl2exe.php)
@@ -57,7 +57,7 @@ There is no direct compilation from interpret/dynamic language to native static 
     - [RubyScript2Exe](http://www.erikveen.dds.nl/rubyscript2exe/)
     - [OCRA](http://ocra.rubyforge.org/)
 
-Based on the list above, **Python** has many alternative to accomplish single distribution artifact task. I.e. it's better to pick Python than other alternatives. Also, it looks like **Ruby** has limited and poor choices, i.e. it's not suitable for this kind of task.
+Based on the list above, **Python** has many alternatives to accomplish single distribution artifact task. I.e. it's better to pick Python than other alternatives. Also, it looks like **Ruby** has limited and poor choices, i.e. it's not suitable for this kind of task.
 
 ## Summary
 IMHO, **Go** has the most appealing tool chain for accomplish this task.
