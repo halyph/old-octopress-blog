@@ -88,6 +88,7 @@ So, Java ecosystem has two full stack frameworks which use Java language minimal
   - [JHipster](https://jhipster.github.io/)
 - DD Frameworks
   - [OpenXava](http://www.openxava.org/)
+  - [Cuba-platform](https://www.cuba-platform.com) - CUBA Platform is free for applications with up to 5 concurrent sessions.
   - [Apache Isis](http://isis.apache.org/)
 - Others
   - [Ninja](http://www.ninjaframework.org/)  
