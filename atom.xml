@@ -4,7 +4,7 @@
   <title><![CDATA[Knowledge Is Everything]]></title>
   <link href="http://halyph.com/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-10-15T01:31:00+03:00</updated>
+  <updated>2015-11-25T00:47:33+02:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -12,6 +12,75 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Java Day - Kiev, 2015 - Report]]></title>
+    <link href="http://halyph.com/blog/2015/11/08/java-day-kiev-2015-report/"/>
+    <updated>2015-11-08T22:14:46+02:00</updated>
+    <id>http://halyph.com/blog/2015/11/08/java-day-kiev-2015-report</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://halyph.com/images/posts/conf/java_day_2015.png"></p>
+
+<p><em>November 6-7, 2015</em> I visited <a href="http://javaday.org.ua/kyiv">Java Day Kyiv</a> conference. This report is for myself just to keep track talks I&rsquo;ve attended.</p>
+
+<a name="Day.1"></a>
+<h2>Day 1</h2>
+
+<ul>
+<li><p><strong>Get Past the Syntax, the Real Scare&rsquo;s in the Semantics</strong> by <a href="https://twitter.com/@venkat_s">Venkat Subramaniam</a></p>
+
+<blockquote><p>We often hear programmers complain about the syntax, especially when learning a new language. It turns out that, while syntax plays a role in our ability to learn and use languages, the real force we have to deal with is in the semantics. Once we get past the syntax, the semantics is where the real power and the real scare is. Curious to learn more?</p></blockquote></li>
+<li><p><strong>Enterprise Integration Patterns Revisited for the Era of Big Data, Internet of Things and Microservices</strong> by <a href="https://twitter.com/kaiwaehner">Kai Waehner</a>  (<a href="http://www.slideshare.net/KaiWaehner/enterprise-integration-patterns-revisited-eip-for-the-era-of-big-data-internet-of-things-iot-and-cloud">slides</a>)</p>
+
+<blockquote><p>Data exchanges between companies increase a lot. Hence, the number of applications, which must be integrated increases, too. The realization of these integration scenarios is a complex and time-consuming task because different applications and services do not use the same concepts, interfaces, data formats and technologies. Originated and published over ten years ago by Gregor Hohpe and Bobby Woolf, Enterprise Integration Patterns (EIP) became the world wide de facto standard for describing integration problems. They offer a standardized way to split huge, complex integration scenarios into smaller recurring problems. This session revisits EIPs and gives an overview about the status quo and its relevance regarding modern concepts such as Big Data, Internet of Things or Microservices. Fortunately, EIPs offer more possibilities than just being used for modeling integration problems in a standardized way. Several frameworks and tools already implement these patterns. The developer does not have to implement EIPs on his own. Therefore, the end of the session shows different open source frameworks and proprietary tools available, which can be used for modeling and implementing complex integration scenarios by using the EIPs.</p></blockquote></li>
+<li><p><strong>Microservices at Proximus: Netflix OSS and HATEOAS deployed on production</strong> by <a href="https://twitter.com/andreasevers">Andreas Evers</a> (<a href="https://speakerdeck.com/krosan/microservices-with-netflix-oss-and-hypermedia-apis-javaday-kiev">slides</a>)</p>
+
+<blockquote><p>At a major telco company in Belgium we have designed and implemented a cutting-edge architecture using microservices and hypermedia (REST level 3 / hateoas) for the entire customer- and business-facing web portfolio. Throughout this session you will learn what the microservices hype is all about, including its benefits and pitfalls based on our experiences of running microservices (including the Netflix OSS) in production at a major company in Belgium. To manage hundreds of microservices you need to apply certain patterns such as circuit breakers, gateways, service registries and so on. You will learn how these patterns work, how they are applied through the Netflix stack and how easy it is to use them in your architecture through code examples and demos. The contracts between these microservices should be well defined and loosely coupled. Using hypermedia as the engine of application state (hateoas), we can benefit from independent evolution and decoupled implementation. How we can implement these using Spring Hateoas, correctly document using Spring Restdocs, integrate with the HAL browser and version using JsonViews will become clear in the second part of this session.</p></blockquote></li>
+<li><p><strong>Java in production for Data Mining Research projects</strong> by <a href="https://plus.google.com/110650159101065784429/posts">Alexey Zinoviev</a> (<a href="http://www.slideshare.net/zaleslaw/javadaykiev15-java-in-production-for-data-mining-research-projects">slide</a>)</p>
+
+<blockquote><p>Java is often criticized for hard parsing CSV datasets, poor matrix and vectors manipulations. This makes it hard to easy and efficiently implement certain types of machine learning algorithms. In many cases data scientists choose R or Python languages for modeling and problem solution and you as a Java developer should rewrite R algorithms in Java or integrate many small Python scripts in Java application. But why so many highload tools like Cassandra, Hadoop, Giraph, Spark are written in Java or executed on JVM? What the secret of successful implementation and running? Maybe we should forget old manufacturing approach of dividing on developers and research engineers in production projects? During the report, we will discuss how to build full Java-stack Data Mining application, deploy it, make charts, integrate with databases, how to improve performance with JVM tuning and etc. Attendees of my talk will become familiar with the development and deploy of research Java projects, Hadoop/Spark — based Data Mining tools and will get useful tips about possible integration ways.</p></blockquote></li>
+<li><p><strong>How Java developers should test their applications</strong> by <a href="https://twitter.com/xpinjection">Mikalai Alimenkou</a> <em>It was a real code sharing session where were demoed and discussed different testing approaches</em></p></li>
+</ul>
+
+
+<a name="Day.2"></a>
+<h2>Day 2</h2>
+
+<ul>
+<li><p><strong>The Future [Java] Developer</strong> by <a href="https://twitter.com/brjavaman">Bruno Souza</a>. <strong>Keynote</strong></p>
+
+<blockquote><p>What kind of developer do you want to be? The kind that plans, organizes, prepares, and prepares&hellip; and prepares&hellip; Or the kind that focus on delivering and on transforming your customers&#8217; lives? Software development is a creative and complex work. It is trully &ldquo;Meaningful Work&rdquo;. But&hellip; If we do it right! Java has allowed us to adventure into all kinds of new technologies, while improving our core knowledge. But how does the ever changing technology landscape and things like Cloud Computing, Internet of Things, BigData and DevOps impact our ability to deliver? This talk will take a look at the abilities of the Future [Java] Developer, and how open source, startups and containers play a role into our future careers.</p></blockquote></li>
+<li><p><strong>20 Years of Java</strong> by <a href="https://twitter.com/lagergren">Marcus Lagergren</a>. <strong>Keynote</strong></p>
+
+<blockquote><p>This keynote will be a historical trip down memory lane - going through 20 years of Java and JVM implementations. This will be partly from Marcus’s own perspective as one of the architects behind JRockit, with plenty of stories from the trenches, like the benchmarking competitions between BEA/Oracle, Sun and IBM. We will see how Java and the JVM turned into the robust high performance server side platform that it is today, partly through personal observations and partly through a more objective “what a long strange trip this has been”. He will take you back to 1995 in a time machine and slowly bring you to 2014, going over the major Java releases and the runtime innovations made in the JVM side to get us here. Finally, we will do a short trip into the future, even though the future is always fuzzy, to explore what might be coming next. With Java 8, the biggest release in Java history, Java is more vibrant and alive than ever before. This is an evolution that won’t be stopped.</p></blockquote></li>
+<li><p><strong>Brand new proximus microservices architecture in production</strong> by <a href="https://twitter.com/andreasevers">Andreas Evers</a> (<a href="https://speakerdeck.com/krosan/lessons-learned-testimonial-of-a-brand-new-microservices-architecture-in-production-javaday-kiev">slides</a>)</p>
+
+<blockquote><p>At a major telco company in Belgium we have designed and implemented a cutting-edge architecture using microservices and hypermedia (REST level 3 / hateoas) for the entire customer- and business-facing web portfolio. During this talk we will shed a light on the migration path we went through to get Spring Cloud microservices based on Netflix deployed to production. Migrating from a monolith to containerized microservices doesn&rsquo;t always go smoothly in a rigid regulated enterprise. This is not your regular microservice talk. This is a journey through our struggles to reform both technically and culturally (reverse Conway&rsquo;s law) towards a devops distributed architecture which actually runs on production. E.g. gradually evolving from a manual infrastructure deploying on JBoss and using dedicated apache load balancers, to a PaaS private cloud solution.</p></blockquote></li>
+<li><p><strong>One VM To Rule Them All</strong> by <a href="http://www.wuerthinger.net/">Thomas Wuerthinger</a> (<a href="http://www.slideshare.net/ThomasWuerthinger/jazoon2014-slides">slides</a>)</p>
+
+<blockquote><p>Running a multitude of programming languages is a common requirement for large scale applications. This talk presents a virtual machine architecture that allows to handle different programming languages and their interoperability while not sacrificing performance. It bases on partial evaluation of AST interpreters to automatically derive compiled code. A prototype of this architecture has been developed as part of the Graal OpenJDK project (<a href="http://openjdk.java.net/projects/graal/">http://openjdk.java.net/projects/graal/</a>) as well as the TruffleRuby, ZipPy, and FastR open source projects. The talk will be about the general principles behind our VM, special aspects of the Ruby, Python, and R implementations, and our vision for making language interoperability work efficiently.</p></blockquote></li>
+<li><p><strong>Microservices Design Patterns for Java Application</strong> by <a href="https://twitter.com/arungupta">Arun Gupta</a> (<a href="https://dzone.com/refcardz/getting-started-with-microservices">DZone Refcard</a>)</p>
+
+<blockquote><p>Microservices allow to decompose a monolithic application into cohesive and multiple decoupled services. Each service is running in its own process and communicate using lightweight mechanisms, such as HTTP API. These services are built around business capabilities or functional decomposition. Microservice also enables true polyglot architecture – both in terms of language and data. It truly allows you to employ the right tool for the right job. Each service is independently deployable and lends very well to fully automated deployment machinery. Can you take an existing Java EE application and decompose it into microservices? What tools are required to enable CI/CD? What are different design patterns for microservices? What tools do you need to manage such services? Is the complexity being pushed around from service implementation to orchestration? This talk will explain some of these concerns and provide guidance on how to leverage microservices in your Java applications.</p></blockquote></li>
+<li><p><strong>Scaling Wix with microservices architecture and multi-cloud platform</strong> by <a href="http://www.aviransplace.com/">Aviran Mordo</a> (<a href="http://www.slideshare.net/aviranwix/scaling-wix-with-microservices-and-multi-cloud-2015">slides</a>)</p>
+
+<blockquote><p>Many small startups build their systems on top of a traditional toolset like Tomcat, Hibernate, and MySQL. These systems are used because they facilitate easy development and fast progress, but many of them are monolithic and have limited scalability. So as a startup grows, the team is confronted with the problem of how to evolve the system and make it scalable. Facing the same dilemma, Wix.com grew from 0 to 70 million users in just a few years. Facing some interesting challenges, like performance and availability. Traditional performance solutions, such as caching, would not help due to a very long tail problem which causes caching to be highly inefficient. And because every minute of downtime means customers lose money, the product needed to have near 100% availability. Solving these issues required some interesting and out-of-the-box thinking, and this talk will discuss some of these strategies: building a highly preformant, highly available and highly scalable system; and leveraging microservices architecture and multi-cloud platforms to help build a very efficient and cost-effective system.</p></blockquote></li>
+<li><p><strong>From CRUD to Hypermedia APIs with Spring</strong> by <a href="https://twitter.com/flushdia">Vladimir Tsukur</a></p>
+
+<blockquote><p>Typical way to design and expose HTTP API today is a so called CRUD approach: come up with URL templates for resources, map create-read-update-delete operations to HTTP verbs and serialize domain model as JSON. Nice and easy, isn&rsquo;t it? This talk will present limitations of CRUD style APIs and how to address them using &ldquo;real&rdquo; REST and hypermedia, HAL and ALPS. We&rsquo;ll take a look how a set of libraries and tools from Spring helps building these APIs. All the talking is not worth it without an example, so Spring-based application will be our guide. Amazon, PayPal, GitHub and other API providers have already started embracing hypermedia and linking by enhancing their HTTP interfaces. Are you next? #rest #hypermedia #http #api #design #spring #spring-hateoas #java #hal #alps</p></blockquote></li>
+</ul>
+
+
+<a name="References"></a>
+<h2>References</h2>
+
+<ul>
+<li><a href="https://speakerdeck.com/krosan/spring-rest-docs-documenting-restful-apis-using-your-tests">Spring REST Docs - Documenting RESTful APIs using your tests by Andreas Evers</a></li>
+<li>Graal Compiler <a href="http://www.slideshare.net/ThomasWuerthinger/2015-cgo-graal">slides</a></li>
+<li><a href="http://blog.arungupta.me/microservice-design-patterns/">Microservice Design Patterns</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Distribute Application as Native Single Binary]]></title>
@@ -100,6 +169,36 @@ I&rsquo;ve picked <code>JRuby</code> and packed/distribute the application as a 
 <h2>Summary</h2>
 
 <p>IMHO, <strong>Go</strong> has the most appealing tool chain for accomplish this task.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JDay - Lviv, 2015 - Report]]></title>
+    <link href="http://halyph.com/blog/2015/09/20/jday-lviv-2015-report/"/>
+    <updated>2015-09-20T23:14:46+03:00</updated>
+    <id>http://halyph.com/blog/2015/09/20/jday-lviv-2015-report</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://halyph.com/images/posts/conf/jday.png"></p>
+
+<p><em>September 19, 2015</em> I visited <a href="http://www.jday.com.ua">JDay Lviv</a> Java conference. This report is for myself just to keep track talks I&rsquo;ve attended.</p>
+
+<ul>
+<li><p><strong>Put Your Thinking CAP On</strong> by <a href="https://twitter.com/tomerg">Tomer Gabel</a> (<a href="http://www.slideshare.net/holograph/scaling-out-data-stores-and-the-cap-theorem">slides</a>)</p>
+
+<blockquote><p>Consistency, availability and partition tolerance: these seemingly innocuous concepts have been giving engineers and researchers of distributed systems headaches for over 15 years. But despite how important they are to the design and architecture of modern software, they are still poorly understood by many engineers. This session covers the definition and practical ramifications of the CAP theorem; you may think that this has nothing to do with you because you &ldquo;don&rsquo;t work on distributed systems&rdquo;, or possibly that it doesn&rsquo;t matter because you &ldquo;run over a local network.&rdquo; Yet even traditional enterprise CRUD applications must obey the laws of physics, which are exactly what the CAP theorem describes. Know the rules of the game and they&rsquo;ll serve you well, or ignore them at your own peril&hellip;</p></blockquote></li>
+<li><p><strong>Microservices and Modularity or the difference between treatment and cure!</strong> by <a href="https://twitter.com/milendyankov">Milen Dyankov</a> (<a href="http://www.slideshare.net/MilenDyankov1/microservices-and-modularity">slides</a>)</p>
+
+<blockquote><p>Everyone is talking about microservices these days! So the question is should you also jump on that bandwagon and why those somewhat older colleagues of yours (yep, those that still remember the EJB 2 revolution) are not that enthusiastic? To help you make the right decisions, this talk will first focus on explaining complexity - the problem microservices claim to solve. It then will concentrate on modular architecture and how it compares to what most people understand by microservices! Live demo will present multiple ways to modularize existing JEE application going from &ldquo;monolithic&rdquo; Glassfish EJB/JSF style app through SpringBoot and OSGi to reach a distributed system with a portal as front-end.</p></blockquote></li>
+<li><p><strong>The modern view on implementation of classic design patterns in Java</strong> by <a href="https://twitter.com/xpinjection">Mikalai Alimenkou</a> (<a href="http://www.slideshare.net/alimenkou/the-modern-view-on-implementation-of-classic-design-patterns-in-java">slides</a>, <a href="https://github.com/xpinjection/design-patterns">github</a>)</p>
+
+<blockquote><p>Almost every developer heard about design patterns. They was introduced long time ago to solve particular set of repeating problems in systems of different complexity level and size. But there is an opinion that many design patters just filled holes in the OOP languages of that time. Java as one of them has transformed and improved significantly in the last 10 years. So may be we could review design patterns implementation in modern Java world? Some of them are now may be easily replaced with language idioms, some others may be covered with existing libraries and frameworks. I&rsquo;m sure you know some design patterns that are dead now or became anti-patterns in their initial implementation. Lets make this fun and useful review together!</p></blockquote></li>
+<li><p><strong>Functional programming concepts in Java 8: Lambdas &amp;&amp; Monads</strong> by <a href="https://twitter.com/pivovarit">Grzegorz Piwowarek</a> (<a href="http://www.slideshare.net/pivovarit/confitura2015grzegorzpiwowareklambdasmonads">slides</a>)</p>
+
+<blockquote><p>The aim of this presentation is to introduce listener to a functional programming concepts that were introduced in Java 8. Presentation covers lambda expressions, an imperative-programmer-friendly definition of a monad and an application of Java 8 monads in everyday java developer life.</p></blockquote></li>
+<li><p><strong>Handling 10k req/sec with 1 core or how you could get even more?</strong> by <a href="https://github.com/doom369">Dmitriy Dumanskiy</a></p>
+
+<blockquote><p>For the past 5 years I have been working on highly-loaded systems, solving problems and optimizing them. In my talk I will explain how the IoT has changed the understanding of high-load and why this trend changes the rules. What are asynchronous sockets and how they work. What are the solutions up to date and why Netty has no competitors? How does Netty work, what are its strengths, weaknesses, pitfalls? How to get the most, out of your code, where to look and what to do? And many other tips and advices on how to optimize your code ranging from simple cases up to choosing a JDBC pool.</p></blockquote></li>
+</ul>
+
 ]]></content>
   </entry>
   
@@ -3660,130 +3759,6 @@ What is the simplest way to define block comment in Bash script?</p>
 </span><span class='line'>text
 </span><span class='line'><span class="k">fi</span>
 </span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;after block comment&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Migration to Octopress]]></title>
-    <link href="http://halyph.com/blog/2014/09/07/migration-to-octopress/"/>
-    <updated>2014-09-07T23:15:56+03:00</updated>
-    <id>http://halyph.com/blog/2014/09/07/migration-to-octopress</id>
-    <content type="html"><![CDATA[<a name="Objectives"></a>
-<h2>Objectives</h2>
-
-<p>I&rsquo;ve been blogging for several years (2009-2014) using Google Blogger <a href="http://halyph.blogspot.com">My old blogspot blog</a>. It was a great experience. But, I always felt some discomfort.
-I couldn&rsquo;t simply write without thinking how it will be rendered. I was distracted by blog engine.</p>
-
-<a name="Moving.away"></a>
-<h2>Moving away</h2>
-
-<p>Additional inspiration for moving away came from the essay <a href="http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html">Blogging Like a Hacker</a>.
-Finally, I made a decision to use GitHub Pages for blogging. There were two choices: <a href="http://jekyllrb.com/">Jekyll</a> or <a href="http://octopress.org/">Octopress</a>.
-I picked Octopress because of the pre-bundled minimal required blogging features. <em>I.e.</em> it&rsquo;s not required the additional configuration to start blogging right away.</p>
-
-<p>The official Octopress <a href="http://octopress.org/docs/">documentation</a> has step-by-step guide for blog setup. It&rsquo;s very convenient and transparent.</p>
-
-<a name="Theme"></a>
-<h2>Theme</h2>
-
-<p>I didn&rsquo;t want to use the default Octopress theme (it&rsquo;s boring). Theme customization required some time. All others free themes are too complex, IMHO.</p>
-
-<p>At the end I found this <a href="http://blog.justin.kelly.org.au/octopress-theme/">theme</a> and applied it to my <em>new</em> blog.</p>
-
-<a name="Main.features"></a>
-<h2>Main features</h2>
-
-<p>Here I selected the main features which I like the most:</p>
-
-<ul>
-<li>markdown for blogging</li>
-<li>simple code snippets insertion</li>
-<li>full blog customization</li>
-<li>Ruby at the bottom (I love this language)</li>
-<li>ability to use your favorite text editor (Textmate in my case) for blogging</li>
-</ul>
-
-
-<a name="Minor.Issues"></a>
-<h3>Minor Issues</h3>
-
-<p>I&rsquo;ve tried to migrate posts form my old blog to Octopress, tried different approaches. But, I had no success. Actually, I had ugly results, which should be manually fixed.</p>
-
-<a name="P.S."></a>
-<h3>P.S.</h3>
-
-<p>There are tons of different Static Site Generators, see the next resources:</p>
-
-<ul>
-<li><a href="https://www.staticgen.com/">Top Open-Source Static Site Generators</a></li>
-<li><a href="http://staticsitegenerators.net/">Static Site Generators, The definitive listing of Static Site Generators — all 298 of them!</a></li>
-</ul>
-
-
-<p>But, Jekyll and Octopress are at the top.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Groovy Notes: Pretty Print JSON From the Command Line]]></title>
-    <link href="http://halyph.com/2014/08/groovy-notes-pretty-print-json-from.html"/>
-    <updated>2014-08-13T21:28:00+03:00</updated>
-    <id>http://halyph.com/2014/08/groovy-notes-pretty-print-json-from</id>
-    <content type="html"><![CDATA[<p><img class="center" src="http://halyph.com/images/blog/groovy.png">
-JSON pretty print it&rsquo;s common task while working with JSON from command line. There are many ways of doing this via Python, Ruby, node.js, but here I&rsquo;d like to concentrate on Groovy one-liner:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;{&quot;foo&quot;: &quot;lorem&quot;, &quot;bar&quot;: &quot;ipsum&quot;}&#39;</span> <span class="p">|</span> groovy -e <span class="s1">&#39;import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">{</span>
-</span><span class='line'>    <span class="s2">&quot;foo&quot;</span>: <span class="s2">&quot;lorem&quot;</span>,
-</span><span class='line'>    <span class="s2">&quot;bar&quot;</span>: <span class="s2">&quot;ipsum&quot;</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We can slightly improve this one-liner via adding shell alias:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">alias </span><span class="nv">pp</span><span class="o">=</span><span class="s2">&quot;groovy -e &#39;import groovy.json.*; println JsonOutput.prettyPrint(System.in.text)&#39;&quot;</span>
-</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;{&quot;foo&quot;: &quot;lorem&quot;, &quot;bar&quot;: &quot;ipsum&quot;}&#39;</span> <span class="p">|</span> pp
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Also, we might use Groovy script which might be handy for simple JSON validation also:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">$</span> <span class="n">cat</span> <span class="n">prettyJson</span><span class="o">.</span><span class="na">groovy</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">groovy.json.*</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">try</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">println</span> <span class="n">JsonOutput</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">.</span><span class="na">text</span><span class="o">)</span>
-</span><span class='line'><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">JsonException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;ERROR: Not valid JSON&quot;</span>
-</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">$</span> <span class="n">echo</span> <span class="s1">&#39;{&quot;foo: &quot;lorem&quot;, &#39;</span> <span class="o">|</span> <span class="n">groovy</span> <span class="n">prettyJson</span><span class="o">.</span><span class="na">groovy</span>
-</span><span class='line'><span class="nl">ERROR:</span> <span class="n">Not</span> <span class="n">valid</span> <span class="n">JSON</span>
 </span></code></pre></td></tr></table></div></figure>
 
 ]]></content>

@@ -9,7 +9,7 @@
   <meta name="author" content="Orest Ivasiv">
 
   
-  <meta name="description" content="There are several Java SQL databases which supports both server and embedded modes: H2, HSQLDB and Derby. The most interesting for me is H2 with own &hellip;">
+  <meta name="description" content="I&rsquo;m sure that a lot of Java developers experienced java.lang.OutOfMemoryError: PermGen space (OOME PermGen). It was very common to get this &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -88,7 +88,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/01/22/how-to-use-embedded-h2-with-h2-console/">How to Use Embedded H2 With Web Console?</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/02/05/how-to-generate-permgen/">How to Generate PermGen Leak?</a></h1>
     
     
       <p class="meta">
@@ -97,10 +97,10 @@
 
 
 
-<time class='entry-date' datetime='2015-01-22T00:55:03+02:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>12:55 am</span></time>
+<time class='entry-date' datetime='2015-02-05T00:05:30+02:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:05 am</span></time>
         
-           | <a href="/blog/2015/01/22/how-to-use-embedded-h2-with-h2-console/#disqus_thread"
-             data-disqus-identifier="http://halyph.com/blog/2015/01/22/how-to-use-embedded-h2-with-h2-console/">Comments</a>
+           | <a href="/blog/2015/02/05/how-to-generate-permgen/#disqus_thread"
+             data-disqus-identifier="http://halyph.com/blog/2015/02/05/how-to-generate-permgen/">Comments</a>
         
       </p>
     
@@ -109,27 +109,32 @@
 
   <div class="entry-content"><p><img class="center" src="/images/blog/java.png"></p>
 
-<p>There are several Java SQL databases which supports both server and embedded modes: <a href="http://www.h2database.com/">H2</a>, <a href="http://hsqldb.org/">HSQLDB</a> and <a href="http://db.apache.org/derby/">Derby</a>. The most interesting for me is H2 with own web <a href="http://www.h2database.com/html/quickstart.html#h2_console">Console</a>.</p>
+<p>I&rsquo;m sure that a lot of Java developers experienced <code>java.lang.OutOfMemoryError: PermGen space</code> (OOME PermGen). It was very common to get this error after multiple WAR re-deploys on Tomcat v.6.x. Permanent generation (PermGen) region of memory is used to store the internal representation of loaded classes (and much more, see here [<a href="https://plumbr.eu/blog/what-is-a-permgen-leak">1</a>] and [<a href="https://blogs.oracle.com/jonthecollector/entry/presenting_the_permanent_generation">2</a>]).</p>
 
-<p>The aim of this post is to show how to connect from H2 Console to embedded in-memory H2.</p>
+<p>So, we can get <strong>OOME PermGen</strong> when ClassLoader whats to store class definition, but there is not enough space in PermGen - i.e. loaded too many classes.</p>
 
-<blockquote><p>H2 currently supports three servers: a web server (for the H2 Console), a TCP server (for client/server connections) and an PG server (for PostgreSQL clients). <strong>Please note that only the web server supports browser connections.</strong> The servers can be started in different ways, one is using the Server tool. Starting the server doesn&rsquo;t open a database - databases are opened as soon as a client connects.</p></blockquote>
-
-<p>The next steps have to be performed to connect to embedded DB and populate initial data:</p>
-
-<ol>
-<li>Load DB driver</li>
-<li>Get <code>Connection</code></li>
-<li>Create <code>Statement</code> and <code>executeUpate</code> queries</li>
-<li>Create TCP <code>Server</code>. <em>We should start serve to make in-memory DB available for another process</em></li>
-</ol>
-
-
-<a name="Let.s.try.to.implement.this:"></a>
-<h3>Let&rsquo;s try to implement this:</h3>
+<p>Based on this <strong>OOME PermGen</strong> error can be generated via:</p>
 
 <ul>
-<li>Run sample application</li>
+<li>decreasing PermGen size</li>
+<li>loading huge amount of classes</li>
+</ul>
+
+
+<p>I highly recommend to read <a href="https://plumbr.eu/blog/what-is-a-permgen-leak">What is a PermGen leak?</a> post to get more info about this issue.</p>
+
+<a name="Disclaimer"></a>
+<h3>Disclaimer</h3>
+
+<p>The current post is totally based on <a href="https://plumbr.eu/blog/how-not-to-create-a-permgen-leak">How (not) to create a permgen leak?</a></p>
+
+<a name="Generate.PermGen.leak"></a>
+<h2>Generate PermGen leak</h2>
+
+<p>The main idea is dynamically create a lot of classes via byte code manipulation library. We are going to use <a href="http://www.csg.ci.i.u-tokyo.ac.jp/~chiba/javassist/">Javassist</a> as it&rsquo;s the simplest library with nice API.</p>
+
+<ul>
+<li>We assume that it&rsquo;s <code>maven</code> based project. So, let&rsquo;s add Javassist to <code>pom.xml</code>.</li>
 </ul>
 
 
@@ -177,213 +182,68 @@
 <span class='line-number'>42</span>
 <span class='line-number'>43</span>
 <span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
-</span><span class='line'>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">DBNAME</span> <span class="o">=</span> <span class="s">&quot;mytest&quot;</span><span class="o">;</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+</span><span class='line'>         <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ClassNotFoundException</span><span class="o">,</span> <span class="n">SQLException</span><span class="o">,</span> <span class="n">IOException</span> <span class="o">{</span>
-</span><span class='line'>        <span class="c1">// open the in-memory database within a VM</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>com.mycompany.app<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>my-app<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
 </span><span class='line'>
-</span><span class='line'>        <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">&quot;org.h2.Driver&quot;</span><span class="o">);</span> <span class="c1">// (1)</span>
-</span><span class='line'>        <span class="n">Connection</span> <span class="n">conn</span>
-</span><span class='line'>          <span class="o">=</span> <span class="n">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="s">&quot;jdbc:h2:mem:&quot;</span> <span class="o">+</span> <span class="n">DBNAME</span><span class="o">,</span> <span class="s">&quot;sa&quot;</span><span class="o">,</span> <span class="s">&quot;sa&quot;</span><span class="o">);</span> <span class="c1">// (2)</span>
-</span><span class='line'>        <span class="c1">// username:password are very important and must be used for connecting via H2 Console</span>
+</span><span class='line'>  <span class="nt">&lt;name&gt;</span>my-app<span class="nt">&lt;/name&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;url&gt;</span>http://maven.apache.org<span class="nt">&lt;/url&gt;</span>
 </span><span class='line'>
-</span><span class='line'>        <span class="n">Statement</span> <span class="n">stat</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">createStatement</span><span class="o">();</span> <span class="c1">// (3)</span>
-</span><span class='line'>        <span class="n">stat</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">(</span><span class="s">&quot;create table mytbl(id int primary key, name varchar(255))&quot;</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">stat</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">(</span><span class="s">&quot;insert into mytbl values(1, &#39;Hello&#39;)&quot;</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">stat</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">(</span><span class="s">&quot;insert into mytbl values(2, &#39;World&#39;)&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="nt">&lt;properties&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;skipTests&gt;</span>true<span class="nt">&lt;/skipTests&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/properties&gt;</span>
 </span><span class='line'>
-</span><span class='line'>        <span class="c1">// Verify that sample data was really inserted</span>
-</span><span class='line'>        <span class="n">ResultSet</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">stat</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">(</span><span class="s">&quot;select * from mytbl&quot;</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;ResultSet output:&quot;</span><span class="o">);</span>
-</span><span class='line'>        <span class="k">while</span> <span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">next</span><span class="o">())</span> <span class="o">{</span>
-</span><span class='line'>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;&gt; &quot;</span> <span class="o">+</span> <span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">));</span>
-</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>  <span class="nt">&lt;dependencies&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;groupId&gt;</span>org.javassist<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;artifactId&gt;</span>javassist<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;version&gt;</span>3.15.0-GA<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/dependency&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/dependencies&gt;</span>
 </span><span class='line'>
-</span><span class='line'>        <span class="c1">// start a TCP server</span>
-</span><span class='line'>        <span class="n">Server</span> <span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="na">createTcpServer</span><span class="o">().</span><span class="na">start</span><span class="o">();</span> <span class="c1">// (4)</span>
-</span><span class='line'>        <span class="c1">// .. use in embedded mode ..</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// or use it from another process:</span>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Server started and connection is open.&quot;</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;URL: jdbc:h2:&quot;</span> <span class="o">+</span> <span class="n">server</span><span class="o">.</span><span class="na">getURL</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;/mem:&quot;</span> <span class="o">+</span> <span class="n">DBNAME</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;\n&quot;</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
-</span><span class='line'>                <span class="s">&quot;now start the H2 Console in another process using:\n&quot;</span> <span class="o">+</span>
-</span><span class='line'>                <span class="s">&quot;$ cd h2/bin; java -cp h2-1.4.185.jar org.h2.tools.Console -web -browser&quot;</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Press [Enter] to stop.&quot;</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Stopping server and closing the connection&quot;</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">rs</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-</span><span class='line'>        <span class="n">server</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
-</span><span class='line'>        <span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Server is STOPPED&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
+</span><span class='line'>  <span class="nt">&lt;build&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;plugins&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;plugin&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;groupId&gt;</span>org.codehaus.mojo<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;artifactId&gt;</span>appassembler-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;version&gt;</span>1.9<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;configuration&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;extraJvmArguments&gt;</span>-XX:PermSize=2M -XX:MaxPermSize=4M<span class="nt">&lt;/extraJvmArguments&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;programs&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;program&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;mainClass&gt;</span>com.mycompany.app.App<span class="nt">&lt;/mainClass&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;id&gt;</span>app<span class="nt">&lt;/id&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/program&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/programs&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/configuration&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/plugin&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/plugins&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/build&gt;</span>
+</span><span class='line'><span class="nt">&lt;/project&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <ul>
-<li>Output for previous run:</li>
+<li>Also, we should set <strong>PermGen</strong> and <strong>MaxPermGen</strong> size to 2M and 4M respectively (it gives us a chance to get error as quickly as possible). Maven <code>Appassembler</code> plugin [<a href="http://mojo.codehaus.org/appassembler/appassembler-maven-plugin/usage-program-jvmsettings.html">3</a>] uses <code>extraJvmArguments</code> parameter while generating wrapper scripts: shell and batch (see <code>pom.xml</code> above, <code>&lt;extraJvmArguments&gt;-XX:PermSize=2M -XX:MaxPermSize=2M&lt;/extraJvmArguments&gt;</code>).</li>
 </ul>
 
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">ResultSet</span> <span class="nl">output:</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="n">Hello</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="n">World</span>
-</span><span class='line'><span class="n">Server</span> <span class="n">started</span> <span class="n">and</span> <span class="n">connection</span> <span class="n">is</span> <span class="n">open</span><span class="o">.</span>
-</span><span class='line'><span class="nl">URL:</span> <span class="nl">jdbc:h2:tcp:</span><span class="c1">//192.168.1.100:9092/mem:mytest</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="n">now</span> <span class="n">start</span> <span class="n">the</span> <span class="n">H2</span> <span class="n">Console</span> <span class="n">in</span> <span class="n">another</span> <span class="n">process</span> <span class="nl">using:</span>
-</span><span class='line'><span class="n">$</span> <span class="n">cd</span> <span class="n">h2</span><span class="o">/</span><span class="n">bin</span><span class="o">;</span> <span class="n">java</span> <span class="o">-</span><span class="n">cp</span> <span class="n">h2</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">185</span><span class="o">.</span><span class="na">jar</span> <span class="n">org</span><span class="o">.</span><span class="na">h2</span><span class="o">.</span><span class="na">tools</span><span class="o">.</span><span class="na">Console</span> <span class="o">-</span><span class="n">web</span> <span class="o">-</span><span class="n">browser</span>
-</span><span class='line'><span class="n">Press</span> <span class="o">[</span><span class="n">Enter</span><span class="o">]</span> <span class="n">to</span> <span class="n">stop</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure>
+<blockquote><p>&ndash;XX:PermSize<size> - Set initial PermGen Size</p>
 
+<p>&ndash;XX:MaxPermSize<size> - Set the maximum PermGen Size</p></blockquote>
 
 <ul>
-<li>We assume that h2 installation bundle (zip file) was downloaded (from <a href="http://www.h2database.com/html/download.html">http://www.h2database.com/html/download.html</a>) beforehand and unpacked in some folder</li>
-<li>Go into H2 &ldquo;install/unpack&rdquo; folder and run the next command <code>cd h2/bin; java -cp h2-1.4.185.jar org.h2.tools.Console -web -browser</code></li>
-<li>Now we should copy URL (from sample App output) and credentials sa/sa to login into Console
-
-<ul>
-<li><strong>URL:</strong> jdbc:h2:tcp://192.168.1.100:9092/mem:mytest</li>
-<li><strong>Username:</strong> sa</li>
-<li><strong>Password:</strong> sa</li>
-</ul>
-</li>
-<li>Login window (opened from shell by <code>org.h2.tools.Console</code>)
-<img class="left" src="/images/posts/h2console_login.png"></li>
+<li>Below is a simple application which dynamically creates 1000 classes to cause PermGem leak. Class creation is very simple and self explanatory. The main idea is that we should use byte code manipulation library to create classes dynamically.</li>
 </ul>
 
 
-<p>Verify that our custom table contains just inserted values
-<img class="left" src="/images/posts/h2console_sqlwindow.png"></p>
-
-<a name="Add.Embedded.TCP.and.Web.Servers"></a>
-<h3>Add Embedded TCP and Web Servers</h3>
-
-<p>Now, it&rsquo;s time to add small improvements.
-The idea is to switch <em>on</em> H2 Console <strong>Web Server</strong> and <strong>TCP Server</strong> to have external access.
-We should add/update item (4) in previous code snippets like this</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
-</span><span class='line'>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">DBNAME</span> <span class="o">=</span> <span class="s">&quot;mytest&quot;</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ClassNotFoundException</span><span class="o">,</span> <span class="n">SQLException</span><span class="o">,</span> <span class="n">IOException</span> <span class="o">{</span>
-</span><span class='line'><span class="o">...</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">Server</span> <span class="n">webServer</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="na">createWebServer</span><span class="o">(</span><span class="s">&quot;-webAllowOthers&quot;</span><span class="o">,</span><span class="s">&quot;-webPort&quot;</span><span class="o">,</span><span class="s">&quot;8082&quot;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span> <span class="c1">// (4a)</span>
-</span><span class='line'>        <span class="n">Server</span> <span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="na">createTcpServer</span><span class="o">(</span><span class="s">&quot;-tcpAllowOthers&quot;</span><span class="o">,</span><span class="s">&quot;-tcpPort&quot;</span><span class="o">,</span><span class="s">&quot;9092&quot;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>    <span class="c1">// (4b)</span>
-</span><span class='line'>        <span class="c1">// .. use in embedded mode ..</span>
-</span><span class='line'><span class="o">...</span>
-</span><span class='line'>        <span class="n">server</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
-</span><span class='line'>        <span class="n">webServer</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
-</span><span class='line'>        <span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Server is STOPPED&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>After this we can access to Web Console without running external service
-
-<ul>
-<li>Simply use URL in  browser (access to <strong>Web Server</strong>): <a href="http://localhost:8082/">http://localhost:8082/</a></li>
-</ul>
-</li>
-<li>Use any JDBC client (see IntelliJ IDEA as a sample below)
-
-<ul>
-<li>access to <strong>TCP Server</strong>
-<img class="left" src="/images/posts/h2console_idea.png"></li>
-</ul>
-</li>
-</ul>
-
-
-<a name="References"></a>
-<h2>References</h2>
-
-<ol>
-<li><a href="http://stackoverflow.com/questions/5077584/h2-database-in-memory-mode-cannot-be-accessed-by-console">H2 database in memory mode cannot be accessed by Console</a></li>
-<li><a href="http://www.h2database.com/html/tutorial.html">Official H2 Tutorial</a></li>
-<li><a href="http://h2database.com/javadoc/org/h2/tools/Server.html">H2 Server methods</a></li>
-<li><a href="https://github.com/halyph/tutorials/tree/master/h2-embedded-console">GitHub Sources</a></li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/11/16/how-to-fix-textmate-osx-yosemite-ruby-1-dot-8-issues/">How to Fix Textmate OSX Yosemite Ruby 1.8 Issues?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-11-16T17:40:32+02:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>5:40 pm</span></time>
-        
-           | <a href="/blog/2014/11/16/how-to-fix-textmate-osx-yosemite-ruby-1-dot-8-issues/#disqus_thread"
-             data-disqus-identifier="http://halyph.com/blog/2014/11/16/how-to-fix-textmate-osx-yosemite-ruby-1-dot-8-issues/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="right" src="/images/blog/textmate.png">
-Textmate 2.0 is using Ruby 1.8 in own bundles. OSX Yosemite dropped Ruby 1.8 as default Ruby implementation, now it&rsquo;s Ruby 2.0. Based on this all Textmate ruby-based (legacy) bundles do not work. It can be fixed in several steps:</p>
-
-<ul>
-<li>Install Ruby 1.8.x via some Ruby version manager (e.g. rvm)</li>
-</ul>
-
+<p>See additional comments in the next code snippet</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -435,122 +295,471 @@ Textmate 2.0 is using Ruby 1.8 in own bundles. OSX Yosemite dropped Ruby 1.8 as 
 <span class='line-number'>48</span>
 <span class='line-number'>49</span>
 <span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rvm install 1.8
-</span><span class='line'>Warning! Requested ruby installation which requires another ruby available - installing ruby-1.8.7-p374 first.
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">mycompany</span><span class="o">.</span><span class="na">app</span><span class="o">;</span>
 </span><span class='line'>
-</span><span class='line'>Checking requirements <span class="k">for</span> osx.
-</span><span class='line'>Installing requirements <span class="k">for</span> osx.
-</span><span class='line'>Updating system...........
-</span><span class='line'>Installing required custom packages: homebrew/versions homebrew/versions.
-</span><span class='line'>Installing required packages: libtool, gcc48, libyaml, libksba, openssl098.....-Certificates in <span class="s1">&#39;/usr/local/etc/openssl/cert.pem&#39;</span> are already up to date.
-</span><span class='line'>Requirements installation successful.
-</span><span class='line'>Installing Ruby from <span class="nb">source </span>to: /Users/halyph/.rvm/rubies/ruby-1.8.7-p374, this may take a <span class="k">while</span> depending on your cpu<span class="o">(</span>s<span class="o">)</span>...
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#downloading ruby-1.8.7-p374, this may take a while depending on your connection...</span>
-</span><span class='line'>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-</span><span class='line'>                                 Dload  Upload   Total   Spent    Left  Speed
-</span><span class='line'><span class="m">100</span> 4150k  <span class="m">100</span> 4150k    <span class="m">0</span>     <span class="m">0</span>   279k      <span class="m">0</span>  0:00:14  0:00:14 --:--:--  326k
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#extracting ruby-1.8.7-p374 to /Users/halyph/.rvm/src/ruby-1.8.7-p374....</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#applying patch /Users/halyph/.rvm/patches/ruby/1.8.7/stdout-rouge-fix.patch.</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#applying patch /Users/halyph/.rvm/patches/ruby/1.8.7/no_sslv2.diff.</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#applying patch /Users/halyph/.rvm/patches/ruby/GH-488.patch.</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#applying patch /Users/halyph/.rvm/patches/ruby/ssl_no_ec2m.patch.</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#configuring...............................</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#post-configuration.</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#compiling....................................................</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#installing.</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#making binaries executable..</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#downloading rubygems-2.0.14</span>
-</span><span class='line'>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-</span><span class='line'>                                 Dload  Upload   Total   Spent    Left  Speed
-</span><span class='line'><span class="m">100</span>  329k  <span class="m">100</span>  329k    <span class="m">0</span>     <span class="m">0</span>   108k      <span class="m">0</span>  0:00:03  0:00:03 --:--:--  108k
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#extracting rubygems-2.0.14....</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#removing old rubygems.........</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#installing rubygems-2.0.14..................................|</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#gemset created /Users/halyph/.rvm/gems/ruby-1.8.7-p374@global</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#importing gemset /Users/halyph/.rvm/gemsets/ruby/1.8.7/global.gems..............................................................</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#generating global wrappers........</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#gemset created /Users/halyph/.rvm/gems/ruby-1.8.7-p374</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#importing gemsetfile /Users/halyph/.rvm/gemsets/default.gems evaluated to empty gem list</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#generating default wrappers........</span>
-</span><span class='line'>ruby-1.8.7-p374 - <span class="c">#adjusting #shebangs for (gem irb erb ri rdoc testrb rake).</span>
-</span><span class='line'>Install of ruby-1.8.7-p374 - <span class="c">#complete</span>
-</span><span class='line'>WARNING: Please be aware that you just installed a ruby that is no longer maintained <span class="o">(</span>2014-02-23<span class="o">)</span>, <span class="k">for</span> a list of maintained rubies visit:
+</span><span class='line'><span class="kn">import</span> <span class="nn">javassist.CannotCompileException</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">javassist.ClassPool</span><span class="o">;</span>
 </span><span class='line'>
-</span><span class='line'>    http://bugs.ruby-lang.org/projects/ruby/wiki/ReleaseEngineering
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.concurrent.TimeUnit</span><span class="o">;</span>
 </span><span class='line'>
-</span><span class='line'>Please consider upgrading to ruby-2.1.4 which will have all of the latest security patches.
-</span><span class='line'>Ruby was built without documentation, to build it run: rvm docs generate-ri
-</span><span class='line'>Checking requirements <span class="k">for</span> osx.
-</span><span class='line'>Certificates in <span class="s1">&#39;/usr/local/etc/openssl/cert.pem&#39;</span> are already up to date.
-</span><span class='line'>Requirements installation successful.
-</span><span class='line'>Installing Ruby from <span class="nb">source </span>to: /Users/halyph/.rvm/rubies/ruby-1.8.7-head, this may take a <span class="k">while</span> depending on your cpu<span class="o">(</span>s<span class="o">)</span>...
-</span><span class='line'>Cloning from git://github.com/ruby/ruby.git, this may take a <span class="k">while</span> depending on your connection.
-</span><span class='line'>HEAD is now at 2a9ea11 * lib/webrick/server.rb <span class="o">(</span>initialize<span class="o">)</span>: Initialize shutdown pipe here
-</span><span class='line'>Branch ruby_1_8_7 <span class="nb">set </span>up to track remote branch ruby_1_8_7 from origin.
-</span><span class='line'>Switched to a new branch <span class="s1">&#39;ruby_1_8_7&#39;</span>
-</span><span class='line'>Copying from repo to src path...
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#applying patch /Users/halyph/.rvm/patches/ruby/1.8.7/stdout-rouge-fix.patch.</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#applying patch /Users/halyph/.rvm/patches/ruby/1.8.7/no_sslv2.diff.</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#applying patch /Users/halyph/.rvm/patches/ruby/ssl_no_ec2m.patch.</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#autoreconf.</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#configuring...............................</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#post-configuration.</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#compiling...................................................|</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#installing.</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#making binaries executable..</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#downloading rubygems-2.0.14</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#extracting rubygems-2.0.14.....</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#removing old rubygems.........</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#installing rubygems-2.0.14..................................|</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#gemset created /Users/halyph/.rvm/gems/ruby-1.8.7-head@global</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#importing gemset /Users/halyph/.rvm/gemsets/ruby/1.8.7/global.gems..............................................................</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#generating global wrappers........</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#gemset created /Users/halyph/.rvm/gems/ruby-1.8.7-head</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#importing gemsetfile /Users/halyph/.rvm/gemsets/default.gems evaluated to empty gem list</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#generating default wrappers........</span>
-</span><span class='line'>ruby-1.8.7-head - <span class="c">#adjusting #shebangs for (gem irb erb ri rdoc testrb rake).</span>
-</span><span class='line'>Install of ruby-1.8.7-head - <span class="c">#complete</span>
-</span><span class='line'>Please be aware that you just installed a ruby that requires        <span class="m">3</span> patches just to be compiled on an up to date linux system.
-</span><span class='line'>This may have known and unaccounted <span class="k">for</span> security vulnerabilities.
-</span><span class='line'>Please consider upgrading to ruby-2.1.4 which will have all of the latest security patches.
-</span><span class='line'>Ruby was built without documentation, to build it run: rvm docs generate-ri
+</span><span class='line'><span class="cm">/**</span>
+</span><span class='line'><span class="cm"> * Steps to build and run demo application: &lt;br /&gt;</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * &lt;li&gt;mvn clean package appassembler:assemble</span>
+</span><span class='line'><span class="cm"> * &lt;li&gt;target/appassembler/bin/app</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
+</span><span class='line'>    <span class="cm">/**</span>
+</span><span class='line'><span class="cm">     * We should use static block for OutOfMemoryError &quot;initialization&quot;</span>
+</span><span class='line'><span class="cm">     * It&#39;s very important to have it. In other case JVM won&#39;t be able to</span>
+</span><span class='line'><span class="cm">     * throw (actually create new OutOfMemoryError) this exception because</span>
+</span><span class='line'><span class="cm">     * there will be no free memory for this. That&#39;s why we creating it beforehand.</span>
+</span><span class='line'><span class="cm">     * As you can see we intentionally added output to highlight that THIS error</span>
+</span><span class='line'><span class="cm">     * was produces by us.</span>
+</span><span class='line'><span class="cm">     */</span>
+</span><span class='line'>    <span class="kd">static</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">new</span> <span class="nf">OutOfMemoryError</span><span class="o">().</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class='line'>        <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;=====================&quot;</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Initialized/created OutOfMemoryError&quot;</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;=====================&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Start dynamic class creation.....\n&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">Class</span> <span class="n">clazz</span> <span class="o">=</span> <span class="n">createClass</span><span class="o">(</span><span class="s">&quot;MyClass&quot;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+</span><span class='line'>            <span class="c1">// we use this output as indicator to see the rough number of created classes</span>
+</span><span class='line'>            <span class="c1">// it&#39;s not necessary to print every single (just created) class</span>
+</span><span class='line'>            <span class="k">if</span><span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">clazz</span><span class="o">);</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Class</span> <span class="nf">createClass</span><span class="o">(</span><span class="n">String</span> <span class="n">className</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">CannotCompileException</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">ClassPool</span> <span class="n">pool</span> <span class="o">=</span> <span class="n">ClassPool</span><span class="o">.</span><span class="na">getDefault</span><span class="o">();</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">pool</span><span class="o">.</span><span class="na">makeClass</span><span class="o">(</span><span class="n">className</span><span class="o">).</span><span class="na">toClass</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <ul>
-<li><p>Update Textmate preferences
-<img src="/images/posts/textmate_prefs_ruby.png"></p></li>
-<li><p>Verify &ldquo;updated&rdquo; Textmate settings via some ruby-based bundles,
-e.g. <code>Bundles-&gt;Text-&gt;Duplicate Line</code></p></li>
+<li>Run the application</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">$</span> <span class="n">mvn</span> <span class="n">clean</span> <span class="kn">package</span> <span class="nl">appassembler:</span><span class="n">assemble</span>
+</span><span class='line'><span class="n">$</span> <span class="n">target</span><span class="o">/</span><span class="n">appassembler</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">app</span>
+</span><span class='line'><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">OutOfMemoryError</span>
+</span><span class='line'>  <span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="na">mycompany</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">App</span><span class="o">.&lt;</span><span class="n">clinit</span><span class="o">&gt;(</span><span class="n">App</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">15</span><span class="o">)</span>
+</span><span class='line'><span class="o">=====================</span>
+</span><span class='line'><span class="n">Initialized</span><span class="o">/</span><span class="n">created</span> <span class="n">OutOfMemoryError</span>
+</span><span class='line'><span class="o">=====================</span>
+</span><span class='line'><span class="n">Start</span> <span class="n">dynamic</span> <span class="kd">class</span> <span class="nc">creation</span><span class="o">.....</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass0</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass50</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass100</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass150</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass200</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass250</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass300</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass350</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass400</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass450</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass500</span>
+</span><span class='line'><span class="kd">class</span> <span class="nc">MyClass550</span>
+</span><span class='line'><span class="n">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">&quot;Reference Handler&quot;</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">OutOfMemoryError</span><span class="o">:</span> <span class="n">PermGen</span> <span class="n">space</span>
+</span><span class='line'>  <span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ref</span><span class="o">.</span><span class="na">Reference$ReferenceHandler</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="n">Reference</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">140</span><span class="o">)</span>
+</span><span class='line'><span class="n">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">&quot;main&quot;</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">OutOfMemoryError</span><span class="o">:</span> <span class="n">PermGen</span> <span class="n">space</span>
+</span><span class='line'>  <span class="n">at</span> <span class="n">javassist</span><span class="o">.</span><span class="na">ClassPool</span><span class="o">.</span><span class="na">toClass</span><span class="o">(</span><span class="n">ClassPool</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">1089</span><span class="o">)</span>
+</span><span class='line'>  <span class="n">at</span> <span class="n">javassist</span><span class="o">.</span><span class="na">ClassPool</span><span class="o">.</span><span class="na">toClass</span><span class="o">(</span><span class="n">ClassPool</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">1032</span><span class="o">)</span>
+</span><span class='line'>  <span class="n">at</span> <span class="n">javassist</span><span class="o">.</span><span class="na">ClassPool</span><span class="o">.</span><span class="na">toClass</span><span class="o">(</span><span class="n">ClassPool</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">990</span><span class="o">)</span>
+</span><span class='line'>  <span class="n">at</span> <span class="n">javassist</span><span class="o">.</span><span class="na">CtClass</span><span class="o">.</span><span class="na">toClass</span><span class="o">(</span><span class="n">CtClass</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">1125</span><span class="o">)</span>
+</span><span class='line'>  <span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="na">mycompany</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">App</span><span class="o">.</span><span class="na">createClass</span><span class="o">(</span><span class="n">App</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">36</span><span class="o">)</span>
+</span><span class='line'>  <span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="na">mycompany</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">App</span><span class="o">.</span><span class="na">main</span><span class="o">(</span><span class="n">App</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">29</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The next command runs under the hood:
+<code>java -XX:PermSize=2M -XX:MaxPermSize=4M -classpath "$CLASSPATH" com.mycompany.app.App</code></p>
+
+<p>As you can see it was possible to create about 550 <code>MyClass</code> classes before we&rsquo;ve got an expected error.</p>
+
+<a name="Tomcat.Leaks"></a>
+<h3>Tomcat Leaks</h3>
+
+<p>Tomcat team created a nice <a href="http://wiki.apache.org/tomcat/MemoryLeakProtection">wiki page</a> where listed and shown the situations where leaks can be detected and fixed.</p>
+
+<a name="References"></a>
+<h2>References</h2>
+
+<ul>
+<li><a href="https://plumbr.eu/blog/what-is-a-permgen-leak">What is a PermGen leak?</a></li>
+<li><a href="https://plumbr.eu/blog/how-not-to-create-a-permgen-leak">How (not) to create a permgen leak?</a></li>
+<li><a href="http://www.infoq.com/articles/Java-PERMGEN-Removed">Where Has the Java PermGen Gone?</a> PermGen is replace with Metaspace in Java 8</li>
+<li><a href="https://blogs.oracle.com/jonthecollector/entry/presenting_the_permanent_generation">Presenting the Permanent Generation</a> General intro into the subject</li>
+<li><a href="http://www.javaranch.com/journal/200711/creating_java_classes_runtime_expression_evaluation.html">Javassist - Creating Java classes at runtime for evaluating numerical expressions</a> Small article how to create Java classes dynamically</li>
+<li><a href="http://wiki.apache.org/tomcat/MemoryLeakProtection">Tomcat Wiki MemoryLeakProtection</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/02/scripting-in-scala/">Scripting in Scala</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-02T00:18:00+02:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>12:18 am</span></time>
+        
+           | <a href="/blog/2015/02/02/scripting-in-scala/#disqus_thread"
+             data-disqus-identifier="http://halyph.com/blog/2015/02/02/scripting-in-scala/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="center" src="/images/blog/scala.png"></p>
+
+<p>Scala language compiles sources code to Java bytecode.  But, it has some nice scripting facilities. Let&rsquo;s review them.</p>
+
+<p>So, the <code>scala</code> command is also a shell-script wrapper around the java command.</p>
+
+<p>According to official <a href="http://www.scala-lang.org/files/archive/nightly/docs-2.10.1/manual/html/scala.html">scala utility</a> documentation (here highlighted only post-related notes):</p>
+
+<blockquote><p><code>scala [ &lt;option&gt; ]... [ &lt;torun&gt; &lt;argument&gt;... ]</code></p>
+
+<p>The <code>scala</code> utility runs Scala code using a Java runtime environment.</p>
+
+<p>If a <strong>script</strong> file is specified to run, then the file is read and all Scala statements and declarations in the file are processed in order. Any arguments specified will be available via the argsvariable.</p>
+
+<p>Script files may have an <strong>optional header</strong> that is ignored if present. There are two ways to format the header: either beginning with #! and ending with !#, or beginning with ::#! and ending with ::!#.</p>
+
+<p>Such a header must have each header boundary start at the beginning of a line. Headers can be used to make stand-alone script files, as shown in the examples below.</p>
+
+<p>Here is a complete Scala script (<strong>check.sh</strong>) for Unix:</p>
+
+<pre><code>#!/bin/sh
+exec scala "$0" "$@"
+!#
+Console.println("Hello, world!")
+argv.toList foreach Console.println
+</code></pre>
+
+<p>Here is a complete Scala script (<strong>check.bat</strong>) for MS Windows:</p>
+
+<pre><code>::#!
+@echo off
+call scala %0 %*
+goto :eof
+::!#
+Console.println("Hello, world!")
+argv.toList foreach Console.println
+</code></pre>
+
+<p>If you want to use the compilation cache to speed up multiple executions of the script (<strong>check.sh</strong>), then add <strong>-savecompiled</strong> to the scala command:</p>
+
+<pre><code>#!/bin/sh
+exec scala -savecompiled "$0" "$@"
+!#
+Console.println("Hello, world!")
+argv.toList foreach Console.println
+</code></pre></blockquote>
+
+<p>These tricks give us an ability to run Scala script as plain shell script. Also, based on the setting above this script can have input parameters and <em>almost</em> cross-platform (see script header differences for Linux <strong>.vs.</strong> Windows).</p>
+
+<p>Now, we should save the mentioned above code snippet in some file (e.g. <strong>check.sh</strong>) and make it executable. This script can be run as any Linux shell script <code>./check.sh</code> (<code>check.bat</code> - Windows).</p>
+
+<a name="Scala.utility.internals"></a>
+<h2>Scala utility internals</h2>
+
+<a name="Linux"></a>
+<h3>Linux</h3>
+
+<p>Linux script header uses the next items:</p>
+
+<ul>
+<li><code>#!</code> it&rsquo;s <a href="http://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a> interpreter directive</li>
+<li><code>exec</code> is used to run <code>scala</code> without creation new process. Commands which go right after <code>exec</code> will not be executed</li>
+<li><code>!#</code> is simple marker for <code>scala</code> utility (see notes below)</li>
+</ul>
+
+
+<p>E.g.
+This script</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/sh
+</span><span class='line'>echo Header
+</span><span class='line'>exec echo
+</span><span class='line'>!#
+</span><span class='line'>echo Body</span></code></pre></td></tr></table></div></figure>
+
+
+<p>will have the next output</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./test.sh
+</span><span class='line'>Header</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We will get error in case <code>exec</code> is removed:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/sh
+</span><span class='line'>echo Header
+</span><span class='line'>!#
+</span><span class='line'>echo Body</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Output</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./test.sh
+</span><span class='line'>Header
+</span><span class='line'>./test.sh: line 4: !#: command not found
+</span><span class='line'>Body
+</span></code></pre></td></tr></table></div></figure>
+
+
+<a name="Windows"></a>
+<h3>Windows</h3>
+
+<p>Windows batch script header uses the next items:</p>
+
+<ul>
+<li><code>::</code> is a remark without displaying or executing that line when the batch file is run (see <a href="http://www.computerhope.com/batch.htm">Information on batch files</a>).</li>
+<li><code>::#!</code>  is simple marker for <code>scala</code> utility (see notes below)</li>
+<li><code>@echo off</code> disable echo</li>
+<li><code>call</code> calls one batch program from another.</li>
+<li><code>goto :eof</code> go to end of file</li>
+<li><code>::!#</code> is simple marker for <code>scala</code> utility (see notes below)</li>
+</ul>
+
+
+<p>The OS-specific script settings were identified, now let&rsquo;s dive deeper to understand how <code>scala</code> utility works.</p>
+
+<a name="L.code.scala..code..internals"></a>
+<h3><code>scala</code> internals</h3>
+
+<p>This utility performs the next flow to run script:</p>
+
+<ol>
+<li>Run <code>scala.tools.nsc.MainGenericRunner#process</code> and identify run target &ldquo;as Script&rdquo; (there are other targets) <code>ScriptRunner.runScriptAndCatch(settings, thingToRun, command.arguments)</code></li>
+<li><code>ScriptRunner</code> creates temp file <code>File.makeTemp("scalacmd", ".scala")</code></li>
+<li>Run compiler and clean script header</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class ScriptRunner extends HasCompileSocket {
+</span><span class='line'>...
+</span><span class='line'>  private def withCompiledScript(
+</span><span class='line'>      settings: GenericRunnerSettings,
+</span><span class='line'>      scriptFile: String)
+</span><span class='line'>      (handler: String =&gt; Boolean): Boolean =
+</span><span class='line'>    {
+</span><span class='line'>      def mainClass = scriptMain(settings)
+</span><span class='line'>  
+</span><span class='line'>         val compiler = newGlobal(settings, reporter)
+</span><span class='line'>         new compiler.Run compile List(scriptFile)</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Global
+</span><span class='line'>    /** If this compilation is scripted, convert the source to a script source. */
+</span><span class='line'>    private def scripted(s: SourceFile) = s match {
+</span><span class='line'>      case b: BatchSourceFile if settings.script.isSetByUser =&gt; ScriptSourceFile(b)
+</span><span class='line'>      case _ =&gt; s
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    /** Compile abstract file until `globalPhase`, but at least
+</span><span class='line'>     *  to phase "namer".
+</span><span class='line'>     */
+</span><span class='line'>    def compileLate(file: AbstractFile) {
+</span><span class='line'>      if (!compiledFiles(file.path))
+</span><span class='line'>        compileLate(new CompilationUnit(scripted(getSourceFile(file))))
+</span><span class='line'>    }
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Cleanup shell script (remove header) via <code>SourceFile</code>. Now, it&rsquo;s clear why script&rsquo;s header have such <em>strange</em> closing markers (see line 21, <code>content drop headerLen</code> - actual header remove)</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>object ScriptSourceFile {
+</span><span class='line'>  /** Length of the script header from the given content, if there is one.
+</span><span class='line'>   *  The header begins with "#!" or "::#!" and ends with a line starting
+</span><span class='line'>   *  with "!#" or "::!#".
+</span><span class='line'>   */
+</span><span class='line'>  def headerLength(cs: Array[Char]): Int = {
+</span><span class='line'>    val headerPattern = Pattern.compile("""((?m)^(::)?!#.*|^.*/env .*)(\r|\n|\r\n)""")
+</span><span class='line'>    val headerStarts  = List("#!", "::#!")
+</span><span class='line'>
+</span><span class='line'>    if (headerStarts exists (cs startsWith _)) {
+</span><span class='line'>      val matcher = headerPattern matcher cs.mkString
+</span><span class='line'>      if (matcher.find) matcher.end
+</span><span class='line'>      else throw new IOException("script file does not close its header with !# or ::!#")
+</span><span class='line'>    }
+</span><span class='line'>    else 0
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  def apply(file: AbstractFile, content: Array[Char]) = {
+</span><span class='line'>    val underlying = new BatchSourceFile(file, content)
+</span><span class='line'>    val headerLen = headerLength(content)
+</span><span class='line'>    val stripped = new ScriptSourceFile(underlying, content drop headerLen, headerLen)
+</span><span class='line'>
+</span><span class='line'>    stripped
+</span><span class='line'>  }</span></code></pre></td></tr></table></div></figure>
+
+
+<a name="Add.libraries.to.Scala.script"></a>
+<h2>Add libraries to Scala script</h2>
+
+<p>Scala script libraries (<strong>jar</strong>s) can be added in script&rsquo;s header section:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/sh
+</span><span class='line'>exec scala -classpath "lib/lib.1.jar:lib/lib.2.jar" "$0" "$@"
+</span><span class='line'>!#</span></code></pre></td></tr></table></div></figure>
+
+
+<a name="Summary"></a>
+<h2>Summary</h2>
+
+<p>There is nothing magical in Scala interpretation. Every single peace of code must be compiled. Such interesting <em>scripting</em> approach can be applied to Java as well.</p>
+
+<p>Unfortunately, Scala is not looks like nice scripting language (because it&rsquo;s <strong>not</strong> designed for this use case). It will be uncomfortable &ldquo;scripting&rdquo; in Scala without IDE.</p>
+
+<a name="References"></a>
+<h2>References</h2>
+
+<ul>
+<li><a href="http://timperrett.com/2011/08/01/system-scripting-with-scala/">System Scripting with Scala</a></li>
+<li><a href="http://www.scala-lang.org/files/archive/nightly/docs-2.10.1/manual/html/scala.html">scala utility</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a></li>
+<li><a href="http://www.computerhope.com/batch.htm">Information on batch files</a></li>
+<li>Scala Sources:
+
+<ul>
+<li><a href="https://github.com/scala/scala/blob/v2.11.5/src/compiler/scala/tools/nsc/ScriptRunner.scala#">ScriptRunner.scala</a></li>
+<li><a href="https://github.com/scala/scala/blob/v2.11.5/src/reflect/scala/reflect/internal/util/SourceFile.scala">SourceFile.scala</a></li>
+<li><a href="https://github.com/scala/scala/blob/v2.11.5/src/compiler/scala/tools/nsc/Global.scala">Global.scala</a></li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -583,7 +792,15 @@ e.g. <code>Bundles-&gt;Text-&gt;Duplicate Line</code></p></li>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/11/08/java-day-kiev-2015-report/">Java Day - Kiev, 2015 - Report</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/09/25/programming-languages-to-native-code/">Distribute Application as Native Single Binary</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/09/20/jday-lviv-2015-report/">JDay - Lviv, 2015 - Report</a>
       </li>
     
       <li class="post">
@@ -594,23 +811,15 @@ e.g. <code>Bundles-&gt;Text-&gt;Duplicate Line</code></p></li>
         <a href="/blog/2015/06/29/devoxxpl/">DevoxxPL - Krakow, 2015 - Report</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/05/25/jeeconf-kiev/">JEEConf - Kiev, 2015 - Report</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/19/grails-2-dot-5-0-debug-in-intellij-idea/">Grails 2.5.0 Debug in IntelliJ IDEA</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Top Categories</h1>
-    <ul id="top-category-list"><li><a href='/blog/categories/java'>java (38)</a></li><li><a href='/blog/categories/ruby'>ruby (19)</a></li><li><a href='/blog/categories/groovy'>groovy (12)</a></li><li><a href='/blog/categories/conference'>conference (11)</a></li><li><a href='/blog/categories/linux'>linux (10)</a></li><li><a href='/blog/categories/git'>git (10)</a></li><li><a href='/blog/categories/books'>books (10)</a></li><li><a href='/blog/categories/review'>review (8)</a></li><li><a href='/blog/categories/tools'>tools (6)</a></li><li><a href='/blog/categories/languages'>languages (6)</a></li></ul>
+    <ul id="top-category-list"><li><a href='/blog/categories/java'>java (40)</a></li><li><a href='/blog/categories/ruby'>ruby (19)</a></li><li><a href='/blog/categories/conference'>conference (13)</a></li><li><a href='/blog/categories/groovy'>groovy (12)</a></li><li><a href='/blog/categories/books'>books (10)</a></li><li><a href='/blog/categories/git'>git (10)</a></li><li><a href='/blog/categories/linux'>linux (10)</a></li><li><a href='/blog/categories/review'>review (8)</a></li><li><a href='/blog/categories/rails'>rails (6)</a></li><li><a href='/blog/categories/languages'>languages (6)</a></li></ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <span id="tag-cloud"><a href='/blog/categories/agile' style='font-size: 104.73684210526315%'>agile(3)</a> <a href='/blog/categories/annotation' style='font-size: 101.57894736842105%'>annotation(1)</a> <a href='/blog/categories/ant' style='font-size: 103.15789473684211%'>ant(2)</a> <a href='/blog/categories/architecture' style='font-size: 101.57894736842105%'>architecture(1)</a> <a href='/blog/categories/automation' style='font-size: 103.15789473684211%'>automation(2)</a> <a href='/blog/categories/barcode' style='font-size: 101.57894736842105%'>barcode(1)</a> <a href='/blog/categories/bash' style='font-size: 104.73684210526315%'>bash(3)</a> <a href='/blog/categories/blog' style='font-size: 101.57894736842105%'>blog(1)</a> <a href='/blog/categories/blogging' style='font-size: 103.15789473684211%'>blogging(2)</a> <a href='/blog/categories/books' style='font-size: 115.78947368421052%'>books(10)</a> <a href='/blog/categories/centos' style='font-size: 101.57894736842105%'>centos(1)</a> <a href='/blog/categories/certification' style='font-size: 101.57894736842105%'>certification(1)</a> <a href='/blog/categories/ci' style='font-size: 101.57894736842105%'>ci(1)</a> <a href='/blog/categories/clojure' style='font-size: 103.15789473684211%'>clojure(2)</a> <a href='/blog/categories/cmd-dot-exe' style='font-size: 101.57894736842105%'>cmd.exe(1)</a> <a href='/blog/categories/code-quality' style='font-size: 101.57894736842105%'>code quality(1)</a> <a href='/blog/categories/code-style' style='font-size: 101.57894736842105%'>code style(1)</a> <a href='/blog/categories/computation' style='font-size: 101.57894736842105%'>computation(1)</a> <a href='/blog/categories/conference' style='font-size: 117.36842105263158%'>conference(11)</a> <a href='/blog/categories/console' style='font-size: 101.57894736842105%'>console(1)</a> <a href='/blog/categories/craftsmanship' style='font-size: 103.15789473684211%'>craftsmanship(2)</a> <a href='/blog/categories/cxf' style='font-size: 104.73684210526315%'>cxf(3)</a> <a href='/blog/categories/cygwin' style='font-size: 101.57894736842105%'>cygwin(1)</a> <a href='/blog/categories/db' style='font-size: 101.57894736842105%'>db(1)</a> <a href='/blog/categories/devoxx' style='font-size: 101.57894736842105%'>devoxx(1)</a> <a href='/blog/categories/diff' style='font-size: 101.57894736842105%'>diff(1)</a> <a href='/blog/categories/eclipse' style='font-size: 103.15789473684211%'>eclipse(2)</a> <a href='/blog/categories/evernote' style='font-size: 103.15789473684211%'>evernote(2)</a> <a href='/blog/categories/general' style='font-size: 104.73684210526315%'>general(3)</a> <a href='/blog/categories/gerrit' style='font-size: 101.57894736842105%'>gerrit(1)</a> <a href='/blog/categories/gist' style='font-size: 101.57894736842105%'>gist(1)</a> <a href='/blog/categories/git' style='font-size: 115.78947368421052%'>git(10)</a> <a href='/blog/categories/github' style='font-size: 101.57894736842105%'>github(1)</a> <a href='/blog/categories/gnustep' style='font-size: 101.57894736842105%'>gnustep(1)</a> <a href='/blog/categories/golang' style='font-size: 103.15789473684211%'>golang(2)</a> <a href='/blog/categories/gradle' style='font-size: 101.57894736842105%'>gradle(1)</a> <a href='/blog/categories/grails' style='font-size: 103.15789473684211%'>grails(2)</a> <a href='/blog/categories/groovy' style='font-size: 118.94736842105263%'>groovy(12)</a> <a href='/blog/categories/h2' style='font-size: 101.57894736842105%'>h2(1)</a> <a href='/blog/categories/haskell' style='font-size: 101.57894736842105%'>haskell(1)</a> <a href='/blog/categories/hibernate' style='font-size: 101.57894736842105%'>hibernate(1)</a> <a href='/blog/categories/i18n' style='font-size: 101.57894736842105%'>i18n(1)</a> <a href='/blog/categories/intellij-idea' style='font-size: 101.57894736842105%'>intellij idea(1)</a> <a href='/blog/categories/itbooze' style='font-size: 103.15789473684211%'>itbooze(2)</a> <a href='/blog/categories/itext' style='font-size: 101.57894736842105%'>itext(1)</a> <a href='/blog/categories/ivy' style='font-size: 101.57894736842105%'>ivy(1)</a> <a href='/blog/categories/java' style='font-size: 160.0%'>java(38)</a> <a href='/blog/categories/java-se' style='font-size: 103.15789473684211%'>java se(2)</a> <a href='/blog/categories/javascript' style='font-size: 101.57894736842105%'>javascript(1)</a> <a href='/blog/categories/jax-rs' style='font-size: 104.73684210526315%'>jax-rs(3)</a> <a href='/blog/categories/jdbc' style='font-size: 101.57894736842105%'>jdbc(1)</a> <a href='/blog/categories/jdk' style='font-size: 101.57894736842105%'>jdk(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 107.89473684210526%'>jeeconf(5)</a> <a href='/blog/categories/jenkins' style='font-size: 106.3157894736842%'>jenkins(4)</a> <a href='/blog/categories/jetty' style='font-size: 101.57894736842105%'>jetty(1)</a> <a href='/blog/categories/jsp' style='font-size: 101.57894736842105%'>jsp(1)</a> <a href='/blog/categories/kanban' style='font-size: 101.57894736842105%'>kanban(1)</a> <a href='/blog/categories/l10n' style='font-size: 101.57894736842105%'>l10n(1)</a> <a href='/blog/categories/languages' style='font-size: 109.47368421052632%'>languages(6)</a> <a href='/blog/categories/learning' style='font-size: 106.3157894736842%'>learning(4)</a> <a href='/blog/categories/library' style='font-size: 104.73684210526315%'>library(3)</a> <a href='/blog/categories/linux' style='font-size: 115.78947368421052%'>linux(10)</a> <a href='/blog/categories/lisp' style='font-size: 107.89473684210526%'>lisp(5)</a> <a href='/blog/categories/maven' style='font-size: 109.47368421052632%'>maven(6)</a> <a href='/blog/categories/merge' style='font-size: 101.57894736842105%'>merge(1)</a> <a href='/blog/categories/mingw' style='font-size: 101.57894736842105%'>mingw(1)</a> <a href='/blog/categories/msysgit' style='font-size: 101.57894736842105%'>msysgit(1)</a> <a href='/blog/categories/objective-c' style='font-size: 101.57894736842105%'>objective-c(1)</a> <a href='/blog/categories/ocaml' style='font-size: 101.57894736842105%'>ocaml(1)</a> <a href='/blog/categories/ocpjp' style='font-size: 101.57894736842105%'>ocpjp(1)</a> <a href='/blog/categories/octopress' style='font-size: 103.15789473684211%'>octopress(2)</a> <a href='/blog/categories/os-x' style='font-size: 107.89473684210526%'>os x(5)</a> <a href='/blog/categories/pdf' style='font-size: 104.73684210526315%'>pdf(3)</a> <a href='/blog/categories/plugin' style='font-size: 103.15789473684211%'>plugin(2)</a> <a href='/blog/categories/pomodoro' style='font-size: 103.15789473684211%'>pomodoro(2)</a> <a href='/blog/categories/productivity' style='font-size: 103.15789473684211%'>productivity(2)</a> <a href='/blog/categories/prompt' style='font-size: 103.15789473684211%'>prompt(2)</a> <a href='/blog/categories/prototyping' style='font-size: 103.15789473684211%'>prototyping(2)</a> <a href='/blog/categories/python' style='font-size: 103.15789473684211%'>python(2)</a> <a href='/blog/categories/rails' style='font-size: 109.47368421052632%'>rails(6)</a> <a href='/blog/categories/reflection' style='font-size: 101.57894736842105%'>reflection(1)</a> <a href='/blog/categories/rest' style='font-size: 104.73684210526315%'>rest(3)</a> <a href='/blog/categories/review' style='font-size: 112.63157894736842%'>review(8)</a> <a href='/blog/categories/ruby' style='font-size: 130.0%'>ruby(19)</a> <a href='/blog/categories/rust' style='font-size: 101.57894736842105%'>rust(1)</a> <a href='/blog/categories/rvm' style='font-size: 101.57894736842105%'>rvm(1)</a> <a href='/blog/categories/scala' style='font-size: 106.3157894736842%'>scala(4)</a> <a href='/blog/categories/scjp' style='font-size: 101.57894736842105%'>scjp(1)</a> <a href='/blog/categories/screencast' style='font-size: 104.73684210526315%'>screencast(3)</a> <a href='/blog/categories/scripting' style='font-size: 103.15789473684211%'>scripting(2)</a> <a href='/blog/categories/scrum' style='font-size: 101.57894736842105%'>scrum(1)</a> <a href='/blog/categories/servlet' style='font-size: 101.57894736842105%'>servlet(1)</a> <a href='/blog/categories/shell' style='font-size: 103.15789473684211%'>shell(2)</a> <a href='/blog/categories/sketching' style='font-size: 101.57894736842105%'>sketching(1)</a> <a href='/blog/categories/spring' style='font-size: 106.3157894736842%'>spring(4)</a> <a href='/blog/categories/ssh' style='font-size: 103.15789473684211%'>ssh(2)</a> <a href='/blog/categories/ssh-agent' style='font-size: 101.57894736842105%'>ssh-agent(1)</a> <a href='/blog/categories/static-analysis' style='font-size: 101.57894736842105%'>static analysis(1)</a> <a href='/blog/categories/svn' style='font-size: 101.57894736842105%'>svn(1)</a> <a href='/blog/categories/terminal' style='font-size: 103.15789473684211%'>terminal(2)</a> <a href='/blog/categories/textmate' style='font-size: 103.15789473684211%'>textmate(2)</a> <a href='/blog/categories/time-management' style='font-size: 103.15789473684211%'>time management(2)</a> <a href='/blog/categories/tomcat' style='font-size: 101.57894736842105%'>tomcat(1)</a> <a href='/blog/categories/tool' style='font-size: 101.57894736842105%'>tool(1)</a> <a href='/blog/categories/tools' style='font-size: 109.47368421052632%'>tools(6)</a> <a href='/blog/categories/top' style='font-size: 101.57894736842105%'>top(1)</a> <a href='/blog/categories/tutorial' style='font-size: 101.57894736842105%'>tutorial(1)</a> <a href='/blog/categories/tutorials' style='font-size: 101.57894736842105%'>tutorials(1)</a> <a href='/blog/categories/ui' style='font-size: 101.57894736842105%'>ui(1)</a> <a href='/blog/categories/uml' style='font-size: 101.57894736842105%'>uml(1)</a> <a href='/blog/categories/video' style='font-size: 101.57894736842105%'>video(1)</a> <a href='/blog/categories/vim' style='font-size: 103.15789473684211%'>vim(2)</a> <a href='/blog/categories/vs' style='font-size: 104.73684210526315%'>vs(3)</a> <a href='/blog/categories/windows' style='font-size: 101.57894736842105%'>windows(1)</a> <a href='/blog/categories/xp' style='font-size: 101.57894736842105%'>xp(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/agile' style='font-size: 104.5%'>agile(3)</a> <a href='/blog/categories/annotation' style='font-size: 101.5%'>annotation(1)</a> <a href='/blog/categories/ant' style='font-size: 103.0%'>ant(2)</a> <a href='/blog/categories/architecture' style='font-size: 101.5%'>architecture(1)</a> <a href='/blog/categories/automation' style='font-size: 103.0%'>automation(2)</a> <a href='/blog/categories/barcode' style='font-size: 101.5%'>barcode(1)</a> <a href='/blog/categories/bash' style='font-size: 104.5%'>bash(3)</a> <a href='/blog/categories/blog' style='font-size: 101.5%'>blog(1)</a> <a href='/blog/categories/blogging' style='font-size: 103.0%'>blogging(2)</a> <a href='/blog/categories/books' style='font-size: 115.0%'>books(10)</a> <a href='/blog/categories/centos' style='font-size: 101.5%'>centos(1)</a> <a href='/blog/categories/certification' style='font-size: 101.5%'>certification(1)</a> <a href='/blog/categories/ci' style='font-size: 101.5%'>ci(1)</a> <a href='/blog/categories/clojure' style='font-size: 103.0%'>clojure(2)</a> <a href='/blog/categories/cmd-dot-exe' style='font-size: 101.5%'>cmd.exe(1)</a> <a href='/blog/categories/code-quality' style='font-size: 101.5%'>code quality(1)</a> <a href='/blog/categories/code-style' style='font-size: 101.5%'>code style(1)</a> <a href='/blog/categories/computation' style='font-size: 101.5%'>computation(1)</a> <a href='/blog/categories/conference' style='font-size: 119.5%'>conference(13)</a> <a href='/blog/categories/console' style='font-size: 101.5%'>console(1)</a> <a href='/blog/categories/craftsmanship' style='font-size: 103.0%'>craftsmanship(2)</a> <a href='/blog/categories/cxf' style='font-size: 104.5%'>cxf(3)</a> <a href='/blog/categories/cygwin' style='font-size: 101.5%'>cygwin(1)</a> <a href='/blog/categories/db' style='font-size: 101.5%'>db(1)</a> <a href='/blog/categories/devoxx' style='font-size: 101.5%'>devoxx(1)</a> <a href='/blog/categories/diff' style='font-size: 101.5%'>diff(1)</a> <a href='/blog/categories/eclipse' style='font-size: 103.0%'>eclipse(2)</a> <a href='/blog/categories/evernote' style='font-size: 103.0%'>evernote(2)</a> <a href='/blog/categories/general' style='font-size: 104.5%'>general(3)</a> <a href='/blog/categories/gerrit' style='font-size: 101.5%'>gerrit(1)</a> <a href='/blog/categories/gist' style='font-size: 101.5%'>gist(1)</a> <a href='/blog/categories/git' style='font-size: 115.0%'>git(10)</a> <a href='/blog/categories/github' style='font-size: 101.5%'>github(1)</a> <a href='/blog/categories/gnustep' style='font-size: 101.5%'>gnustep(1)</a> <a href='/blog/categories/golang' style='font-size: 103.0%'>golang(2)</a> <a href='/blog/categories/gradle' style='font-size: 101.5%'>gradle(1)</a> <a href='/blog/categories/grails' style='font-size: 103.0%'>grails(2)</a> <a href='/blog/categories/groovy' style='font-size: 118.0%'>groovy(12)</a> <a href='/blog/categories/h2' style='font-size: 101.5%'>h2(1)</a> <a href='/blog/categories/haskell' style='font-size: 101.5%'>haskell(1)</a> <a href='/blog/categories/hibernate' style='font-size: 101.5%'>hibernate(1)</a> <a href='/blog/categories/i18n' style='font-size: 101.5%'>i18n(1)</a> <a href='/blog/categories/intellij-idea' style='font-size: 101.5%'>intellij idea(1)</a> <a href='/blog/categories/itbooze' style='font-size: 103.0%'>itbooze(2)</a> <a href='/blog/categories/itext' style='font-size: 101.5%'>itext(1)</a> <a href='/blog/categories/ivy' style='font-size: 101.5%'>ivy(1)</a> <a href='/blog/categories/java' style='font-size: 160.0%'>java(40)</a> <a href='/blog/categories/java-se' style='font-size: 103.0%'>java se(2)</a> <a href='/blog/categories/javaday' style='font-size: 101.5%'>javaday(1)</a> <a href='/blog/categories/javascript' style='font-size: 101.5%'>javascript(1)</a> <a href='/blog/categories/jax-rs' style='font-size: 104.5%'>jax-rs(3)</a> <a href='/blog/categories/jday' style='font-size: 101.5%'>jday(1)</a> <a href='/blog/categories/jdbc' style='font-size: 101.5%'>jdbc(1)</a> <a href='/blog/categories/jdk' style='font-size: 101.5%'>jdk(1)</a> <a href='/blog/categories/jeeconf' style='font-size: 107.5%'>jeeconf(5)</a> <a href='/blog/categories/jenkins' style='font-size: 106.0%'>jenkins(4)</a> <a href='/blog/categories/jetty' style='font-size: 101.5%'>jetty(1)</a> <a href='/blog/categories/jsp' style='font-size: 101.5%'>jsp(1)</a> <a href='/blog/categories/kanban' style='font-size: 101.5%'>kanban(1)</a> <a href='/blog/categories/l10n' style='font-size: 101.5%'>l10n(1)</a> <a href='/blog/categories/languages' style='font-size: 109.0%'>languages(6)</a> <a href='/blog/categories/learning' style='font-size: 106.0%'>learning(4)</a> <a href='/blog/categories/library' style='font-size: 104.5%'>library(3)</a> <a href='/blog/categories/linux' style='font-size: 115.0%'>linux(10)</a> <a href='/blog/categories/lisp' style='font-size: 107.5%'>lisp(5)</a> <a href='/blog/categories/maven' style='font-size: 109.0%'>maven(6)</a> <a href='/blog/categories/merge' style='font-size: 101.5%'>merge(1)</a> <a href='/blog/categories/mingw' style='font-size: 101.5%'>mingw(1)</a> <a href='/blog/categories/msysgit' style='font-size: 101.5%'>msysgit(1)</a> <a href='/blog/categories/objective-c' style='font-size: 101.5%'>objective-c(1)</a> <a href='/blog/categories/ocaml' style='font-size: 101.5%'>ocaml(1)</a> <a href='/blog/categories/ocpjp' style='font-size: 101.5%'>ocpjp(1)</a> <a href='/blog/categories/octopress' style='font-size: 103.0%'>octopress(2)</a> <a href='/blog/categories/os-x' style='font-size: 107.5%'>os x(5)</a> <a href='/blog/categories/pdf' style='font-size: 104.5%'>pdf(3)</a> <a href='/blog/categories/plugin' style='font-size: 103.0%'>plugin(2)</a> <a href='/blog/categories/pomodoro' style='font-size: 103.0%'>pomodoro(2)</a> <a href='/blog/categories/productivity' style='font-size: 103.0%'>productivity(2)</a> <a href='/blog/categories/prompt' style='font-size: 103.0%'>prompt(2)</a> <a href='/blog/categories/prototyping' style='font-size: 103.0%'>prototyping(2)</a> <a href='/blog/categories/python' style='font-size: 103.0%'>python(2)</a> <a href='/blog/categories/rails' style='font-size: 109.0%'>rails(6)</a> <a href='/blog/categories/reflection' style='font-size: 101.5%'>reflection(1)</a> <a href='/blog/categories/rest' style='font-size: 104.5%'>rest(3)</a> <a href='/blog/categories/review' style='font-size: 112.0%'>review(8)</a> <a href='/blog/categories/ruby' style='font-size: 128.5%'>ruby(19)</a> <a href='/blog/categories/rust' style='font-size: 101.5%'>rust(1)</a> <a href='/blog/categories/rvm' style='font-size: 101.5%'>rvm(1)</a> <a href='/blog/categories/scala' style='font-size: 106.0%'>scala(4)</a> <a href='/blog/categories/scjp' style='font-size: 101.5%'>scjp(1)</a> <a href='/blog/categories/screencast' style='font-size: 104.5%'>screencast(3)</a> <a href='/blog/categories/scripting' style='font-size: 103.0%'>scripting(2)</a> <a href='/blog/categories/scrum' style='font-size: 101.5%'>scrum(1)</a> <a href='/blog/categories/servlet' style='font-size: 101.5%'>servlet(1)</a> <a href='/blog/categories/shell' style='font-size: 103.0%'>shell(2)</a> <a href='/blog/categories/sketching' style='font-size: 101.5%'>sketching(1)</a> <a href='/blog/categories/spring' style='font-size: 106.0%'>spring(4)</a> <a href='/blog/categories/ssh' style='font-size: 103.0%'>ssh(2)</a> <a href='/blog/categories/ssh-agent' style='font-size: 101.5%'>ssh-agent(1)</a> <a href='/blog/categories/static-analysis' style='font-size: 101.5%'>static analysis(1)</a> <a href='/blog/categories/svn' style='font-size: 101.5%'>svn(1)</a> <a href='/blog/categories/terminal' style='font-size: 103.0%'>terminal(2)</a> <a href='/blog/categories/textmate' style='font-size: 103.0%'>textmate(2)</a> <a href='/blog/categories/time-management' style='font-size: 103.0%'>time management(2)</a> <a href='/blog/categories/tomcat' style='font-size: 101.5%'>tomcat(1)</a> <a href='/blog/categories/tool' style='font-size: 101.5%'>tool(1)</a> <a href='/blog/categories/tools' style='font-size: 109.0%'>tools(6)</a> <a href='/blog/categories/top' style='font-size: 101.5%'>top(1)</a> <a href='/blog/categories/tutorial' style='font-size: 101.5%'>tutorial(1)</a> <a href='/blog/categories/tutorials' style='font-size: 101.5%'>tutorials(1)</a> <a href='/blog/categories/ui' style='font-size: 101.5%'>ui(1)</a> <a href='/blog/categories/uml' style='font-size: 101.5%'>uml(1)</a> <a href='/blog/categories/video' style='font-size: 101.5%'>video(1)</a> <a href='/blog/categories/vim' style='font-size: 103.0%'>vim(2)</a> <a href='/blog/categories/vs' style='font-size: 104.5%'>vs(3)</a> <a href='/blog/categories/windows' style='font-size: 101.5%'>windows(1)</a> <a href='/blog/categories/xp' style='font-size: 101.5%'>xp(1)</a> </span>
 </section>
 
   
