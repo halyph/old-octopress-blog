@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | Knowledge Is Everything]]></title>
   <link href="http://halyph.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-11-25T00:47:33+02:00</updated>
+  <updated>2015-11-25T00:59:42+02:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -258,6 +258,7 @@ It can generate both back-end (REST endpoint) and front-end (Angular.js Single-p
 
 <ul>
 <li><a href="http://www.openxava.org/">OpenXava</a></li>
+<li><a href="https://www.cuba-platform.com">Cuba-platform</a> - CUBA Platform is free for applications with up to 5 concurrent sessions.</li>
 <li><a href="http://isis.apache.org/">Apache Isis</a></li>
 </ul>
 </li>
