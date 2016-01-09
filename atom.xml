@@ -4,7 +4,7 @@
   <title><![CDATA[Knowledge Is Everything]]></title>
   <link href="http://halyph.com/atom.xml" rel="self"/>
   <link href="http://halyph.com/"/>
-  <updated>2015-11-25T00:59:42+02:00</updated>
+  <updated>2016-01-09T22:57:29+02:00</updated>
   <id>http://halyph.com/</id>
   <author>
     <name><![CDATA[Orest Ivasiv]]></name>
@@ -77,6 +77,78 @@
 <li><a href="https://speakerdeck.com/krosan/spring-rest-docs-documenting-restful-apis-using-your-tests">Spring REST Docs - Documenting RESTful APIs using your tests by Andreas Evers</a></li>
 <li>Graal Compiler <a href="http://www.slideshare.net/ThomasWuerthinger/2015-cgo-graal">slides</a></li>
 <li><a href="http://blog.arungupta.me/microservice-design-patterns/">Microservice Design Patterns</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Run Netflix Eureka via Webapp Runner?]]></title>
+    <link href="http://halyph.com/blog/2015/10/21/using-webrunner/"/>
+    <updated>2015-10-21T00:20:21+03:00</updated>
+    <id>http://halyph.com/blog/2015/10/21/using-webrunner</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://halyph.com/images/blog/java.png"></p>
+
+<p>Some time ago I had to run <a href="https://github.com/Netflix/eureka">Netflix Eureka server</a> (to be more specific itwas version 1.1.151) not using Spring Boot.</p>
+
+<p>There were several ways:</p>
+
+<ul>
+<li>simply deploy <strong>eureka-server.war</strong> into Tomcat</li>
+<li>use <a href="http://www.eclipse.org/jetty/documentation/current/runner.html">Jetty runner</a>.
+
+<blockquote><p>The idea of the jetty-runner is extremely simple – run a webapp directly from the command line using a single jar and as much default configuration as possible. Of course, if your webapp is not so straightforward, the jetty-runner has command line options which allow you to customize the execution environment.</p></blockquote></li>
+<li>use <a href="https://github.com/jsimone/webapp-runner">Webapp Runner</a>.
+
+<blockquote><p>Webapp runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a tomcat container with a simple java -jar command.</p></blockquote></li>
+</ul>
+
+
+<p>I decided to go with <em>Webapp Runner</em>.</p>
+
+<p>So, here is the list of steps:</p>
+
+<ol>
+<li>Download <strong>eureka-server</strong> war from maven central (e.g. <a href="http://mvnrepository.com/artifact/com.netflix.eureka/eureka-server/1.1.151">http://mvnrepository.com/artifact/com.netflix.eureka/eureka-server/1.1.151</a>). Also, we can clone the Netflix Eureka github repo and perform build locally. But, our intent is just get ready to use war file as quick as possible.</li>
+<li>Rename <strong>eureka-server-1.1.151.war</strong> to <strong>eureka-server.war</strong>.</li>
+<li>Download <strong>webapp-runnner</strong> jar from maven central (e.g. <a href="http://mvnrepository.com/artifact/com.github.jsimone/webapp-runner/8.0.24.0">http://mvnrepository.com/artifact/com.github.jsimone/webapp-runner/8.0.24.0</a>)</li>
+<li>I assume that <strong>eureka-server.war</strong> and <strong>webapp-runner-8.0.24.0.jar</strong> are located in the same directory. Now we can simply run the <em>eureka-server</em> on port 4000 via <code>runme.bat</code> file:</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat runme.bat
+</span><span class='line'>java -jar webapp-runner-8.0.24.0.jar eureka.war --path /eureka --port 4000</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Local directory should have the next files/folders:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dir /b
+</span><span class='line'>eureka-server-1.1.151.war
+</span><span class='line'>eureka.war
+</span><span class='line'>runme.bat
+</span><span class='line'>target/
+</span><span class='line'>webapp-runner-8.0.24.0.jar</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The server is up and running: check Eureka UI <a href="http://localhost:4000/eureka/">http://localhost:4000/eureka/</a> or registered apps <a href="http://localhost:4000/eureka/v2/apps/">http://localhost:4000/eureka/v2/apps/</a> XML output.</p>
+
+<a name="References"></a>
+<h2>References</h2>
+
+<ul>
+<li>Github <a href="https://github.com/jsimone/webapp-runner">Webapp Runner</a></li>
+<li>Github <a href="https://github.com/Netflix/eureka">Netflix Eureka</a></li>
+<li><a href="https://github.com/heroku/devcenter-jetty-runner">Deploy a Java Web Application that launches with Jetty Runner</a></li>
+<li><a href="https://devcenter.heroku.com/articles/java-webapp-runner">Deploying Tomcat-based Java Web Applications with Webapp Runner</a></li>
+<li><a href="http://www.java-allandsundry.com/2015/02/standing-up-local-netflix-eureka.html">Standing up a local Netflix Eureka</a></li>
 </ul>
 
 ]]></content>
@@ -3698,70 +3770,6 @@ Recently I&rsquo;ve decided to switch from Sublime Text editor to <a href="http:
 
 
 <p>Don&rsquo;t forget to share your TextMate links, article, tips, hacks, etc.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to Use Block Comments in Bash Script]]></title>
-    <link href="http://halyph.com/blog/2014/10/09/bash-block-comments/"/>
-    <updated>2014-10-09T22:39:25+03:00</updated>
-    <id>http://halyph.com/blog/2014/10/09/bash-block-comments</id>
-    <content type="html"><![CDATA[<p><img class="right" src="http://halyph.com/images/blog/bash.png">
-What is the simplest way to define block comment in Bash script?</p>
-
-<p>I&rsquo;ve selected two approaches for myself:</p>
-
-<ul>
-<li>Use here document</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;before block comment&quot;</span>
-</span><span class='line'>: <span class="s">&lt;&lt;&#39;END&#39;</span>
-</span><span class='line'><span class="s">Some long </span>
-</span><span class='line'><span class="s">myltiline </span>
-</span><span class='line'><span class="s">text</span>
-</span><span class='line'><span class="s">END</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;after block comment&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Use <strong>&ldquo;if&rdquo;</strong> false block</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/usr/bin/env bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;before block comment&quot;</span>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>Some long
-</span><span class='line'>myltiline
-</span><span class='line'>text
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;after block comment&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   
