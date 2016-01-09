@@ -8,12 +8,15 @@ categories: [java]
 
 {% img right  /images/blog/java.png %}
 
-Some time ago I had to run [Netflix Eureka server](https://github.com/Netflix/eureka) (to be more specific version 1.1.151) not using Spring Boot.
+Some time ago I had to run [Netflix Eureka server](https://github.com/Netflix/eureka) (to be more specific itwas version 1.1.151) not using Spring Boot.
+
 There were several ways: 
 
 - simply deploy **eureka-server.war** into Tomcat
-- use [Jetty runner](http://www.eclipse.org/jetty/documentation/current/runner.html). The idea of the jetty-runner is extremely simple – run a webapp directly from the command line using a single jar and as much default configuration as possible. Of course, if your webapp is not so straightforward, the jetty-runner has command line options which allow you to customize the execution environment.
-- use [Webapp Runner](https://github.com/jsimone/webapp-runner). Webapp runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a tomcat container with a simple java -jar command.
+- use [Jetty runner](http://www.eclipse.org/jetty/documentation/current/runner.html). 
+>The idea of the jetty-runner is extremely simple – run a webapp directly from the command line using a single jar and as much default configuration as possible. Of course, if your webapp is not so straightforward, the jetty-runner has command line options which allow you to customize the execution environment.
+- use [Webapp Runner](https://github.com/jsimone/webapp-runner). 
+>Webapp runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a tomcat container with a simple java -jar command.
 
 I decided to go with *Webapp Runner*.
 
@@ -41,8 +44,8 @@ webapp-runner-8.0.24.0.jar
 The server is up and running: check Eureka UI http://localhost:4000/eureka/ or registered apps http://localhost:4000/eureka/v2/apps/ XML output.
 
 ## References
-- Github [Webapp Runner](https://github.com/jsimone/webapp-runner) Webapp runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a tomcat container with a simple java -jar command.
+- Github [Webapp Runner](https://github.com/jsimone/webapp-runner)
 - Github [Netflix Eureka](https://github.com/Netflix/eureka)
 - [Deploy a Java Web Application that launches with Jetty Runner](https://github.com/heroku/devcenter-jetty-runner)
 - [Deploying Tomcat-based Java Web Applications with Webapp Runner](https://devcenter.heroku.com/articles/java-webapp-runner)
-- [Standing up a local Netflix Eureka](http://www.java-allandsundry.com/2015/02/standing-up-local-netflix-eureka.html)*
+- [Standing up a local Netflix Eureka](http://www.java-allandsundry.com/2015/02/standing-up-local-netflix-eureka.html)
