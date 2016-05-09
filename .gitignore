@@ -1,0 +1,6 @@
+.pygments-cache/
+.sass-cache/
+Gemfile.lock
+_deploy/
+public/
+source/
